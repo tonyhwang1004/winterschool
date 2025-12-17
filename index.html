@@ -9,23 +9,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #5a8f7b;
-            --primary-light: #7ab39d;
-            --primary-dark: #3d6b5a;
-            --accent: #e8985a;
-            --accent-light: #f0aa74;
-            --accent-dark: #d4844a;
-            --cream: #fefefe;
-            --warm-white: #f9fafb;
-            --bg-soft: #f5f7f6;
-            --text-dark: #2d3436;
-            --text-muted: #636e72;
-            --text-light: #a0a8ab;
+            --primary: #1a1a1a;
+            --primary-light: #2d2d2d;
+            --primary-dark: #000000;
+            --accent: #1a1a1a;
+            --accent-light: #333333;
+            --accent-dark: #000000;
+            --cream: #ffffff;
+            --warm-white: #fafafa;
+            --bg-soft: #f5f5f5;
+            --text-dark: #1a1a1a;
+            --text-muted: #555555;
+            --text-light: #888888;
             --white: #ffffff;
-            --border: #e9ecef;
-            --shadow-sm: 0 2px 10px rgba(90, 143, 123, 0.08);
-            --shadow: 0 4px 24px rgba(90, 143, 123, 0.12);
-            --shadow-lg: 0 12px 48px rgba(90, 143, 123, 0.16);
+            --border: #e0e0e0;
+            --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.06);
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+            --shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.15);
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -71,7 +71,7 @@
         .nav-logo {
             font-size: 18px;
             font-weight: 700;
-            color: var(--primary);
+            color: var(--white);
             text-decoration: none;
             letter-spacing: -0.5px;
             transition: var(--transition);
@@ -88,7 +88,7 @@
         }
 
         .nav-links a {
-            color: var(--text-muted);
+            color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
@@ -102,7 +102,7 @@
         }
 
         .nav-links a:hover {
-            color: var(--primary);
+            color: var(--white);
         }
 
         .nav.scrolled .nav-links a:hover {
@@ -116,8 +116,12 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--primary);
+            background: var(--white);
             transition: width 0.3s ease;
+        }
+
+        .nav.scrolled .nav-links a::after {
+            background: var(--primary);
         }
 
         .nav-links a:hover::after {
@@ -126,8 +130,8 @@
 
         .nav-cta {
             padding: 10px 24px;
-            background: var(--accent);
-            color: var(--white);
+            background: var(--white);
+            color: var(--primary);
             text-decoration: none;
             font-size: 13px;
             font-weight: 600;
@@ -135,9 +139,14 @@
             transition: var(--transition);
         }
 
+        .nav.scrolled .nav-cta {
+            background: var(--primary);
+            color: var(--white);
+        }
+
         .nav-cta:hover {
-            background: var(--accent-light);
             transform: translateY(-1px);
+            box-shadow: var(--shadow);
         }
 
         .nav-mobile-toggle {
@@ -150,7 +159,7 @@
         .nav-mobile-toggle span {
             width: 24px;
             height: 2px;
-            background: var(--primary);
+            background: var(--white);
             transition: var(--transition);
         }
 
@@ -160,12 +169,11 @@
 
         /* ==================== HERO ==================== */
         .hero {
-            position: relative;
-            height: 100vh;
-            min-height: 700px;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
             overflow: hidden;
         }
 
@@ -175,14 +183,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #f8faf9 0%, #e8f0ec 50%, #d4e5dc 100%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
         }
 
         .hero-bg img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.6;
+            opacity: 0.25;
+            filter: grayscale(100%);
         }
 
         .hero-overlay {
@@ -191,15 +200,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(245, 247, 246, 0.7) 100%);
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%);
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
             text-align: center;
+            padding: 0 20px;
             max-width: 900px;
-            padding: 0 40px;
         }
 
         .hero-badge {
@@ -207,15 +216,15 @@
             align-items: center;
             gap: 10px;
             padding: 12px 28px;
-            background: rgba(90, 143, 123, 0.1);
-            border: 1px solid rgba(90, 143, 123, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 50px;
             margin-bottom: 32px;
             animation: fadeInDown 1s ease-out;
         }
 
         .hero-badge span {
-            color: var(--primary);
+            color: rgba(255, 255, 255, 0.9);
             font-size: 13px;
             font-weight: 600;
             letter-spacing: 2px;
@@ -226,7 +235,7 @@
             font-family: 'Noto Sans KR', sans-serif;
             font-size: clamp(36px, 6vw, 64px);
             font-weight: 900;
-            color: var(--text-dark);
+            color: var(--white);
             line-height: 1.2;
             margin-bottom: 24px;
             letter-spacing: -1px;
@@ -234,12 +243,24 @@
         }
 
         .hero-title .highlight {
-            color: var(--primary);
+            color: var(--white);
+            position: relative;
+        }
+
+        .hero-title .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 8px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.3);
+            z-index: -1;
         }
 
         .hero-subtitle {
             font-size: clamp(16px, 2.5vw, 20px);
-            color: var(--text-muted);
+            color: rgba(255, 255, 255, 0.85);
             font-weight: 400;
             margin-bottom: 48px;
             line-height: 1.7;
@@ -259,33 +280,33 @@
             font-size: 15px;
             font-weight: 600;
             text-decoration: none;
-            border-radius: 4px;
+            border-radius: 8px;
             transition: var(--transition);
-            cursor: pointer;
-            border: none;
-            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .btn-primary {
-            background: var(--primary);
-            color: var(--white);
+            background: var(--white);
+            color: var(--primary);
         }
 
         .btn-primary:hover {
-            background: var(--primary-light);
+            background: var(--bg-soft);
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(90, 143, 123, 0.4);
+            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
         }
 
         .btn-outline {
             background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
+            color: var(--white);
+            border: 2px solid rgba(255, 255, 255, 0.5);
         }
 
         .btn-outline:hover {
-            background: var(--primary);
-            color: var(--white);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--white);
         }
 
         .hero-scroll {
@@ -293,15 +314,21 @@
             bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
-            color: var(--text-muted);
+            color: rgba(255, 255, 255, 0.6);
             font-size: 12px;
             letter-spacing: 2px;
             text-transform: uppercase;
             animation: bounce 2s infinite;
         }
 
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -310,27 +337,21 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(10px); }
-        }
-
-        /* ==================== SECTIONS COMMON ==================== */
+        /* ==================== SECTIONS ==================== */
         .section {
             padding: 120px 40px;
         }
 
         .section-header {
             text-align: center;
-            max-width: 700px;
-            margin: 0 auto 70px;
+            margin-bottom: 72px;
         }
 
         .section-label {
             display: inline-block;
             font-size: 12px;
             font-weight: 700;
-            color: var(--primary);
+            color: var(--text-muted);
             letter-spacing: 3px;
             text-transform: uppercase;
             margin-bottom: 16px;
@@ -339,19 +360,20 @@
         .section-title {
             font-size: clamp(28px, 4vw, 42px);
             font-weight: 800;
-            color: var(--primary);
-            line-height: 1.3;
-            margin-bottom: 20px;
+            color: var(--text-dark);
             letter-spacing: -0.5px;
+            margin-bottom: 16px;
         }
 
         .section-desc {
-            font-size: 16px;
+            font-size: 17px;
             color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
             line-height: 1.8;
         }
 
-        /* ==================== ABOUT / FLOORS ==================== */
+        /* ==================== ABOUT ==================== */
         .about {
             background: var(--white);
         }
@@ -365,10 +387,10 @@
         }
 
         .floor-card {
-            position: relative;
-            border-radius: 16px;
+            background: var(--white);
+            border-radius: 24px;
             overflow: hidden;
-            background: var(--cream);
+            box-shadow: var(--shadow);
             transition: var(--transition);
         }
 
@@ -379,7 +401,7 @@
 
         .floor-image {
             position: relative;
-            height: 320px;
+            height: 300px;
             overflow: hidden;
         }
 
@@ -398,50 +420,66 @@
             position: absolute;
             top: 20px;
             left: 20px;
-            padding: 8px 16px;
+            padding: 8px 20px;
             background: var(--primary);
             color: var(--white);
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 700;
-            border-radius: 4px;
+            border-radius: 100px;
         }
 
         .floor-content {
-            padding: 32px;
+            padding: 36px;
         }
 
         .floor-title {
             font-size: 24px;
-            font-weight: 800;
-            color: var(--primary);
+            font-weight: 700;
+            color: var(--text-dark);
             margin-bottom: 12px;
         }
 
         .floor-desc {
             font-size: 15px;
             color: var(--text-muted);
+            line-height: 1.8;
             margin-bottom: 20px;
-            line-height: 1.7;
         }
 
         .floor-features {
             display: flex;
+            gap: 10px;
             flex-wrap: wrap;
-            gap: 8px;
+            margin-bottom: 20px;
         }
 
         .floor-feature {
             padding: 6px 14px;
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            font-size: 13px;
+            background: var(--bg-soft);
             color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 100px;
+        }
+
+        .floor-phone {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .floor-phone:hover {
+            opacity: 0.7;
         }
 
         /* ==================== GALLERY ==================== */
         .gallery {
-            background: var(--bg-soft);
+            background: var(--primary);
             padding: 120px 0;
         }
 
@@ -450,38 +488,39 @@
         }
 
         .gallery .section-label {
-            color: var(--primary);
+            color: rgba(255, 255, 255, 0.6);
         }
 
         .gallery .section-title {
-            color: var(--text-dark);
+            color: var(--white);
         }
 
         .gallery .section-desc {
-            color: var(--text-muted);
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
+            gap: 16px;
             padding: 0 40px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .gallery-item {
             position: relative;
-            aspect-ratio: 1;
+            border-radius: 16px;
             overflow: hidden;
+            aspect-ratio: 1;
             cursor: pointer;
-            border-radius: 12px;
-            box-shadow: var(--shadow-sm);
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.6s ease;
+            transition: transform 0.5s ease;
         }
 
         .gallery-item:hover img {
@@ -495,26 +534,28 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(90, 143, 123, 0);
+            background: rgba(0, 0, 0, 0);
             transition: var(--transition);
         }
 
         .gallery-item:hover::after {
-            background: rgba(90, 143, 123, 0.2);
+            background: rgba(0, 0, 0, 0.2);
         }
 
         .gallery-item-label {
             position: absolute;
-            bottom: 16px;
-            left: 16px;
-            color: var(--white);
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 500;
             opacity: 0;
             transform: translateY(10px);
             transition: var(--transition);
             z-index: 2;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
         .gallery-item:hover .gallery-item-label {
@@ -524,84 +565,36 @@
 
         /* ==================== PROGRAMS ==================== */
         .programs {
-            background: var(--cream);
+            background: var(--bg-soft);
         }
 
-        .program-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 50px;
-            flex-wrap: wrap;
-        }
-
-        .program-tab {
-            padding: 14px 32px;
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .program-tab:hover {
-            border-color: var(--gold);
-            color: var(--gold);
-        }
-
-        .program-tab.active {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: var(--white);
-        }
-
-        .program-content {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .program-panel {
-            display: none;
-        }
-
-        .program-panel.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .program-cards {
+        .program-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .program-card {
             background: var(--white);
-            border-radius: 16px;
-            padding: 36px 28px;
+            padding: 40px 32px;
+            border-radius: 20px;
             text-align: center;
+            border: 1px solid var(--border);
             transition: var(--transition);
-            border: 1px solid transparent;
         }
 
         .program-card:hover {
             transform: translateY(-6px);
             box-shadow: var(--shadow);
-            border-color: var(--primary-light);
+            border-color: var(--primary);
         }
 
         .program-icon {
             width: 64px;
             height: 64px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            background: var(--primary);
             border-radius: 16px;
             display: flex;
             align-items: center;
@@ -610,560 +603,110 @@
             font-size: 28px;
         }
 
-        .program-card-title {
-            font-size: 18px;
+        .program-title {
+            font-size: 20px;
             font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .program-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .program-features {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            text-align: left;
+        }
+
+        .program-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--text-body);
+        }
+
+        .program-feature::before {
+            content: '✓';
             color: var(--primary);
-            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        /* Additional Programs */
+        .programs-additional {
+            margin-top: 60px;
+        }
+
+        .programs-additional h3 {
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 32px;
+            color: var(--text-dark);
+        }
+
+        .program-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .program-card-small {
+            background: var(--white);
+            padding: 28px 24px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .program-card-small:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+        }
+
+        .program-card-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .program-card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 6px;
         }
 
         .program-card-desc {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-muted);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .program-card-status {
             display: inline-block;
-            padding: 6px 14px;
-            border-radius: 20px;
+            padding: 4px 12px;
             font-size: 12px;
             font-weight: 600;
+            border-radius: 100px;
         }
 
-        .status-open {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .status-closing {
-            background: #f8d7da;
-            color: #721c24;
+        .status-available {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
         }
 
         .status-waiting {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        /* ==================== APPLICATION FORM ==================== */
-        .application {
-            background: linear-gradient(180deg, var(--white) 0%, var(--cream) 100%);
-        }
-
-        .form-container {
-            max-width: 700px;
-            margin: 0 auto;
-            background: var(--white);
-            border-radius: 24px;
-            box-shadow: var(--shadow-lg);
-            overflow: hidden;
-        }
-
-        .form-type-selector {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .form-type-btn {
-            padding: 24px;
-            background: var(--cream);
-            border: none;
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: inherit;
-            position: relative;
-        }
-
-        .form-type-btn.active {
-            background: var(--white);
-            color: var(--primary);
-        }
-
-        .form-type-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 20%;
-            right: 20%;
-            height: 3px;
-            background: var(--primary);
-            border-radius: 3px 3px 0 0;
-        }
-
-        .form-body {
-            padding: 48px 40px;
-        }
-
-        .form-section {
-            display: none;
-        }
-
-        .form-section.active {
-            display: block;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .form-title {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 8px;
-            text-align: center;
-        }
-
-        .form-subtitle {
-            font-size: 14px;
-            color: var(--text-muted);
-            text-align: center;
-            margin-bottom: 36px;
-        }
-
-        .form-group {
-            margin-bottom: 24px;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 8px;
-        }
-
-        .form-label .required {
-            color: #dc3545;
-            margin-left: 2px;
-        }
-
-        .form-input,
-        .form-select,
-        .form-textarea {
-            width: 100%;
-            padding: 16px 20px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 15px;
-            font-family: inherit;
-            transition: var(--transition);
-            background: var(--cream);
-        }
-
-        .form-input:focus,
-        .form-select:focus,
-        .form-textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: var(--white);
-            box-shadow: 0 0 0 4px rgba(26, 47, 74, 0.08);
-        }
-
-        .form-select {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%235a5a5a' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 16px center;
-            padding-right: 48px;
-            cursor: pointer;
-        }
-
-        .form-textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .form-submit {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-            color: var(--white);
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: inherit;
-            margin-top: 12px;
-        }
-
-        .form-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(232, 152, 90, 0.4);
-        }
-
-        .form-submit:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .form-notice {
-            text-align: center;
-            font-size: 12px;
-            color: var(--text-light);
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border);
-        }
-
-        /* Success Message */
-        .success-message {
-            display: none;
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        .success-message.show {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .success-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 24px;
-            font-size: 36px;
-            color: white;
-        }
-
-        .success-message h3 {
-            font-size: 24px;
-            color: var(--primary);
-            margin-bottom: 12px;
-        }
-
-        .success-message p {
-            color: var(--text-muted);
-            font-size: 15px;
-        }
-
-        /* ==================== LOCATION ==================== */
-        .location {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            padding: 100px 40px;
-        }
-
-        .location-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            max-width: 1100px;
-            margin: 0 auto;
-            align-items: center;
-        }
-
-        .location-info h2 {
-            font-size: 36px;
-            font-weight: 800;
-            color: var(--white);
-            margin-bottom: 32px;
-            line-height: 1.3;
-        }
-
-        .location-item {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .location-icon {
-            width: 48px;
-            height: 48px;
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            flex-shrink: 0;
-        }
-
-        .location-text h4 {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .location-text p {
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.6;
-        }
-
-        .location-text a {
-            color: var(--white);
-            text-decoration: none;
-        }
-
-        .location-map {
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .location-map img {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-        }
-
-        /* ==================== FOOTER ==================== */
-        .footer {
-            background: var(--primary-dark);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 60px 40px;
-            text-align: center;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 32px;
-            margin-bottom: 32px;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            padding: 12px 24px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 8px;
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: var(--accent);
-            color: var(--white);
-        }
-
-        .footer-copy {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        /* ==================== RESPONSIVE ==================== */
-        @media (max-width: 1024px) {
-            .floor-grid {
-                grid-template-columns: 1fr;
-                max-width: 600px;
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .program-cards {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .location-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .location-item {
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav {
-                padding: 16px 24px;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .nav-cta {
-                display: none;
-            }
-
-            .nav-mobile-toggle {
-                display: flex;
-            }
-
-            .section {
-                padding: 80px 24px;
-            }
-
-            .hero-content {
-                padding: 0 24px;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: 100%;
-                max-width: 280px;
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .program-cards {
-                grid-template-columns: 1fr;
-                max-width: 400px;
-                margin: 0 auto;
-            }
-
-            .form-body {
-                padding: 32px 24px;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .form-type-btn {
-                font-size: 14px;
-                padding: 18px 12px;
-            }
-
-            .location {
-                padding: 80px 24px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-badge {
-                padding: 10px 20px;
-            }
-
-            .hero-badge span {
-                font-size: 11px;
-            }
-
-            .floor-image {
-                height: 240px;
-            }
-
-            .floor-content {
-                padding: 24px;
-            }
-
-            .program-tabs {
-                gap: 8px;
-            }
-
-            .program-tab {
-                padding: 12px 20px;
-                font-size: 13px;
-            }
-        }
-
-        /* Mobile menu */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 280px;
-            height: 100vh;
-            background: var(--white);
-            z-index: 1001;
-            padding: 80px 32px 32px;
-            transition: right 0.4s ease;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .mobile-menu.open {
-            right: 0;
-        }
-
-        .mobile-menu-close {
-            position: absolute;
-            top: 24px;
-            right: 24px;
-            width: 32px;
-            height: 32px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--text-dark);
-        }
-
-        .mobile-menu-links {
-            list-style: none;
-        }
-
-        .mobile-menu-links li {
-            margin-bottom: 8px;
-        }
-
-        .mobile-menu-links a {
-            display: block;
-            padding: 14px 0;
-            color: var(--text-dark);
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 500;
-            border-bottom: 1px solid var(--border);
-            transition: var(--transition);
-        }
-
-        .mobile-menu-links a:hover {
-            color: var(--gold);
-        }
-
-        .mobile-menu-cta {
-            display: block;
-            margin-top: 24px;
-            padding: 16px;
-            background: var(--gold);
-            color: var(--white);
-            text-align: center;
-            text-decoration: none;
-            font-weight: 600;
-            border-radius: 8px;
-        }
-
-        .mobile-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-        }
-
-        .mobile-overlay.open {
-            opacity: 1;
-            visibility: visible;
+            background: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
         }
 
         /* ==================== PRICING ==================== */
@@ -1191,7 +734,7 @@
         }
 
         .pricing-table thead {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            background: var(--primary);
         }
 
         .pricing-table th {
@@ -1222,11 +765,11 @@
         }
 
         .pricing-table tbody tr.highlight-row {
-            background: rgba(90, 143, 123, 0.08);
+            background: rgba(26, 26, 26, 0.03);
         }
 
         .pricing-table tbody tr.highlight-row:hover {
-            background: rgba(90, 143, 123, 0.15);
+            background: rgba(26, 26, 26, 0.06);
         }
 
         .pricing-table .row-label {
@@ -1252,7 +795,7 @@
         }
 
         .pricing-table .highlight-price {
-            color: var(--accent);
+            color: var(--primary);
             font-size: 20px;
         }
 
@@ -1268,7 +811,7 @@
             justify-content: center;
             gap: 16px;
             padding: 20px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            background: var(--primary);
             border-radius: 12px;
             color: var(--white);
         }
@@ -1326,6 +869,454 @@
                 font-size: 16px;
             }
         }
+
+        /* ==================== APPLICATION ==================== */
+        .application {
+            background: var(--bg-soft);
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .form-type-selector {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .form-type-btn {
+            flex: 1;
+            padding: 20px;
+            background: var(--bg-soft);
+            border: none;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            font-family: inherit;
+        }
+
+        .form-type-btn.active {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        .form-type-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 20%;
+            right: 20%;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px 3px 0 0;
+        }
+
+        .form-body {
+            padding: 48px 40px;
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .form-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .form-subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 36px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .required {
+            color: #e53e3e;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: var(--transition);
+            background: var(--white);
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.1);
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            cursor: pointer;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 18px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+            margin-top: 12px;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(26, 26, 26, 0.3);
+        }
+
+        .form-notice {
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-light);
+            margin-top: 20px;
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .success-icon {
+            width: 72px;
+            height: 72px;
+            background: #10b981;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 32px;
+            color: white;
+        }
+
+        .success-message h3 {
+            font-size: 22px;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .success-message p {
+            color: var(--text-muted);
+        }
+
+        /* ==================== LOCATION ==================== */
+        .location {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .location-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .location-content h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        .location-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .location-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .location-text h4 {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .location-text p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--white);
+        }
+
+        .location-text a {
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .location-text a:hover {
+            opacity: 0.8;
+        }
+
+        .location-map {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .location-map img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        /* ==================== FOOTER ==================== */
+        .footer {
+            background: #0a0a0a;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 24px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+        }
+
+        .footer-copy {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* ==================== MOBILE MENU ==================== */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: var(--white);
+            z-index: 1001;
+            padding: 80px 24px 24px;
+            transition: right 0.3s ease;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .mobile-menu.open {
+            right: 0;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        .mobile-menu-links {
+            list-style: none;
+        }
+
+        .mobile-menu-links a {
+            display: block;
+            padding: 16px 0;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-body);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-menu-cta {
+            display: block;
+            margin-top: 24px;
+            padding: 16px;
+            background: var(--primary);
+            color: var(--white);
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 8px;
+        }
+
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .mobile-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 1024px) {
+            .floor-grid {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .location-inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .location-map {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .location-item {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links,
+            .nav-cta {
+                display: none;
+            }
+
+            .nav-mobile-toggle {
+                display: flex;
+            }
+
+            .section {
+                padding: 80px 20px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 0 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .form-body {
+                padding: 32px 24px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1370,7 +1361,7 @@
             <div class="hero-badge">
                 <span>분당 1호점 7년의 노하우</span>
             </div>
-            <h1>송도 <span class="highlight">김엄마</span><br>관리형독서실</h1>
+            <h1 class="hero-title">송도 <span class="highlight">김엄마</span><br>관리형독서실</h1>
             <p class="hero-subtitle">
                 체계적인 학습관리와 프리미엄 환경으로<br>
                 목표 대학까지 함께 하겠습니다
@@ -1412,6 +1403,7 @@
                         <span class="floor-feature">1:1 맞춤관리</span>
                         <span class="floor-feature">체계적 커리큘럼</span>
                     </div>
+                    <a href="tel:010-6861-4321" class="floor-phone">📞 010-6861-4321</a>
                 </div>
             </div>
 
@@ -1428,10 +1420,11 @@
                         최적의 학습 환경에서 집중력을 높여드립니다.
                     </p>
                     <div class="floor-features">
-                        <span class="floor-feature">고1~고3 재원생</span>
-                        <span class="floor-feature">프리미엄 시설</span>
-                        <span class="floor-feature">학습 플래너</span>
+                        <span class="floor-feature">재원생 전용</span>
+                        <span class="floor-feature">안면인식 출입</span>
+                        <span class="floor-feature">실시간 학습관리</span>
                     </div>
+                    <a href="tel:010-4602-1953" class="floor-phone">📞 010-4602-1953</a>
                 </div>
             </div>
         </div>
@@ -1448,33 +1441,33 @@
         </div>
 
         <div class="gallery-grid">
-            <!-- 7층 김엄마송도독학재수학원 사진 14장 -->
+            <!-- 7층 김엄마송도독학재수학원 사진 13장 -->
             <div class="gallery-item">
-                <img src="images/7f-study-1.png.jpeg" alt="독서실 내부">
+                <img src="images/7f-study-1.png.jpeg" alt="7층 독서실 내부">
                 <span class="gallery-item-label">7층 독서실 내부 1</span>
             </div>
             <div class="gallery-item">
-                <img src="images/7f-study-2.png.jpeg" alt="독서실 내부">
+                <img src="images/7f-study-2.png.jpeg" alt="7층 독서실 내부">
                 <span class="gallery-item-label">7층 독서실 내부 2</span>
             </div>
             <div class="gallery-item">
-                <img src="images/7f-study-3.png.jpeg" alt="독서실 내부">
+                <img src="images/7f-study-3.png.jpeg" alt="7층 독서실 내부">
                 <span class="gallery-item-label">7층 독서실 내부 3</span>
             </div>
             <div class="gallery-item">
-                <img src="images/7f-study-4.png.jpeg" alt="독서실 내부">
+                <img src="images/7f-study-4.png.jpeg" alt="7층 독서실 내부">
                 <span class="gallery-item-label">7층 독서실 내부 4</span>
             </div>
             <div class="gallery-item">
-                <img src="images/7f-study-5.png.jpeg" alt="독서실 내부">
+                <img src="images/7f-study-5.png.jpeg" alt="7층 독서실 내부">
                 <span class="gallery-item-label">7층 독서실 내부 5</span>
             </div>
             <div class="gallery-item">
-                <img src="images/7f-study-6.png.jpeg" alt="독서실 내부">
+                <img src="images/7f-study-6.png.jpeg" alt="7층 독서실 내부">
                 <span class="gallery-item-label">7층 독서실 내부 6</span>
             </div>
             <div class="gallery-item">
-                <img src="images/7f-study-7.png.jpeg" alt="독서실 내부">
+                <img src="images/7f-study-7.png.jpeg" alt="7층 독서실 내부">
                 <span class="gallery-item-label">7층 독서실 내부 7</span>
             </div>
             <div class="gallery-item">
@@ -1501,7 +1494,7 @@
                 <img src="images/7f-refresh.png.jpeg" alt="리프레쉬룸">
                 <span class="gallery-item-label">7층 리프레쉬룸</span>
             </div>
-            <!-- 8층 김엄마송도관리형독서실 사진 15장 -->
+            <!-- 8층 김엄마송도관리형독서실 사진 14장 -->
             <div class="gallery-item">
                 <img src="images/8f-refresh-1.png.png" alt="8층 리프레쉬룸">
                 <span class="gallery-item-label">8층 리프레쉬룸 1</span>
@@ -1515,15 +1508,15 @@
                 <span class="gallery-item-label">8층 리프레쉬룸 3</span>
             </div>
             <div class="gallery-item">
-                <img src="images/8f-restroom.png.png" alt="8층 화장실쪽">
+                <img src="images/8f-restroom.png.png" alt="8층 화장실">
                 <span class="gallery-item-label">8층 화장실쪽</span>
             </div>
             <div class="gallery-item">
-                <img src="images/8f-faceid-1.png.png" alt="8층 안면인식 입구">
+                <img src="images/8f-faceid-1.png.png" alt="8층 안면인식">
                 <span class="gallery-item-label">8층 안면인식 입구 1</span>
             </div>
             <div class="gallery-item">
-                <img src="images/8f-faceid-2.png.png" alt="8층 안면인식 입구">
+                <img src="images/8f-faceid-2.png.png" alt="8층 안면인식">
                 <span class="gallery-item-label">8층 안면인식 입구 2</span>
             </div>
             <div class="gallery-item">
@@ -1582,63 +1575,56 @@
     <section class="section programs" id="programs">
         <div class="section-header">
             <span class="section-label">Programs</span>
-            <h2 class="section-title">모집 프로그램</h2>
+            <h2 class="section-title">2026 윈터스쿨</h2>
             <p class="section-desc">
-                학생의 상황에 맞는 최적의 프로그램을 선택하세요
+                겨울방학을 알차게 보내고 싶은 학생들을 위한 특별 프로그램
             </p>
         </div>
 
-        <div class="program-tabs">
-            <button class="program-tab active" data-tab="student">재원생 프로그램</button>
-            <button class="program-tab" data-tab="nsu">N수생 프로그램</button>
-        </div>
-
-        <div class="program-content">
-            <!-- 재원생 프로그램 -->
-            <div class="program-panel active" id="panel-student">
-                <div class="program-cards">
-                    <div class="program-card">
-                        <div class="program-icon">📚</div>
-                        <h4 class="program-card-title">예비고1 윈터스쿨</h4>
-                        <p class="program-card-desc">중3 → 고1 겨울방학 집중반</p>
-                        <span class="program-card-status status-open">모집중</span>
-                    </div>
-                    <div class="program-card">
-                        <div class="program-icon">📖</div>
-                        <h4 class="program-card-title">예비고2 윈터스쿨</h4>
-                        <p class="program-card-desc">고1 → 고2 겨울방학 집중반</p>
-                        <span class="program-card-status status-open">모집중</span>
-                    </div>
-                    <div class="program-card">
-                        <div class="program-icon">🎯</div>
-                        <h4 class="program-card-title">예비고3 윈터스쿨</h4>
-                        <p class="program-card-desc">고2 → 고3 겨울방학 집중반</p>
-                        <span class="program-card-status status-closing">마감임박</span>
-                    </div>
-                    <div class="program-card">
-                        <div class="program-icon">✨</div>
-                        <h4 class="program-card-title">정규반</h4>
-                        <p class="program-card-desc">학기 중 관리형독서실</p>
-                        <span class="program-card-status status-waiting">상시모집</span>
-                    </div>
+        <div class="program-grid">
+            <div class="program-card">
+                <div class="program-icon">📗</div>
+                <h3 class="program-title">예비고2 윈터스쿨</h3>
+                <p class="program-desc">
+                    본격적인 내신과 수능 준비의 시작,<br>
+                    취약 과목 집중 보완과 심화 학습
+                </p>
+                <div class="program-features">
+                    <span class="program-feature">취약 과목 보완</span>
+                    <span class="program-feature">심화 학습</span>
+                    <span class="program-feature">내신/수능 대비</span>
                 </div>
             </div>
 
-            <!-- N수생 프로그램 -->
-            <div class="program-panel" id="panel-nsu">
-                <div class="program-cards">
-                    <div class="program-card">
-                        <div class="program-icon">🔥</div>
-                        <h4 class="program-card-title">2026 N수생반</h4>
-                        <p class="program-card-desc">재수·N수 연간 관리반</p>
-                        <span class="program-card-status status-open">모집중</span>
-                    </div>
-                    <div class="program-card">
-                        <div class="program-icon">⚡</div>
-                        <h4 class="program-card-title">단기 집중반</h4>
-                        <p class="program-card-desc">3개월/6개월 단기 과정</p>
-                        <span class="program-card-status status-waiting">상담 후 결정</span>
-                    </div>
+            <div class="program-card">
+                <div class="program-icon">📕</div>
+                <h3 class="program-title">예비고3 윈터스쿨</h3>
+                <p class="program-desc">
+                    수능까지 남은 1년, 체계적인 학습 관리로<br>
+                    목표 대학 합격을 향해 달려갑니다
+                </p>
+                <div class="program-features">
+                    <span class="program-feature">수능 집중 대비</span>
+                    <span class="program-feature">개인별 맞춤 플랜</span>
+                    <span class="program-feature">멘토링 시스템</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="programs-additional">
+            <h3>N수생 프로그램 (7층)</h3>
+            <div class="program-card-grid">
+                <div class="program-card-small">
+                    <div class="program-card-icon">🎯</div>
+                    <h4 class="program-card-title">2026 N수생반</h4>
+                    <p class="program-card-desc">연간 프로그램</p>
+                    <span class="program-card-status status-available">상담 가능</span>
+                </div>
+                <div class="program-card-small">
+                    <div class="program-card-icon">⚡</div>
+                    <h4 class="program-card-title">단기 집중반</h4>
+                    <p class="program-card-desc">3개월/6개월 단기 과정</p>
+                    <span class="program-card-status status-waiting">상담 후 결정</span>
                 </div>
             </div>
         </div>
@@ -1673,7 +1659,7 @@
                             <td><span class="price">490,000</span>원</td>
                         </tr>
                         <tr class="highlight-row">
-                            <td class="row-label">종일권<br><small>(멘토링서비스 포함)</small></td>
+                            <td class="row-label">종일권<small>멘토링서비스 포함</small></td>
                             <td><span class="price highlight-price">730,000</span>원</td>
                             <td><span class="price highlight-price">730,000</span>원</td>
                             <td>-</td>
@@ -1685,7 +1671,7 @@
                             <td><span class="price">390,000</span>원</td>
                         </tr>
                         <tr class="highlight-row">
-                            <td class="row-label">오후권<br><small>(멘토링서비스 포함)</small></td>
+                            <td class="row-label">오후권<small>멘토링서비스 포함</small></td>
                             <td><span class="price highlight-price">650,000</span>원</td>
                             <td><span class="price highlight-price">590,000</span>원</td>
                             <td>-</td>
@@ -1695,10 +1681,6 @@
             </div>
 
             <div class="pricing-info">
-                <div class="pricing-daily">
-                    <span class="daily-label">일일권</span>
-                    <span class="daily-price">65,000원</span>
-                </div>
                 <ul class="pricing-notes">
                     <li>원장의 등록 (등록기간: 매월 1일~말일)</li>
                     <li>VAT 포함</li>
@@ -1741,10 +1723,9 @@
                             <label class="form-label">신청 프로그램 <span class="required">*</span></label>
                             <select class="form-select" name="program" required>
                                 <option value="">선택해주세요</option>
-                                <option value="예비고1 윈터스쿨">예비고1 윈터스쿨</option>
-                                <option value="예비고2 윈터스쿨">예비고2 윈터스쿨</option>
-                                <option value="예비고3 윈터스쿨">예비고3 윈터스쿨</option>
-                                <option value="정규반">정규반 (상시)</option>
+                                <option value="고2">고2</option>
+                                <option value="고3">고3</option>
+                                <option value="N수">N수</option>
                             </select>
                         </div>
 
@@ -1771,27 +1752,12 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">상담 희망 시간</label>
-                            <select class="form-select" name="consultTime">
-                                <option value="">선택해주세요</option>
-                                <option value="오전 (10시~12시)">오전 (10시~12시)</option>
-                                <option value="오후 (14시~17시)">오후 (14시~17시)</option>
-                                <option value="저녁 (18시~20시)">저녁 (18시~20시)</option>
-                                <option value="언제든 가능">언제든 가능</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
                             <label class="form-label">문의사항</label>
                             <textarea class="form-textarea" name="message" placeholder="궁금하신 점이나 특이사항을 남겨주세요"></textarea>
                         </div>
 
                         <button type="submit" class="form-submit">대기 신청하기</button>
-
-                        <p class="form-notice">
-                            신청 시 개인정보 수집 및 이용에 동의하는 것으로 간주합니다.<br>
-                            신청 후 1~2일 내 연락드립니다.
-                        </p>
+                        <p class="form-notice">신청 후 1~2일 내에 연락드리겠습니다.</p>
                     </form>
                 </div>
 
@@ -1810,7 +1776,6 @@
                                 <option value="2026 N수생반 (연간)">2026 N수생반 (연간)</option>
                                 <option value="단기 집중반 (3개월)">단기 집중반 (3개월)</option>
                                 <option value="단기 집중반 (6개월)">단기 집중반 (6개월)</option>
-                                <option value="상담 후 결정">상담 후 결정</option>
                             </select>
                         </div>
 
@@ -1825,11 +1790,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="form-label">수능 성적 (선택)</label>
-                            <input type="text" class="form-input" name="score" placeholder="예: 국어 2등급, 수학 3등급">
-                        </div>
-
                         <div class="form-row">
                             <div class="form-group">
                                 <label class="form-label">학부모 연락처 <span class="required">*</span></label>
@@ -1842,45 +1802,39 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">상담 희망 시간</label>
-                            <select class="form-select" name="consultTime">
+                            <label class="form-label">N수 횟수</label>
+                            <select class="form-select" name="nsuCount">
                                 <option value="">선택해주세요</option>
-                                <option value="오전 (10시~12시)">오전 (10시~12시)</option>
-                                <option value="오후 (14시~17시)">오후 (14시~17시)</option>
-                                <option value="저녁 (18시~20시)">저녁 (18시~20시)</option>
-                                <option value="언제든 가능">언제든 가능</option>
+                                <option value="첫 재수">첫 재수</option>
+                                <option value="2수">2수</option>
+                                <option value="3수 이상">3수 이상</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">목표 대학/학과</label>
-                            <textarea class="form-textarea" name="message" placeholder="목표 대학, 학과, 기타 문의사항을 남겨주세요"></textarea>
+                            <label class="form-label">목표 대학/학과, 문의사항</label>
+                            <textarea class="form-textarea" name="message" placeholder="목표 대학, 학과, 현재 성적, 기타 문의사항"></textarea>
                         </div>
 
                         <button type="submit" class="form-submit">대기 신청하기</button>
-
-                        <p class="form-notice">
-                            신청 시 개인정보 수집 및 이용에 동의하는 것으로 간주합니다.<br>
-                            신청 후 1~2일 내 연락드립니다.
-                        </p>
+                        <p class="form-notice">신청 후 1~2일 내에 연락드리겠습니다.</p>
                     </form>
                 </div>
 
-                <!-- 성공 메시지 -->
+                <!-- Success Message -->
                 <div class="success-message" id="successMessage">
                     <div class="success-icon">✓</div>
                     <h3>신청이 완료되었습니다!</h3>
                     <p>빠른 시일 내에 연락드리겠습니다.</p>
-                    <p>감사합니다 🙏</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Location Section -->
-    <section class="location" id="location">
-        <div class="location-grid">
-            <div class="location-info">
+    <section class="section location" id="location">
+        <div class="location-inner">
+            <div class="location-content">
                 <h2>오시는 길</h2>
                 <div class="location-item">
                     <div class="location-icon">📍</div>
@@ -1893,7 +1847,10 @@
                     <div class="location-icon">📞</div>
                     <div class="location-text">
                         <h4>문의 전화</h4>
-                        <p><a href="tel:010-4602-1953">010-4602-1953</a></p>
+                        <p>
+                            <a href="tel:010-4602-1953">8층 독서실: 010-4602-1953</a><br>
+                            <a href="tel:010-6861-4321">7층 독재관: 010-6861-4321</a>
+                        </p>
                     </div>
                 </div>
                 <div class="location-item">
@@ -1903,35 +1860,28 @@
                         <p>평일 07:00 ~ 24:00<br>주말 08:00 ~ 22:00</p>
                     </div>
                 </div>
-                <div class="location-item">
-                    <div class="location-icon">🚇</div>
-                    <div class="location-text">
-                        <h4>교통편</h4>
-                        <p>인천 1호선 센트럴파크역 도보 5분</p>
-                    </div>
-                </div>
             </div>
             <div class="location-map">
-                <!-- 이미지: map.png.png (지도 이미지 또는 건물 외관) -->
-                <img src="images/map.png.png" alt="오시는 길">
+                <img src="images/map.png.png" alt="오시는 길 지도">
+            </div>
+            <div class="location-map">
+                <img src="images/7f-entrance.png.jpeg" alt="입구">
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
+        <div class="footer-logo">김엄마 관리형독서실</div>
         <div class="footer-links">
             <a href="https://blog.naver.com/kimmmommy" target="_blank">📝 네이버 블로그</a>
-            <a href="tel:010-4602-1953">📞 전화 문의</a>
-            <a href="#application">✏️ 상담 신청</a>
+            <a href="tel:010-4602-1953">📞 8층 문의</a>
+            <a href="tel:010-6861-4321">📞 7층 문의</a>
         </div>
         <p class="footer-copy">© 2025 송도 김엄마 관리형독서실 · 김엄마송도독학재수학원. All rights reserved.</p>
     </footer>
 
     <script>
-        // ⚠️ Google Apps Script 배포 URL로 교체하세요
-        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL';
-
         // Navigation scroll effect
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
@@ -1948,43 +1898,27 @@
         const mobileOverlay = document.getElementById('mobileOverlay');
         const mobileClose = document.getElementById('mobileClose');
 
-        function openMobileMenu() {
+        function openMenu() {
             mobileMenu.classList.add('open');
             mobileOverlay.classList.add('open');
             document.body.style.overflow = 'hidden';
         }
 
-        function closeMobileMenu() {
+        function closeMenu() {
             mobileMenu.classList.remove('open');
             mobileOverlay.classList.remove('open');
             document.body.style.overflow = '';
         }
 
-        mobileToggle.addEventListener('click', openMobileMenu);
-        mobileClose.addEventListener('click', closeMobileMenu);
-        mobileOverlay.addEventListener('click', closeMobileMenu);
+        mobileToggle.addEventListener('click', openMenu);
+        mobileClose.addEventListener('click', closeMenu);
+        mobileOverlay.addEventListener('click', closeMenu);
 
         document.querySelectorAll('.mobile-menu-links a, .mobile-menu-cta').forEach(link => {
-            link.addEventListener('click', closeMobileMenu);
+            link.addEventListener('click', closeMenu);
         });
 
-        // Program tabs
-        const programTabs = document.querySelectorAll('.program-tab');
-        const programPanels = document.querySelectorAll('.program-panel');
-
-        programTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const targetTab = tab.dataset.tab;
-
-                programTabs.forEach(t => t.classList.remove('active'));
-                programPanels.forEach(p => p.classList.remove('active'));
-
-                tab.classList.add('active');
-                document.getElementById(`panel-${targetTab}`).classList.add('active');
-            });
-        });
-
-        // Form type selector
+        // Form tabs
         const formTypeBtns = document.querySelectorAll('.form-type-btn');
         const formSections = document.querySelectorAll('.form-section');
         const successMessage = document.getElementById('successMessage');
@@ -2002,7 +1936,7 @@
             });
         });
 
-        // Phone number auto-format
+        // Phone number formatting
         document.querySelectorAll('input[type="tel"]').forEach(input => {
             input.addEventListener('input', function(e) {
                 let value = e.target.value.replace(/\D/g, '');
@@ -2016,60 +1950,27 @@
         });
 
         // Form submission
-        async function handleFormSubmit(e, formType) {
+        async function handleSubmit(e) {
             e.preventDefault();
-
             const form = e.target;
             const submitBtn = form.querySelector('.form-submit');
-            const originalText = submitBtn.textContent;
-
+            
             submitBtn.textContent = '신청 중...';
             submitBtn.disabled = true;
 
-            const formData = new FormData(form);
-            const data = {
-                timestamp: new Date().toLocaleString('ko-KR'),
-                formType: formData.get('formType'),
-                program: formData.get('program'),
-                studentName: formData.get('studentName'),
-                school: formData.get('school') || '-',
-                score: formData.get('score') || '-',
-                parentPhone: formData.get('parentPhone'),
-                studentPhone: formData.get('studentPhone') || '-',
-                consultTime: formData.get('consultTime') || '-',
-                message: formData.get('message') || '-'
-            };
+            // Simulate API call
+            await new Promise(resolve => setTimeout(resolve, 1500));
 
-            try {
-                if (GOOGLE_SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL') {
-                    await fetch(GOOGLE_SCRIPT_URL, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(data)
-                    });
-                }
+            formSections.forEach(s => s.classList.remove('active'));
+            successMessage.classList.add('show');
 
-                console.log('신청 데이터:', data);
-
-                // Hide form, show success
-                formSections.forEach(s => s.classList.remove('active'));
-                successMessage.classList.add('show');
-
-                // Reset form
-                form.reset();
-
-            } catch (error) {
-                console.error('Error:', error);
-                alert('신청 중 오류가 발생했습니다. 전화로 문의해주세요.');
-            } finally {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }
+            form.reset();
+            submitBtn.textContent = '대기 신청하기';
+            submitBtn.disabled = false;
         }
 
-        document.getElementById('studentForm').addEventListener('submit', (e) => handleFormSubmit(e, 'student'));
-        document.getElementById('nsuForm').addEventListener('submit', (e) => handleFormSubmit(e, 'nsu'));
+        document.getElementById('studentForm').addEventListener('submit', handleSubmit);
+        document.getElementById('nsuForm').addEventListener('submit', handleSubmit);
 
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -2077,7 +1978,10 @@
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
             });
         });

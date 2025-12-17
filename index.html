@@ -1165,6 +1165,167 @@
             opacity: 1;
             visibility: visible;
         }
+
+        /* ==================== PRICING ==================== */
+        .pricing {
+            background: var(--white);
+        }
+
+        .pricing-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .pricing-table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 40px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            min-width: 500px;
+        }
+
+        .pricing-table thead {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        }
+
+        .pricing-table th {
+            padding: 20px 16px;
+            color: var(--white);
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .pricing-table th:first-child {
+            border-radius: 16px 0 0 0;
+        }
+
+        .pricing-table th:last-child {
+            border-radius: 0 16px 0 0;
+        }
+
+        .pricing-table td {
+            padding: 20px 16px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            font-size: 15px;
+        }
+
+        .pricing-table tbody tr:hover {
+            background: var(--bg-soft);
+        }
+
+        .pricing-table tbody tr.highlight-row {
+            background: rgba(90, 143, 123, 0.08);
+        }
+
+        .pricing-table tbody tr.highlight-row:hover {
+            background: rgba(90, 143, 123, 0.15);
+        }
+
+        .pricing-table .row-label {
+            font-weight: 700;
+            color: var(--primary);
+            background: var(--bg-soft);
+            text-align: left;
+            padding-left: 24px;
+        }
+
+        .pricing-table .row-label small {
+            display: block;
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-top: 4px;
+        }
+
+        .pricing-table .price {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--text-dark);
+        }
+
+        .pricing-table .highlight-price {
+            color: var(--accent);
+            font-size: 20px;
+        }
+
+        .pricing-info {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .pricing-daily {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            border-radius: 12px;
+            color: var(--white);
+        }
+
+        .daily-label {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .daily-price {
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .pricing-notes {
+            background: var(--bg-soft);
+            border-radius: 12px;
+            padding: 24px 32px;
+            list-style: none;
+        }
+
+        .pricing-notes li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .pricing-notes li:last-child {
+            margin-bottom: 0;
+        }
+
+        .pricing-notes li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            .pricing-table th,
+            .pricing-table td {
+                padding: 14px 10px;
+                font-size: 13px;
+            }
+
+            .pricing-table .price {
+                font-size: 15px;
+            }
+
+            .pricing-table .highlight-price {
+                font-size: 16px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1175,6 +1336,7 @@
             <li><a href="#about">소개</a></li>
             <li><a href="#gallery">둘러보기</a></li>
             <li><a href="#programs">프로그램</a></li>
+            <li><a href="#pricing">이용료</a></li>
             <li><a href="#location">오시는 길</a></li>
         </ul>
         <a href="#application" class="nav-cta">상담 신청</a>
@@ -1193,6 +1355,7 @@
             <li><a href="#about">소개</a></li>
             <li><a href="#gallery">둘러보기</a></li>
             <li><a href="#programs">프로그램</a></li>
+            <li><a href="#pricing">이용료</a></li>
             <li><a href="#location">오시는 길</a></li>
         </ul>
         <a href="#application" class="mobile-menu-cta">상담 신청하기</a>
@@ -1477,6 +1640,74 @@
                         <span class="program-card-status status-waiting">상담 후 결정</span>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="section pricing" id="pricing">
+        <div class="section-header">
+            <span class="section-label">Pricing</span>
+            <h2 class="section-title">이용료 안내</h2>
+            <p class="section-desc">
+                김엄마 지정석 오픈형 지정석 (8층 관리형독서실)
+            </p>
+        </div>
+
+        <div class="pricing-container">
+            <div class="pricing-table-wrapper">
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>칸막이 지정석</th>
+                            <th>오픈형 지정석</th>
+                            <th>자유석</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="row-label">종일권</td>
+                            <td><span class="price">690,000</span>원</td>
+                            <td><span class="price">630,000</span>원</td>
+                            <td><span class="price">490,000</span>원</td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td class="row-label">종일권<br><small>(멘토링서비스 포함)</small></td>
+                            <td><span class="price highlight-price">730,000</span>원</td>
+                            <td><span class="price highlight-price">730,000</span>원</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td class="row-label">오후권</td>
+                            <td><span class="price">550,000</span>원</td>
+                            <td><span class="price">530,000</span>원</td>
+                            <td><span class="price">390,000</span>원</td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td class="row-label">오후권<br><small>(멘토링서비스 포함)</small></td>
+                            <td><span class="price highlight-price">650,000</span>원</td>
+                            <td><span class="price highlight-price">590,000</span>원</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="pricing-info">
+                <div class="pricing-daily">
+                    <span class="daily-label">일일권</span>
+                    <span class="daily-price">65,000원</span>
+                </div>
+                <ul class="pricing-notes">
+                    <li>원장의 등록 (등록기간: 매월 1일~말일)</li>
+                    <li>VAT 포함</li>
+                    <li>카드결제, 계좌이체 등록</li>
+                    <li>등록비: 환불 불가 / 월 관리비는 이용일수대로 환불</li>
+                    <li>11월 15일부터 이용시 잔여금액의 50% 환불</li>
+                    <li>가격에 관리/프로그램 이용료/간식비/교재비 등 포함</li>
+                    <li>환불규정은 제 18조 3항 적용</li>
+                </ul>
             </div>
         </div>
     </section>

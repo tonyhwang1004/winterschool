@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>송도 김엄마 관리형독서실 | 김엄마송도독학재수학원</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a2f4a;
+            --primary-light: #2d4a6f;
+            --primary-dark: #0f1d2d;
+            --gold: #b8965c;
+            --gold-light: #d4b077;
+            --gold-dark: #96783f;
+            --cream: #faf9f7;
+            --warm-white: #f5f3f0;
+            --text-dark: #1a1a1a;
+            --text-muted: #5a5a5a;
+            --text-light: #8a8a8a;
+            --white: #ffffff;
+            --border: #e5e2dc;
+            --shadow-sm: 0 2px 10px rgba(26, 47, 74, 0.06);
+            --shadow: 0 4px 24px rgba(26, 47, 74, 0.1);
+            --shadow-lg: 0 12px 48px rgba(26, 47, 74, 0.15);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* ==================== NAVIGATION ==================== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 15px 40px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-logo {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            transition: var(--transition);
+        }
+
+        .nav.scrolled .nav-logo {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav.scrolled .nav-links a {
+            color: var(--text-muted);
+        }
+
+        .nav-links a:hover {
+            color: var(--gold-light);
+        }
+
+        .nav.scrolled .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 10px 24px;
+            background: var(--gold);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .nav-cta:hover {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+        }
+
+        .nav-mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .nav-mobile-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--white);
+            transition: var(--transition);
+        }
+
+        .nav.scrolled .nav-mobile-toggle span {
+            background: var(--primary);
+        }
+
+        /* ==================== HERO ==================== */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(15, 29, 45, 0.3) 0%, rgba(15, 29, 45, 0.6) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 40px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 28px;
+            background: rgba(184, 150, 92, 0.15);
+            border: 1px solid rgba(184, 150, 92, 0.4);
+            border-radius: 50px;
+            margin-bottom: 32px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero-badge span {
+            color: var(--gold-light);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: clamp(36px, 6vw, 64px);
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.2;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-title .highlight {
+            color: var(--gold-light);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(16px, 2.5vw, 20px);
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 300;
+            margin-bottom: 48px;
+            line-height: 1.7;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .btn {
+            padding: 16px 36px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(184, 150, 92, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* ==================== SECTIONS COMMON ==================== */
+        .section {
+            padding: 120px 40px;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 70px;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1.3;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-desc {
+            font-size: 16px;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        /* ==================== ABOUT / FLOORS ==================== */
+        .about {
+            background: var(--white);
+        }
+
+        .floor-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .floor-card {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--cream);
+            transition: var(--transition);
+        }
+
+        .floor-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .floor-image {
+            position: relative;
+            height: 320px;
+            overflow: hidden;
+        }
+
+        .floor-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .floor-card:hover .floor-image img {
+            transform: scale(1.05);
+        }
+
+        .floor-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 8px 16px;
+            background: var(--primary);
+            color: var(--white);
+            font-size: 13px;
+            font-weight: 700;
+            border-radius: 4px;
+        }
+
+        .floor-content {
+            padding: 32px;
+        }
+
+        .floor-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .floor-desc {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .floor-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .floor-feature {
+            padding: 6px 14px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* ==================== GALLERY ==================== */
+        .gallery {
+            background: var(--primary-dark);
+            padding: 120px 0;
+        }
+
+        .gallery .section-header {
+            padding: 0 40px;
+        }
+
+        .gallery .section-label {
+            color: var(--gold-light);
+        }
+
+        .gallery .section-title {
+            color: var(--white);
+        }
+
+        .gallery .section-desc {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 47, 74, 0);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover::after {
+            background: rgba(26, 47, 74, 0.3);
+        }
+
+        .gallery-item-label {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            color: var(--white);
+            font-size: 14px;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: var(--transition);
+            z-index: 2;
+        }
+
+        .gallery-item:hover .gallery-item-label {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==================== PROGRAMS ==================== */
+        .programs {
+            background: var(--cream);
+        }
+
+        .program-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .program-tab {
+            padding: 14px 32px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .program-tab:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .program-tab.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--white);
+        }
+
+        .program-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .program-panel {
+            display: none;
+        }
+
+        .program-panel.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .program-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .program-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 36px 28px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .program-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow);
+            border-color: var(--gold);
+        }
+
+        .program-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+        }
+
+        .program-card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .program-card-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .program-card-status {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-open {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-closing {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-waiting {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        /* ==================== APPLICATION FORM ==================== */
+        .application {
+            background: linear-gradient(180deg, var(--white) 0%, var(--cream) 100%);
+        }
+
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        .form-type-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .form-type-btn {
+            padding: 24px;
+            background: var(--cream);
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+            position: relative;
+        }
+
+        .form-type-btn.active {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        .form-type-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 20%;
+            right: 20%;
+            height: 3px;
+            background: var(--gold);
+            border-radius: 3px 3px 0 0;
+        }
+
+        .form-body {
+            padding: 48px 40px;
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .form-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .form-subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .form-label .required {
+            color: #dc3545;
+            margin-left: 2px;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: var(--transition);
+            background: var(--cream);
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(26, 47, 74, 0.08);
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%235a5a5a' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 48px;
+            cursor: pointer;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+            margin-top: 12px;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(184, 150, 92, 0.4);
+        }
+
+        .form-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-notice {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 36px;
+            color: white;
+        }
+
+        .success-message h3 {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .success-message p {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        /* ==================== LOCATION ==================== */
+        .location {
+            background: var(--primary-dark);
+            padding: 100px 40px;
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1100px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .location-info h2 {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 32px;
+            line-height: 1.3;
+        }
+
+        .location-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .location-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(184, 150, 92, 0.15);
+            border: 1px solid rgba(184, 150, 92, 0.3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .location-text h4 {
+            font-size: 14px;
+            color: var(--gold-light);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .location-text p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+
+        .location-text a {
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .location-map {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .location-map img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        /* ==================== FOOTER ==================== */
+        .footer {
+            background: var(--primary-dark);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--gold);
+            color: var(--white);
+        }
+
+        .footer-copy {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 1024px) {
+            .floor-grid {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .program-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .location-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .location-item {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                padding: 16px 24px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .nav-cta {
+                display: none;
+            }
+
+            .nav-mobile-toggle {
+                display: flex;
+            }
+
+            .section {
+                padding: 80px 24px;
+            }
+
+            .hero-content {
+                padding: 0 24px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .program-cards {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .form-body {
+                padding: 32px 24px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .form-type-btn {
+                font-size: 14px;
+                padding: 18px 12px;
+            }
+
+            .location {
+                padding: 80px 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-badge {
+                padding: 10px 20px;
+            }
+
+            .hero-badge span {
+                font-size: 11px;
+            }
+
+            .floor-image {
+                height: 240px;
+            }
+
+            .floor-content {
+                padding: 24px;
+            }
+
+            .program-tabs {
+                gap: 8px;
+            }
+
+            .program-tab {
+                padding: 12px 20px;
+                font-size: 13px;
+            }
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background: var(--white);
+            z-index: 1001;
+            padding: 80px 32px 32px;
+            transition: right 0.4s ease;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .mobile-menu.open {
+            right: 0;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            width: 32px;
+            height: 32px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        .mobile-menu-links {
+            list-style: none;
+        }
+
+        .mobile-menu-links li {
+            margin-bottom: 8px;
+        }
+
+        .mobile-menu-links a {
+            display: block;
+            padding: 14px 0;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            border-bottom: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .mobile-menu-links a:hover {
+            color: var(--gold);
+        }
+
+        .mobile-menu-cta {
+            display: block;
+            margin-top: 24px;
+            padding: 16px;
+            background: var(--gold);
+            color: var(--white);
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 8px;
+        }
+
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .mobile-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="navbar">
+        <a href="#" class="nav-logo">김엄마 관리형독서실</a>
+        <ul class="nav-links">
+            <li><a href="#about">소개</a></li>
+            <li><a href="#gallery">둘러보기</a></li>
+            <li><a href="#programs">프로그램</a></li>
+            <li><a href="#location">오시는 길</a></li>
+        </ul>
+        <a href="#application" class="nav-cta">상담 신청</a>
+        <div class="nav-mobile-toggle" id="mobileToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileClose">×</button>
+        <ul class="mobile-menu-links">
+            <li><a href="#about">소개</a></li>
+            <li><a href="#gallery">둘러보기</a></li>
+            <li><a href="#programs">프로그램</a></li>
+            <li><a href="#location">오시는 길</a></li>
+        </ul>
+        <a href="#application" class="mobile-menu-cta">상담 신청하기</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg">
+            <!-- 이미지: hero-bg.jpg -->
+            <img src="images/hero-bg.jpg" alt="김엄마 관리형독서실">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span>분당 1호점 7년의 노하우</span>
+            </div>
+            <h1>송도 <span class="highlight">김엄마</span><br>관리형독서실</h1>
+            <p class="hero-subtitle">
+                체계적인 학습관리와 프리미엄 환경으로<br>
+                목표 대학까지 함께 하겠습니다
+            </p>
+            <div class="hero-buttons">
+                <a href="#application" class="btn btn-primary">상담 신청하기</a>
+                <a href="#gallery" class="btn btn-outline">시설 둘러보기</a>
+            </div>
+        </div>
+        <div class="hero-scroll">Scroll</div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="section-header">
+            <span class="section-label">About Us</span>
+            <h2 class="section-title">두 개의 층, 하나의 목표</h2>
+            <p class="section-desc">
+                7층 독학재수학원과 8층 관리형독서실이 함께<br>
+                학생들의 대학 합격을 위해 최선을 다합니다
+            </p>
+        </div>
+
+        <div class="floor-grid">
+            <!-- 7층 카드 -->
+            <div class="floor-card">
+                <div class="floor-image">
+                    <!-- 이미지: floor-7f.jpg -->
+                    <img src="images/floor-7f.jpg" alt="7층 김엄마송도독학재수학원">
+                    <span class="floor-badge">7층</span>
+                </div>
+                <div class="floor-content">
+                    <h3 class="floor-title">김엄마송도독학재수학원</h3>
+                    <p class="floor-desc">
+                        N수생을 위한 전문 재수학원입니다. 
+                        체계적인 커리큘럼과 1:1 맞춤 관리로 목표 대학 합격을 이끌어냅니다.
+                    </p>
+                    <div class="floor-features">
+                        <span class="floor-feature">N수생 전문</span>
+                        <span class="floor-feature">1:1 맞춤관리</span>
+                        <span class="floor-feature">체계적 커리큘럼</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8층 카드 -->
+            <div class="floor-card">
+                <div class="floor-image">
+                    <!-- 이미지: floor-8f.jpg -->
+                    <img src="images/floor-8f.jpg" alt="8층 김엄마송도관리형독서실">
+                    <span class="floor-badge">8층</span>
+                </div>
+                <div class="floor-content">
+                    <h3 class="floor-title">김엄마송도관리형독서실</h3>
+                    <p class="floor-desc">
+                        재원생(고1~고3)을 위한 프리미엄 관리형독서실입니다.
+                        최적의 학습 환경에서 집중력을 높여드립니다.
+                    </p>
+                    <div class="floor-features">
+                        <span class="floor-feature">고1~고3 재원생</span>
+                        <span class="floor-feature">프리미엄 시설</span>
+                        <span class="floor-feature">학습 플래너</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section gallery" id="gallery">
+        <div class="section-header">
+            <span class="section-label">Gallery</span>
+            <h2 class="section-title">시설 둘러보기</h2>
+            <p class="section-desc">
+                최고의 학습 환경을 위해 설계된 프리미엄 공간
+            </p>
+        </div>
+
+        <div class="gallery-grid">
+            <!-- 이미지들: gallery-1.jpg ~ gallery-8.jpg -->
+            <div class="gallery-item">
+                <img src="images/gallery-1.jpg" alt="독서실 내부">
+                <span class="gallery-item-label">독서실 전경</span>
+            </div>
+            <div class="gallery-item">
+                <img src="images/gallery-2.jpg" alt="개인 좌석">
+                <span class="gallery-item-label">개인 좌석</span>
+            </div>
+            <div class="gallery-item">
+                <img src="images/gallery-3.jpg" alt="상담실">
+                <span class="gallery-item-label">상담실</span>
+            </div>
+            <div class="gallery-item">
+                <img src="images/gallery-4.jpg" alt="휴게 공간">
+                <span class="gallery-item-label">휴게 공간</span>
+            </div>
+            <div class="gallery-item">
+                <img src="images/gallery-5.jpg" alt="스터디룸">
+                <span class="gallery-item-label">스터디룸</span>
+            </div>
+            <div class="gallery-item">
+                <img src="images/gallery-6.jpg" alt="로비">
+                <span class="gallery-item-label">로비</span>
+            </div>
+            <div class="gallery-item">
+                <img src="images/gallery-7.jpg" alt="복도">
+                <span class="gallery-item-label">복도</span>
+            </div>
+            <div class="gallery-item">
+                <img src="images/gallery-8.jpg" alt="전경">
+                <span class="gallery-item-label">전경</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="section programs" id="programs">
+        <div class="section-header">
+            <span class="section-label">Programs</span>
+            <h2 class="section-title">모집 프로그램</h2>
+            <p class="section-desc">
+                학생의 상황에 맞는 최적의 프로그램을 선택하세요
+            </p>
+        </div>
+
+        <div class="program-tabs">
+            <button class="program-tab active" data-tab="student">재원생 프로그램</button>
+            <button class="program-tab" data-tab="nsu">N수생 프로그램</button>
+        </div>
+
+        <div class="program-content">
+            <!-- 재원생 프로그램 -->
+            <div class="program-panel active" id="panel-student">
+                <div class="program-cards">
+                    <div class="program-card">
+                        <div class="program-icon">📚</div>
+                        <h4 class="program-card-title">예비고1 윈터스쿨</h4>
+                        <p class="program-card-desc">중3 → 고1 겨울방학 집중반</p>
+                        <span class="program-card-status status-open">모집중</span>
+                    </div>
+                    <div class="program-card">
+                        <div class="program-icon">📖</div>
+                        <h4 class="program-card-title">예비고2 윈터스쿨</h4>
+                        <p class="program-card-desc">고1 → 고2 겨울방학 집중반</p>
+                        <span class="program-card-status status-open">모집중</span>
+                    </div>
+                    <div class="program-card">
+                        <div class="program-icon">🎯</div>
+                        <h4 class="program-card-title">예비고3 윈터스쿨</h4>
+                        <p class="program-card-desc">고2 → 고3 겨울방학 집중반</p>
+                        <span class="program-card-status status-closing">마감임박</span>
+                    </div>
+                    <div class="program-card">
+                        <div class="program-icon">✨</div>
+                        <h4 class="program-card-title">정규반</h4>
+                        <p class="program-card-desc">학기 중 관리형독서실</p>
+                        <span class="program-card-status status-waiting">상시모집</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- N수생 프로그램 -->
+            <div class="program-panel" id="panel-nsu">
+                <div class="program-cards">
+                    <div class="program-card">
+                        <div class="program-icon">🔥</div>
+                        <h4 class="program-card-title">2026 N수생반</h4>
+                        <p class="program-card-desc">재수·N수 연간 관리반</p>
+                        <span class="program-card-status status-open">모집중</span>
+                    </div>
+                    <div class="program-card">
+                        <div class="program-icon">⚡</div>
+                        <h4 class="program-card-title">단기 집중반</h4>
+                        <p class="program-card-desc">3개월/6개월 단기 과정</p>
+                        <span class="program-card-status status-waiting">상담 후 결정</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Form Section -->
+    <section class="section application" id="application">
+        <div class="section-header">
+            <span class="section-label">Application</span>
+            <h2 class="section-title">상담 신청</h2>
+            <p class="section-desc">
+                아래 양식을 작성해주시면 빠르게 연락드리겠습니다
+            </p>
+        </div>
+
+        <div class="form-container">
+            <div class="form-type-selector">
+                <button class="form-type-btn active" data-form="student">재원생 대기신청</button>
+                <button class="form-type-btn" data-form="nsu">N수생 대기신청</button>
+            </div>
+
+            <div class="form-body">
+                <!-- 재원생 신청 폼 -->
+                <div class="form-section active" id="form-student">
+                    <h3 class="form-title">재원생 대기신청서</h3>
+                    <p class="form-subtitle">8층 관리형독서실 (고1~고3)</p>
+
+                    <form id="studentForm">
+                        <input type="hidden" name="formType" value="재원생">
+
+                        <div class="form-group">
+                            <label class="form-label">신청 프로그램 <span class="required">*</span></label>
+                            <select class="form-select" name="program" required>
+                                <option value="">선택해주세요</option>
+                                <option value="예비고1 윈터스쿨">예비고1 윈터스쿨</option>
+                                <option value="예비고2 윈터스쿨">예비고2 윈터스쿨</option>
+                                <option value="예비고3 윈터스쿨">예비고3 윈터스쿨</option>
+                                <option value="정규반">정규반 (상시)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">학생 이름 <span class="required">*</span></label>
+                                <input type="text" class="form-input" name="studentName" placeholder="학생 이름" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">학교 / 학년</label>
+                                <input type="text" class="form-input" name="school" placeholder="예: 송도고 2학년">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">학부모 연락처 <span class="required">*</span></label>
+                                <input type="tel" class="form-input" name="parentPhone" placeholder="010-0000-0000" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">학생 연락처</label>
+                                <input type="tel" class="form-input" name="studentPhone" placeholder="010-0000-0000">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">상담 희망 시간</label>
+                            <select class="form-select" name="consultTime">
+                                <option value="">선택해주세요</option>
+                                <option value="오전 (10시~12시)">오전 (10시~12시)</option>
+                                <option value="오후 (14시~17시)">오후 (14시~17시)</option>
+                                <option value="저녁 (18시~20시)">저녁 (18시~20시)</option>
+                                <option value="언제든 가능">언제든 가능</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">문의사항</label>
+                            <textarea class="form-textarea" name="message" placeholder="궁금하신 점이나 특이사항을 남겨주세요"></textarea>
+                        </div>
+
+                        <button type="submit" class="form-submit">대기 신청하기</button>
+
+                        <p class="form-notice">
+                            신청 시 개인정보 수집 및 이용에 동의하는 것으로 간주합니다.<br>
+                            신청 후 1~2일 내 연락드립니다.
+                        </p>
+                    </form>
+                </div>
+
+                <!-- N수생 신청 폼 -->
+                <div class="form-section" id="form-nsu">
+                    <h3 class="form-title">N수생 대기신청서</h3>
+                    <p class="form-subtitle">7층 김엄마송도독학재수학원</p>
+
+                    <form id="nsuForm">
+                        <input type="hidden" name="formType" value="N수생">
+
+                        <div class="form-group">
+                            <label class="form-label">신청 프로그램 <span class="required">*</span></label>
+                            <select class="form-select" name="program" required>
+                                <option value="">선택해주세요</option>
+                                <option value="2026 N수생반 (연간)">2026 N수생반 (연간)</option>
+                                <option value="단기 집중반 (3개월)">단기 집중반 (3개월)</option>
+                                <option value="단기 집중반 (6개월)">단기 집중반 (6개월)</option>
+                                <option value="상담 후 결정">상담 후 결정</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">학생 이름 <span class="required">*</span></label>
+                                <input type="text" class="form-input" name="studentName" placeholder="학생 이름" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">출신 고교</label>
+                                <input type="text" class="form-input" name="school" placeholder="졸업/재학 고등학교">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">수능 성적 (선택)</label>
+                            <input type="text" class="form-input" name="score" placeholder="예: 국어 2등급, 수학 3등급">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">학부모 연락처 <span class="required">*</span></label>
+                                <input type="tel" class="form-input" name="parentPhone" placeholder="010-0000-0000" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">학생 연락처</label>
+                                <input type="tel" class="form-input" name="studentPhone" placeholder="010-0000-0000">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">상담 희망 시간</label>
+                            <select class="form-select" name="consultTime">
+                                <option value="">선택해주세요</option>
+                                <option value="오전 (10시~12시)">오전 (10시~12시)</option>
+                                <option value="오후 (14시~17시)">오후 (14시~17시)</option>
+                                <option value="저녁 (18시~20시)">저녁 (18시~20시)</option>
+                                <option value="언제든 가능">언제든 가능</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">목표 대학/학과</label>
+                            <textarea class="form-textarea" name="message" placeholder="목표 대학, 학과, 기타 문의사항을 남겨주세요"></textarea>
+                        </div>
+
+                        <button type="submit" class="form-submit">대기 신청하기</button>
+
+                        <p class="form-notice">
+                            신청 시 개인정보 수집 및 이용에 동의하는 것으로 간주합니다.<br>
+                            신청 후 1~2일 내 연락드립니다.
+                        </p>
+                    </form>
+                </div>
+
+                <!-- 성공 메시지 -->
+                <div class="success-message" id="successMessage">
+                    <div class="success-icon">✓</div>
+                    <h3>신청이 완료되었습니다!</h3>
+                    <p>빠른 시일 내에 연락드리겠습니다.</p>
+                    <p>감사합니다 🙏</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location" id="location">
+        <div class="location-grid">
+            <div class="location-info">
+                <h2>오시는 길</h2>
+                <div class="location-item">
+                    <div class="location-icon">📍</div>
+                    <div class="location-text">
+                        <h4>주소</h4>
+                        <p>인천 연수구 송도동 22-20<br>해온프라자 더라운지 7층, 8층</p>
+                    </div>
+                </div>
+                <div class="location-item">
+                    <div class="location-icon">📞</div>
+                    <div class="location-text">
+                        <h4>문의 전화</h4>
+                        <p><a href="tel:010-4602-1953">010-4602-1953</a></p>
+                    </div>
+                </div>
+                <div class="location-item">
+                    <div class="location-icon">🕐</div>
+                    <div class="location-text">
+                        <h4>운영 시간</h4>
+                        <p>평일 07:00 ~ 24:00<br>주말 08:00 ~ 22:00</p>
+                    </div>
+                </div>
+                <div class="location-item">
+                    <div class="location-icon">🚇</div>
+                    <div class="location-text">
+                        <h4>교통편</h4>
+                        <p>인천 1호선 센트럴파크역 도보 5분</p>
+                    </div>
+                </div>
+            </div>
+            <div class="location-map">
+                <!-- 이미지: map.jpg (지도 이미지 또는 건물 외관) -->
+                <img src="images/map.jpg" alt="오시는 길">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://blog.naver.com/kimmmommy" target="_blank">📝 네이버 블로그</a>
+            <a href="tel:010-4602-1953">📞 전화 문의</a>
+            <a href="#application">✏️ 상담 신청</a>
+        </div>
+        <p class="footer-copy">© 2025 송도 김엄마 관리형독서실 · 김엄마송도독학재수학원. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // ⚠️ Google Apps Script 배포 URL로 교체하세요
+        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+
+        // Navigation scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu
+        const mobileToggle = document.getElementById('mobileToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        const mobileClose = document.getElementById('mobileClose');
+
+        function openMobileMenu() {
+            mobileMenu.classList.add('open');
+            mobileOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('open');
+            mobileOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        mobileToggle.addEventListener('click', openMobileMenu);
+        mobileClose.addEventListener('click', closeMobileMenu);
+        mobileOverlay.addEventListener('click', closeMobileMenu);
+
+        document.querySelectorAll('.mobile-menu-links a, .mobile-menu-cta').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Program tabs
+        const programTabs = document.querySelectorAll('.program-tab');
+        const programPanels = document.querySelectorAll('.program-panel');
+
+        programTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetTab = tab.dataset.tab;
+
+                programTabs.forEach(t => t.classList.remove('active'));
+                programPanels.forEach(p => p.classList.remove('active'));
+
+                tab.classList.add('active');
+                document.getElementById(`panel-${targetTab}`).classList.add('active');
+            });
+        });
+
+        // Form type selector
+        const formTypeBtns = document.querySelectorAll('.form-type-btn');
+        const formSections = document.querySelectorAll('.form-section');
+        const successMessage = document.getElementById('successMessage');
+
+        formTypeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetForm = btn.dataset.form;
+
+                formTypeBtns.forEach(b => b.classList.remove('active'));
+                formSections.forEach(s => s.classList.remove('active'));
+                successMessage.classList.remove('show');
+
+                btn.classList.add('active');
+                document.getElementById(`form-${targetForm}`).classList.add('active');
+            });
+        });
+
+        // Phone number auto-format
+        document.querySelectorAll('input[type="tel"]').forEach(input => {
+            input.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 3 && value.length <= 7) {
+                    value = value.slice(0, 3) + '-' + value.slice(3);
+                } else if (value.length > 7) {
+                    value = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7, 11);
+                }
+                e.target.value = value;
+            });
+        });
+
+        // Form submission
+        async function handleFormSubmit(e, formType) {
+            e.preventDefault();
+
+            const form = e.target;
+            const submitBtn = form.querySelector('.form-submit');
+            const originalText = submitBtn.textContent;
+
+            submitBtn.textContent = '신청 중...';
+            submitBtn.disabled = true;
+
+            const formData = new FormData(form);
+            const data = {
+                timestamp: new Date().toLocaleString('ko-KR'),
+                formType: formData.get('formType'),
+                program: formData.get('program'),
+                studentName: formData.get('studentName'),
+                school: formData.get('school') || '-',
+                score: formData.get('score') || '-',
+                parentPhone: formData.get('parentPhone'),
+                studentPhone: formData.get('studentPhone') || '-',
+                consultTime: formData.get('consultTime') || '-',
+                message: formData.get('message') || '-'
+            };
+
+            try {
+                if (GOOGLE_SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL') {
+                    await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                }
+
+                console.log('신청 데이터:', data);
+
+                // Hide form, show success
+                formSections.forEach(s => s.classList.remove('active'));
+                successMessage.classList.add('show');
+
+                // Reset form
+                form.reset();
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('신청 중 오류가 발생했습니다. 전화로 문의해주세요.');
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        document.getElementById('studentForm').addEventListener('submit', (e) => handleFormSubmit(e, 'student'));
+        document.getElementById('nsuForm').addEventListener('submit', (e) => handleFormSubmit(e, 'nsu'));
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

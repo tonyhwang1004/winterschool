@@ -1330,7 +1330,7 @@
             <li><a href="#pricing">이용료</a></li>
             <li><a href="#location">오시는 길</a></li>
         </ul>
-        <a href="#application" class="nav-cta">상담 신청</a>
+        <a href="#application" class="nav-cta">대기 신청</a>
         <div class="nav-mobile-toggle" id="mobileToggle">
             <span></span>
             <span></span>
@@ -1349,7 +1349,7 @@
             <li><a href="#pricing">이용료</a></li>
             <li><a href="#location">오시는 길</a></li>
         </ul>
-        <a href="#application" class="mobile-menu-cta">상담 신청하기</a>
+        <a href="#application" class="mobile-menu-cta">대기 신청하기</a>
     </div>
 
     <!-- Hero Section -->
@@ -1367,7 +1367,7 @@
                 목표 대학까지 함께 하겠습니다
             </p>
             <div class="hero-buttons">
-                <a href="#application" class="btn btn-primary">상담 신청하기</a>
+                <a href="#application" class="btn btn-primary">대기 신청하기</a>
                 <a href="#gallery" class="btn btn-outline">시설 둘러보기</a>
             </div>
         </div>
@@ -1469,6 +1469,10 @@
             <div class="gallery-item">
                 <img src="images/7f-study-7.png.jpeg" alt="7층 독서실 내부">
                 <span class="gallery-item-label">7층 독서실 내부 7</span>
+            </div>
+            <div class="gallery-item">
+                <img src="images/7f-study-8.png.jpeg" alt="7층 독서실 내부">
+                <span class="gallery-item-label">7층 독서실 내부 8</span>
             </div>
             <div class="gallery-item">
                 <img src="images/7f-front-1.png.jpeg" alt="프론트 데스크">
@@ -1695,7 +1699,7 @@
     <section class="section application" id="application">
         <div class="section-header">
             <span class="section-label">Application</span>
-            <h2 class="section-title">상담 신청</h2>
+            <h2 class="section-title">대기 신청</h2>
             <p class="section-desc">
                 아래 양식을 작성해주시면 빠르게 연락드리겠습니다
             </p>
@@ -1722,7 +1726,6 @@
                                 <option value="">선택해주세요</option>
                                 <option value="고2">고2</option>
                                 <option value="고3">고3</option>
-                                <option value="N수">N수</option>
                             </select>
                         </div>
 
@@ -1770,9 +1773,7 @@
                             <label class="form-label">신청 프로그램 <span class="required">*</span></label>
                             <select class="form-select" name="program" required>
                                 <option value="">선택해주세요</option>
-                                <option value="2026 N수생반 (연간)">2026 N수생반 (연간)</option>
-                                <option value="단기 집중반 (3개월)">단기 집중반 (3개월)</option>
-                                <option value="단기 집중반 (6개월)">단기 집중반 (6개월)</option>
+                                <option value="N수">N수</option>
                             </select>
                         </div>
 
@@ -1854,7 +1855,14 @@
                     <div class="location-icon">🕐</div>
                     <div class="location-text">
                         <h4>운영 시간</h4>
-                        <p>평일 07:00 ~ 24:00<br>주말 08:00 ~ 22:00</p>
+                        <p>평일/주말 08:00 ~ 01:00</p>
+                    </div>
+                </div>
+                <div class="location-item">
+                    <div class="location-icon">📅</div>
+                    <div class="location-text">
+                        <h4>공식 휴관일 안내</h4>
+                        <p>12월 24일(화), 12월 25일(수)<br>1년에 단 2일! 전체 휴관합니다.</p>
                     </div>
                 </div>
             </div>
@@ -1946,6 +1954,9 @@
             });
         });
 
+        // Google Apps Script URL
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzA3QoMhXlhXp_V_A3HxPDtEca6xJUCHZiW_TTqPIPC1u7onln9RvoqcUXo2UvcOFQG3A/exec';
+
         // Form submission
         async function handleSubmit(e) {
             e.preventDefault();
@@ -1955,13 +1966,37 @@
             submitBtn.textContent = '신청 중...';
             submitBtn.disabled = true;
 
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            // Collect form data
+            const formData = {
+                formType: form.querySelector('input[name="formType"]').value,
+                program: form.querySelector('select[name="program"]').value,
+                studentName: form.querySelector('input[name="studentName"]').value,
+                school: form.querySelector('input[name="school"]')?.value || '',
+                parentPhone: form.querySelector('input[name="parentPhone"]').value,
+                studentPhone: form.querySelector('input[name="studentPhone"]')?.value || '',
+                message: form.querySelector('textarea[name="message"]')?.value || ''
+            };
 
-            formSections.forEach(s => s.classList.remove('active'));
-            successMessage.classList.add('show');
+            try {
+                // Send to Google Sheets
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
 
-            form.reset();
+                // Show success message
+                formSections.forEach(s => s.classList.remove('active'));
+                successMessage.classList.add('show');
+                form.reset();
+            } catch (error) {
+                alert('신청 중 오류가 발생했습니다. 다시 시도해주세요.');
+                console.error('Error:', error);
+            }
+
             submitBtn.textContent = '대기 신청하기';
             submitBtn.disabled = false;
         }

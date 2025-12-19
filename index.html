@@ -577,152 +577,6 @@
             transform: translateY(0);
         }
 
-        /* ==================== PROGRAMS ==================== */
-        .programs {
-            background: var(--bg-soft);
-        }
-
-        .program-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .program-card {
-            background: var(--white);
-            padding: 40px 32px;
-            border-radius: 20px;
-            text-align: center;
-            border: 1px solid var(--border);
-            transition: var(--transition);
-        }
-
-        .program-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow);
-            border-color: var(--primary);
-        }
-
-        .program-icon {
-            width: 64px;
-            height: 64px;
-            background: var(--primary);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 28px;
-        }
-
-        .program-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 12px;
-        }
-
-        .program-desc {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.7;
-            margin-bottom: 20px;
-        }
-
-        .program-features {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            text-align: left;
-        }
-
-        .program-feature {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-            color: var(--text-body);
-        }
-
-        .program-feature::before {
-            content: '✓';
-            color: var(--primary);
-            font-weight: 700;
-        }
-
-        /* Additional Programs */
-        .programs-additional {
-            margin-top: 60px;
-        }
-
-        .programs-additional h3 {
-            font-size: 24px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 32px;
-            color: var(--text-dark);
-        }
-
-        .program-card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .program-card-small {
-            background: var(--white);
-            padding: 28px 24px;
-            border-radius: 16px;
-            text-align: center;
-            border: 1px solid var(--border);
-            transition: var(--transition);
-        }
-
-        .program-card-small:hover {
-            border-color: var(--primary);
-            transform: translateY(-4px);
-        }
-
-        .program-card-icon {
-            font-size: 32px;
-            margin-bottom: 12px;
-        }
-
-        .program-card-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 6px;
-        }
-
-        .program-card-desc {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 12px;
-        }
-
-        .program-card-status {
-            display: inline-block;
-            padding: 4px 12px;
-            font-size: 12px;
-            font-weight: 600;
-            border-radius: 100px;
-        }
-
-        .status-available {
-            background: rgba(16, 185, 129, 0.1);
-            color: #10b981;
-        }
-
-        .status-waiting {
-            background: rgba(245, 158, 11, 0.1);
-            color: #f59e0b;
-        }
-
         /* ==================== PRICING ==================== */
         .pricing {
             background: var(--white);
@@ -817,27 +671,6 @@
             display: flex;
             flex-direction: column;
             gap: 24px;
-        }
-
-        .pricing-daily {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            padding: 20px;
-            background: var(--primary);
-            border-radius: 12px;
-            color: var(--white);
-        }
-
-        .daily-label {
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .daily-price {
-            font-size: 24px;
-            font-weight: 800;
         }
 
         .pricing-notes {
@@ -1598,7 +1431,6 @@
         </div>
 
         <div class="gallery-grid">
-            <!-- 7층 김엄마송도독학재수학원 사진 13장 -->
             <div class="gallery-item">
                 <img src="images/7f-study-1.png.jpeg" alt="7층 독서실 내부">
                 <span class="gallery-item-label">7층 독서실 내부 1</span>
@@ -1655,7 +1487,6 @@
                 <img src="images/7f-refresh.png.jpeg" alt="리프레쉬룸">
                 <span class="gallery-item-label">7층 리프레쉬룸</span>
             </div>
-            <!-- 8층 김엄마송도관리형독서실 사진 14장 -->
             <div class="gallery-item">
                 <img src="images/8f-refresh-1.png.png" alt="8층 리프레쉬룸">
                 <span class="gallery-item-label">8층 리프레쉬룸 1</span>
@@ -1712,7 +1543,6 @@
                 <img src="images/8f-hallway.png.png" alt="8층 복도">
                 <span class="gallery-item-label">8층 복도</span>
             </div>
-            <!-- 기타 사진 5장 -->
             <div class="gallery-item">
                 <img src="images/building.png.png" alt="건물 전경">
                 <span class="gallery-item-label">건물 전경</span>
@@ -1796,16 +1626,14 @@
                     <table class="pricing-table">
                         <thead>
                             <tr>
-                                <th></th>
-                                <th>오픈형 지정석</th>
-                                <th>자유석</th>
+                                <th>구분</th>
+                                <th>등록비</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="row-label">방학 금액</td>
-                                <td><span class="price">490,000</span>원</td>
-                                <td><span class="price">530,000</span>원</td>
+                            <tr class="highlight-row">
+                                <td class="row-label">N수생 등록비<br><small>(멘토링서비스 포함)</small></td>
+                                <td><span class="price highlight-price">790,000</span>원</td>
                             </tr>
                         </tbody>
                     </table>

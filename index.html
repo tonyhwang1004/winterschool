@@ -868,6 +868,143 @@
             font-weight: bold;
         }
 
+        /* 가격표 탭 스타일 */
+        .pricing-tab-selector {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 32px;
+        }
+
+        .pricing-tab-btn {
+            padding: 12px 32px;
+            background: transparent;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .pricing-tab-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .pricing-tab-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--white);
+        }
+
+        .pricing-section {
+            display: none;
+        }
+
+        .pricing-section.active {
+            display: block;
+        }
+
+        .pricing-desc {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            font-size: 15px;
+        }
+
+        /* 3탭 신청서 스타일 */
+        .form-type-selector.three-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .form-type-selector.three-tabs .form-type-btn {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        /* 라디오 버튼 그룹 */
+        .form-radio-group {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .form-radio {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        .form-radio input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* 폼 힌트 텍스트 */
+        .form-hint {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 6px;
+            line-height: 1.5;
+        }
+
+        /* 폼 경고 텍스트 */
+        .form-warning {
+            font-size: 13px;
+            color: #e74c3c;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        /* 폼 안내 박스 */
+        .form-notice-box {
+            background: rgba(201, 162, 39, 0.1);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .form-notice-box p {
+            margin: 0;
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        .form-notice-box p:first-child {
+            margin-bottom: 4px;
+        }
+
+        @media (max-width: 600px) {
+            .pricing-tab-selector {
+                flex-direction: column;
+            }
+
+            .pricing-tab-btn {
+                width: 100%;
+            }
+
+            .form-type-selector.three-tabs .form-type-btn {
+                font-size: 12px;
+                padding: 12px 8px;
+            }
+
+            .form-radio-group {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+
         @media (max-width: 600px) {
             .pricing-table th,
             .pricing-table td {
@@ -1600,49 +1737,79 @@
         <div class="section-header">
             <span class="section-label">Pricing</span>
             <h2 class="section-title">이용료 안내</h2>
-            <p class="section-desc">
-                김엄마 지정석 오픈형 지정석 (8층 관리형독서실)
-            </p>
         </div>
 
         <div class="pricing-container">
-            <div class="pricing-table-wrapper">
-                <table class="pricing-table">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>칸막이 지정석</th>
-                            <th>오픈형 지정석</th>
-                            <th>자유석</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="row-label">종일권</td>
-                            <td><span class="price">690,000</span>원</td>
-                            <td><span class="price">630,000</span>원</td>
-                            <td><span class="price">490,000</span>원</td>
-                        </tr>
-                        <tr class="highlight-row">
-                            <td class="row-label">종일권<small>멘토링서비스 포함</small></td>
-                            <td><span class="price highlight-price">730,000</span>원</td>
-                            <td><span class="price highlight-price">730,000</span>원</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td class="row-label">오후권</td>
-                            <td><span class="price">550,000</span>원</td>
-                            <td><span class="price">530,000</span>원</td>
-                            <td><span class="price">390,000</span>원</td>
-                        </tr>
-                        <tr class="highlight-row">
-                            <td class="row-label">오후권<small>멘토링서비스 포함</small></td>
-                            <td><span class="price highlight-price">650,000</span>원</td>
-                            <td><span class="price highlight-price">590,000</span>원</td>
-                            <td>-</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <!-- 가격표 탭 선택 -->
+            <div class="pricing-tab-selector">
+                <button class="pricing-tab-btn active" data-pricing="student">재학생 (8층)</button>
+                <button class="pricing-tab-btn" data-pricing="nsu">N수생 (7층)</button>
+            </div>
+
+            <!-- 재학생 가격표 -->
+            <div class="pricing-section active" id="pricing-student">
+                <p class="pricing-desc">8층 관리형독서실 (고1~고3)</p>
+                <div class="pricing-table-wrapper">
+                    <table class="pricing-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>칸막이 지정석</th>
+                                <th>오픈형 지정석</th>
+                                <th>자유석</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="row-label">종일권</td>
+                                <td><span class="price">690,000</span>원</td>
+                                <td><span class="price">630,000</span>원</td>
+                                <td><span class="price">490,000</span>원</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td class="row-label">종일권<br><small>(멘토링서비스 포함)</small></td>
+                                <td><span class="price highlight-price">730,000</span>원</td>
+                                <td><span class="price highlight-price">730,000</span>원</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td class="row-label">오후권</td>
+                                <td><span class="price">550,000</span>원</td>
+                                <td><span class="price">530,000</span>원</td>
+                                <td><span class="price">390,000</span>원</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td class="row-label">오후권<br><small>(멘토링서비스 포함)</small></td>
+                                <td><span class="price highlight-price">650,000</span>원</td>
+                                <td><span class="price highlight-price">590,000</span>원</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- N수생 가격표 -->
+            <div class="pricing-section" id="pricing-nsu">
+                <p class="pricing-desc">7층 김엄마송도독학재수학원</p>
+                <div class="pricing-table-wrapper">
+                    <table class="pricing-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>오픈형 지정석</th>
+                                <th>자유석</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="row-label">방학 금액</td>
+                                <td><span class="price">490,000</span>원</td>
+                                <td><span class="price">530,000</span>원</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="pricing-info">
@@ -1661,33 +1828,27 @@
         <div class="section-header">
             <span class="section-label">Application</span>
             <h2 class="section-title">대기 신청</h2>
-            <p class="section-desc">
-                아래 양식을 작성해주시면 빠르게 연락드리겠습니다
-            </p>
         </div>
 
         <div class="form-container">
-            <div class="form-type-selector">
-                <button class="form-type-btn active" data-form="student">재원생 대기신청</button>
-                <button class="form-type-btn" data-form="nsu">N수생 대기신청</button>
+            <div class="form-type-selector three-tabs">
+                <button class="form-type-btn active" data-form="pre-g1">예비고1 신청</button>
+                <button class="form-type-btn" data-form="student">재학생 신청</button>
+                <button class="form-type-btn" data-form="nsu">N수생 신청</button>
             </div>
 
             <div class="form-body">
-                <!-- 재원생 신청 폼 -->
-                <div class="form-section active" id="form-student">
-                    <h3 class="form-title">재원생 대기신청서</h3>
-                    <p class="form-subtitle">8층 관리형독서실 (고1~고3)</p>
+                <!-- 예비고1 신청 폼 -->
+                <div class="form-section active" id="form-pre-g1">
+                    <h3 class="form-title">예비고1 신청서</h3>
+                    <p class="form-subtitle">7층 전수관 (예비고1)</p>
 
-                    <form id="studentForm">
-                        <input type="hidden" name="formType" value="재원생">
+                    <form id="preG1Form">
+                        <input type="hidden" name="formType" value="예비고1">
 
                         <div class="form-group">
-                            <label class="form-label">신청 프로그램 <span class="required">*</span></label>
-                            <select class="form-select" name="program" required>
-                                <option value="">선택해주세요</option>
-                                <option value="고2">고2</option>
-                                <option value="고3">고3</option>
-                            </select>
+                            <label class="form-label">학년</label>
+                            <input type="text" class="form-input" value="예비고1" readonly style="background: #f5f5f5;">
                         </div>
 
                         <div class="form-row">
@@ -1696,15 +1857,90 @@
                                 <input type="text" class="form-input" name="studentName" placeholder="학생 이름" required>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">학교 / 학년</label>
-                                <input type="text" class="form-input" name="school" placeholder="예: 송도고 2학년">
+                                <label class="form-label">성별 <span class="required">*</span></label>
+                                <select class="form-select" name="gender" required>
+                                    <option value="">선택해주세요</option>
+                                    <option value="남학생">남학생</option>
+                                    <option value="여학생">여학생</option>
+                                </select>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label class="form-label">학부모 연락처 <span class="required">*</span></label>
+                                <label class="form-label">학생 연락처</label>
+                                <input type="tel" class="form-input" name="studentPhone" placeholder="000-0000-0000 또는 '없음'">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">부모님 연락처 <span class="required">*</span></label>
                                 <input type="tel" class="form-input" name="parentPhone" placeholder="010-0000-0000" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">출신 중학교 <span class="required">*</span></label>
+                            <input type="text" class="form-input" name="middleSchool" placeholder="출신 중학교명" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">2026 입학 고등학교 (1순위)</label>
+                                <input type="text" class="form-input" name="highSchool1" placeholder="1순위 고등학교">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">2026 입학 고등학교 (2순위)</label>
+                                <input type="text" class="form-input" name="highSchool2" placeholder="2순위 고등학교">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">2025년 성적표 (3-1 기말)</label>
+                            <input type="text" class="form-input" name="grade1" placeholder="예: A/B/A/A (국,수,영,과)">
+                            <p class="form-hint">증빙서류는 상담 때 제출</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">2025년 성적표 (3-2 중간)</label>
+                            <input type="text" class="form-input" name="grade2" placeholder="예: A/B/A/A (국,수,영,과)">
+                            <p class="form-hint">증빙서류는 상담 때 제출</p>
+                        </div>
+
+                        <div class="form-group form-notice-box">
+                            <p><strong>7층 전수관 (예비고1)</strong></p>
+                            <p>신규가입비 100,000원 별도</p>
+                        </div>
+
+                        <button type="submit" class="form-submit">대기 신청하기</button>
+                    </form>
+                </div>
+
+                <!-- 재학생 신청 폼 -->
+                <div class="form-section" id="form-student">
+                    <h3 class="form-title">재학생 대기신청서</h3>
+                    <p class="form-subtitle">8층 관리형독서실 (고2~고3)</p>
+
+                    <form id="studentForm">
+                        <input type="hidden" name="formType" value="재학생">
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">학년 <span class="required">*</span></label>
+                                <select class="form-select" name="grade" required>
+                                    <option value="">선택해주세요</option>
+                                    <option value="고2">고2</option>
+                                    <option value="고3">고3</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">학교 <span class="required">*</span></label>
+                                <input type="text" class="form-input" name="school" placeholder="학교명" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">학생 이름 <span class="required">*</span></label>
+                                <input type="text" class="form-input" name="studentName" placeholder="학생 이름" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">학생 연락처</label>
@@ -1713,12 +1949,16 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="form-label">부모님 연락처 <span class="required">*</span></label>
+                            <input type="tel" class="form-input" name="parentPhone" placeholder="010-0000-0000" required>
+                        </div>
+
+                        <div class="form-group">
                             <label class="form-label">문의사항</label>
                             <textarea class="form-textarea" name="message" placeholder="궁금하신 점이나 특이사항을 남겨주세요"></textarea>
                         </div>
 
                         <button type="submit" class="form-submit">대기 신청하기</button>
-                        <p class="form-notice">신청 후 1~2일 내에 연락드리겠습니다.</p>
                     </form>
                 </div>
 
@@ -1730,53 +1970,89 @@
                     <form id="nsuForm">
                         <input type="hidden" name="formType" value="N수생">
 
-                        <div class="form-group">
-                            <label class="form-label">신청 프로그램 <span class="required">*</span></label>
-                            <select class="form-select" name="program" required>
-                                <option value="">선택해주세요</option>
-                                <option value="N수">N수</option>
-                            </select>
-                        </div>
-
                         <div class="form-row">
                             <div class="form-group">
                                 <label class="form-label">학생 이름 <span class="required">*</span></label>
                                 <input type="text" class="form-input" name="studentName" placeholder="학생 이름" required>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">출신 고교</label>
-                                <input type="text" class="form-input" name="school" placeholder="졸업/재학 고등학교">
+                                <label class="form-label">성별 <span class="required">*</span></label>
+                                <select class="form-select" name="gender" required>
+                                    <option value="">선택해주세요</option>
+                                    <option value="남학생">남학생</option>
+                                    <option value="여학생">여학생</option>
+                                </select>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label class="form-label">학부모 연락처 <span class="required">*</span></label>
-                                <input type="tel" class="form-input" name="parentPhone" placeholder="010-0000-0000" required>
+                                <label class="form-label">학생 연락처 <span class="required">*</span></label>
+                                <input type="tel" class="form-input" name="studentPhone" placeholder="010-0000-0000" required>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">학생 연락처</label>
-                                <input type="tel" class="form-input" name="studentPhone" placeholder="010-0000-0000">
+                                <label class="form-label">부모님 연락처 <span class="required">*</span></label>
+                                <input type="tel" class="form-input" name="parentPhone" placeholder="010-0000-0000" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">출신 고등학교 <span class="required">*</span></label>
+                                <input type="text" class="form-input" name="highSchool" placeholder="출신 고등학교명" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">희망 등원일</label>
+                                <input type="date" class="form-input" name="startDate">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">N수 횟수</label>
-                            <select class="form-select" name="nsuCount">
+                            <label class="form-label">2025년 수능등급 (국어/수학/영어)</label>
+                            <input type="text" class="form-input" name="suneungScore" placeholder="예: 3/2/1">
+                            <p class="form-hint">수시는 학교내신등급을 기재하세요. (선택사항)<br>수능점수 제출 시 장학혜택 가능</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">전수관 사전등록을 희망하시나요? <span class="required">*</span></label>
+                            <div class="form-radio-group">
+                                <label class="form-radio">
+                                    <input type="radio" name="preRegister" value="Yes" required>
+                                    <span>Yes</span>
+                                </label>
+                                <label class="form-radio">
+                                    <input type="radio" name="preRegister" value="No">
+                                    <span>No</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">사전등록 방법을 선택하세요</label>
+                            <select class="form-select" name="paymentMethod">
                                 <option value="">선택해주세요</option>
-                                <option value="첫 재수">첫 재수</option>
-                                <option value="2수">2수</option>
-                                <option value="3수 이상">3수 이상</option>
+                                <option value="계좌이체">계좌이체</option>
+                                <option value="온라인카드결제">온라인카드결제</option>
+                                <option value="방문결제">방문결제</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">목표 대학/학과, 문의사항</label>
-                            <textarea class="form-textarea" name="message" placeholder="목표 대학, 학과, 현재 성적, 기타 문의사항"></textarea>
+                            <label class="form-label">흡연 여부 확인 <span class="required">*</span></label>
+                            <p class="form-warning">⚠️ 흡연자는 신청서를 작성할 수 없습니다.</p>
+                            <div class="form-radio-group">
+                                <label class="form-radio">
+                                    <input type="radio" name="smoking" value="확인하였습니다" required>
+                                    <span>확인하였습니다 (비흡연)</span>
+                                </label>
+                                <label class="form-radio">
+                                    <input type="radio" name="smoking" value="해당사항없습니다">
+                                    <span>해당사항없습니다</span>
+                                </label>
+                            </div>
                         </div>
 
                         <button type="submit" class="form-submit">대기 신청하기</button>
-                        <p class="form-notice">신청 후 1~2일 내에 연락드리겠습니다.</p>
                     </form>
                 </div>
 
@@ -1906,6 +2182,22 @@
             });
         });
 
+        // Pricing tabs
+        const pricingTabBtns = document.querySelectorAll('.pricing-tab-btn');
+        const pricingSections = document.querySelectorAll('.pricing-section');
+
+        pricingTabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetPricing = btn.dataset.pricing;
+
+                pricingTabBtns.forEach(b => b.classList.remove('active'));
+                pricingSections.forEach(s => s.classList.remove('active'));
+
+                btn.classList.add('active');
+                document.getElementById(`pricing-${targetPricing}`).classList.add('active');
+            });
+        });
+
         // Phone number formatting
         document.querySelectorAll('input[type="tel"]').forEach(input => {
             input.addEventListener('input', function(e) {
@@ -1931,16 +2223,16 @@
             submitBtn.textContent = '신청 중...';
             submitBtn.disabled = true;
 
-            // Collect form data
-            const formData = {
-                formType: form.querySelector('input[name="formType"]').value,
-                program: form.querySelector('select[name="program"]').value,
-                studentName: form.querySelector('input[name="studentName"]').value,
-                school: form.querySelector('input[name="school"]')?.value || '',
-                parentPhone: form.querySelector('input[name="parentPhone"]').value,
-                studentPhone: form.querySelector('input[name="studentPhone"]')?.value || '',
-                message: form.querySelector('textarea[name="message"]')?.value || ''
-            };
+            // Collect all form data dynamically
+            const formData = {};
+            const inputs = form.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                if (input.name && input.type !== 'radio') {
+                    formData[input.name] = input.value || '';
+                } else if (input.type === 'radio' && input.checked) {
+                    formData[input.name] = input.value;
+                }
+            });
 
             try {
                 // Send to Google Sheets
@@ -1966,6 +2258,7 @@
             submitBtn.disabled = false;
         }
 
+        document.getElementById('preG1Form').addEventListener('submit', handleSubmit);
         document.getElementById('studentForm').addEventListener('submit', handleSubmit);
         document.getElementById('nsuForm').addEventListener('submit', handleSubmit);
 

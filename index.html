@@ -1040,6 +1040,18 @@
             margin-top: 4px;
         }
 
+        .pricing-table .row-label .vacation-badge {
+            display: inline-block;
+            background: #f97316;
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
         .pricing-table .price {
             font-weight: 700;
             font-size: 18px;
@@ -2255,41 +2267,35 @@
 
             <!-- 재학생 가격표 -->
             <div class="pricing-section active" id="pricing-student">
-                <p class="pricing-desc">8층 관리형독서실 (고1~고3)</p>
+                <p class="pricing-desc">8층 관리형독서실 (고2~고3)</p>
                 <div class="pricing-table-wrapper">
                     <table class="pricing-table">
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>칸막이 지정석</th>
-                                <th>오픈형 지정석</th>
                                 <th>자유석</th>
+                                <th>오픈형 지정석</th>
+                                <th>칸막이 지정석</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="row-label">종일권</td>
-                                <td><span class="price">690,000</span>원</td>
+                                <td class="row-label">종일권 <span class="vacation-badge">방학</span></td>
+                                <td><span class="price">530,000</span>원</td>
                                 <td><span class="price">630,000</span>원</td>
-                                <td><span class="price">490,000</span>원</td>
-                            </tr>
-                            <tr class="highlight-row">
-                                <td class="row-label">종일권<br><small>(멘토링서비스 포함)</small></td>
-                                <td><span class="price highlight-price">730,000</span>원</td>
-                                <td><span class="price highlight-price">730,000</span>원</td>
-                                <td>-</td>
+                                <td><span class="price">690,000</span>원</td>
                             </tr>
                             <tr>
                                 <td class="row-label">오후권</td>
-                                <td><span class="price">550,000</span>원</td>
-                                <td><span class="price">530,000</span>원</td>
                                 <td><span class="price">390,000</span>원</td>
+                                <td><span class="price">490,000</span>원</td>
+                                <td><span class="price">550,000</span>원</td>
                             </tr>
                             <tr class="highlight-row">
                                 <td class="row-label">오후권<br><small>(멘토링서비스 포함)</small></td>
-                                <td><span class="price highlight-price">650,000</span>원</td>
-                                <td><span class="price highlight-price">590,000</span>원</td>
                                 <td>-</td>
+                                <td><span class="price highlight-price">590,000</span>원</td>
+                                <td><span class="price highlight-price">650,000</span>원</td>
                             </tr>
                         </tbody>
                     </table>
@@ -2303,14 +2309,18 @@
                     <table class="pricing-table">
                         <thead>
                             <tr>
-                                <th>구분</th>
-                                <th>등록비</th>
+                                <th></th>
+                                <th>칸막이 지정석</th>
+                                <th>오픈형 지정석</th>
+                                <th>N수생 올케어서비스</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="highlight-row">
-                                <td class="row-label">N수생 등록비<br><small>(멘토링서비스 포함)</small></td>
-                                <td><span class="price highlight-price">790,000</span>원</td>
+                                <td class="row-label">등록비</td>
+                                <td><span class="price">690,000</span>원</td>
+                                <td><span class="price">630,000</span>원</td>
+                                <td><span class="price highlight-price">750,000</span>원</td>
                             </tr>
                         </tbody>
                     </table>
@@ -2345,7 +2355,7 @@
                 <!-- 재학생 신청 폼 -->
                 <div class="form-section active" id="form-student">
                     <h3 class="form-title">재학생 대기신청서</h3>
-                    <p class="form-subtitle">8층 관리형독서실 (고1~고3)</p>
+                    <p class="form-subtitle">8층 관리형독서실 (고2~고3)</p>
 
                     <form id="studentForm">
                         <input type="hidden" name="formType" value="재학생">
@@ -2385,7 +2395,6 @@
                                 <label class="form-label">학년 <span class="required">*</span></label>
                                 <select class="form-select" name="grade" required>
                                     <option value="">선택해주세요</option>
-                                    <option value="고1">고1</option>
                                     <option value="고2">고2</option>
                                     <option value="고3">고3</option>
                                 </select>

@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>송도 김엄마 관리형독서실 | 김엄마송도독학재수학원</title>
-
+    
     <!-- Open Graph / 링크 미리보기 -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tonyhwang1004.github.io/winterschool/">
     <meta property="og:title" content="송도 김엄마 관리형독서실">
     <meta property="og:description" content="분당 1호점 7년의 노하우 - 체계적인 학습관리와 프리미엄 환경으로 목표 대학까지 함께 하겠습니다">
     <meta property="og:image" content="https://tonyhwang1004.github.io/winterschool/images/og-image.png">
-
+    
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="송도 김엄마 관리형독서실">
     <meta name="twitter:description" content="분당 1호점 7년의 노하우 - 체계적인 학습관리와 프리미엄 환경">
     <meta name="twitter:image" content="https://tonyhwang1004.github.io/winterschool/images/og-image.png">
-
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
@@ -2709,9 +2709,6 @@
             });
         });
 
-        // Google Apps Script URL
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyJzH2IwDpH7l_lA8N87D7f77zdyqGjjdAf7839h3D23xXTd5Fyk_k-uzPXVuUrp42T/exec';
-
         // ✅ 새로운 Google Apps Script URL (재학생/N수생 분리 저장)
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyYoutJgZpUeez901XRf3SZ2vacQTuBsiWr96n1TngWoygOnqHnpkc8cO8qSu2UrIoBgA/exec';
 
@@ -2720,7 +2717,7 @@
             e.preventDefault();
             const form = e.target;
             const submitBtn = form.querySelector('.form-submit');
-
+            
             submitBtn.textContent = '신청 중...';
             submitBtn.disabled = true;
 

@@ -41,6 +41,8 @@
             --shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
             --shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.15);
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --winter-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --winter-accent: #667eea;
         }
 
         * {
@@ -59,6 +61,77 @@
             color: var(--text-dark);
             line-height: 1.8;
             overflow-x: hidden;
+        }
+
+        /* ==================== WINTER CAMP BANNER ==================== */
+        .winter-banner {
+            background: var(--winter-gradient);
+            padding: 12px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .winter-banner::before {
+            content: '❄️';
+            position: absolute;
+            left: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            animation: snowfall 3s ease-in-out infinite;
+        }
+
+        .winter-banner::after {
+            content: '❄️';
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            animation: snowfall 3s ease-in-out infinite 1.5s;
+        }
+
+        @keyframes snowfall {
+            0%, 100% { opacity: 1; transform: translateY(-50%) rotate(0deg); }
+            50% { opacity: 0.7; transform: translateY(-40%) rotate(180deg); }
+        }
+
+        .winter-banner-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .winter-banner-text {
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .winter-banner-text span {
+            color: #ffd700;
+        }
+
+        .winter-banner-btn {
+            background: white;
+            color: var(--winter-accent);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .winter-banner-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         /* ==================== NAVIGATION ==================== */
@@ -323,6 +396,17 @@
             border-color: var(--white);
         }
 
+        .btn-winter {
+            background: var(--winter-gradient);
+            color: white;
+            border: none;
+        }
+
+        .btn-winter:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
+        }
+
         .hero-scroll {
             position: absolute;
             bottom: 40px;
@@ -349,6 +433,193 @@
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ==================== WINTER CAMP SECTION ==================== */
+        .winter-camp {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .winter-camp::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23667eea' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .winter-camp-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .winter-camp-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .winter-camp-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: var(--winter-gradient);
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .winter-camp-title {
+            font-size: clamp(28px, 4vw, 38px);
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .winter-camp-subtitle {
+            font-size: 17px;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        .winter-camp-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        .winter-camp-card-header {
+            background: var(--winter-gradient);
+            padding: 32px 40px;
+            color: white;
+        }
+
+        .winter-camp-card-header h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .winter-camp-card-header p {
+            font-size: 15px;
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        .winter-camp-card-body {
+            padding: 40px;
+        }
+
+        .winter-camp-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .winter-info-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .winter-info-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .winter-info-content h4 {
+            font-size: 14px;
+            color: var(--winter-accent);
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .winter-info-content p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .winter-camp-notice {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 32px;
+        }
+
+        .winter-camp-notice h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #856404;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .winter-camp-notice ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .winter-camp-notice li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #856404;
+            line-height: 1.6;
+        }
+
+        .winter-camp-notice li:last-child {
+            margin-bottom: 0;
+        }
+
+        .winter-camp-notice li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #ffc107;
+            font-weight: bold;
+        }
+
+        .winter-camp-cta {
+            text-align: center;
+        }
+
+        .winter-camp-cta .btn {
+            padding: 18px 48px;
+            font-size: 16px;
+        }
+
+        .winter-camp-cta p {
+            margin-top: 16px;
+            font-size: 13px;
+            color: var(--text-light);
         }
 
         /* ==================== SECTIONS ==================== */
@@ -1169,7 +1440,7 @@
             padding: 20px;
             background: var(--bg-soft);
             border: none;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
             color: var(--text-muted);
             cursor: pointer;
@@ -1192,6 +1463,19 @@
             height: 3px;
             background: var(--primary);
             border-radius: 3px 3px 0 0;
+        }
+
+        .form-type-btn.winter-tab {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+        }
+
+        .form-type-btn.winter-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .form-type-btn.winter-tab.active::after {
+            background: #ffd700;
         }
 
         .form-body {
@@ -1298,6 +1582,14 @@
             box-shadow: 0 8px 30px rgba(10, 36, 99, 0.3);
         }
 
+        .form-submit.winter-submit {
+            background: var(--winter-gradient);
+        }
+
+        .form-submit.winter-submit:hover {
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
+        }
+
         .form-notice {
             text-align: center;
             font-size: 13px;
@@ -1326,6 +1618,10 @@
             margin: 0 auto 24px;
             font-size: 32px;
             color: white;
+        }
+
+        .success-icon.winter-icon {
+            background: var(--winter-gradient);
         }
 
         .success-message h3 {
@@ -1391,6 +1687,55 @@
 
         .form-notice-box p:first-child {
             margin-bottom: 4px;
+        }
+
+        /* Winter Form Specific */
+        .winter-form-notice {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .winter-form-notice h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--winter-accent);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .winter-form-notice ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .winter-form-notice li {
+            position: relative;
+            padding-left: 16px;
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .winter-form-notice li:last-child {
+            margin-bottom: 0;
+        }
+
+        .winter-form-notice li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--winter-accent);
+        }
+
+        .winter-form-notice li strong {
+            color: #e74c3c;
         }
 
         /* ==================== LOCATION ==================== */
@@ -1572,6 +1917,18 @@
             border-radius: 8px;
         }
 
+        .mobile-menu-winter-cta {
+            display: block;
+            margin-top: 12px;
+            padding: 16px;
+            background: var(--winter-gradient);
+            color: var(--white);
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 8px;
+        }
+
         .mobile-overlay {
             position: fixed;
             top: 0;
@@ -1642,6 +1999,10 @@
             .reviews-grid {
                 grid-template-columns: 1fr;
             }
+
+            .winter-camp-info {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1705,6 +2066,40 @@
                 flex-direction: column;
                 gap: 12px;
             }
+
+            .form-type-selector {
+                flex-direction: column;
+            }
+
+            .form-type-btn {
+                border-bottom: 1px solid var(--border);
+            }
+
+            .form-type-btn:last-child {
+                border-bottom: none;
+            }
+
+            .form-type-btn.active::after {
+                display: none;
+            }
+
+            .winter-banner-content {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .winter-banner::before,
+            .winter-banner::after {
+                display: none;
+            }
+
+            .winter-camp-card-header {
+                padding: 24px;
+            }
+
+            .winter-camp-card-body {
+                padding: 24px;
+            }
         }
 
         @media (max-width: 600px) {
@@ -1725,13 +2120,23 @@
     </style>
 </head>
 <body>
+    <!-- Winter Camp Banner -->
+    <div class="winter-banner">
+        <div class="winter-banner-content">
+            <span class="winter-banner-text">❄️ <span>[재원생 전용]</span> 2026 김엄마 겨울방학 캠프 집중 관리 신청 받습니다!</span>
+            <a href="#winter-camp" class="winter-banner-btn">
+                신청 바로가기 →
+            </a>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="nav" id="navbar">
         <a href="#" class="nav-logo">김엄마 관리형독서실</a>
         <ul class="nav-links">
             <li><a href="#about">소개</a></li>
             <li><a href="#gallery">둘러보기</a></li>
-            <li><a href="#app-features">앱 기능</a></li>
+            <li><a href="#winter-camp">겨울캠프</a></li>
             <li><a href="#management">학습관리</a></li>
             <li><a href="#pricing">이용료</a></li>
             <li><a href="#location">오시는 길</a></li>
@@ -1751,11 +2156,13 @@
         <ul class="mobile-menu-links">
             <li><a href="#about">소개</a></li>
             <li><a href="#gallery">둘러보기</a></li>
+            <li><a href="#winter-camp">겨울캠프</a></li>
             <li><a href="#app-features">앱 기능</a></li>
             <li><a href="#management">학습관리</a></li>
             <li><a href="#pricing">이용료</a></li>
             <li><a href="#location">오시는 길</a></li>
         </ul>
+        <a href="#winter-camp" class="mobile-menu-winter-cta">❄️ 겨울캠프 신청</a>
         <a href="#application" class="mobile-menu-cta">대기 신청하기</a>
     </div>
 
@@ -1775,10 +2182,79 @@
             </p>
             <div class="hero-buttons">
                 <a href="#application" class="btn btn-primary">대기 신청하기</a>
+                <a href="#winter-camp" class="btn btn-winter">❄️ 겨울캠프 신청</a>
                 <a href="#gallery" class="btn btn-outline">시설 둘러보기</a>
             </div>
         </div>
         <div class="hero-scroll">Scroll</div>
+    </section>
+
+    <!-- Winter Camp Section -->
+    <section class="section winter-camp" id="winter-camp">
+        <div class="winter-camp-container">
+            <div class="winter-camp-header">
+                <span class="winter-camp-badge">❄️ 재원생 전용</span>
+                <h2 class="winter-camp-title">2026 김엄마 겨울방학 캠프<br>집중 관리 신청</h2>
+                <p class="winter-camp-subtitle">
+                    겨울방학 도전목표 달성을 위한, 주 1회 1:1 집중 관리를 실시합니다.<br>
+                    1:1 집중관리를 희망하는 학생은 아래 신청서를 작성하여 제출해주세요.
+                </p>
+            </div>
+
+            <div class="winter-camp-card">
+                <div class="winter-camp-card-header">
+                    <h3>❄️ 겨울방학 집중 관리 프로그램</h3>
+                    <p>집중관리를 신청하지 않을 경우 주 1회 스케줄노트 기본검사(비대면, 노트 제출시 일괄 검사)를 진행하며, <strong>미제출 시에는 벌점이 부여</strong>됩니다.</p>
+                </div>
+                <div class="winter-camp-card-body">
+                    <div class="winter-camp-info">
+                        <div class="winter-info-item">
+                            <div class="winter-info-icon">📅</div>
+                            <div class="winter-info-content">
+                                <h4>집중관리 기간</h4>
+                                <p>각 학교별 겨울방학기간 동안</p>
+                            </div>
+                        </div>
+                        <div class="winter-info-item">
+                            <div class="winter-info-icon">🕐</div>
+                            <div class="winter-info-content">
+                                <h4>검사 시간</h4>
+                                <p>월-금 오전 9시~12시(정오) 사이에 진행</p>
+                            </div>
+                        </div>
+                        <div class="winter-info-item">
+                            <div class="winter-info-icon">📝</div>
+                            <div class="winter-info-content">
+                                <h4>검사 일정</h4>
+                                <p>지정된 요일에 검사를 받지 않는 경우, 검사는 다음 주로 넘어갑니다</p>
+                            </div>
+                        </div>
+                        <div class="winter-info-item">
+                            <div class="winter-info-icon">⚠️</div>
+                            <div class="winter-info-content">
+                                <h4>자동 제외 조건</h4>
+                                <p>2회 미검사 시, 집중 관리에서 자동 제외됩니다</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="winter-camp-notice">
+                        <h4>⚠️ 미신청 시 안내</h4>
+                        <ul>
+                            <li>집중관리를 신청하지 않을 경우, 주 1회 스케줄노트 기본검사(비대면, 노트 제출시 일괄 검사)를 진행합니다</li>
+                            <li><strong>미제출 시에는 벌점이 부여</strong>됩니다</li>
+                        </ul>
+                    </div>
+
+                    <div class="winter-camp-cta">
+                        <a href="https://forms.gle/QYbf1NGcP6ay3ehP8" target="_blank" class="btn btn-winter">
+                            ❄️ 겨울캠프 집중관리 신청하기 →
+                        </a>
+                        <p>Google Form으로 연결됩니다</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- About Section -->
@@ -2343,6 +2819,7 @@
             <div class="form-type-selector">
                 <button class="form-type-btn active" data-form="student">재학생 신청</button>
                 <button class="form-type-btn" data-form="nsu">N수생 신청</button>
+                <button class="form-type-btn winter-tab" data-form="winter">❄️ 겨울캠프</button>
             </div>
 
             <div class="form-body">
@@ -2537,11 +3014,80 @@
                     </form>
                 </div>
 
+                <!-- 겨울캠프 신청 폼 -->
+                <div class="form-section" id="form-winter">
+                    <h3 class="form-title">❄️ 2026 김엄마 겨울방학 캠프</h3>
+                    <p class="form-subtitle">집중 관리 신청서 (재원생 전용)</p>
+
+                    <div class="winter-form-notice">
+                        <h4>📋 신청 전 안내사항</h4>
+                        <ul>
+                            <li>겨울방학 도전목표 달성을 위한, 주 1회 1:1 집중 관리를 실시합니다</li>
+                            <li>집중관리 기간: 각 학교별 겨울방학기간 동안</li>
+                            <li>검사 시간: 월-금 오전 9시~12시(정오)</li>
+                            <li>지정된 요일에 검사를 받지 않는 경우, 검사는 다음 주로 넘어갑니다</li>
+                            <li><strong>2회 미검사 시, 집중 관리에서 자동 제외됩니다</strong></li>
+                        </ul>
+                    </div>
+
+                    <form id="winterForm">
+                        <input type="hidden" name="formType" value="겨울캠프">
+
+                        <div class="form-group">
+                            <label class="form-label">학생명 <span class="required">*</span></label>
+                            <input type="text" class="form-input" name="studentName" placeholder="학생 이름" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">김엄마 등원번호 <span class="required">*</span></label>
+                            <input type="text" class="form-input" name="registrationNumber" placeholder="등원번호를 입력해주세요" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">학교 & 학년 <span class="required">*</span></label>
+                            <input type="text" class="form-input" name="schoolGrade" placeholder="예: OO고등학교 2학년" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">집중 관리 신청 여부 <span class="required">*</span></label>
+                            <p class="form-hint" style="margin-bottom: 12px;">
+                                집중관리를 신청하지 않을 경우, 주 1회 스케줄노트 기본검사(비대면, 노트 제출시 일괄 검사)를 진행하며, <strong style="color: #e74c3c;">미제출 시에는 벌점이 부여</strong>됩니다.
+                            </p>
+                            <div class="form-radio-group">
+                                <label class="form-radio">
+                                    <input type="radio" name="winterApply" value="신청합니다" required>
+                                    <span>신청합니다</span>
+                                </label>
+                                <label class="form-radio">
+                                    <input type="radio" name="winterApply" value="신청하지 않습니다">
+                                    <span>신청하지 않습니다</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="form-submit winter-submit">❄️ 겨울캠프 신청하기</button>
+                    </form>
+
+                    <div class="form-notice" style="margin-top: 24px;">
+                        <p>또는 Google Form으로 직접 신청하실 수 있습니다.</p>
+                        <a href="https://forms.gle/QYbf1NGcP6ay3ehP8" target="_blank" style="color: var(--winter-accent); font-weight: 600;">
+                            Google Form으로 신청하기 →
+                        </a>
+                    </div>
+                </div>
+
                 <!-- Success Message -->
                 <div class="success-message" id="successMessage">
                     <div class="success-icon">✓</div>
                     <h3>신청이 완료되었습니다!</h3>
                     <p>빠른 시일 내에 연락드리겠습니다.</p>
+                </div>
+
+                <!-- Winter Success Message -->
+                <div class="success-message" id="winterSuccessMessage">
+                    <div class="success-icon winter-icon">❄️</div>
+                    <h3>겨울캠프 신청이 완료되었습니다!</h3>
+                    <p>집중 관리 일정은 개별 안내드리겠습니다.</p>
                 </div>
             </div>
         </div>
@@ -2642,7 +3188,7 @@
         mobileClose.addEventListener('click', closeMenu);
         mobileOverlay.addEventListener('click', closeMenu);
 
-        document.querySelectorAll('.mobile-menu-links a, .mobile-menu-cta').forEach(link => {
+        document.querySelectorAll('.mobile-menu-links a, .mobile-menu-cta, .mobile-menu-winter-cta').forEach(link => {
             link.addEventListener('click', closeMenu);
         });
 
@@ -2650,6 +3196,7 @@
         const formTypeBtns = document.querySelectorAll('.form-type-btn');
         const formSections = document.querySelectorAll('.form-section');
         const successMessage = document.getElementById('successMessage');
+        const winterSuccessMessage = document.getElementById('winterSuccessMessage');
 
         formTypeBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -2658,6 +3205,7 @@
                 formTypeBtns.forEach(b => b.classList.remove('active'));
                 formSections.forEach(s => s.classList.remove('active'));
                 successMessage.classList.remove('show');
+                winterSuccessMessage.classList.remove('show');
 
                 btn.classList.add('active');
                 document.getElementById(`form-${targetForm}`).classList.add('active');
@@ -2717,6 +3265,7 @@
             e.preventDefault();
             const form = e.target;
             const submitBtn = form.querySelector('.form-submit');
+            const isWinterForm = form.id === 'winterForm';
             
             submitBtn.textContent = '신청 중...';
             submitBtn.disabled = true;
@@ -2745,19 +3294,24 @@
 
                 // Show success message
                 formSections.forEach(s => s.classList.remove('active'));
-                successMessage.classList.add('show');
+                if (isWinterForm) {
+                    winterSuccessMessage.classList.add('show');
+                } else {
+                    successMessage.classList.add('show');
+                }
                 form.reset();
             } catch (error) {
                 alert('신청 중 오류가 발생했습니다. 다시 시도해주세요.');
                 console.error('Error:', error);
             }
 
-            submitBtn.textContent = '대기 신청하기';
+            submitBtn.textContent = isWinterForm ? '❄️ 겨울캠프 신청하기' : '대기 신청하기';
             submitBtn.disabled = false;
         }
 
         document.getElementById('studentForm').addEventListener('submit', handleSubmit);
         document.getElementById('nsuForm').addEventListener('submit', handleSubmit);
+        document.getElementById('winterForm').addEventListener('submit', handleSubmit);
 
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {

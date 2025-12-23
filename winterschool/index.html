@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김엄마 윈터스쿨 2차 등록 신청서</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2D5A7B;
+            --primary-light: #4A7C9B;
+            --primary-dark: #1E3F55;
+            --accent: #E8A87C;
+            --accent-warm: #C38D6C;
+            --snow: #F8FAFC;
+            --ice: #E3EDF5;
+            --frost: #C7D9E8;
+            --text-dark: #1A2A3A;
+            --text-muted: #5A6A7A;
+            --success: #4CAF50;
+            --error: #E57373;
+            --gradient-winter: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --shadow-soft: 0 4px 20px rgba(45, 90, 123, 0.1);
+            --shadow-medium: 0 8px 30px rgba(45, 90, 123, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--snow);
+            min-height: 100vh;
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        /* Snowfall Animation */
+        .snowflakes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1em;
+            animation: fall linear infinite;
+            text-shadow: 0 0 5px rgba(200, 220, 255, 0.8);
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            font-family: 'Gowun Batang', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.9);
+            font-weight: 300;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .period-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-top: 20px;
+            font-size: 1rem;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+            box-shadow: 0 4px 15px rgba(232, 168, 124, 0.4);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Info Card */
+        .info-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-soft);
+            border-left: 5px solid var(--primary);
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .info-card h2 {
+            font-family: 'Gowun Batang', serif;
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-card h2::before {
+            content: '❄️';
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--frost);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
+        }
+
+        .info-list li::before {
+            content: '•';
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+            line-height: 1.5;
+        }
+
+        /* Benefits Card */
+        .benefits-card {
+            background: linear-gradient(135deg, var(--ice) 0%, white 100%);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-soft);
+            animation: slideIn 0.6s ease-out 0.1s both;
+        }
+
+        .benefits-card h2 {
+            font-family: 'Gowun Batang', serif;
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .benefits-card h2::before {
+            content: '⭐';
+        }
+
+        .benefit-item {
+            background: white;
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .benefit-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .benefit-number {
+            background: var(--primary);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .benefit-text {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
+
+        .benefit-text .highlight {
+            color: var(--accent-warm);
+            font-weight: 600;
+        }
+
+        /* Form Section */
+        .form-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow-medium);
+            animation: slideIn 0.6s ease-out 0.2s both;
+        }
+
+        .form-title {
+            font-family: 'Gowun Batang', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        .form-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 28px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .required {
+            color: var(--error);
+            margin-left: 4px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid var(--frost);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background: var(--snow);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 4px rgba(74, 124, 155, 0.1);
+            background: white;
+        }
+
+        .form-input::placeholder {
+            color: #aaa;
+        }
+
+        /* Checkbox Group */
+        .checkbox-group {
+            background: var(--snow);
+            border-radius: 12px;
+            padding: 8px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .checkbox-item:hover {
+            background: var(--ice);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            display: none;
+        }
+
+        .checkbox-custom {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--frost);
+            border-radius: 6px;
+            margin-right: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .checkbox-item input[type="checkbox"]:checked + .checkbox-custom {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .checkbox-item input[type="checkbox"]:checked + .checkbox-custom::after {
+            content: '✓';
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .checkbox-label-content {
+            flex: 1;
+        }
+
+        .checkbox-label-main {
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .checkbox-label-sub {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .price-tag {
+            background: var(--accent);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .discount-tag {
+            background: #E53935;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        /* Radio Group */
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .radio-item {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .radio-item input[type="radio"] {
+            display: none;
+        }
+
+        .radio-label {
+            display: block;
+            padding: 14px 20px;
+            background: var(--snow);
+            border: 2px solid var(--frost);
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .radio-item input[type="radio"]:checked + .radio-label {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(45, 90, 123, 0.3);
+        }
+
+        .radio-label:hover {
+            border-color: var(--primary-light);
+        }
+
+        /* Yes/No Toggle */
+        .toggle-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        .toggle-item {
+            flex: 1;
+        }
+
+        .toggle-item input[type="radio"] {
+            display: none;
+        }
+
+        .toggle-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 16px 24px;
+            background: var(--snow);
+            border: 2px solid var(--frost);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .toggle-item input[type="radio"]:checked + .toggle-label.yes {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border-color: #4CAF50;
+            color: white;
+        }
+
+        .toggle-item input[type="radio"]:checked + .toggle-label.no {
+            background: linear-gradient(135deg, #78909C, #607D8B);
+            border-color: #78909C;
+            color: white;
+        }
+
+        /* Section Divider */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            margin: 35px 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .section-divider::before,
+        .section-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--frost);
+        }
+
+        .section-divider span {
+            padding: 0 20px;
+            font-weight: 500;
+        }
+
+        /* Note Box */
+        .note-box {
+            background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #E65100;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .note-box::before {
+            content: '⚠️';
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(45, 90, 123, 0.4);
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Agreement Section */
+        .agreement-section {
+            background: var(--ice);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .agreement-section .checkbox-item {
+            background: white;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--frost);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 20px;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 60px 40px;
+        }
+
+        .success-message.active {
+            display: block;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .success-message h2 {
+            font-family: 'Gowun Batang', serif;
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .success-message p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .header {
+                padding: 40px 20px;
+            }
+
+            .logo {
+                font-size: 2.2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .info-card, .benefits-card, .form-card {
+                padding: 25px;
+            }
+
+            .toggle-group {
+                flex-direction: column;
+            }
+
+            .radio-group {
+                flex-direction: column;
+            }
+
+            .radio-item {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Snowfall Effect -->
+    <div class="snowflakes" aria-hidden="true">
+        <script>
+            for(let i = 0; i < 30; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.style.left = Math.random() * 100 + '%';
+                snowflake.style.animationDuration = (Math.random() * 3 + 5) + 's';
+                snowflake.style.animationDelay = Math.random() * 5 + 's';
+                snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+                snowflake.style.opacity = Math.random() * 0.6 + 0.4;
+                snowflake.innerHTML = ['❄', '❅', '❆'][Math.floor(Math.random() * 3)];
+                document.querySelector('.snowflakes').appendChild(snowflake);
+            }
+        </script>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">신청서를 제출하고 있습니다...</p>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="logo">김엄마 윈터스쿨</h1>
+            <p class="subtitle">2차 등록 신청서</p>
+            <span class="period-badge">📅 2026년 1월 1일 ~ 2월 28일</span>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Info Card -->
+        <section class="info-card">
+            <h2>윈터스쿨 안내</h2>
+            <ul class="info-list">
+                <li>1차 신청서를 작성한 학생들은 2차등록 신청서를 작성하지 않습니다.</li>
+                <li>1윈터스쿨 기간은 <strong>일시납</strong>으로 진행합니다.</li>
+                <li>윈터기간 학사일정으로 학교등원을 할 경우 기간유예나 할인은 없습니다.</li>
+                <li>환불규칙은 <strong>학원법 제 18조 3항</strong> 적용</li>
+                <li>12월 이용료는 <strong>일할결제</strong>합니다.</li>
+            </ul>
+        </section>
+
+        <!-- Benefits Card -->
+        <section class="benefits-card">
+            <h2>윈터스쿨 혜택</h2>
+            <div class="benefit-item">
+                <span class="benefit-number">1</span>
+                <p class="benefit-text">다양한 <span class="highlight">상점제도</span>로 학생들에게 동기부여를 합니다.</p>
+            </div>
+            <div class="benefit-item">
+                <span class="benefit-number">2</span>
+                <p class="benefit-text">겨울방학 계획표 작성 - <span class="highlight">1회 무료 멘토서비스 신청</span> 또는 정시전략 멘토서비스 신청</p>
+            </div>
+            <div class="benefit-item">
+                <span class="benefit-number">3</span>
+                <p class="benefit-text">멘토링서비스 추가신청 (유료 - <span class="highlight">50% 할인</span>)<br>
+                <small style="color: var(--text-muted);">총 4회 학습분량을 1:1 대면검사 실시합니다. 인강추천 및 학습계획을 도와줍니다.</small></p>
+            </div>
+            <div class="benefit-item">
+                <span class="benefit-number">4</span>
+                <p class="benefit-text"><span class="highlight">영어단어시험</span>을 실시합니다. (신청자: 응시→상점 / 불응시→벌점)</p>
+            </div>
+        </section>
+
+        <!-- Form Card -->
+        <section class="form-card">
+            <h2 class="form-title">신청서 작성</h2>
+            
+            <form id="registrationForm">
+                <!-- Agreement Section -->
+                <div class="agreement-section">
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="agreement" required>
+                        <span class="checkbox-custom"></span>
+                        <span class="checkbox-label-content">
+                            <span class="checkbox-label-main">윈터스쿨 관련 안내글을 읽고 이해했습니다.</span>
+                            <span class="checkbox-label-sub">위의 안내사항을 모두 확인하셨다면 체크해주세요.</span>
+                        </span>
+                    </label>
+                </div>
+
+                <div class="section-divider"><span>기본 정보</span></div>
+
+                <!-- Student Name -->
+                <div class="form-group">
+                    <label class="form-label">
+                        학생이름<span class="required">*</span>
+                    </label>
+                    <input type="text" class="form-input" name="studentName" placeholder="학생 이름을 입력해주세요" required>
+                </div>
+
+                <!-- School -->
+                <div class="form-group">
+                    <label class="form-label">
+                        학교<span class="required">*</span>
+                    </label>
+                    <input type="text" class="form-input" name="school" placeholder="재학 중인 학교명을 입력해주세요" required>
+                </div>
+
+                <!-- Grade -->
+                <div class="form-group">
+                    <label class="form-label">학년</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="grade2" name="grade" value="예비고2">
+                            <label class="radio-label" for="grade2">예비고2</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="grade3" name="grade" value="예비고3">
+                            <label class="radio-label" for="grade3">예비고3</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Parent Contact -->
+                <div class="form-group">
+                    <label class="form-label">
+                        학부모 연락처<span class="required">*</span>
+                    </label>
+                    <input type="tel" class="form-input" name="parentContact" placeholder="010-0000-0000" required>
+                </div>
+
+                <div class="section-divider"><span>서비스 선택</span></div>
+
+                <!-- Free Mentor Service -->
+                <div class="form-group">
+                    <label class="form-label">1회 무료멘토 서비스를 신청하시겠습니까?</label>
+                    <div class="toggle-group">
+                        <div class="toggle-item">
+                            <input type="radio" id="freeMentorYes" name="freeMentor" value="네">
+                            <label class="toggle-label yes" for="freeMentorYes">✓ 네</label>
+                        </div>
+                        <div class="toggle-item">
+                            <input type="radio" id="freeMentorNo" name="freeMentor" value="아니오">
+                            <label class="toggle-label no" for="freeMentorNo">✗ 아니오</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paid Mentor Service -->
+                <div class="form-group">
+                    <label class="form-label">
+                        4회 정시멘토링 서비스를 신청하시겠습니까?<span class="required">*</span>
+                    </label>
+                    <div class="toggle-group">
+                        <div class="toggle-item">
+                            <input type="radio" id="paidMentorYes" name="paidMentor" value="네" required>
+                            <label class="toggle-label yes" for="paidMentorYes">
+                                ✓ 네
+                                <span class="discount-tag">50% 할인</span>
+                            </label>
+                        </div>
+                        <div class="toggle-item">
+                            <input type="radio" id="paidMentorNo" name="paidMentor" value="아니오">
+                            <label class="toggle-label no" for="paidMentorNo">✗ 아니오</label>
+                        </div>
+                    </div>
+                    <div class="note-box">
+                        기간 후 신청자는 할인적용을 받을 수 없습니다. (150,000원 → <strong>75,000원</strong>)
+                    </div>
+                </div>
+
+                <!-- English Vocabulary Test -->
+                <div class="form-group">
+                    <label class="form-label">
+                        영어단어시험을 응시하시겠습니까?<span class="required">*</span>
+                    </label>
+                    <div class="toggle-group">
+                        <div class="toggle-item">
+                            <input type="radio" id="vocabTestYes" name="vocabTest" value="네" required>
+                            <label class="toggle-label yes" for="vocabTestYes">✓ 네</label>
+                        </div>
+                        <div class="toggle-item">
+                            <input type="radio" id="vocabTestNo" name="vocabTest" value="아니오">
+                            <label class="toggle-label no" for="vocabTestNo">✗ 아니오</label>
+                        </div>
+                    </div>
+                    <div class="note-box">
+                        학생과 충분한 대화가 필요합니다. 신청 후 미응시 할 경우 벌점이 부여됩니다.
+                    </div>
+                </div>
+
+                <div class="section-divider"><span>이용권 선택</span></div>
+
+                <!-- Fee Selection -->
+                <div class="form-group">
+                    <label class="form-label">
+                        방학이용료<span class="required">*</span>
+                    </label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="radio" name="feeType" value="자유석 2개월 1,100,000원(사물함포함)" required>
+                            <span class="checkbox-custom"></span>
+                            <span class="checkbox-label-content">
+                                <span class="checkbox-label-main">
+                                    자유석 2개월
+                                    <span class="price-tag">1,100,000원</span>
+                                </span>
+                                <span class="checkbox-label-sub">사물함 포함</span>
+                            </span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="radio" name="feeType" value="오픈형 지정석 2개월 1,260,000원">
+                            <span class="checkbox-custom"></span>
+                            <span class="checkbox-label-content">
+                                <span class="checkbox-label-main">
+                                    오픈형 지정석 2개월
+                                    <span class="price-tag">1,260,000원</span>
+                                </span>
+                            </span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="radio" name="feeType" value="칸막이 지정석 2개월 1,380,000원">
+                            <span class="checkbox-custom"></span>
+                            <span class="checkbox-label-content">
+                                <span class="checkbox-label-main">
+                                    칸막이 지정석 2개월
+                                    <span class="price-tag">1,380,000원</span>
+                                </span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    ❄️ 신청서 제출하기
+                </button>
+            </form>
+
+            <!-- Success Message -->
+            <div class="success-message" id="successMessage">
+                <div class="success-icon">🎉</div>
+                <h2>신청이 완료되었습니다!</h2>
+                <p>김엄마 윈터스쿨 2차 등록 신청서가 성공적으로 제출되었습니다.<br>곧 연락드리겠습니다. 감사합니다!</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>
+            📝 김엄마 블로그: <a href="https://blog.naver.com/kimmmommy" target="_blank">https://blog.naver.com/kimmmommy</a>
+        </p>
+        <p style="margin-top: 10px; font-size: 0.85rem;">
+            운영방침에 따라 모집방법이 변경될 수 있으니, 블로그나 홈페이지의 공지사항을 참고해주세요.
+        </p>
+    </footer>
+
+    <script>
+        // ============================================
+        // Google 스프레드시트 연결 설정
+        // ============================================
+        // 아래 URL을 Google Apps Script 웹앱 URL로 교체하세요
+        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+        
+        // ============================================
+        // Form Submission Handler
+        // ============================================
+        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const formData = new FormData(form);
+            const data = {};
+            
+            // Collect form data
+            data.timestamp = new Date().toLocaleString('ko-KR');
+            data.agreement = formData.get('agreement') ? '동의함' : '동의안함';
+            data.studentName = formData.get('studentName');
+            data.school = formData.get('school');
+            data.grade = formData.get('grade') || '';
+            data.parentContact = formData.get('parentContact');
+            data.freeMentor = formData.get('freeMentor') || '';
+            data.paidMentor = formData.get('paidMentor');
+            data.vocabTest = formData.get('vocabTest');
+            data.feeType = formData.get('feeType');
+            
+            // Show loading
+            document.getElementById('loadingOverlay').classList.add('active');
+            
+            try {
+                // Send to Google Sheets
+                if (GOOGLE_SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+                    const response = await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    });
+                }
+                
+                // Hide loading, show success
+                document.getElementById('loadingOverlay').classList.remove('active');
+                form.style.display = 'none';
+                document.getElementById('successMessage').classList.add('active');
+                
+                // Scroll to success message
+                document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth' });
+                
+            } catch (error) {
+                document.getElementById('loadingOverlay').classList.remove('active');
+                alert('제출 중 오류가 발생했습니다. 다시 시도해주세요.');
+                console.error('Error:', error);
+            }
+        });
+
+        // Phone number formatting
+        document.querySelector('input[name="parentContact"]').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 3 && value.length <= 7) {
+                value = value.slice(0, 3) + '-' + value.slice(3);
+            } else if (value.length > 7) {
+                value = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7, 11);
+            }
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>

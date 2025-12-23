@@ -3257,8 +3257,9 @@
             });
         });
 
-        // ✅ 새로운 Google Apps Script URL (재학생/N수생 분리 저장)
+        // ✅ Google Apps Script URLs
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyYoutJgZpUeez901XRf3SZ2vacQTuBsiWr96n1TngWoygOnqHnpkc8cO8qSu2UrIoBgA/exec';
+        const WINTER_CAMP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyY_CHPDDyARh5ay6PyQCutkp0YHGb84_8S3V-UquZZYRXcBOp-CiHCXU2wFPTgkCqr/exec';
 
         // Form submission
         async function handleSubmit(e) {
@@ -3281,9 +3282,12 @@
                 }
             });
 
+            // Use different URL for winter camp form
+            const targetURL = isWinterForm ? WINTER_CAMP_SCRIPT_URL : GOOGLE_SCRIPT_URL;
+
             try {
                 // Send to Google Sheets
-                await fetch(GOOGLE_SCRIPT_URL, {
+                await fetch(targetURL, {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: {

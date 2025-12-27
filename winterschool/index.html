@@ -686,6 +686,82 @@
             font-size: 1rem;
         }
 
+        /* 신입생 설문지 안내 카드 - 새로 추가 */
+        .new-student-card {
+            background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-soft);
+            border-left: 5px solid #4CAF50;
+            animation: slideIn 0.6s ease-out 0.15s both;
+        }
+
+        .new-student-card h2 {
+            font-family: 'Gowun Batang', serif;
+            font-size: 1.4rem;
+            color: #2E7D32;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .new-student-card h2::before {
+            content: '📱';
+        }
+
+        .new-student-card p {
+            color: #33691E;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .new-student-card .highlight-text {
+            background: rgba(255,255,255,0.7);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .survey-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .survey-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+        }
+
+        .survey-btn:active {
+            transform: translateY(0);
+        }
+
+        .survey-btn::after {
+            content: '→';
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .survey-btn:hover::after {
+            transform: translateX(5px);
+        }
+
         /* Responsive */
         @media (max-width: 600px) {
             .header {
@@ -700,7 +776,7 @@
                 font-size: 1rem;
             }
 
-            .info-card, .benefits-card, .form-card {
+            .info-card, .benefits-card, .form-card, .new-student-card {
                 padding: 25px;
             }
 
@@ -714,6 +790,11 @@
 
             .radio-item {
                 min-width: 100%;
+            }
+
+            .survey-btn {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
@@ -762,6 +843,17 @@
                 <li>환불규칙은 <strong>학원법 제 18조 3항</strong> 적용</li>
                 <li>12월 이용료는 <strong>일할결제</strong>합니다.</li>
             </ul>
+        </section>
+
+        <!-- 신입생 전자기기 설문지 안내 카드 - 새로 추가 -->
+        <section class="new-student-card">
+            <h2>신입생 학부모님 안내</h2>
+            <p>
+                이 페이지에서 신청서를 작성하시되, <span class="highlight-text">신입생</span>이시면 아래 버튼을 눌러 추가적인 <span class="highlight-text">전자기기 관련 설문지</span>를 작성해주시기 바랍니다.
+            </p>
+            <a href="https://docs.google.com/forms/d/137GIpipl3yFmMxahIehN-GOWjIUpi3dXl-gqGv13LMA/viewform" target="_blank" class="survey-btn">
+                📱 전자기기 설문지 작성하기
+            </a>
         </section>
 
         <!-- Benefits Card -->

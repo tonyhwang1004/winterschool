@@ -91,7 +91,7 @@
         .nav-logo {
             font-size: 18px;
             font-weight: 700;
-            color: var(--white);
+            color: #0a2463;
             text-decoration: none;
             letter-spacing: -0.5px;
             transition: var(--transition);
@@ -108,7 +108,7 @@
         }
 
         .nav-links a {
-            color: rgba(255, 255, 255, 0.9);
+            color: #333;
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
@@ -122,7 +122,7 @@
         }
 
         .nav-links a:hover {
-            color: var(--white);
+            color: #0a2463;
         }
 
         .nav.scrolled .nav-links a:hover {
@@ -206,7 +206,7 @@
         .nav-mobile-toggle span {
             width: 24px;
             height: 2px;
-            background: var(--white);
+            background: #0a2463;
             transition: var(--transition);
         }
 
@@ -230,7 +230,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #0a2463 0%, #1e4b8e 50%, #0a2463 100%);
+            background: #ffffff;
         }
 
         .hero-bg img {
@@ -247,7 +247,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%);
+            background: transparent;
         }
 
         .hero-content {
@@ -263,15 +263,15 @@
             align-items: center;
             gap: 10px;
             padding: 12px 28px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(10, 36, 99, 0.1);
+            border: 1px solid rgba(10, 36, 99, 0.3);
             border-radius: 50px;
             margin-bottom: 32px;
             animation: fadeInDown 1s ease-out;
         }
 
         .hero-badge span {
-            color: rgba(255, 255, 255, 0.9);
+            color: #0a2463;
             font-size: 13px;
             font-weight: 600;
             letter-spacing: 2px;
@@ -282,7 +282,7 @@
             font-family: 'Noto Sans KR', sans-serif;
             font-size: clamp(36px, 6vw, 64px);
             font-weight: 900;
-            color: var(--white);
+            color: #0a2463;
             line-height: 1.2;
             margin-bottom: 24px;
             letter-spacing: -1px;
@@ -290,7 +290,7 @@
         }
 
         .hero-title .highlight {
-            color: var(--white);
+            color: #0a2463;
             position: relative;
         }
 
@@ -301,13 +301,13 @@
             left: 0;
             width: 100%;
             height: 8px;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(10, 36, 99, 0.2);
             z-index: -1;
         }
 
         .hero-subtitle {
             font-size: clamp(16px, 2.5vw, 20px);
-            color: rgba(255, 255, 255, 0.85);
+            color: #333;
             font-weight: 400;
             margin-bottom: 48px;
             line-height: 1.7;
@@ -342,25 +342,28 @@
         }
 
         .btn-primary {
-            background: var(--white);
-            color: var(--primary);
+            background: #0a2463;
+            color: var(--white);
+            border: 2px solid #0a2463;
         }
 
         .btn-primary:hover {
-            background: var(--bg-soft);
+            background: #1e4b8e;
+            border-color: #1e4b8e;
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 30px rgba(10, 36, 99, 0.3);
         }
 
         .btn-outline {
             background: transparent;
-            color: var(--white);
-            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: #0a2463;
+            border: 2px solid #0a2463;
         }
 
         .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--white);
+            background: #0a2463;
+            color: var(--white);
+            border-color: #0a2463;
         }
 
         /* 어학원 버튼 */
@@ -863,7 +866,7 @@
             bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
-            color: rgba(255, 255, 255, 0.6);
+            color: #666;
             font-size: 12px;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -3001,40 +3004,6 @@
     </section>
 
     <!-- 8층 이용료 -->
-    <section class="section pricing-section-8f" id="pricing-8f-section">
-        <div class="section-header">
-            <span class="section-label">Pricing</span>
-            <h2 class="section-title">8층 이용료 안내</h2>
-            <p class="section-desc">김엄마관리형독서실</p>
-        </div>
-        <div class="pricing-table-wrapper">
-            <table class="pricing-table">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>자유석</th>
-                        <th>오픈형 지정석</th>
-                        <th>칸막이 지정석</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="row-label">종일권 <span class="vacation-badge">방학</span></td>
-                        <td><span class="price">530,000</span>원</td>
-                        <td><span class="price">630,000</span>원</td>
-                        <td><span class="price">690,000</span>원</td>
-                    </tr>
-                    <tr>
-                        <td class="row-label">오후권</td>
-                        <td><span class="price">390,000</span>원</td>
-                        <td><span class="price">490,000</span>원</td>
-                        <td><span class="price">550,000</span>원</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
     <!-- 8층 재원생 전용어플 -->
     <section class="section app-features-brand" id="app-features-8f">
         <div class="section-header">
@@ -3468,34 +3437,6 @@
     </section>
 
     <!-- 7층 이용료 -->
-    <section class="section pricing-section-7f" id="pricing-7f-section">
-        <div class="section-header">
-            <span class="section-label">Pricing</span>
-            <h2 class="section-title">7층 이용료 안내</h2>
-            <p class="section-desc">김엄마송도독학재수학원</p>
-        </div>
-        <div class="pricing-table-wrapper">
-            <table class="pricing-table">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>오픈형 지정석</th>
-                        <th>칸막이 지정석</th>
-                        <th>N수생 올케어서비스</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="highlight-row">
-                        <td class="row-label">등록비</td>
-                        <td><span class="price">630,000</span>원</td>
-                        <td><span class="price">690,000</span>원</td>
-                        <td><span class="price highlight-price">750,000</span>원</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
     <!-- 7층 재원생 전용어플 -->
     <section class="section app-features-brand app-features-alt" id="app-features-7f">
         <div class="section-header">
@@ -3870,7 +3811,7 @@
             </div>
             <div class="brand-feature-item">
                 <div class="brand-feature-icon">🎓</div>
-                <h4>채드윅 입학대비</h4>
+                <h4>국제학교 입학대비</h4>
                 <p>국제학교 입학을 준비하는 학생들을 위한 맞춤형 프로그램</p>
             </div>
         </div>
@@ -3948,69 +3889,6 @@
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">1대1원어민수업</span>
                     <span class="gallery-zoom-icon">🔍</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 어학원 이용료 -->
-    <section class="section pricing-section-academy" id="pricing-academy-section">
-        <div class="section-header">
-            <span class="section-label">Pricing</span>
-            <h2 class="section-title">어학원 수강료 안내</h2>
-            <p class="section-desc">수리딩영어논술학원</p>
-        </div>
-        <div class="pricing-table-wrapper">
-            <table class="pricing-table academy-pricing-table">
-                <thead>
-                    <tr>
-                        <th>프로그램</th>
-                        <th>수업 시간</th>
-                        <th>수강료 (월)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="row-label">영어 소설 읽기</td>
-                        <td>주 2회 / 90분</td>
-                        <td><span class="price">별도 문의</span></td>
-                    </tr>
-                    <tr>
-                        <td class="row-label">디베이트</td>
-                        <td>주 1회 / 120분</td>
-                        <td><span class="price">별도 문의</span></td>
-                    </tr>
-                    <tr>
-                        <td class="row-label">에세이 작성</td>
-                        <td>주 1회 / 90분</td>
-                        <td><span class="price">별도 문의</span></td>
-                    </tr>
-                    <tr>
-                        <td class="row-label">채드윅 입학대비</td>
-                        <td>맞춤형</td>
-                        <td><span class="price">별도 문의</span></td>
-                    </tr>
-                    <tr>
-                        <td class="row-label">내신반</td>
-                        <td>주 2회 / 90분</td>
-                        <td><span class="price">별도 문의</span></td>
-                    </tr>
-                    <tr>
-                        <td class="row-label">유아 영어</td>
-                        <td>주 2회 / 60분</td>
-                        <td><span class="price">별도 문의</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="academy-pricing-notice">
-            <div class="academy-pricing-notice-icon">📞</div>
-            <div class="academy-pricing-notice-content">
-                <h4>수강료 및 상담 문의</h4>
-                <p>레벨 테스트 후 맞춤 커리큘럼으로 진행됩니다.<br>자세한 수강료는 상담 신청을 통해 안내해 드립니다.</p>
-                <div class="academy-pricing-contacts">
-                    <a href="#application-academy" class="academy-pricing-phone">📝 레벨테스트 신청</a>
-                    <a href="https://suereadingclub.co.kr/" target="_blank" class="academy-pricing-web">🌐 홈페이지 문의</a>
                 </div>
             </div>
         </div>
@@ -4116,16 +3994,16 @@
                             <span>에세이 작성</span>
                         </label>
                         <label class="form-checkbox">
-                            <input type="checkbox" name="programs" value="채드윅입학대비">
-                            <span>채드윅 입학대비</span>
+                            <input type="checkbox" name="programs" value="국제학교입학대비">
+                            <span>국제학교 입학대비</span>
+                        </label>
+                        <label class="form-checkbox">
+                            <input type="checkbox" name="programs" value="특목자사고반대비">
+                            <span>특목자사고반 대비</span>
                         </label>
                         <label class="form-checkbox">
                             <input type="checkbox" name="programs" value="내신반">
                             <span>내신반</span>
-                        </label>
-                        <label class="form-checkbox">
-                            <input type="checkbox" name="programs" value="유아영어">
-                            <span>유아 영어</span>
                         </label>
                     </div>
                 </div>
@@ -4144,6 +4022,28 @@
                 <div class="form-group">
                     <label class="form-label">문의사항</label>
                     <textarea class="form-textarea" name="inquiry" placeholder="궁금하신 점이나 요청사항을 적어주세요"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">레벨테스트 비용: <strong style="color: #2d6a4f;">20,000원</strong></label>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">결제 방법 선택 <span class="required">*</span></label>
+                    <div class="form-checkbox-group">
+                        <label class="form-checkbox">
+                            <input type="radio" name="paymentMethod" value="계좌이체" required>
+                            <span>계좌이체</span>
+                        </label>
+                        <label class="form-checkbox">
+                            <input type="radio" name="paymentMethod" value="온라인카드결제">
+                            <span>온라인카드결제</span>
+                        </label>
+                    </div>
+                    <p class="form-hint" style="margin-top: 10px; background: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 3px solid #2d6a4f;">
+                        💳 <strong>계좌이체 안내</strong><br>
+                        수리딩교육 국민은행 469901-04-155186
+                    </p>
                 </div>
 
                 <button type="submit" class="form-submit">레벨테스트 신청하기</button>
@@ -4198,7 +4098,7 @@
             </div>
             <div class="program-card">
                 <div class="program-icon">🎓</div>
-                <h4 class="program-title">채드윅 입학대비</h4>
+                <h4 class="program-title">국제학교 입학대비</h4>
                 <span class="program-target">초등</span>
                 <p class="program-desc">국제학교 입학을 준비하는 학생들을 위한 맞춤형 프로그램입니다</p>
             </div>
@@ -4857,7 +4757,7 @@
                                 <td><span class="price">별도 문의</span></td>
                             </tr>
                             <tr>
-                                <td class="row-label">채드윅 입학대비</td>
+                                <td class="row-label">국제학교 입학대비</td>
                                 <td>초등</td>
                                 <td>맞춤형</td>
                                 <td><span class="price">별도 문의</span></td>
@@ -5193,16 +5093,16 @@
                                     <span>에세이 작성</span>
                                 </label>
                                 <label class="form-checkbox">
-                                    <input type="checkbox" name="programs" value="채드윅입학대비">
-                                    <span>채드윅 입학대비</span>
+                                    <input type="checkbox" name="programs" value="국제학교입학대비">
+                                    <span>국제학교 입학대비</span>
+                                </label>
+                                <label class="form-checkbox">
+                                    <input type="checkbox" name="programs" value="특목자사고반대비">
+                                    <span>특목자사고반 대비</span>
                                 </label>
                                 <label class="form-checkbox">
                                     <input type="checkbox" name="programs" value="내신반">
                                     <span>내신반</span>
-                                </label>
-                                <label class="form-checkbox">
-                                    <input type="checkbox" name="programs" value="유아영어">
-                                    <span>유아 영어</span>
                                 </label>
                             </div>
                         </div>

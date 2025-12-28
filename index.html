@@ -322,6 +322,13 @@
             animation: fadeInUp 1s ease-out 0.6s both;
         }
 
+        .hero-buttons .btn {
+            min-width: 220px;
+            padding: 18px 40px;
+            justify-content: center;
+            text-align: center;
+        }
+
         .btn {
             padding: 16px 36px;
             font-size: 15px;
@@ -381,6 +388,19 @@
             border-color: var(--text-dark);
         }
 
+        .btn-academy-outline {
+            background: transparent;
+            color: var(--academy-primary);
+            border: 2px solid var(--academy-primary);
+        }
+
+        .btn-academy-outline:hover {
+            background: var(--academy-primary);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(45, 106, 79, 0.3);
+        }
+
         /* ==================== 브랜드 섹션 ==================== */
         .brand-section {
             background: var(--white);
@@ -401,6 +421,13 @@
             justify-content: center;
             margin-bottom: 60px;
             flex-wrap: wrap;
+        }
+
+        .brand-buttons .btn {
+            min-width: 220px;
+            padding: 18px 40px;
+            justify-content: center;
+            text-align: center;
         }
 
         .brand-features {
@@ -461,7 +488,7 @@
         .academy-location {
             text-align: center;
             margin-top: 40px;
-            padding: 16px 32px;
+            padding: 14px 28px;
             background: rgba(45, 106, 79, 0.1);
             border-radius: 50px;
             display: inline-block;
@@ -469,6 +496,8 @@
             transform: translateX(-50%);
             color: var(--academy-primary);
             font-weight: 600;
+            font-size: 15px;
+            white-space: nowrap;
         }
 
         /* ==================== 흰색 배경 갤러리 ==================== */
@@ -3429,13 +3458,6 @@
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/building.png.png" alt="건물 전경">
-                <div class="gallery-item-overlay">
-                    <span class="gallery-item-label">건물 전경</span>
-                    <span class="gallery-zoom-icon">🔍</span>
-                </div>
-            </div>
-            <div class="gallery-item-large" onclick="openLightbox(this)">
                 <img src="images/phone-locker.png.png" alt="핸드폰함">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">핸드폰함</span>
@@ -3817,7 +3839,7 @@
     <!-- ==================== 어학원 브랜드 섹션 ==================== -->
     <section class="section brand-section brand-section-academy" id="brand-academy">
         <div class="section-header">
-            <span class="section-label">SR Academy</span>
+            <span class="section-label">7F SR Academy</span>
             <h2 class="section-title">수리딩영어논술학원</h2>
             <p class="section-desc">
                 영어 소설과 디베이트 수업으로<br>
@@ -3827,7 +3849,7 @@
         
         <div class="brand-buttons">
             <a href="#gallery-academy-section" class="btn btn-academy">시설 둘러보기</a>
-            <a href="#application-academy" class="btn btn-outline-dark">레벨테스트 신청하기</a>
+            <a href="#application-academy" class="btn btn-academy-outline">레벨테스트 신청하기</a>
         </div>
 
         <div class="brand-features academy-features">
@@ -3943,7 +3965,6 @@
                 <thead>
                     <tr>
                         <th>프로그램</th>
-                        <th>대상</th>
                         <th>수업 시간</th>
                         <th>수강료 (월)</th>
                     </tr>
@@ -3951,37 +3972,31 @@
                 <tbody>
                     <tr>
                         <td class="row-label">영어 소설 읽기</td>
-                        <td>초등 · 중등</td>
                         <td>주 2회 / 90분</td>
                         <td><span class="price">별도 문의</span></td>
                     </tr>
                     <tr>
                         <td class="row-label">디베이트</td>
-                        <td>초등 · 중등</td>
                         <td>주 1회 / 120분</td>
                         <td><span class="price">별도 문의</span></td>
                     </tr>
                     <tr>
                         <td class="row-label">에세이 작성</td>
-                        <td>초등 · 중등</td>
                         <td>주 1회 / 90분</td>
                         <td><span class="price">별도 문의</span></td>
                     </tr>
                     <tr>
                         <td class="row-label">채드윅 입학대비</td>
-                        <td>초등</td>
                         <td>맞춤형</td>
                         <td><span class="price">별도 문의</span></td>
                     </tr>
                     <tr>
                         <td class="row-label">내신반</td>
-                        <td>중등</td>
                         <td>주 2회 / 90분</td>
                         <td><span class="price">별도 문의</span></td>
                     </tr>
                     <tr>
                         <td class="row-label">유아 영어</td>
-                        <td>유아</td>
                         <td>주 2회 / 60분</td>
                         <td><span class="price">별도 문의</span></td>
                     </tr>
@@ -4064,9 +4079,25 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-label">희망 상담일시 <span class="required">*</span></label>
-                    <input type="datetime-local" class="form-input" name="consultDate" required>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">희망 요일 <span class="required">*</span></label>
+                        <select class="form-select" name="consultDay" id="consultDay" required onchange="updateTimeOptions()">
+                            <option value="">요일 선택</option>
+                            <option value="월요일">월요일</option>
+                            <option value="화요일">화요일</option>
+                            <option value="수요일">수요일</option>
+                            <option value="목요일">목요일</option>
+                            <option value="금요일">금요일</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">희망 시간 <span class="required">*</span></label>
+                        <select class="form-select" name="consultTime" id="consultTime" required>
+                            <option value="">요일을 먼저 선택하세요</option>
+                        </select>
+                        <p class="form-hint">월·수·금: 오후 6시, 7시, 8시 / 화·목: 오후 2시, 3시, 4시</p>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -5224,7 +5255,8 @@
                         <h4>문의 전화</h4>
                         <p>
                             <a href="tel:0507-1378-1953">8층 독서실: 0507-1378-1953</a><br>
-                            <a href="tel:010-6861-4321">7층 독재관: 010-6861-4321</a>
+                            <a href="tel:010-6861-4321">7층 독재관: 010-6861-4321</a><br>
+                            <a href="tel:010-4602-1953">704호 어학원: 010-4602-1953</a>
                         </p>
                         <p style="margin-top: 8px; font-size: 13px; color: rgba(255,255,255,0.7);">전화상담: 오후 1시 이후부터 가능합니다.</p>
                     </div>
@@ -5431,6 +5463,52 @@
         document.getElementById('nsuForm').addEventListener('submit', handleSubmit);
         document.getElementById('academyForm').addEventListener('submit', handleSubmit);
         
+        // 레벨테스트 시간 선택 업데이트 함수
+        function updateTimeOptions() {
+            const daySelect = document.getElementById('consultDay');
+            const timeSelect = document.getElementById('consultTime');
+            const selectedDay = daySelect.value;
+            
+            // 기존 옵션 초기화
+            timeSelect.innerHTML = '';
+            
+            if (!selectedDay) {
+                timeSelect.innerHTML = '<option value="">요일을 먼저 선택하세요</option>';
+                return;
+            }
+            
+            let times = [];
+            
+            // 월수금: 6시, 7시, 8시 / 화목: 2시, 3시, 4시
+            if (selectedDay === '월요일' || selectedDay === '수요일' || selectedDay === '금요일') {
+                times = [
+                    { value: '오후 6시', label: '오후 6시' },
+                    { value: '오후 7시', label: '오후 7시' },
+                    { value: '오후 8시', label: '오후 8시' }
+                ];
+            } else if (selectedDay === '화요일' || selectedDay === '목요일') {
+                times = [
+                    { value: '오후 2시', label: '오후 2시' },
+                    { value: '오후 3시', label: '오후 3시' },
+                    { value: '오후 4시', label: '오후 4시' }
+                ];
+            }
+            
+            // 기본 옵션 추가
+            const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.textContent = '시간 선택';
+            timeSelect.appendChild(defaultOption);
+            
+            // 시간 옵션 추가
+            times.forEach(time => {
+                const option = document.createElement('option');
+                option.value = time.value;
+                option.textContent = time.label;
+                timeSelect.appendChild(option);
+            });
+        }
+
         // 새 브랜드별 폼 핸들러
         document.getElementById('studentForm8f').addEventListener('submit', handleBrandFormSubmit);
         document.getElementById('nsuForm7f').addEventListener('submit', handleBrandFormSubmit);
@@ -5471,6 +5549,13 @@
                     data[key] = value;
                 }
             });
+            
+            // 어학원 폼의 경우 요일+시간을 합쳐서 희망상담일시로 저장
+            if (formId === 'academyFormNew' && data.consultDay && data.consultTime) {
+                data.consultDate = data.consultDay + ' ' + data.consultTime;
+                delete data.consultDay;
+                delete data.consultTime;
+            }
 
             try {
                 // Google Apps Script 웹앱 URL로 전송

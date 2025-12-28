@@ -370,6 +370,424 @@
             box-shadow: 0 8px 30px rgba(45, 106, 79, 0.4);
         }
 
+        .btn-outline-dark {
+            background: transparent;
+            color: var(--text-dark);
+            border: 2px solid var(--border);
+        }
+
+        .btn-outline-dark:hover {
+            background: var(--bg-soft);
+            border-color: var(--text-dark);
+        }
+
+        /* ==================== 브랜드 섹션 ==================== */
+        .brand-section {
+            background: var(--white);
+            padding: 100px 40px;
+        }
+
+        .brand-section-alt {
+            background: var(--bg-soft);
+        }
+
+        .brand-section-academy {
+            background: linear-gradient(135deg, #f0f9f4 0%, #e8f5e9 100%);
+        }
+
+        .brand-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        .brand-features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .brand-feature-item {
+            background: var(--white);
+            padding: 32px 24px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .brand-section-alt .brand-feature-item {
+            background: var(--white);
+        }
+
+        .brand-section-academy .brand-feature-item {
+            background: var(--white);
+            border: 1px solid var(--academy-accent);
+        }
+
+        .brand-feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .brand-feature-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+
+        .brand-feature-item h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .brand-feature-item p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .brand-feature-item p a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .academy-location {
+            text-align: center;
+            margin-top: 40px;
+            padding: 16px 32px;
+            background: rgba(45, 106, 79, 0.1);
+            border-radius: 50px;
+            display: inline-block;
+            margin-left: 50%;
+            transform: translateX(-50%);
+            color: var(--academy-primary);
+            font-weight: 600;
+        }
+
+        /* ==================== 흰색 배경 갤러리 ==================== */
+        .gallery-section-white {
+            background: var(--white);
+            padding: 100px 40px;
+        }
+
+        .gallery-grid-large {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .gallery-item-large {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .gallery-item-large img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item-large:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .gallery-item-large:hover img {
+            transform: scale(1.03);
+        }
+
+        .gallery-item-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 24px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .gallery-item-large:hover .gallery-item-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item-overlay .gallery-item-label {
+            color: var(--white);
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .gallery-zoom-icon {
+            font-size: 24px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 50%;
+        }
+
+        /* ==================== 라이트박스 ==================== */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            font-size: 40px;
+            color: var(--white);
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: var(--transition);
+        }
+
+        .lightbox-close:hover {
+            transform: scale(1.2);
+        }
+
+        .lightbox-label {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--white);
+            font-size: 16px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 50px;
+            color: var(--white);
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 20px;
+            transition: var(--transition);
+        }
+
+        .lightbox-nav:hover {
+            transform: translateY(-50%) scale(1.2);
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        /* 개별 이용료 섹션 */
+        .pricing-section-8f,
+        .pricing-section-7f {
+            background: var(--bg-soft);
+            padding: 80px 40px;
+        }
+
+        .pricing-section-academy {
+            background: linear-gradient(135deg, #e8f5e9 0%, #f0f9f4 100%);
+            padding: 80px 40px;
+        }
+
+        /* 기존 섹션 숨기기 */
+        #about,
+        #academy,
+        #gallery,
+        #pricing,
+        #application {
+            display: none !important;
+        }
+
+        /* ==================== 브랜드별 신청 섹션 ==================== */
+        .application-section-brand {
+            background: var(--white);
+            padding: 80px 40px;
+        }
+
+        .application-section-alt {
+            background: var(--bg-soft);
+        }
+
+        .application-section-academy {
+            background: linear-gradient(135deg, #f0f9f4 0%, #e8f5e9 100%);
+        }
+
+        .application-form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .application-section-alt .application-form-container {
+            background: var(--white);
+        }
+
+        .application-section-academy .application-form-container {
+            background: var(--white);
+            border: 1px solid var(--academy-accent);
+        }
+
+        .brand-form .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .brand-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .brand-form .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .brand-form .form-input,
+        .brand-form .form-select,
+        .brand-form .form-textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 15px;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .brand-form .form-input:focus,
+        .brand-form .form-select:focus,
+        .brand-form .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(10, 36, 99, 0.1);
+        }
+
+        .brand-form .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .brand-form .form-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 20px;
+        }
+
+        .brand-form .form-submit:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        .application-section-academy .brand-form .form-submit {
+            background: var(--academy-primary);
+        }
+
+        .application-section-academy .brand-form .form-submit:hover {
+            background: var(--academy-light);
+        }
+
+        .application-section-academy .brand-form .form-input:focus,
+        .application-section-academy .brand-form .form-select:focus,
+        .application-section-academy .brand-form .form-textarea:focus {
+            border-color: var(--academy-primary);
+            box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.1);
+        }
+
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .form-success .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--academy-primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 24px;
+        }
+
+        .form-success h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        .form-success p {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
         .hero-scroll {
             position: absolute;
             bottom: 40px;
@@ -1828,6 +2246,36 @@
             cursor: pointer;
         }
 
+        .form-checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .form-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--text-dark);
+            padding: 8px 14px;
+            background: var(--bg-soft);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .form-checkbox:hover {
+            background: var(--border);
+        }
+
+        .form-checkbox input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
         .form-hint {
             font-size: 12px;
             color: var(--text-muted);
@@ -2116,6 +2564,49 @@
                 align-items: center;
             }
 
+            /* 브랜드 섹션 반응형 */
+            .brand-section {
+                padding: 60px 20px;
+            }
+
+            .brand-features {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+
+            .brand-feature-item {
+                padding: 24px 16px;
+            }
+
+            .brand-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            /* 새 갤러리 반응형 */
+            .gallery-section-white {
+                padding: 60px 20px;
+            }
+
+            .gallery-grid-large {
+                gap: 24px;
+                padding: 0 10px;
+            }
+
+            /* 라이트박스 반응형 */
+            .lightbox-nav {
+                font-size: 30px;
+                padding: 10px;
+            }
+
+            .lightbox-prev {
+                left: 5px;
+            }
+
+            .lightbox-next {
+                right: 5px;
+            }
+
             .gallery-grid {
                 grid-template-columns: repeat(2, 1fr);
                 padding: 0 20px;
@@ -2186,6 +2677,33 @@
             }
         }
 
+        @media (max-width: 480px) {
+            .brand-features {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid-large {
+                gap: 20px;
+                padding: 0;
+            }
+
+            .gallery-item-overlay .gallery-item-label {
+                font-size: 16px;
+            }
+
+            .brand-form .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .application-form-container {
+                padding: 24px 20px;
+            }
+
+            .application-section-brand {
+                padding: 60px 20px;
+            }
+        }
+
         @media (max-width: 600px) {
             .pricing-table th,
             .pricing-table td {
@@ -2206,16 +2724,14 @@
 <body>
     <!-- Navigation -->
     <nav class="nav" id="navbar">
-        <a href="#" class="nav-logo">김엄마 관리형독서실</a>
+        <a href="#" class="nav-logo">김엄마관리형독서실</a>
         <ul class="nav-links">
-            <li><a href="#about">소개</a></li>
-            <li><a href="#academy" class="academy-link">📚 어학원</a></li>
-            <li><a href="#gallery">둘러보기</a></li>
+            <li><a href="#brand-8f">관리형독서실</a></li>
+            <li><a href="#brand-7f">독학재수학원</a></li>
+            <li><a href="#brand-academy" class="academy-link">어학원</a></li>
             <li><a href="#management">학습관리</a></li>
-            <li><a href="#pricing">이용료</a></li>
             <li><a href="#location">오시는 길</a></li>
         </ul>
-        <a href="#application" class="nav-cta">대기 신청</a>
         <div class="nav-mobile-toggle" id="mobileToggle">
             <span></span>
             <span></span>
@@ -2228,14 +2744,12 @@
     <div class="mobile-menu" id="mobileMenu">
         <button class="mobile-menu-close" id="mobileClose">×</button>
         <ul class="mobile-menu-links">
-            <li><a href="#about">소개</a></li>
-            <li><a href="#academy" class="academy-mobile-link">📚 어학원 (초중등)</a></li>
-            <li><a href="#gallery">둘러보기</a></li>
+            <li><a href="#brand-8f">관리형독서실</a></li>
+            <li><a href="#brand-7f">독학재수학원</a></li>
+            <li><a href="#brand-academy" class="academy-mobile-link">어학원</a></li>
             <li><a href="#management">학습관리</a></li>
-            <li><a href="#pricing">이용료</a></li>
             <li><a href="#location">오시는 길</a></li>
         </ul>
-        <a href="#application" class="mobile-menu-cta">대기 신청하기</a>
     </div>
 
     <!-- Hero Section -->
@@ -2246,72 +2760,759 @@
             <div class="hero-badge">
                 <span>분당 1호점 7년의 노하우</span>
             </div>
-            <h1 class="hero-title">송도 <span class="highlight">김엄마</span><br>관리형독서실</h1>
-            <p class="hero-subtitle">
-                유아부터 대학입시까지, 수리딩교육이 함께합니다<br>
-                체계적인 학습관리와 프리미엄 환경으로 목표 대학까지
-            </p>
+            <h1 class="hero-title">(주)<span class="highlight">수리딩</span>교육</h1>
             <div class="hero-buttons">
-                <a href="#application" class="btn btn-primary">대기 신청하기</a>
-                <a href="#academy" class="btn btn-academy">📚 어학원 알아보기</a>
-                <a href="#gallery" class="btn btn-outline">시설 둘러보기</a>
+                <a href="#brand-8f" class="btn btn-primary">김엄마관리형독서실</a>
+                <a href="#brand-7f" class="btn btn-outline">김엄마송도독학재수학원</a>
+                <a href="#brand-academy" class="btn btn-outline">어학원</a>
             </div>
         </div>
         <div class="hero-scroll">Scroll</div>
     </section>
 
-    <!-- About Section -->
-    <section class="section about" id="about">
+    <!-- ==================== 8층 김엄마관리형독서실 브랜드 섹션 ==================== -->
+    <section class="section brand-section" id="brand-8f">
         <div class="section-header">
-            <span class="section-label">About Us</span>
-            <h2 class="section-title">두 개의 층, 하나의 목표</h2>
+            <span class="section-label">8F Study Room</span>
+            <h2 class="section-title">김엄마관리형독서실</h2>
             <p class="section-desc">
-                7층 독학재수학원과 8층 관리형독서실이 함께<br>
-                학생들의 대학 합격을 위해 최선을 다합니다
+                재원생(고1~고3)을 위한 프리미엄 관리형독서실<br>
+                최적의 학습 환경에서 집중력을 높여드립니다
             </p>
         </div>
+        
+        <div class="brand-buttons">
+            <a href="#application-8f" class="btn btn-primary">대기 신청하기</a>
+            <a href="#gallery-8f-section" class="btn btn-outline-dark">시설 둘러보기</a>
+        </div>
 
-        <div class="floor-grid">
-            <!-- 7층 카드 -->
-            <div class="floor-card">
-                <div class="floor-image">
-                    <img src="images/7f-study-4.png.jpeg" alt="7층 김엄마송도독학재수학원">
-                    <span class="floor-badge">7층</span>
-                </div>
-                <div class="floor-content">
-                    <h3 class="floor-title">김엄마송도독학재수학원</h3>
-                    <p class="floor-desc">
-                        N수생을 위한 전문 재수학원입니다. 
-                        체계적인 커리큘럼과 1:1 맞춤 관리로 목표 대학 합격을 이끌어냅니다.
-                    </p>
-                    <div class="floor-features">
-                        <span class="floor-feature">N수생 전문</span>
-                        <span class="floor-feature">1:1 맞춤관리</span>
-                        <span class="floor-feature">체계적 커리큘럼</span>
-                    </div>
-                    <a href="tel:010-6861-4321" class="floor-phone">📞 010-6861-4321</a>
+        <div class="brand-features">
+            <div class="brand-feature-item">
+                <div class="brand-feature-icon">🔐</div>
+                <h4>안면인식 출입</h4>
+                <p>최신 안면인식 시스템으로 안전하고 편리한 출입</p>
+            </div>
+            <div class="brand-feature-item">
+                <div class="brand-feature-icon">📱</div>
+                <h4>실시간 학습관리</h4>
+                <p>학습 현황을 실시간으로 학부모님께 전달</p>
+            </div>
+            <div class="brand-feature-item">
+                <div class="brand-feature-icon">☕</div>
+                <h4>리프레쉬룸</h4>
+                <p>휴식과 재충전을 위한 쾌적한 공간</p>
+            </div>
+            <div class="brand-feature-item">
+                <div class="brand-feature-icon">📞</div>
+                <h4>문의전화</h4>
+                <p><a href="tel:0507-1378-1953">0507-1378-1953</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8층 시설 둘러보기 -->
+    <section class="section gallery-section-white" id="gallery-8f-section">
+        <div class="section-header">
+            <span class="section-label">Gallery</span>
+            <h2 class="section-title">8층 시설 둘러보기</h2>
+        </div>
+        <div class="gallery-grid-large">
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/8f-study-1.png.png" alt="8층 독서실 내부">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">독서실 내부 1</span>
+                    <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/8f-study-2.png.png" alt="8층 독서실 내부">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">독서실 내부 2</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/8f-study-3.png.png" alt="8층 독서실 내부">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">독서실 내부 3</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/8f-faceid-1.png.png" alt="8층 안면인식">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">안면인식 입구</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/8f-refresh-1.png.png" alt="8층 리프레쉬룸">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">리프레쉬룸</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/program-1.png.png" alt="관리 프로그램">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">관리 프로그램</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <!-- 8층 카드 -->
-            <div class="floor-card">
-                <div class="floor-image">
-                    <img src="images/8f-faceid-1.png.png" alt="8층 김엄마송도관리형독서실">
-                    <span class="floor-badge">8층</span>
-                </div>
-                <div class="floor-content">
-                    <h3 class="floor-title">김엄마송도관리형독서실</h3>
-                    <p class="floor-desc">
-                        재원생(고1~고3)을 위한 프리미엄 관리형독서실입니다.
-                        최적의 학습 환경에서 집중력을 높여드립니다.
-                    </p>
-                    <div class="floor-features">
-                        <span class="floor-feature">재원생 전용</span>
-                        <span class="floor-feature">안면인식 출입</span>
-                        <span class="floor-feature">실시간 학습관리</span>
+    <!-- 8층 이용료 -->
+    <section class="section pricing-section-8f" id="pricing-8f-section">
+        <div class="section-header">
+            <span class="section-label">Pricing</span>
+            <h2 class="section-title">8층 이용료 안내</h2>
+            <p class="section-desc">김엄마관리형독서실</p>
+        </div>
+        <div class="pricing-table-wrapper">
+            <table class="pricing-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>1개월</th>
+                        <th>3개월</th>
+                        <th>6개월</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="row-label">지정석</td>
+                        <td><span class="price">350,000</span>원</td>
+                        <td><span class="price">330,000</span>원/월</td>
+                        <td><span class="price highlight-price">300,000</span>원/월</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- 8층 대기 신청 -->
+    <section class="section application-section-brand" id="application-8f">
+        <div class="section-header">
+            <span class="section-label">Application</span>
+            <h2 class="section-title">8층 대기 신청</h2>
+            <p class="section-desc">김엄마관리형독서실 (고2~고3)</p>
+        </div>
+
+        <div class="application-form-container">
+            <form id="studentForm8f" class="brand-form">
+                <input type="hidden" name="formType" value="재학생">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">학생 이름 <span class="required">*</span></label>
+                        <input type="text" class="form-input" name="studentName" placeholder="학생 이름" required>
                     </div>
-                    <a href="tel:0507-1378-1953" class="floor-phone">📞 0507-1378-1953</a>
+                    <div class="form-group">
+                        <label class="form-label">성별 <span class="required">*</span></label>
+                        <select class="form-select" name="gender" required>
+                            <option value="">선택해주세요</option>
+                            <option value="남학생">남학생</option>
+                            <option value="여학생">여학생</option>
+                        </select>
+                    </div>
                 </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">학생 연락처 <span class="required">*</span></label>
+                        <input type="tel" class="form-input" name="studentPhone" placeholder="010-0000-0000" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">부모님 연락처 <span class="required">*</span></label>
+                        <input type="tel" class="form-input" name="parentPhone" placeholder="010-0000-0000" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">학교 <span class="required">*</span></label>
+                        <input type="text" class="form-input" name="school" placeholder="현재 재학중인 학교명" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">학년 <span class="required">*</span></label>
+                        <select class="form-select" name="grade" required>
+                            <option value="">선택해주세요</option>
+                            <option value="고2">고2</option>
+                            <option value="고3">고3</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">희망 등원일</label>
+                        <input type="date" class="form-input" name="startDate">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">내신등급 (국어/수학/영어)</label>
+                        <input type="text" class="form-input" name="gradeScore" placeholder="예: 2/1/2">
+                        <p class="form-hint">모의고사등급도 가능합니다. (선택사항)</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">흡연 여부 확인 <span class="required">*</span></label>
+                    <p class="form-warning">⚠️ 흡연자는 신청서를 작성할 수 없습니다.</p>
+                    <div class="form-radio-group">
+                        <label class="form-radio">
+                            <input type="radio" name="smoking8f" value="확인하였습니다" required>
+                            <span>확인하였습니다 (비흡연)</span>
+                        </label>
+                        <label class="form-radio">
+                            <input type="radio" name="smoking8f" value="해당사항없습니다">
+                            <span>해당사항없습니다</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="form-submit">대기 신청하기</button>
+            </form>
+            <div class="form-success" id="successMessage8f">
+                <div class="success-icon">✓</div>
+                <h3>신청이 완료되었습니다!</h3>
+                <p>빠른 시일 내에 연락드리겠습니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 7층 김엄마송도독학재수학원 브랜드 섹션 ==================== -->
+    <section class="section brand-section brand-section-alt" id="brand-7f">
+        <div class="section-header">
+            <span class="section-label">7F Academy</span>
+            <h2 class="section-title">김엄마송도독학재수학원</h2>
+            <p class="section-desc">
+                N수생을 위한 전문 재수학원<br>
+                체계적인 커리큘럼과 1:1 맞춤 관리로 목표 대학 합격
+            </p>
+        </div>
+        
+        <div class="brand-buttons">
+            <a href="#application-7f" class="btn btn-primary">대기 신청하기</a>
+            <a href="#gallery-7f-section" class="btn btn-outline-dark">시설 둘러보기</a>
+        </div>
+
+        <div class="brand-features">
+            <div class="brand-feature-item">
+                <div class="brand-feature-icon">🎯</div>
+                <h4>N수생 전문</h4>
+                <p>재수생만을 위한 특화된 학습 프로그램</p>
+            </div>
+            <div class="brand-feature-item">
+                <div class="brand-feature-icon">👤</div>
+                <h4>1:1 맞춤관리</h4>
+                <p>개인별 성적 분석 및 목표 설정</p>
+            </div>
+            <div class="brand-feature-item">
+                <div class="brand-feature-icon">📚</div>
+                <h4>체계적 커리큘럼</h4>
+                <p>입시 전문가가 설계한 체계적인 학습 계획</p>
+            </div>
+            <div class="brand-feature-item">
+                <div class="brand-feature-icon">📞</div>
+                <h4>문의전화</h4>
+                <p><a href="tel:010-6861-4321">010-6861-4321</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7층 시설 둘러보기 -->
+    <section class="section gallery-section-white" id="gallery-7f-section">
+        <div class="section-header">
+            <span class="section-label">Gallery</span>
+            <h2 class="section-title">7층 시설 둘러보기</h2>
+        </div>
+        <div class="gallery-grid-large">
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/7f-study-1.png.jpeg" alt="7층 학원 내부">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">학원 내부 1</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/7f-study-2.png.jpeg" alt="7층 학원 내부">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">학원 내부 2</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/7f-study-3.png.jpeg" alt="7층 학원 내부">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">학원 내부 3</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/7f-entrance.png.jpeg" alt="7층 입구">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">학원 입구</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/7f-refresh.png.jpeg" alt="7층 휴게실">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">휴게실</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/7f-back-desk.png.jpeg" alt="7층 후면">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">학원 후면</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7층 이용료 -->
+    <section class="section pricing-section-7f" id="pricing-7f-section">
+        <div class="section-header">
+            <span class="section-label">Pricing</span>
+            <h2 class="section-title">7층 이용료 안내</h2>
+            <p class="section-desc">김엄마송도독학재수학원</p>
+        </div>
+        <div class="pricing-table-wrapper">
+            <table class="pricing-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>오픈형 지정석</th>
+                        <th>칸막이 지정석</th>
+                        <th>N수생 올케어서비스</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="highlight-row">
+                        <td class="row-label">등록비</td>
+                        <td><span class="price">630,000</span>원</td>
+                        <td><span class="price">690,000</span>원</td>
+                        <td><span class="price highlight-price">750,000</span>원</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- 7층 대기 신청 -->
+    <section class="section application-section-brand application-section-alt" id="application-7f">
+        <div class="section-header">
+            <span class="section-label">Application</span>
+            <h2 class="section-title">7층 대기 신청</h2>
+            <p class="section-desc">김엄마송도독학재수학원 (N수생)</p>
+        </div>
+
+        <div class="application-form-container">
+            <form id="nsuForm7f" class="brand-form">
+                <input type="hidden" name="formType" value="N수생">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">학생 이름 <span class="required">*</span></label>
+                        <input type="text" class="form-input" name="studentName" placeholder="학생 이름" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">성별 <span class="required">*</span></label>
+                        <select class="form-select" name="gender" required>
+                            <option value="">선택해주세요</option>
+                            <option value="남학생">남학생</option>
+                            <option value="여학생">여학생</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">학생 연락처 <span class="required">*</span></label>
+                        <input type="tel" class="form-input" name="studentPhone" placeholder="010-0000-0000" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">부모님 연락처 <span class="required">*</span></label>
+                        <input type="tel" class="form-input" name="parentPhone" placeholder="010-0000-0000" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">출신 고등학교 <span class="required">*</span></label>
+                        <input type="text" class="form-input" name="highSchool" placeholder="출신 고등학교명" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">희망 등원일</label>
+                        <input type="date" class="form-input" name="startDate">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">2025년 수능등급 (국어/수학/영어)</label>
+                    <input type="text" class="form-input" name="suneungScore" placeholder="예: 3/2/1">
+                    <p class="form-hint">수시는 학교내신등급을 기재하세요. (선택사항)<br>수능점수 제출 시 장학혜택 가능</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">전수관 사전등록을 희망하시나요? <span class="required">*</span></label>
+                    <div class="form-radio-group">
+                        <label class="form-radio">
+                            <input type="radio" name="preRegister7f" value="Yes" required>
+                            <span>Yes</span>
+                        </label>
+                        <label class="form-radio">
+                            <input type="radio" name="preRegister7f" value="No">
+                            <span>No</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">사전등록 방법을 선택하세요</label>
+                    <select class="form-select" name="paymentMethod">
+                        <option value="">선택해주세요</option>
+                        <option value="계좌이체">계좌이체</option>
+                        <option value="온라인카드결제">온라인카드결제</option>
+                    </select>
+                    <p class="form-hint">계좌이체: 국민 4699-01-04-155186 수리딩교육</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">흡연 여부 확인 <span class="required">*</span></label>
+                    <p class="form-warning">⚠️ 흡연자는 신청서를 작성할 수 없습니다.</p>
+                    <div class="form-radio-group">
+                        <label class="form-radio">
+                            <input type="radio" name="smoking7f" value="확인하였습니다" required>
+                            <span>확인하였습니다 (비흡연)</span>
+                        </label>
+                        <label class="form-radio">
+                            <input type="radio" name="smoking7f" value="해당사항없습니다">
+                            <span>해당사항없습니다</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="form-submit">대기 신청하기</button>
+            </form>
+            <div class="form-success" id="successMessage7f">
+                <div class="success-icon">✓</div>
+                <h3>신청이 완료되었습니다!</h3>
+                <p>빠른 시일 내에 연락드리겠습니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 어학원 브랜드 섹션 ==================== -->
+    <section class="section brand-section brand-section-academy" id="brand-academy">
+        <div class="section-header">
+            <span class="section-label">SR Academy</span>
+            <h2 class="section-title">수리딩영어논술학원</h2>
+            <p class="section-desc">
+                영어 소설과 디베이트 수업으로<br>
+                영어 독해 능력과 사고력을 체계적으로 향상시킵니다
+            </p>
+        </div>
+        
+        <div class="brand-buttons">
+            <a href="#gallery-academy-section" class="btn btn-academy">시설 둘러보기</a>
+            <a href="#application-academy" class="btn btn-outline-dark">레벨테스트 신청하기</a>
+        </div>
+
+        <div class="brand-features academy-features">
+            <div class="brand-feature-item">
+                <div class="brand-feature-icon">📖</div>
+                <h4>영어 소설 읽기</h4>
+                <p>다양한 영문 소설과 텍스트를 통해 독해력 향상</p>
+            </div>
+            <div class="brand-feature-item">
+                <div class="brand-feature-icon">💬</div>
+                <h4>디베이트</h4>
+                <p>논리적 사고와 설득 기술을 영어로 토의</p>
+            </div>
+            <div class="brand-feature-item">
+                <div class="brand-feature-icon">✍️</div>
+                <h4>에세이 작성</h4>
+                <p>문법과 어휘를 확실한 수업으로 글쓰기 실력 향상</p>
+            </div>
+            <div class="brand-feature-item">
+                <div class="brand-feature-icon">🎓</div>
+                <h4>채드윅 입학대비</h4>
+                <p>국제학교 입학을 준비하는 학생들을 위한 맞춤형 프로그램</p>
+            </div>
+        </div>
+        
+        <div class="academy-location">
+            <span>📍 송도본점 · 분당지점</span>
+        </div>
+    </section>
+
+    <!-- 어학원 시설 둘러보기 -->
+    <section class="section gallery-section-white" id="gallery-academy-section">
+        <div class="section-header">
+            <span class="section-label">Gallery</span>
+            <h2 class="section-title">어학원 시설 둘러보기</h2>
+        </div>
+        <div class="gallery-grid-large">
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/images/academy/academy-1.jpg" alt="수리딩영어논술학원">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">스터디홀</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/images/academy/academy-2.jpg" alt="수리딩영어논술학원">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">에세이교정수업</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/images/academy/academy-5.jpg" alt="수리딩영어논술학원">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">센트럴파크가 보이는창문</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/images/academy/academy-7.jpg" alt="수리딩영어논술학원">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">1대1수업장면</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/images/academy/academy-13.jpg" alt="수리딩영어논술학원">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">영어소설책장</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/images/academy/academy-15.jpg" alt="수리딩영어논술학원">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">전자칠판</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/images/academy/academy-16.jpg" alt="수리딩영어논술학원">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">소규모수업테이블</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/images/academy/academy-19.jpg" alt="수리딩영어논술학원">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">학원로고</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/images/academy/academy-24.jpg" alt="수리딩영어논술학원">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">1대1원어민수업</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 어학원 이용료 -->
+    <section class="section pricing-section-academy" id="pricing-academy-section">
+        <div class="section-header">
+            <span class="section-label">Pricing</span>
+            <h2 class="section-title">어학원 수강료 안내</h2>
+            <p class="section-desc">수리딩영어논술학원</p>
+        </div>
+        <div class="pricing-table-wrapper">
+            <table class="pricing-table academy-pricing-table">
+                <thead>
+                    <tr>
+                        <th>프로그램</th>
+                        <th>대상</th>
+                        <th>수업 시간</th>
+                        <th>수강료 (월)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="row-label">영어 소설 읽기</td>
+                        <td>초등 · 중등</td>
+                        <td>주 2회 / 90분</td>
+                        <td><span class="price">별도 문의</span></td>
+                    </tr>
+                    <tr>
+                        <td class="row-label">디베이트</td>
+                        <td>초등 · 중등</td>
+                        <td>주 1회 / 120분</td>
+                        <td><span class="price">별도 문의</span></td>
+                    </tr>
+                    <tr>
+                        <td class="row-label">에세이 작성</td>
+                        <td>초등 · 중등</td>
+                        <td>주 1회 / 90분</td>
+                        <td><span class="price">별도 문의</span></td>
+                    </tr>
+                    <tr>
+                        <td class="row-label">채드윅 입학대비</td>
+                        <td>초등</td>
+                        <td>맞춤형</td>
+                        <td><span class="price">별도 문의</span></td>
+                    </tr>
+                    <tr>
+                        <td class="row-label">내신반</td>
+                        <td>중등</td>
+                        <td>주 2회 / 90분</td>
+                        <td><span class="price">별도 문의</span></td>
+                    </tr>
+                    <tr>
+                        <td class="row-label">유아 영어</td>
+                        <td>유아</td>
+                        <td>주 2회 / 60분</td>
+                        <td><span class="price">별도 문의</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="academy-pricing-notice">
+            <div class="academy-pricing-notice-icon">📞</div>
+            <div class="academy-pricing-notice-content">
+                <h4>수강료 및 상담 문의</h4>
+                <p>레벨 테스트 후 맞춤 커리큘럼으로 진행됩니다.<br>자세한 수강료는 상담 신청을 통해 안내해 드립니다.</p>
+                <div class="academy-pricing-contacts">
+                    <a href="#application-academy" class="academy-pricing-phone">📝 레벨테스트 신청</a>
+                    <a href="https://suereadingclub.co.kr/" target="_blank" class="academy-pricing-web">🌐 홈페이지 문의</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 어학원 상담 신청 -->
+    <section class="section application-section-brand application-section-academy" id="application-academy">
+        <div class="section-header">
+            <span class="section-label">Application</span>
+            <h2 class="section-title">레벨테스트 신청</h2>
+            <p class="section-desc">수리딩영어논술학원 (유아 · 초등 · 중등)</p>
+        </div>
+
+        <div class="application-form-container">
+            <form id="academyFormNew" class="brand-form">
+                <input type="hidden" name="formType" value="어학원상담">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">학생 이름 <span class="required">*</span></label>
+                        <input type="text" class="form-input" name="studentName" placeholder="학생 이름" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">성별 <span class="required">*</span></label>
+                        <select class="form-select" name="gender" required>
+                            <option value="">선택해주세요</option>
+                            <option value="남학생">남학생</option>
+                            <option value="여학생">여학생</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">학생 연락처</label>
+                        <input type="tel" class="form-input" name="studentPhone" placeholder="010-0000-0000">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">부모님 연락처 <span class="required">*</span></label>
+                        <input type="tel" class="form-input" name="parentPhone" placeholder="010-0000-0000" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">학교 <span class="required">*</span></label>
+                        <input type="text" class="form-input" name="school" placeholder="현재 재학중인 학교명" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">학년 <span class="required">*</span></label>
+                        <select class="form-select" name="grade" required>
+                            <option value="">선택해주세요</option>
+                            <option value="유아 5세">유아 5세</option>
+                            <option value="유아 6세">유아 6세</option>
+                            <option value="유아 7세">유아 7세</option>
+                            <option value="초1">초1</option>
+                            <option value="초2">초2</option>
+                            <option value="초3">초3</option>
+                            <option value="초4">초4</option>
+                            <option value="초5">초5</option>
+                            <option value="초6">초6</option>
+                            <option value="중1">중1</option>
+                            <option value="중2">중2</option>
+                            <option value="중3">중3</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">희망 상담일시 <span class="required">*</span></label>
+                    <input type="datetime-local" class="form-input" name="consultDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">관심 프로그램 (복수선택 가능)</label>
+                    <div class="form-checkbox-group">
+                        <label class="form-checkbox">
+                            <input type="checkbox" name="programs" value="영어소설읽기">
+                            <span>영어 소설 읽기</span>
+                        </label>
+                        <label class="form-checkbox">
+                            <input type="checkbox" name="programs" value="디베이트">
+                            <span>디베이트</span>
+                        </label>
+                        <label class="form-checkbox">
+                            <input type="checkbox" name="programs" value="에세이작성">
+                            <span>에세이 작성</span>
+                        </label>
+                        <label class="form-checkbox">
+                            <input type="checkbox" name="programs" value="채드윅입학대비">
+                            <span>채드윅 입학대비</span>
+                        </label>
+                        <label class="form-checkbox">
+                            <input type="checkbox" name="programs" value="내신반">
+                            <span>내신반</span>
+                        </label>
+                        <label class="form-checkbox">
+                            <input type="checkbox" name="programs" value="유아영어">
+                            <span>유아 영어</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">현재 영어 수준</label>
+                    <select class="form-select" name="englishLevel">
+                        <option value="">선택해주세요</option>
+                        <option value="입문">입문 (알파벳, 파닉스 단계)</option>
+                        <option value="기초">기초 (간단한 문장 읽기 가능)</option>
+                        <option value="중급">중급 (짧은 지문 독해 가능)</option>
+                        <option value="고급">고급 (원서 읽기 가능)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">문의사항</label>
+                    <textarea class="form-textarea" name="inquiry" placeholder="궁금하신 점이나 요청사항을 적어주세요"></textarea>
+                </div>
+
+                <button type="submit" class="form-submit">레벨테스트 신청하기</button>
+            </form>
+            <div class="form-success" id="successMessageAcademy">
+                <div class="success-icon">✓</div>
+                <h3>신청이 완료되었습니다!</h3>
+                <p>빠른 시일 내에 연락드리겠습니다.</p>
             </div>
         </div>
     </section>
@@ -2423,9 +3624,6 @@
             <div class="academy-contact">
                 <div class="academy-contact-item">
                     📍 <span>송도 캠퍼스 · 분당 지점</span>
-                </div>
-                <div class="academy-contact-item">
-                    📞 <a href="tel:032-123-4567">문의: 032-123-4567</a>
                 </div>
             </div>
         </div>
@@ -3044,9 +4242,9 @@
                     <div class="academy-pricing-notice-icon">📞</div>
                     <div class="academy-pricing-notice-content">
                         <h4>수강료 및 상담 문의</h4>
-                        <p>레벨 테스트 후 맞춤 커리큘럼으로 진행됩니다.<br>자세한 수강료는 전화 또는 방문 상담을 통해 안내해 드립니다.</p>
+                        <p>레벨 테스트 후 맞춤 커리큘럼으로 진행됩니다.<br>자세한 수강료는 상담 신청을 통해 안내해 드립니다.</p>
                         <div class="academy-pricing-contacts">
-                            <a href="tel:032-123-4567" class="academy-pricing-phone">📞 032-123-4567</a>
+                            <a href="#application" class="academy-pricing-phone">📝 상담 신청하기</a>
                             <a href="https://suereadingclub.co.kr/" target="_blank" class="academy-pricing-web">🌐 홈페이지 문의</a>
                         </div>
                     </div>
@@ -3075,6 +4273,7 @@
             <div class="form-type-selector">
                 <button class="form-type-btn active" data-form="student">재학생 신청</button>
                 <button class="form-type-btn" data-form="nsu">N수생 신청</button>
+                <button class="form-type-btn" data-form="academy">어학원 상담신청</button>
             </div>
 
             <div class="form-body">
@@ -3275,6 +4474,120 @@
                     </form>
                 </div>
 
+                <!-- 어학원 상담신청 폼 -->
+                <div class="form-section" id="form-academy">
+                    <h3 class="form-title">어학원 상담신청</h3>
+                    <p class="form-subtitle">수리딩영어논술학원 (유아 · 초등 · 중등)</p>
+
+                    <form id="academyForm">
+                        <input type="hidden" name="formType" value="어학원상담">
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">학생 이름 <span class="required">*</span></label>
+                                <input type="text" class="form-input" name="studentName" placeholder="학생 이름" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">성별 <span class="required">*</span></label>
+                                <select class="form-select" name="gender" required>
+                                    <option value="">선택해주세요</option>
+                                    <option value="남학생">남학생</option>
+                                    <option value="여학생">여학생</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">학생 연락처</label>
+                                <input type="tel" class="form-input" name="studentPhone" placeholder="010-0000-0000">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">부모님 연락처 <span class="required">*</span></label>
+                                <input type="tel" class="form-input" name="parentPhone" placeholder="010-0000-0000" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">학교 <span class="required">*</span></label>
+                                <input type="text" class="form-input" name="school" placeholder="현재 재학중인 학교명" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">학년 <span class="required">*</span></label>
+                                <select class="form-select" name="grade" required>
+                                    <option value="">선택해주세요</option>
+                                    <option value="유아 5세">유아 5세</option>
+                                    <option value="유아 6세">유아 6세</option>
+                                    <option value="유아 7세">유아 7세</option>
+                                    <option value="초1">초1</option>
+                                    <option value="초2">초2</option>
+                                    <option value="초3">초3</option>
+                                    <option value="초4">초4</option>
+                                    <option value="초5">초5</option>
+                                    <option value="초6">초6</option>
+                                    <option value="중1">중1</option>
+                                    <option value="중2">중2</option>
+                                    <option value="중3">중3</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">희망 상담일시 <span class="required">*</span></label>
+                            <input type="datetime-local" class="form-input" name="consultDate" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">관심 프로그램 (복수선택 가능)</label>
+                            <div class="form-checkbox-group">
+                                <label class="form-checkbox">
+                                    <input type="checkbox" name="programs" value="영어소설읽기">
+                                    <span>영어 소설 읽기</span>
+                                </label>
+                                <label class="form-checkbox">
+                                    <input type="checkbox" name="programs" value="디베이트">
+                                    <span>디베이트</span>
+                                </label>
+                                <label class="form-checkbox">
+                                    <input type="checkbox" name="programs" value="에세이작성">
+                                    <span>에세이 작성</span>
+                                </label>
+                                <label class="form-checkbox">
+                                    <input type="checkbox" name="programs" value="채드윅입학대비">
+                                    <span>채드윅 입학대비</span>
+                                </label>
+                                <label class="form-checkbox">
+                                    <input type="checkbox" name="programs" value="내신반">
+                                    <span>내신반</span>
+                                </label>
+                                <label class="form-checkbox">
+                                    <input type="checkbox" name="programs" value="유아영어">
+                                    <span>유아 영어</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">현재 영어 수준</label>
+                            <select class="form-select" name="englishLevel">
+                                <option value="">선택해주세요</option>
+                                <option value="입문">입문 (알파벳, 파닉스 단계)</option>
+                                <option value="기초">기초 (간단한 문장 읽기 가능)</option>
+                                <option value="중급">중급 (짧은 지문 독해 가능)</option>
+                                <option value="고급">고급 (원서 읽기 가능)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">문의사항</label>
+                            <textarea class="form-textarea" name="inquiry" placeholder="궁금하신 점이나 요청사항을 적어주세요"></textarea>
+                        </div>
+
+                        <button type="submit" class="form-submit">상담 신청하기</button>
+                    </form>
+                </div>
+
                 <!-- Success Message -->
                 <div class="success-message" id="successMessage">
                     <div class="success-icon">✓</div>
@@ -3347,6 +4660,17 @@
         </div>
         <p class="footer-copy">© 2025 송도 김엄마 관리형독서실 · 김엄마송도독학재수학원 · 수리딩어학원. All rights reserved.</p>
     </footer>
+
+    <!-- 라이트박스 -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">×</button>
+            <button class="lightbox-nav lightbox-prev" onclick="prevImage()">‹</button>
+            <img src="" alt="" id="lightbox-img">
+            <button class="lightbox-nav lightbox-next" onclick="nextImage()">›</button>
+            <div class="lightbox-label" id="lightbox-label"></div>
+        </div>
+    </div>
 
     <script>
         // Navigation scroll effect
@@ -3497,6 +4821,63 @@
 
         document.getElementById('studentForm').addEventListener('submit', handleSubmit);
         document.getElementById('nsuForm').addEventListener('submit', handleSubmit);
+        document.getElementById('academyForm').addEventListener('submit', handleSubmit);
+        
+        // 새 브랜드별 폼 핸들러
+        document.getElementById('studentForm8f').addEventListener('submit', handleBrandFormSubmit);
+        document.getElementById('nsuForm7f').addEventListener('submit', handleBrandFormSubmit);
+        document.getElementById('academyFormNew').addEventListener('submit', handleBrandFormSubmit);
+
+        // 브랜드별 폼 제출 핸들러
+        async function handleBrandFormSubmit(e) {
+            e.preventDefault();
+            const form = e.target;
+            const submitBtn = form.querySelector('.form-submit');
+            const formId = form.id;
+            
+            // 성공 메시지 ID 결정
+            let successMsgId;
+            if (formId === 'studentForm8f') successMsgId = 'successMessage8f';
+            else if (formId === 'nsuForm7f') successMsgId = 'successMessage7f';
+            else if (formId === 'academyFormNew') successMsgId = 'successMessageAcademy';
+            
+            submitBtn.textContent = '처리 중...';
+            submitBtn.disabled = true;
+
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => {
+                if (key === 'programs') {
+                    if (!data[key]) data[key] = [];
+                    data[key].push(value);
+                } else {
+                    data[key] = value;
+                }
+            });
+
+            try {
+                // Google Apps Script 웹앱 URL로 전송
+                const response = await fetch('https://script.google.com/macros/s/AKfycbwl3lmmMDLHm15lLdL7T1CLGSdOzKJZbIwYPr6cKJMWLuWYkZx3bQbCjixzNgCp7M_s/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                // 성공 메시지 표시
+                form.style.display = 'none';
+                document.getElementById(successMsgId).style.display = 'block';
+                form.reset();
+            } catch (error) {
+                alert('신청 중 오류가 발생했습니다. 다시 시도해주세요.');
+                console.error('Error:', error);
+            }
+
+            submitBtn.textContent = form.id.includes('academy') ? '레벨테스트 신청하기' : '대기 신청하기';
+            submitBtn.disabled = false;
+        }
 
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -3511,6 +4892,101 @@
                 }
             });
         });
+
+        // ==================== 라이트박스 기능 ====================
+        let currentGalleryItems = [];
+        let currentImageIndex = 0;
+
+        function openLightbox(element) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxLabel = document.getElementById('lightbox-label');
+            
+            // 같은 갤러리 섹션의 모든 이미지 수집
+            const gallerySection = element.closest('.gallery-grid-large');
+            currentGalleryItems = Array.from(gallerySection.querySelectorAll('.gallery-item-large'));
+            currentImageIndex = currentGalleryItems.indexOf(element);
+            
+            const img = element.querySelector('img');
+            const label = element.querySelector('.gallery-item-label');
+            
+            lightboxImg.src = img.src;
+            lightboxLabel.textContent = label ? label.textContent : '';
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function nextImage() {
+            if (currentGalleryItems.length === 0) return;
+            currentImageIndex = (currentImageIndex + 1) % currentGalleryItems.length;
+            updateLightboxImage();
+        }
+
+        function prevImage() {
+            if (currentGalleryItems.length === 0) return;
+            currentImageIndex = (currentImageIndex - 1 + currentGalleryItems.length) % currentGalleryItems.length;
+            updateLightboxImage();
+        }
+
+        function updateLightboxImage() {
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxLabel = document.getElementById('lightbox-label');
+            const currentItem = currentGalleryItems[currentImageIndex];
+            
+            const img = currentItem.querySelector('img');
+            const label = currentItem.querySelector('.gallery-item-label');
+            
+            lightboxImg.src = img.src;
+            lightboxLabel.textContent = label ? label.textContent : '';
+        }
+
+        // 라이트박스 바깥 클릭 시 닫기
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLightbox();
+            }
+        });
+
+        // ESC 키로 라이트박스 닫기
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            } else if (e.key === 'ArrowRight') {
+                nextImage();
+            } else if (e.key === 'ArrowLeft') {
+                prevImage();
+            }
+        });
+
+        // ==================== selectForm 함수 ====================
+        function selectForm(formType) {
+            const formTypeBtns = document.querySelectorAll('.form-type-btn');
+            const formSections = document.querySelectorAll('.form-section');
+            const successMessage = document.getElementById('successMessage');
+
+            formTypeBtns.forEach(b => b.classList.remove('active'));
+            formSections.forEach(s => s.classList.remove('active'));
+            if (successMessage) successMessage.classList.remove('show');
+
+            // 해당 탭 버튼 활성화
+            formTypeBtns.forEach(btn => {
+                if (btn.dataset.form === formType) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // 해당 폼 표시
+            const targetForm = document.getElementById(`form-${formType}`);
+            if (targetForm) {
+                targetForm.classList.add('active');
+            }
+        }
     </script>
 </body>
 </html>

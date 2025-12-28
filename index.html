@@ -5443,11 +5443,20 @@
             const submitBtn = form.querySelector('.form-submit');
             const formId = form.id;
             
-            // 성공 메시지 ID 결정
+            // 성공 메시지 ID 및 URL 결정
             let successMsgId;
-            if (formId === 'studentForm8f') successMsgId = 'successMessage8f';
-            else if (formId === 'nsuForm7f') successMsgId = 'successMessage7f';
-            else if (formId === 'academyFormNew') successMsgId = 'successMessageAcademy';
+            let submitUrl;
+            
+            if (formId === 'studentForm8f') {
+                successMsgId = 'successMessage8f';
+                submitUrl = 'https://script.google.com/macros/s/AKfycbwl3lmmMDLHm15lLdL7T1CLGSdOzKJZbIwYPr6cKJMWLuWYkZx3bQbCjixzNgCp7M_s/exec';
+            } else if (formId === 'nsuForm7f') {
+                successMsgId = 'successMessage7f';
+                submitUrl = 'https://script.google.com/macros/s/AKfycbwl3lmmMDLHm15lLdL7T1CLGSdOzKJZbIwYPr6cKJMWLuWYkZx3bQbCjixzNgCp7M_s/exec';
+            } else if (formId === 'academyFormNew') {
+                successMsgId = 'successMessageAcademy';
+                submitUrl = 'https://script.google.com/macros/s/AKfycbws8hHnI0AuvZKM9H2Pc42c1hPQfUw9fKWfTkO2nrug7zqEXkHJhOvG7iQvr4n6VBEP/exec';
+            }
             
             submitBtn.textContent = '처리 중...';
             submitBtn.disabled = true;
@@ -5465,7 +5474,7 @@
 
             try {
                 // Google Apps Script 웹앱 URL로 전송
-                const response = await fetch('https://script.google.com/macros/s/AKfycbwl3lmmMDLHm15lLdL7T1CLGSdOzKJZbIwYPr6cKJMWLuWYkZx3bQbCjixzNgCp7M_s/exec', {
+                const response = await fetch(submitUrl, {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: {

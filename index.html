@@ -643,8 +643,49 @@
         #academy,
         #gallery,
         #pricing,
-        #application {
+        #application,
+        #app-features,
+        #management,
+        #penalty,
+        #reviews {
             display: none !important;
+        }
+
+        /* 브랜드별 관리 섹션 스타일 */
+        .app-features-brand {
+            background: var(--bg-soft);
+            padding: 80px 40px;
+        }
+
+        .app-features-alt {
+            background: var(--white);
+        }
+
+        .management-brand {
+            background: var(--white);
+            padding: 80px 40px;
+        }
+
+        .management-alt {
+            background: var(--bg-soft);
+        }
+
+        .penalty-brand {
+            background: var(--bg-soft);
+            padding: 80px 40px;
+        }
+
+        .penalty-alt {
+            background: var(--white);
+        }
+
+        .reviews-brand {
+            background: var(--white);
+            padding: 80px 40px;
+        }
+
+        .reviews-alt {
+            background: var(--bg-soft);
         }
 
         /* ==================== 브랜드별 신청 섹션 ==================== */
@@ -2729,7 +2770,6 @@
             <li><a href="#brand-8f">관리형독서실</a></li>
             <li><a href="#brand-7f">독학재수학원</a></li>
             <li><a href="#brand-academy" class="academy-link">어학원</a></li>
-            <li><a href="#management">학습관리</a></li>
             <li><a href="#location">오시는 길</a></li>
         </ul>
         <div class="nav-mobile-toggle" id="mobileToggle">
@@ -2747,7 +2787,6 @@
             <li><a href="#brand-8f">관리형독서실</a></li>
             <li><a href="#brand-7f">독학재수학원</a></li>
             <li><a href="#brand-academy" class="academy-mobile-link">어학원</a></li>
-            <li><a href="#management">학습관리</a></li>
             <li><a href="#location">오시는 길</a></li>
         </ul>
     </div>
@@ -2839,23 +2878,93 @@
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/8f-study-4.png.png" alt="8층 독서실 내부">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">독서실 내부 4</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/8f-study-5.png.png" alt="8층 독서실 내부">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">독서실 내부 5</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/8f-study-6.png.png" alt="8층 독서실 내부">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">독서실 내부 6</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/8f-study-7.png.png" alt="8층 독서실 내부">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">독서실 내부 7</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
                 <img src="images/8f-faceid-1.png.png" alt="8층 안면인식">
                 <div class="gallery-item-overlay">
-                    <span class="gallery-item-label">안면인식 입구</span>
+                    <span class="gallery-item-label">안면인식 입구 1</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/8f-faceid-2.png.png" alt="8층 안면인식">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">안면인식 입구 2</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
                 <img src="images/8f-refresh-1.png.png" alt="8층 리프레쉬룸">
                 <div class="gallery-item-overlay">
-                    <span class="gallery-item-label">리프레쉬룸</span>
+                    <span class="gallery-item-label">리프레쉬룸 1</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/8f-refresh-2.png.png" alt="8층 리프레쉬룸">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">리프레쉬룸 2</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/8f-refresh-3.png.png" alt="8층 리프레쉬룸">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">리프레쉬룸 3</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/8f-restroom.png.png" alt="8층 화장실">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">화장실쪽</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/8f-hallway.png.png" alt="8층 복도">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">복도</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
                 <img src="images/program-1.png.png" alt="관리 프로그램">
                 <div class="gallery-item-overlay">
-                    <span class="gallery-item-label">관리 프로그램</span>
+                    <span class="gallery-item-label">관리 프로그램 1</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/program-2.png.png" alt="관리 프로그램">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">관리 프로그램 2</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
@@ -2874,20 +2983,262 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th>1개월</th>
-                        <th>3개월</th>
-                        <th>6개월</th>
+                        <th>자유석</th>
+                        <th>오픈형 지정석</th>
+                        <th>칸막이 지정석</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="row-label">지정석</td>
-                        <td><span class="price">350,000</span>원</td>
-                        <td><span class="price">330,000</span>원/월</td>
-                        <td><span class="price highlight-price">300,000</span>원/월</td>
+                        <td class="row-label">종일권 <span class="vacation-badge">방학</span></td>
+                        <td><span class="price">530,000</span>원</td>
+                        <td><span class="price">630,000</span>원</td>
+                        <td><span class="price">690,000</span>원</td>
+                    </tr>
+                    <tr>
+                        <td class="row-label">오후권</td>
+                        <td><span class="price">390,000</span>원</td>
+                        <td><span class="price">490,000</span>원</td>
+                        <td><span class="price">550,000</span>원</td>
                     </tr>
                 </tbody>
             </table>
+        </div>
+    </section>
+
+    <!-- 8층 재원생 전용어플 -->
+    <section class="section app-features-brand" id="app-features-8f">
+        <div class="section-header">
+            <span class="section-label">App Features</span>
+            <h2 class="section-title">재원생 전용어플</h2>
+            <p class="section-desc">독서실 생활을 더욱 간편하게</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📅</div>
+                <h4 class="feature-title">출석 & 벌점</h4>
+                <p class="feature-desc">모든 입퇴실 기록을 일자별로 확인할 수 있습니다</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🗓️</div>
+                <h4 class="feature-title">등원일정</h4>
+                <p class="feature-desc">의무자습시간 외 학원수강 등 사유로 출석이 불가한 경우 등록</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📝</div>
+                <h4 class="feature-title">사유제출</h4>
+                <p class="feature-desc">정기일정 외 지각/결석/외출/조퇴 시 사유 제출</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">❓</div>
+                <h4 class="feature-title">on 질의응답</h4>
+                <p class="feature-desc">학생이 '익명'으로 질문을 업로드하면 과목담당 멘토가 답변</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🍱</div>
+                <h4 class="feature-title">도시락 신청</h4>
+                <p class="feature-desc">신청을 희망하는 끼니에만 메뉴를 선택하여 신청</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h4 class="feature-title">메시지</h4>
+                <p class="feature-desc">냉난방기 조절 요청 등 모든 문의를 메세지로 전달</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👨‍👩‍👧</div>
+                <h4 class="feature-title">가족 채팅방</h4>
+                <p class="feature-desc">메시지 화면에서 학부모와 학생간 채팅 가능</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔓</div>
+                <h4 class="feature-title">방화벽 해제</h4>
+                <p class="feature-desc">보강 영상 시청을 위한 유튜브 접속 등 wifi 방화벽 해제 신청</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8층 철저한 학습관리 -->
+    <section class="section management-brand" id="management-8f">
+        <div class="section-header">
+            <span class="section-label">Management</span>
+            <h2 class="section-title">철저한 학습관리</h2>
+            <p class="section-desc">매 교시마다 누락없이 출석체크가 진행됩니다</p>
+        </div>
+        <div class="management-grid">
+            <div class="management-card">
+                <div class="management-header">
+                    <div class="management-icon">✅</div>
+                    <div>
+                        <h3 class="management-title">출석관리 프로그램</h3>
+                        <p class="management-subtitle">매 교시 빈틈없는 관리</p>
+                    </div>
+                </div>
+                <div class="management-content">
+                    <ul class="management-list">
+                        <li>매 교시 시작 시간에 관리선생님이 순찰을 돌며 착석여부 확인</li>
+                        <li>턴게이트의 모든 입출입 데이터는 서버로 연동</li>
+                        <li>매 교시 등원일정 및 사유제출 내용이 실제 출입 기록과 대조</li>
+                        <li>무단 부재 학생들에게 관리선생님이 개별적으로 전화</li>
+                        <li class="warning">두 개 교시 연속 연락두절인 경우, 학부모 연락</li>
+                        <li class="danger">상습 연락두절의 경우, 벌점 및 퇴원 대상</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="management-card">
+                <div class="management-header">
+                    <div class="management-icon">📵</div>
+                    <div>
+                        <h3 class="management-title">휴대폰 의무 제출</h3>
+                        <p class="management-subtitle">학습 외 전자기기 사용 제한</p>
+                    </div>
+                </div>
+                <div class="management-content">
+                    <ul class="management-list">
+                        <li>등원 시 휴대폰은 의무적으로 제출해야 합니다</li>
+                        <li>배터리 충전이 필요한 경우 원내 보조배터리를 꽂아 휴대폰함에 제출</li>
+                        <li>교시 중간에 등원할 경우, 포스트잇에 '좌석번호 및 이름' 적어 제출장소에 별도 제출</li>
+                        <li>자습실 내 전시간 휴대폰 소지를 금지합니다</li>
+                        <li class="warning">식사시간 내 휴게실에서만 사용 가능합니다</li>
+                        <li class="danger">공기계 제출 시 적발 즉시 퇴원처리됩니다</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="management-card">
+                <div class="management-header">
+                    <div class="management-icon">📋</div>
+                    <div>
+                        <h3 class="management-title">20분 단위 관리일지</h3>
+                        <p class="management-subtitle">관리선생님 상주 순찰</p>
+                    </div>
+                </div>
+                <div class="management-content">
+                    <ul class="management-list">
+                        <li>자습시간동안 관리선생님이 자습실 내 전용석에 매교시 20분단위로 관리</li>
+                        <li>관리선생님은 자습실 전 구역을 돌며 관찰한 내용을 프로그램에 기록</li>
+                        <li>20분 간격의 순찰, 지각생출입제한, 소음및 온도 관리, 환기등 학습환경관리업무 담당</li>
+                        <li>순찰 시 졸고 있는 학생을 깨워 휴게실로 나가 환기하도록 권고</li>
+                        <li class="warning">학습 외 목적으로 전자기기 이용 등이 관찰되는 경우 벌점 부여</li>
+                        <li>시간대별 관리기록은 "김엄마 리포트"를 통해 매일 학부모에게 공개</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="management-card">
+                <div class="management-header">
+                    <div class="management-icon">🔒</div>
+                    <div>
+                        <h3 class="management-title">와이파이 방화벽</h3>
+                        <p class="management-subtitle">인강 외 사이트 접속 불가</p>
+                    </div>
+                </div>
+                <div class="management-content">
+                    <ul class="management-list">
+                        <li>wifi 주소/비밀번호: 입실 시 제공되는 책상 위 안내문 참고</li>
+                        <li>자습실의 와이파이는 방화벽이 설치되어 있어 인강 사이트 외 접속이 차단</li>
+                        <li>학원 보강영상이 유튜브로 제공되는 경우 등 학습 목적으로 방화벽 해제 신청 가능</li>
+                        <li>최초 신청 시, '방화벽 해제 기기 등록 신청서'를 작성하여 본인의 기기를 프로그램에 등록</li>
+                        <li class="warning">특정 학습 관련 사이트 영구 해제는 어플 '의견보내기'로 신청</li>
+                        <li class="danger">방화벽 해제 신청을 통해 학습 외 사이트를 접속하는 경우 벌점 부여 및 기기 사용 2주간 제한</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8층 생활규칙 & 벌점제도 -->
+    <section class="section penalty-brand" id="penalty-8f">
+        <div class="section-header">
+            <span class="section-label">Rules</span>
+            <h2 class="section-title">생활규칙 & 벌점제도</h2>
+            <p class="section-desc">부여된 벌점은 학부모에게 알림톡으로 전송됩니다</p>
+        </div>
+        <div class="penalty-container">
+            <div class="penalty-levels">
+                <div class="penalty-level level-1">
+                    <div class="penalty-points">20점</div>
+                    <p class="penalty-action">누적벌점 20점초과<br>의무자습권고</p>
+                </div>
+                <div class="penalty-level level-2">
+                    <div class="penalty-points">30점</div>
+                    <p class="penalty-action">누적벌점 30점초과<br>개별경고 및 학부모 연락</p>
+                </div>
+                <div class="penalty-level level-3">
+                    <div class="penalty-points">45점</div>
+                    <p class="penalty-action">누적벌점 45점초과<br>강제퇴원</p>
+                </div>
+                <div class="penalty-level level-4">
+                    <div class="penalty-points">매월</div>
+                    <p class="penalty-action">매월 개강없이<br>벌점 초기화</p>
+                </div>
+            </div>
+            <div class="rules-grid">
+                <div class="rules-card">
+                    <h4>📋 기본사항</h4>
+                    <ul>
+                        <li>교시중 학습외 사이트접속, 메신저 사용, 수면을 금지합니다</li>
+                        <li>자습실 내 전시간 휴대폰소지를 금지합니다</li>
+                        <li>지각시, Refreshroom에서 대기후 쉬는시간에 입실합니다</li>
+                        <li>교시중 10분이내 외출은 허용됩니다</li>
+                    </ul>
+                </div>
+                <div class="rules-card">
+                    <h4>🚫 퇴원 대상</h4>
+                    <ul>
+                        <li>의도적으로 출입기록을 조작하거나 휴대폰 공기계를 제출할 경우 강제퇴원 대상이 됩니다</li>
+                        <li>반복적인 학습분위기 저해 행동 발생 시, 벌점과 무관하게 강제퇴원 대상이 될 수 있습니다</li>
+                        <li>흡연행위가 적발되거나 담배냄새로 인한 건의사항이 접수되는 경우 강제퇴원 대상이 됩니다</li>
+                    </ul>
+                </div>
+                <div class="rules-card">
+                    <h4>🏢 시설이용규칙</h4>
+                    <ul>
+                        <li>원내, 자습실, 휴게실, 복도를 포함한 전 구역에서 사적대화 금지</li>
+                        <li>자습실 내 음료 섭취만 가능, 그 외 모든 음식물(사탕,초콜릿,과자등)은 자습실내 섭취 불가</li>
+                        <li>자습실 내 3색볼펜 사용은 금지, 벌점 부여 대상</li>
+                        <li>외부음식: 도시락 가능, 잔반처리 필요한 도시락 반입불가, 냄새가 강한 인스턴트 음식(라면 등) 반입불가</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8층 수강생 후기 -->
+    <section class="section reviews-brand" id="reviews-8f">
+        <div class="section-header">
+            <span class="section-label">Reviews</span>
+            <h2 class="section-title">수강생 후기</h2>
+            <p class="section-desc">김엄마 관리형 독서실을 경험한 선배들의 이야기</p>
+        </div>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <span class="review-quote-mark">"</span>
+                <div class="review-header">
+                    <div class="review-avatar">이</div>
+                    <div class="review-author">
+                        <h4>이*연</h4>
+                        <p>박문여고 졸업</p>
+                        <span class="review-badge">헬스터디3기 도전자</span>
+                    </div>
+                </div>
+                <p class="review-content">
+                    김엄마의 가장 큰 장점은 <strong>김엄마 어플</strong>입니다. 이 어플을 통해 와이파이 방화벽을 해제할 수 있어 편리했습니다. 
+                    또한 관리자와의 대화, 익명 건의, 벌점 확인 및 조정이 가능하여 학습에만 집중할 수 있었습니다.
+                </p>
+            </div>
+            <div class="review-card">
+                <span class="review-quote-mark">"</span>
+                <div class="review-header">
+                    <div class="review-avatar">김</div>
+                    <div class="review-author">
+                        <h4>김도윤</h4>
+                        <p>포스코 고등학교 졸업</p>
+                        <span class="review-badge">2025년도 카이스트 전기전자공학부 합격</span>
+                    </div>
+                </div>
+                <p class="review-content">
+                    가장 인상 깊었던 점 중 하나는 국어 모의고사를 볼 수 있었다는 것입니다. 
+                    단순히 자습하는 것이 아니라, 실전 감각을 키울 수 있도록 <strong>정기적으로 국어 모의고사</strong>를 진행한다는 점이 매우 유익했습니다.
+                </p>
+            </div>
         </div>
     </section>
 
@@ -3050,6 +3401,13 @@
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/7f-study-4.png.jpeg" alt="7층 학원 내부">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">학원 내부 4</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
                 <img src="images/7f-entrance.png.jpeg" alt="7층 입구">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">학원 입구</span>
@@ -3057,16 +3415,30 @@
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/7f-refresh.png.jpeg" alt="7층 휴게실">
+                <img src="images/7f-back-desk.png.jpeg" alt="7층 후면">
                 <div class="gallery-item-overlay">
-                    <span class="gallery-item-label">휴게실</span>
+                    <span class="gallery-item-label">뒤쪽 데스크</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/7f-back-desk.png.jpeg" alt="7층 후면">
+                <img src="images/7f-refresh.png.jpeg" alt="7층 휴게실">
                 <div class="gallery-item-overlay">
-                    <span class="gallery-item-label">학원 후면</span>
+                    <span class="gallery-item-label">리프레쉬룸</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/building.png.png" alt="건물 전경">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">건물 전경</span>
+                    <span class="gallery-zoom-icon">🔍</span>
+                </div>
+            </div>
+            <div class="gallery-item-large" onclick="openLightbox(this)">
+                <img src="images/phone-locker.png.png" alt="핸드폰함">
+                <div class="gallery-item-overlay">
+                    <span class="gallery-item-label">핸드폰함</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
@@ -3099,6 +3471,242 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+    </section>
+
+    <!-- 7층 재원생 전용어플 -->
+    <section class="section app-features-brand app-features-alt" id="app-features-7f">
+        <div class="section-header">
+            <span class="section-label">App Features</span>
+            <h2 class="section-title">재원생 전용어플</h2>
+            <p class="section-desc">독서실 생활을 더욱 간편하게</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📅</div>
+                <h4 class="feature-title">출석 & 벌점</h4>
+                <p class="feature-desc">모든 입퇴실 기록을 일자별로 확인할 수 있습니다</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🗓️</div>
+                <h4 class="feature-title">등원일정</h4>
+                <p class="feature-desc">의무자습시간 외 학원수강 등 사유로 출석이 불가한 경우 등록</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📝</div>
+                <h4 class="feature-title">사유제출</h4>
+                <p class="feature-desc">정기일정 외 지각/결석/외출/조퇴 시 사유 제출</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">❓</div>
+                <h4 class="feature-title">on 질의응답</h4>
+                <p class="feature-desc">학생이 '익명'으로 질문을 업로드하면 과목담당 멘토가 답변</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🍱</div>
+                <h4 class="feature-title">도시락 신청</h4>
+                <p class="feature-desc">신청을 희망하는 끼니에만 메뉴를 선택하여 신청</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h4 class="feature-title">메시지</h4>
+                <p class="feature-desc">냉난방기 조절 요청 등 모든 문의를 메세지로 전달</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👨‍👩‍👧</div>
+                <h4 class="feature-title">가족 채팅방</h4>
+                <p class="feature-desc">메시지 화면에서 학부모와 학생간 채팅 가능</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔓</div>
+                <h4 class="feature-title">방화벽 해제</h4>
+                <p class="feature-desc">보강 영상 시청을 위한 유튜브 접속 등 wifi 방화벽 해제 신청</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7층 철저한 학습관리 -->
+    <section class="section management-brand management-alt" id="management-7f">
+        <div class="section-header">
+            <span class="section-label">Management</span>
+            <h2 class="section-title">철저한 학습관리</h2>
+            <p class="section-desc">매 교시마다 누락없이 출석체크가 진행됩니다</p>
+        </div>
+        <div class="management-grid">
+            <div class="management-card">
+                <div class="management-header">
+                    <div class="management-icon">✅</div>
+                    <div>
+                        <h3 class="management-title">출석관리 프로그램</h3>
+                        <p class="management-subtitle">매 교시 빈틈없는 관리</p>
+                    </div>
+                </div>
+                <div class="management-content">
+                    <ul class="management-list">
+                        <li>매 교시 시작 시간에 관리선생님이 순찰을 돌며 착석여부 확인</li>
+                        <li>턴게이트의 모든 입출입 데이터는 서버로 연동</li>
+                        <li>매 교시 등원일정 및 사유제출 내용이 실제 출입 기록과 대조</li>
+                        <li>무단 부재 학생들에게 관리선생님이 개별적으로 전화</li>
+                        <li class="warning">두 개 교시 연속 연락두절인 경우, 학부모 연락</li>
+                        <li class="danger">상습 연락두절의 경우, 벌점 및 퇴원 대상</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="management-card">
+                <div class="management-header">
+                    <div class="management-icon">📵</div>
+                    <div>
+                        <h3 class="management-title">휴대폰 의무 제출</h3>
+                        <p class="management-subtitle">학습 외 전자기기 사용 제한</p>
+                    </div>
+                </div>
+                <div class="management-content">
+                    <ul class="management-list">
+                        <li>등원 시 휴대폰은 의무적으로 제출해야 합니다</li>
+                        <li>배터리 충전이 필요한 경우 원내 보조배터리를 꽂아 휴대폰함에 제출</li>
+                        <li>교시 중간에 등원할 경우, 포스트잇에 '좌석번호 및 이름' 적어 제출장소에 별도 제출</li>
+                        <li>자습실 내 전시간 휴대폰 소지를 금지합니다</li>
+                        <li class="warning">식사시간 내 휴게실에서만 사용 가능합니다</li>
+                        <li class="danger">공기계 제출 시 적발 즉시 퇴원처리됩니다</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="management-card">
+                <div class="management-header">
+                    <div class="management-icon">📋</div>
+                    <div>
+                        <h3 class="management-title">20분 단위 관리일지</h3>
+                        <p class="management-subtitle">관리선생님 상주 순찰</p>
+                    </div>
+                </div>
+                <div class="management-content">
+                    <ul class="management-list">
+                        <li>자습시간동안 관리선생님이 자습실 내 전용석에 매교시 20분단위로 관리</li>
+                        <li>관리선생님은 자습실 전 구역을 돌며 관찰한 내용을 프로그램에 기록</li>
+                        <li>20분 간격의 순찰, 지각생출입제한, 소음및 온도 관리, 환기등 학습환경관리업무 담당</li>
+                        <li>순찰 시 졸고 있는 학생을 깨워 휴게실로 나가 환기하도록 권고</li>
+                        <li class="warning">학습 외 목적으로 전자기기 이용 등이 관찰되는 경우 벌점 부여</li>
+                        <li>시간대별 관리기록은 "김엄마 리포트"를 통해 매일 학부모에게 공개</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="management-card">
+                <div class="management-header">
+                    <div class="management-icon">🔒</div>
+                    <div>
+                        <h3 class="management-title">와이파이 방화벽</h3>
+                        <p class="management-subtitle">인강 외 사이트 접속 불가</p>
+                    </div>
+                </div>
+                <div class="management-content">
+                    <ul class="management-list">
+                        <li>wifi 주소/비밀번호: 입실 시 제공되는 책상 위 안내문 참고</li>
+                        <li>자습실의 와이파이는 방화벽이 설치되어 있어 인강 사이트 외 접속이 차단</li>
+                        <li>학원 보강영상이 유튜브로 제공되는 경우 등 학습 목적으로 방화벽 해제 신청 가능</li>
+                        <li>최초 신청 시, '방화벽 해제 기기 등록 신청서'를 작성하여 본인의 기기를 프로그램에 등록</li>
+                        <li class="warning">특정 학습 관련 사이트 영구 해제는 어플 '의견보내기'로 신청</li>
+                        <li class="danger">방화벽 해제 신청을 통해 학습 외 사이트를 접속하는 경우 벌점 부여 및 기기 사용 2주간 제한</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7층 생활규칙 & 벌점제도 -->
+    <section class="section penalty-brand penalty-alt" id="penalty-7f">
+        <div class="section-header">
+            <span class="section-label">Rules</span>
+            <h2 class="section-title">생활규칙 & 벌점제도</h2>
+            <p class="section-desc">부여된 벌점은 학부모에게 알림톡으로 전송됩니다</p>
+        </div>
+        <div class="penalty-container">
+            <div class="penalty-levels">
+                <div class="penalty-level level-1">
+                    <div class="penalty-points">20점</div>
+                    <p class="penalty-action">누적벌점 20점초과<br>의무자습권고</p>
+                </div>
+                <div class="penalty-level level-2">
+                    <div class="penalty-points">30점</div>
+                    <p class="penalty-action">누적벌점 30점초과<br>개별경고 및 학부모 연락</p>
+                </div>
+                <div class="penalty-level level-3">
+                    <div class="penalty-points">45점</div>
+                    <p class="penalty-action">누적벌점 45점초과<br>강제퇴원</p>
+                </div>
+                <div class="penalty-level level-4">
+                    <div class="penalty-points">매월</div>
+                    <p class="penalty-action">매월 개강없이<br>벌점 초기화</p>
+                </div>
+            </div>
+            <div class="rules-grid">
+                <div class="rules-card">
+                    <h4>📋 기본사항</h4>
+                    <ul>
+                        <li>교시중 학습외 사이트접속, 메신저 사용, 수면을 금지합니다</li>
+                        <li>자습실 내 전시간 휴대폰소지를 금지합니다</li>
+                        <li>지각시, Refreshroom에서 대기후 쉬는시간에 입실합니다</li>
+                        <li>교시중 10분이내 외출은 허용됩니다</li>
+                    </ul>
+                </div>
+                <div class="rules-card">
+                    <h4>🚫 퇴원 대상</h4>
+                    <ul>
+                        <li>의도적으로 출입기록을 조작하거나 휴대폰 공기계를 제출할 경우 강제퇴원 대상이 됩니다</li>
+                        <li>반복적인 학습분위기 저해 행동 발생 시, 벌점과 무관하게 강제퇴원 대상이 될 수 있습니다</li>
+                        <li>흡연행위가 적발되거나 담배냄새로 인한 건의사항이 접수되는 경우 강제퇴원 대상이 됩니다</li>
+                    </ul>
+                </div>
+                <div class="rules-card">
+                    <h4>🏢 시설이용규칙</h4>
+                    <ul>
+                        <li>원내, 자습실, 휴게실, 복도를 포함한 전 구역에서 사적대화 금지</li>
+                        <li>자습실 내 음료 섭취만 가능, 그 외 모든 음식물(사탕,초콜릿,과자등)은 자습실내 섭취 불가</li>
+                        <li>자습실 내 3색볼펜 사용은 금지, 벌점 부여 대상</li>
+                        <li>외부음식: 도시락 가능, 잔반처리 필요한 도시락 반입불가, 냄새가 강한 인스턴트 음식(라면 등) 반입불가</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7층 수강생 후기 -->
+    <section class="section reviews-brand reviews-alt" id="reviews-7f">
+        <div class="section-header">
+            <span class="section-label">Reviews</span>
+            <h2 class="section-title">수강생 후기</h2>
+            <p class="section-desc">김엄마 독학재수학원을 경험한 선배들의 이야기</p>
+        </div>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <span class="review-quote-mark">"</span>
+                <div class="review-header">
+                    <div class="review-avatar">이</div>
+                    <div class="review-author">
+                        <h4>이*연</h4>
+                        <p>박문여고 졸업</p>
+                        <span class="review-badge">헬스터디3기 도전자</span>
+                    </div>
+                </div>
+                <p class="review-content">
+                    김엄마의 가장 큰 장점은 <strong>김엄마 어플</strong>입니다. 이 어플을 통해 와이파이 방화벽을 해제할 수 있어 편리했습니다. 
+                    또한 관리자와의 대화, 익명 건의, 벌점 확인 및 조정이 가능하여 학습에만 집중할 수 있었습니다.
+                </p>
+            </div>
+            <div class="review-card">
+                <span class="review-quote-mark">"</span>
+                <div class="review-header">
+                    <div class="review-avatar">김</div>
+                    <div class="review-author">
+                        <h4>김도윤</h4>
+                        <p>포스코 고등학교 졸업</p>
+                        <span class="review-badge">2025년도 카이스트 전기전자공학부 합격</span>
+                    </div>
+                </div>
+                <p class="review-content">
+                    가장 인상 깊었던 점 중 하나는 국어 모의고사를 볼 수 있었다는 것입니다. 
+                    단순히 자습하는 것이 아니라, 실전 감각을 키울 수 있도록 <strong>정기적으로 국어 모의고사</strong>를 진행한다는 점이 매우 유익했습니다.
+                </p>
+            </div>
         </div>
     </section>
 
@@ -3398,7 +4006,7 @@
         <div class="section-header">
             <span class="section-label">Application</span>
             <h2 class="section-title">레벨테스트 신청</h2>
-            <p class="section-desc">수리딩영어논술학원 (유아 · 초등 · 중등)</p>
+            <p class="section-desc">수리딩영어논술학원</p>
         </div>
 
         <div class="application-form-container">
@@ -4187,7 +4795,7 @@
 
             <!-- 수리딩영어논술학원 가격표 -->
             <div class="pricing-section" id="pricing-academy">
-                <p class="pricing-desc">수리딩영어논술학원 (유아 · 초등 · 중등)</p>
+                <p class="pricing-desc">수리딩영어논술학원 </p>
                 <div class="pricing-table-wrapper">
                     <table class="pricing-table academy-pricing-table">
                         <thead>
@@ -4477,7 +5085,7 @@
                 <!-- 어학원 상담신청 폼 -->
                 <div class="form-section" id="form-academy">
                     <h3 class="form-title">어학원 상담신청</h3>
-                    <p class="form-subtitle">수리딩영어논술학원 (유아 · 초등 · 중등)</p>
+                    <p class="form-subtitle">수리딩영어논술학원 </p>
 
                     <form id="academyForm">
                         <input type="hidden" name="formType" value="어학원상담">

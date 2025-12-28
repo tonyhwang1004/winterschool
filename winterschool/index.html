@@ -686,15 +686,15 @@
             font-size: 1rem;
         }
 
-        /* 신입생 설문지 안내 카드 - 새로 추가 */
+        /* 신입생 설문지 안내 카드 - 폼 아래로 이동 */
         .new-student-card {
             background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
             border-radius: 20px;
             padding: 35px;
-            margin-bottom: 30px;
+            margin-top: 30px;
             box-shadow: var(--shadow-soft);
             border-left: 5px solid #4CAF50;
-            animation: slideIn 0.6s ease-out 0.15s both;
+            animation: slideIn 0.6s ease-out 0.3s both;
         }
 
         .new-student-card h2 {
@@ -843,17 +843,6 @@
                 <li>환불규칙은 <strong>학원법 제 18조 3항</strong> 적용</li>
                 <li>12월 이용료는 <strong>일할결제</strong>합니다.</li>
             </ul>
-        </section>
-
-        <!-- 신입생 전자기기 설문지 안내 카드 - 새로 추가 -->
-        <section class="new-student-card">
-            <h2>신입생 학부모님 안내</h2>
-            <p>
-                이 페이지에서 신청서를 작성하시되, <span class="highlight-text">신입생</span>이시면 아래 버튼을 눌러 추가적인 <span class="highlight-text">전자기기 관련 설문지</span>를 작성해주시기 바랍니다.
-            </p>
-            <a href="https://docs.google.com/forms/d/137GIpipl3yFmMxahIehN-GOWjIUpi3dXl-gqGv13LMA/viewform" target="_blank" class="survey-btn">
-                📱 전자기기 설문지 작성하기
-            </a>
         </section>
 
         <!-- Benefits Card -->
@@ -1049,6 +1038,17 @@
                 <h2>신청이 완료되었습니다!</h2>
                 <p>김엄마 윈터스쿨 2차 등록 신청서가 성공적으로 제출되었습니다.<br>곧 연락드리겠습니다. 감사합니다!</p>
             </div>
+
+            <!-- 신입생 전자기기 설문지 안내 카드 - 제출 버튼 아래로 이동 -->
+            <section class="new-student-card">
+                <h2>신입생 학부모님 안내</h2>
+                <p>
+                    위 신청서를 먼저 제출하시고, <span class="highlight-text">신입생</span>이시면 아래 버튼을 눌러 추가적인 <span class="highlight-text">전자기기 관련 설문지</span>를 작성해주시기 바랍니다.
+                </p>
+                <a href="https://docs.google.com/forms/d/137GIpipl3yFmMxahIehN-GOWjIUpi3dXl-gqGv13LMA/viewform" target="_blank" class="survey-btn">
+                    📱 전자기기 설문지 작성하기
+                </a>
+            </section>
         </section>
     </main>
 

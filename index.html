@@ -5599,13 +5599,12 @@
             try {
                 // Google Apps Script 웹앱 URL로 전송
                 const response = await fetch(submitUrl, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
-                });
+    method: 'POST',
+    headers: {
+        'Content-Type': 'text/plain',
+    },
+    body: JSON.stringify(data)
+});
 
                 // 성공 메시지 표시
                 form.style.display = 'none';

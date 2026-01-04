@@ -5597,6 +5597,15 @@ if (form.id === 'studentForm8f') {
                     data[key] = value;
                 }
             });
+
+            // formType 설정
+            if (formId === 'studentForm8f') {
+                data.formType = '재학생';
+            } else if (formId === 'nsuForm7f') {
+                data.formType = 'N수생';
+            } else if (formId === 'academyFormNew') {
+                data.formType = '어학원상담';
+            }
             
             // 어학원 폼의 경우 요일+시간을 합쳐서 희망상담일시로 저장
             if (formId === 'academyFormNew' && data.consultDay && data.consultTime) {

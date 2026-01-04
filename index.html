@@ -5453,7 +5453,7 @@
         });
 
         // Google Apps Script URL
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyYoutJgZpUeez901XRf3SZ2vacQTuBsiWr96n1TngWoygOnqHnpkc8cO8qSu2UrIoBgA/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxp6bvtzff0Mj-YOcwtzbnt8g30N8Cynz4avydrUWu789dO1IKTvAj0CZgZhkvhfz_2kQ/exec';
 
         // Form submission
         async function handleSubmit(e) {
@@ -5466,6 +5466,14 @@
 
             // Collect all form data dynamically
             const formData = {};
+            // formType 자동 설정
+if (form.id === 'studentForm8f') {
+    formData.formType = '재학생';
+} else if (form.id === 'nsuForm7f') {
+    formData.formType = 'N수생';
+} else if (form.id === 'academyFormNew') {
+    formData.formType = '어학원상담';
+}
             const inputs = form.querySelectorAll('input, select, textarea');
             inputs.forEach(input => {
                 if (input.name && input.type !== 'radio') {

@@ -3350,7 +3350,30 @@
                         <p class="form-hint">모의고사등급도 가능합니다. (선택사항)</p>
                     </div>
                 </div>
+                
+                <div class="form-group">
+                    <label class="form-label">사전등록을 희망하시나요? <span class="required">*</span></label>
+                    <div class="form-radio-group">
+                        <label class="form-radio">
+                            <input type="radio" name="preRegister" value="Yes" required>
+                            <span>Yes</span>
+                        </label>
+                        <label class="form-radio">
+                            <input type="radio" name="preRegister" value="No">
+                            <span>No</span>
+                        </label>
+                    </div>
+                </div>
 
+                <div class="form-group">
+                    <label class="form-label">사전등록 방법을 선택하세요</label>
+                    <select class="form-select" name="paymentMethod">
+                        <option value="">선택해주세요</option>
+                        <option value="계좌이체">계좌이체</option>
+                        <option value="온라인카드결제">온라인카드결제</option>
+                    </select>
+                    <p class="form-hint">계좌이체: 국민 4699-01-04-155186 수리딩교육</p>
+                </div>
                 <div class="form-group">
                     <label class="form-label">흡연 여부 확인 <span class="required">*</span></label>
                     <p class="form-warning">⚠️ 흡연자는 신청서를 작성할 수 없습니다.</p>

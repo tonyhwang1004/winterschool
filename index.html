@@ -5771,5 +5771,112 @@ if (form.id === 'studentForm8f') {
             }
         }
     </script>
+    <!-- 방문자 카운터 스타일 -->
+<style>
+.visitor-counter {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(10, 36, 99, 0.95);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 13px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.visitor-counter .counter-title {
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.visitor-counter .counter-numbers {
+    display: flex;
+    gap: 16px;
+}
+
+.visitor-counter .counter-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.visitor-counter .counter-label {
+    color: rgba(255,255,255,0.8);
+}
+
+.visitor-counter .counter-value {
+    font-weight: 700;
+    font-size: 16px;
+    color: #5ba4d9;
+}
+
+@media (max-width: 768px) {
+    .visitor-counter {
+        bottom: 10px;
+        left: 10px;
+        padding: 10px 16px;
+        font-size: 12px;
+    }
+    .visitor-counter .counter-value {
+        font-size: 14px;
+    }
+}
+</style>
+
+<!-- 방문자 카운터 HTML -->
+<div class="visitor-counter" id="visitorCounter">
+    <span class="counter-title">📊 방문자 현황</span>
+    <div class="counter-numbers">
+        <div class="counter-item">
+            <span class="counter-label">오늘</span>
+            <span class="counter-value" id="todayVisitors">-</span>
+        </div>
+        <div class="counter-item">
+            <span class="counter-label">전체</span>
+            <span class="counter-value" id="totalVisitors">-</span>
+        </div>
+    </div>
+</div>
+
+<!-- 방문자 카운터 스크립트 -->
+<script>
+(function() {
+    // 여기에 배포된 Google Apps Script URL을 넣으세요
+    const VISITOR_COUNTER_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+    
+    // 세션당 1회만 카운트 (같은 탭에서 새로고침해도 1회만)
+    if (!sessionStorage.getItem('counted')) {
+        fetch(VISITOR_COUNTER_URL)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('todayVisitors').textContent = data.today.toLocaleString();
+                document.getElementById('totalVisitors').textContent = data.total.toLocaleString();
+                sessionStorage.setItem('counted', 'true');
+                sessionStorage.setItem('visitorData', JSON.stringify(data));
+            })
+            .catch(error => {
+                console.log('방문자 카운터 로딩 실패');
+                document.getElementById('visitorCounter').style.display = 'none';
+            });
+    } else {
+        // 이미 카운트된 세션이면 저장된 데이터 표시
+        const savedData = sessionStorage.getItem('visitorData');
+        if (savedData) {
+            const data = JSON.parse(savedData);
+            document.getElementById('todayVisitors').textContent = data.today.toLocaleString();
+            document.getElementById('totalVisitors').textContent = data.total.toLocaleString();
+        }
+    }
+})();
+</script>
 </body>
 </html>

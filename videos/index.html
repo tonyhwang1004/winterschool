@@ -80,9 +80,9 @@
         .home-btn:hover { background: rgba(255,255,255,0.28); transform: translateY(-2px); }
 
         .content {
-            max-width: 960px;
+            max-width: 1100px;
             margin: 32px auto 48px;
-            padding: 0 16px;
+            padding: 0 20px;
         }
         .section-header {
             display: flex;
@@ -112,14 +112,31 @@
         }
         .yt-btn:hover { opacity: 0.85; transform: translateY(-2px); }
 
+        /* 로딩 */
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-mid);
+            font-size: 1rem;
+        }
+        .spinner {
+            width: 40px; height: 40px;
+            border: 4px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 16px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* 그리드 */
         .shorts-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
+            gap: 20px;
         }
         @media (min-width: 600px)  { .shorts-grid { grid-template-columns: repeat(3, 1fr); } }
-        @media (min-width: 768px)  { .shorts-grid { grid-template-columns: repeat(4, 1fr); } }
-        @media (min-width: 1024px) { .shorts-grid { grid-template-columns: repeat(5, 1fr); } }
+        @media (min-width: 900px)  { .shorts-grid { grid-template-columns: repeat(4, 1fr); } }
 
         .short-card {
             background: var(--bg-card);
@@ -160,20 +177,19 @@
         }
         .short-card:hover .play-overlay { background: rgba(0,0,0,0.08); }
         .play-icon {
-            width: 48px; height: 48px;
+            width: 52px; height: 52px;
             background: rgba(255,255,255,0.92);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-            padding-left: 3px;
+            font-size: 20px;
+            padding-left: 4px;
             box-shadow: 0 2px 12px rgba(0,0,0,0.3);
         }
         .shorts-badge {
             position: absolute;
-            bottom: 10px;
-            left: 10px;
+            bottom: 10px; left: 10px;
             background: #ff0000;
             color: #fff;
             font-size: 0.72rem;
@@ -183,14 +199,24 @@
         }
         .card-num {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 10px; right: 10px;
             background: rgba(0,0,0,0.55);
             color: #fff;
             font-size: 0.75rem;
             font-weight: 600;
             padding: 2px 8px;
             border-radius: 6px;
+        }
+        .card-title {
+            padding: 12px 14px 14px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         /* 모달 */
@@ -205,20 +231,13 @@
             padding: 20px;
         }
         .modal-bg.open { display: flex; }
-        .modal-box {
-            position: relative;
-            width: 100%;
-            max-width: 360px;
-        }
+        .modal-box { position: relative; width: 100%; max-width: 380px; }
         .modal-close {
             position: absolute;
             top: -48px; right: 0;
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 40px;
-            cursor: pointer;
-            line-height: 1;
+            background: none; border: none;
+            color: #fff; font-size: 40px;
+            cursor: pointer; line-height: 1;
             transition: transform 0.2s;
         }
         .modal-close:hover { transform: scale(1.2); }
@@ -237,7 +256,6 @@
             width: 100%; height: 100%;
             border: none;
         }
-
         .footer-note {
             text-align: center;
             padding: 0 16px 40px;
@@ -256,15 +274,19 @@
 
 <div class="content">
     <div class="section-header">
-        <div class="section-title">🎬 합격후기 쇼츠 <span style="font-size:1rem;color:#94a3b8;font-weight:500;">18개</span></div>
+        <div class="section-title">🎬 합격후기 쇼츠 <span style="font-size:1rem;color:#94a3b8;font-weight:500;" id="countLabel"></span></div>
         <a href="https://www.youtube.com/@kimmom_songdo/shorts" target="_blank" class="yt-btn">▶ 채널 전체보기</a>
     </div>
-    <div class="shorts-grid" id="shortsGrid"></div>
+
+    <div id="loadingArea" class="loading">
+        <div class="spinner"></div>
+        영상 정보를 불러오는 중...
+    </div>
+
+    <div class="shorts-grid" id="shortsGrid" style="display:none;"></div>
 </div>
 
-<div class="footer-note">
-    © 김엄마 관리형 독서실 · 영상은 YouTube에서 제공됩니다
-</div>
+<div class="footer-note">© 김엄마 관리형 독서실 · 영상은 YouTube에서 제공됩니다</div>
 
 <div class="modal-bg" id="modalBg">
     <div class="modal-box">
@@ -276,7 +298,8 @@
 </div>
 
 <script>
-    const shorts = [
+    const API_KEY = 'AIzaSyDUBvXLy9V4XL3A5QUWCze9I0c4jxXLR1U';
+    const videoIds = [
         "kqzuGt6LABA","u8v2UMCzIjM","J125Jtr4PB0","Jpwaa6-YlrA",
         "2m9zZiK2TX8","mKfFxb8aGkE","7yRFUM93O9A","ytcKvayo90s",
         "QBQ6g4ujXtI","7ud_xGUm6IQ","SQ6GU83wILA","LBAUObTnF0Q",
@@ -284,21 +307,63 @@
         "P6qC4nvmBws","2VMNZcevpLQ"
     ];
 
-    const grid = document.getElementById('shortsGrid');
-    shorts.forEach((id, i) => {
-        const card = document.createElement('div');
-        card.className = 'short-card';
-        card.onclick = () => openModal(id);
-        card.innerHTML = `
-            <div class="thumb-wrap">
-                <img src="https://i.ytimg.com/vi/${id}/mqdefault.jpg" alt="합격후기 ${i+1}" loading="lazy"
-                     onerror="this.src='https://i.ytimg.com/vi/${id}/hqdefault.jpg'">
-                <div class="play-overlay"><div class="play-icon">▶</div></div>
-                <span class="shorts-badge">Shorts</span>
-                <span class="card-num">${i+1}</span>
-            </div>`;
-        grid.appendChild(card);
-    });
+    async function loadVideos() {
+        try {
+            const ids = videoIds.join(',');
+            const url = `https://www.googleapis.com/youtube/v3/videos?id=${ids}&part=snippet&key=${API_KEY}`;
+            const res = await fetch(url);
+            const data = await res.json();
+
+            // API 순서 → videoIds 순서로 정렬
+            const map = {};
+            data.items.forEach(item => { map[item.id] = item.snippet.title; });
+
+            document.getElementById('loadingArea').style.display = 'none';
+            const grid = document.getElementById('shortsGrid');
+            grid.style.display = 'grid';
+            document.getElementById('countLabel').textContent = videoIds.length + '개';
+
+            videoIds.forEach((id, i) => {
+                const title = map[id] || '합격후기 영상';
+                // #Shorts 태그 제거해서 깔끔하게
+                const cleanTitle = title.replace(/#Shorts?/gi, '').replace(/\| 김엄마.*$/i, '').trim();
+                const card = document.createElement('div');
+                card.className = 'short-card';
+                card.onclick = () => openModal(id);
+                card.innerHTML = `
+                    <div class="thumb-wrap">
+                        <img src="https://i.ytimg.com/vi/${id}/mqdefault.jpg" alt="${cleanTitle}" loading="lazy"
+                             onerror="this.src='https://i.ytimg.com/vi/${id}/hqdefault.jpg'">
+                        <div class="play-overlay"><div class="play-icon">▶</div></div>
+                        <span class="shorts-badge">Shorts</span>
+                        <span class="card-num">${i+1}</span>
+                    </div>
+                    <div class="card-title">${cleanTitle}</div>
+                `;
+                grid.appendChild(card);
+            });
+        } catch(e) {
+            // API 실패시 제목 없이 표시
+            document.getElementById('loadingArea').style.display = 'none';
+            const grid = document.getElementById('shortsGrid');
+            grid.style.display = 'grid';
+            document.getElementById('countLabel').textContent = videoIds.length + '개';
+            videoIds.forEach((id, i) => {
+                const card = document.createElement('div');
+                card.className = 'short-card';
+                card.onclick = () => openModal(id);
+                card.innerHTML = `
+                    <div class="thumb-wrap">
+                        <img src="https://i.ytimg.com/vi/${id}/mqdefault.jpg" loading="lazy">
+                        <div class="play-overlay"><div class="play-icon">▶</div></div>
+                        <span class="shorts-badge">Shorts</span>
+                        <span class="card-num">${i+1}</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+    }
 
     function openModal(id) {
         document.getElementById('modalIframe').src =
@@ -315,6 +380,8 @@
         if (e.target === this) closeModal();
     });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    loadVideos();
 </script>
 </body>
 </html>

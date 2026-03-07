@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김엄마 관리형 독서실 - 합격후기 영상</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Black+Han+Sans&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a3a5c;
+            --primary-light: #2a5a8c;
+            --bg-warm: #faf8f5;
+            --bg-card: #ffffff;
+            --text-dark: #1e293b;
+            --text-mid: #475569;
+            --text-light: #94a3b8;
+            --border: #e2e8f0;
+            --shadow: 0 4px 20px rgba(0,0,0,0.10);
+            --radius: 16px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--bg-warm);
+            color: var(--text-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, #3b82f6 100%);
+            padding: 48px 24px 56px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.06) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(245,158,11,0.08) 0%, transparent 40%);
+            animation: heroFloat 20s ease-in-out infinite;
+        }
+        @keyframes heroFloat {
+            0%, 100% { transform: translate(0,0) rotate(0deg); }
+            50% { transform: translate(-2%, 1%) rotate(1deg); }
+        }
+        .hero h1 {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            color: #fff;
+            position: relative;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+        .hero p {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.05rem;
+            font-weight: 300;
+            position: relative;
+        }
+        .home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            padding: 10px 24px;
+            background: rgba(255,255,255,0.15);
+            border: 1.5px solid rgba(255,255,255,0.5);
+            border-radius: 100px;
+            color: #fff;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            position: relative;
+            transition: background 0.25s, transform 0.2s;
+        }
+        .home-btn:hover { background: rgba(255,255,255,0.28); transform: translateY(-2px); }
+
+        .content {
+            max-width: 960px;
+            margin: 32px auto 48px;
+            padding: 0 16px;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+        .yt-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: #ff0000;
+            color: #fff;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+        .yt-btn:hover { opacity: 0.85; transform: translateY(-2px); }
+
+        .shorts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        @media (min-width: 600px)  { .shorts-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 768px)  { .shorts-grid { grid-template-columns: repeat(4, 1fr); } }
+        @media (min-width: 1024px) { .shorts-grid { grid-template-columns: repeat(5, 1fr); } }
+
+        .short-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .short-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 40px rgba(0,0,0,0.16);
+        }
+        .thumb-wrap {
+            position: relative;
+            width: 100%;
+            padding-bottom: 177.78%;
+            background: #111;
+            overflow: hidden;
+        }
+        .thumb-wrap img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+        .short-card:hover .thumb-wrap img { transform: scale(1.05); }
+        .play-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.22);
+            transition: background 0.2s;
+        }
+        .short-card:hover .play-overlay { background: rgba(0,0,0,0.08); }
+        .play-icon {
+            width: 48px; height: 48px;
+            background: rgba(255,255,255,0.92);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            padding-left: 3px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+        }
+        .shorts-badge {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: #ff0000;
+            color: #fff;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        .card-num {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.55);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
+        /* 모달 */
+        .modal-bg {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.88);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-bg.open { display: flex; }
+        .modal-box {
+            position: relative;
+            width: 100%;
+            max-width: 360px;
+        }
+        .modal-close {
+            position: absolute;
+            top: -48px; right: 0;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+            line-height: 1;
+            transition: transform 0.2s;
+        }
+        .modal-close:hover { transform: scale(1.2); }
+        .modal-video {
+            position: relative;
+            width: 100%;
+            padding-bottom: 177.78%;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        .modal-video iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }
+
+        .footer-note {
+            text-align: center;
+            padding: 0 16px 40px;
+            color: var(--text-light);
+            font-size: 0.82rem;
+        }
+    </style>
+</head>
+<body>
+
+<header class="hero">
+    <h1>김엄마 관리형 독서실</h1>
+    <p>합격후기 영상 🎬</p>
+    <a href="https://www.kmsongdo.store/" class="home-btn">← 홈으로 돌아가기</a>
+</header>
+
+<div class="content">
+    <div class="section-header">
+        <div class="section-title">🎬 합격후기 쇼츠 <span style="font-size:1rem;color:#94a3b8;font-weight:500;">18개</span></div>
+        <a href="https://www.youtube.com/@kimmom_songdo/shorts" target="_blank" class="yt-btn">▶ 채널 전체보기</a>
+    </div>
+    <div class="shorts-grid" id="shortsGrid"></div>
+</div>
+
+<div class="footer-note">
+    © 김엄마 관리형 독서실 · 영상은 YouTube에서 제공됩니다
+</div>
+
+<div class="modal-bg" id="modalBg">
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal()">×</button>
+        <div class="modal-video">
+            <iframe id="modalIframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+
+<script>
+    const shorts = [
+        "kqzuGt6LABA","u8v2UMCzIjM","J125Jtr4PB0","Jpwaa6-YlrA",
+        "2m9zZiK2TX8","mKfFxb8aGkE","7yRFUM93O9A","ytcKvayo90s",
+        "QBQ6g4ujXtI","7ud_xGUm6IQ","SQ6GU83wILA","LBAUObTnF0Q",
+        "kHEIzuyt2uo","Z5zX9CfeFRM","fhp-0v8c2-o","P0yAMFkqpqo",
+        "P6qC4nvmBws","2VMNZcevpLQ"
+    ];
+
+    const grid = document.getElementById('shortsGrid');
+    shorts.forEach((id, i) => {
+        const card = document.createElement('div');
+        card.className = 'short-card';
+        card.onclick = () => openModal(id);
+        card.innerHTML = `
+            <div class="thumb-wrap">
+                <img src="https://i.ytimg.com/vi/${id}/mqdefault.jpg" alt="합격후기 ${i+1}" loading="lazy"
+                     onerror="this.src='https://i.ytimg.com/vi/${id}/hqdefault.jpg'">
+                <div class="play-overlay"><div class="play-icon">▶</div></div>
+                <span class="shorts-badge">Shorts</span>
+                <span class="card-num">${i+1}</span>
+            </div>`;
+        grid.appendChild(card);
+    });
+
+    function openModal(id) {
+        document.getElementById('modalIframe').src =
+            `https://www.youtube.com/embed/${id}?autoplay=1&loop=1&playlist=${id}`;
+        document.getElementById('modalBg').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+        document.getElementById('modalIframe').src = '';
+        document.getElementById('modalBg').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    document.getElementById('modalBg').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>

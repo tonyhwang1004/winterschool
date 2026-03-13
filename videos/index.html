@@ -81,51 +81,113 @@
 
         .content {
             max-width: 1100px;
-            margin: 32px auto 48px;
+            margin: 0 auto 48px;
             padding: 0 20px;
         }
-        .section-header {
+
+        /* 학생 섹션 구분 */
+        .student-section {
+            margin-top: 40px;
+        }
+        .student-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 24px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .student-header.jeon {
+            background: linear-gradient(135deg, #1a3a5c 0%, #2a5a8c 100%);
+        }
+        .student-header.baek {
+            background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+        }
+        .student-avatar {
+            width: 56px; height: 56px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            flex-shrink: 0;
+            border: 2px solid rgba(255,255,255,0.4);
+        }
+        .student-info { flex: 1; }
+        .student-name {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 1.3rem;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+        .student-detail {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.75);
+            font-weight: 400;
+            margin-top: 2px;
+        }
+        .student-badge {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.4);
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 100px;
+            white-space: nowrap;
+        }
+        .section-meta {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px;
         }
-        .section-title {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--text-dark);
+        .count-label {
+            font-size: 0.9rem;
+            color: var(--text-mid);
+            font-weight: 500;
         }
         .yt-btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 10px 20px;
+            padding: 8px 18px;
             background: #ff0000;
             color: #fff;
             border-radius: 8px;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             font-weight: 700;
             text-decoration: none;
             transition: opacity 0.2s, transform 0.2s;
         }
         .yt-btn:hover { opacity: 0.85; transform: translateY(-2px); }
 
+        /* 구분선 */
+        .divider {
+            border: none;
+            border-top: 2px dashed var(--border);
+            margin: 48px 0 0;
+        }
+
         /* 로딩 */
         .loading {
             text-align: center;
-            padding: 60px 20px;
+            padding: 40px 20px;
             color: var(--text-mid);
             font-size: 1rem;
         }
         .spinner {
-            width: 40px; height: 40px;
-            border: 4px solid var(--border);
+            width: 36px; height: 36px;
+            border: 3px solid var(--border);
             border-top-color: var(--primary);
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
-            margin: 0 auto 16px;
+            margin: 0 auto 12px;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
 
@@ -133,7 +195,7 @@
         .shorts-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            gap: 16px;
         }
         @media (min-width: 600px)  { .shorts-grid { grid-template-columns: repeat(3, 1fr); } }
         @media (min-width: 900px)  { .shorts-grid { grid-template-columns: repeat(4, 1fr); } }
@@ -219,6 +281,20 @@
             overflow: hidden;
         }
 
+        /* 업로드 예정 안내 */
+        .coming-soon {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 32px 20px;
+            background: linear-gradient(135deg, #f8f4ff, #ede9fe);
+            border-radius: var(--radius);
+            border: 2px dashed #c4b5fd;
+            color: #7c3aed;
+        }
+        .coming-soon .cs-icon { font-size: 2rem; margin-bottom: 8px; }
+        .coming-soon p { font-size: 0.9rem; font-weight: 600; }
+        .coming-soon small { font-size: 0.8rem; color: #a78bfa; font-weight: 400; }
+
         /* 모달 */
         .modal-bg {
             display: none;
@@ -273,17 +349,48 @@
 </header>
 
 <div class="content">
-    <div class="section-header">
-        <div class="section-title">🎬 합격후기 쇼츠 <span style="font-size:1rem;color:#94a3b8;font-weight:500;" id="countLabel"></span></div>
-        <a href="https://www.youtube.com/@kimmom_songdo/shorts" target="_blank" class="yt-btn">▶ 채널 전체보기</a>
+
+    <!-- ===== 전지영 섹션 ===== -->
+    <div class="student-section">
+        <div class="student-header jeon">
+            <div class="student-avatar">🎓</div>
+            <div class="student-info">
+                <div class="student-name">전지영</div>
+                <div class="student-detail">인천포스코고 졸업 · 고려대학교 바이오의공학과 합격</div>
+            </div>
+            <div class="student-badge">고3 합격생</div>
+        </div>
+        <div class="section-meta">
+            <span class="count-label" id="jeonCount"></span>
+            <a href="https://www.youtube.com/@kimmom_songdo/shorts" target="_blank" class="yt-btn">▶ 채널 전체보기</a>
+        </div>
+        <div id="jeonLoading" class="loading">
+            <div class="spinner"></div>
+            영상 정보를 불러오는 중...
+        </div>
+        <div class="shorts-grid" id="jeonGrid" style="display:none;"></div>
     </div>
 
-    <div id="loadingArea" class="loading">
-        <div class="spinner"></div>
-        영상 정보를 불러오는 중...
+    <hr class="divider">
+
+    <!-- ===== 백효찬 섹션 ===== -->
+    <div class="student-section">
+        <div class="student-header baek">
+            <div class="student-avatar">🏆</div>
+            <div class="student-info">
+                <div class="student-name">백효찬</div>
+                <div class="student-detail">고려대학교 합격</div>
+            </div>
+            <div class="student-badge">고3 합격생</div>
+        </div>
+        <div class="section-meta">
+            <span class="count-label" id="baekCount"></span>
+            <a href="https://www.youtube.com/@kimmom_songdo/shorts" target="_blank" class="yt-btn">▶ 채널 전체보기</a>
+        </div>
+        <div id="baekLoading" class="loading" style="display:none;"></div>
+        <div class="shorts-grid" id="baekGrid"></div>
     </div>
 
-    <div class="shorts-grid" id="shortsGrid" style="display:none;"></div>
 </div>
 
 <div class="footer-note">© 김엄마 관리형 독서실 · 영상은 YouTube에서 제공됩니다</div>
@@ -299,7 +406,9 @@
 
 <script>
     const API_KEY = 'AIzaSyDUBvXLy9V4XL3A5QUWCze9I0c4jxXLR1U';
-    const videoIds = [
+
+    // 전지영 영상 ID 목록
+    const jeonVideoIds = [
         "kqzuGt6LABA","u8v2UMCzIjM","J125Jtr4PB0","Jpwaa6-YlrA",
         "2m9zZiK2TX8","mKfFxb8aGkE","7yRFUM93O9A","ytcKvayo90s",
         "QBQ6g4ujXtI","7ud_xGUm6IQ","SQ6GU83wILA","LBAUObTnF0Q",
@@ -307,63 +416,78 @@
         "P6qC4nvmBws","2VMNZcevpLQ"
     ];
 
-    async function loadVideos() {
+    // 백효찬 영상 ID 목록 — 업로드되는대로 여기에 추가!
+    const baekVideoIds = [
+        "Q7u0BiYGF20"
+        // 새 영상 업로드 후 여기에 ID 추가:
+        // "영상ID2",
+        // "영상ID3",
+    ];
+
+    async function fetchTitles(ids) {
         try {
-            const ids = videoIds.join(',');
-            const url = `https://www.googleapis.com/youtube/v3/videos?id=${ids}&part=snippet&key=${API_KEY}`;
+            const url = `https://www.googleapis.com/youtube/v3/videos?id=${ids.join(',')}&part=snippet&key=${API_KEY}`;
             const res = await fetch(url);
             const data = await res.json();
-
-            // API 순서 → videoIds 순서로 정렬
             const map = {};
-            data.items.forEach(item => { map[item.id] = item.snippet.title; });
-
-            document.getElementById('loadingArea').style.display = 'none';
-            const grid = document.getElementById('shortsGrid');
-            grid.style.display = 'grid';
-            document.getElementById('countLabel').textContent = videoIds.length + '개';
-
-            videoIds.forEach((id, i) => {
-                const title = map[id] || '합격후기 영상';
-                // #Shorts 태그 제거해서 깔끔하게
-                const cleanTitle = title.replace(/#Shorts?/gi, '').replace(/\| 김엄마.*$/i, '').trim();
-                const card = document.createElement('div');
-                card.className = 'short-card';
-                card.onclick = () => openModal(id);
-                card.innerHTML = `
-                    <div class="thumb-wrap">
-                        <img src="https://i.ytimg.com/vi/${id}/mqdefault.jpg" alt="${cleanTitle}" loading="lazy"
-                             onerror="this.src='https://i.ytimg.com/vi/${id}/hqdefault.jpg'">
-                        <div class="play-overlay"><div class="play-icon">▶</div></div>
-                        <span class="shorts-badge">Shorts</span>
-                        <span class="card-num">${i+1}</span>
-                    </div>
-                    <div class="card-title">${cleanTitle}</div>
-                `;
-                grid.appendChild(card);
-            });
+            (data.items || []).forEach(item => { map[item.id] = item.snippet.title; });
+            return map;
         } catch(e) {
-            // API 실패시 제목 없이 표시
-            document.getElementById('loadingArea').style.display = 'none';
-            const grid = document.getElementById('shortsGrid');
-            grid.style.display = 'grid';
-            document.getElementById('countLabel').textContent = videoIds.length + '개';
-            videoIds.forEach((id, i) => {
-                const card = document.createElement('div');
-                card.className = 'short-card';
-                card.onclick = () => openModal(id);
-                card.innerHTML = `
-                    <div class="thumb-wrap">
-                        <img src="https://i.ytimg.com/vi/${id}/mqdefault.jpg" loading="lazy">
-                        <div class="play-overlay"><div class="play-icon">▶</div></div>
-                        <span class="shorts-badge">Shorts</span>
-                        <span class="card-num">${i+1}</span>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
+            return {};
         }
     }
+
+    function buildCard(id, index, titleMap) {
+        const raw = titleMap[id] || '';
+        const cleanTitle = raw.replace(/#Shorts?/gi, '').replace(/\| 김엄마.*$/i, '').trim() || '합격후기 영상';
+        const card = document.createElement('div');
+        card.className = 'short-card';
+        card.onclick = () => openModal(id);
+        card.innerHTML = `
+            <div class="thumb-wrap">
+                <img src="https://i.ytimg.com/vi/${id}/mqdefault.jpg" alt="${cleanTitle}" loading="lazy"
+                     onerror="this.src='https://i.ytimg.com/vi/${id}/hqdefault.jpg'">
+                <div class="play-overlay"><div class="play-icon">▶</div></div>
+                <span class="shorts-badge">Shorts</span>
+                <span class="card-num">${index + 1}</span>
+            </div>
+            <div class="card-title">${cleanTitle}</div>
+        `;
+        return card;
+    }
+
+    async function loadSection(videoIds, gridId, loadingId, countId) {
+        const titleMap = await fetchTitles(videoIds);
+        document.getElementById(loadingId).style.display = 'none';
+        const grid = document.getElementById(gridId);
+        grid.style.display = 'grid';
+        document.getElementById(countId).textContent = `영상 ${videoIds.length}개`;
+        videoIds.forEach((id, i) => {
+            grid.appendChild(buildCard(id, i, titleMap));
+        });
+    }
+
+    async function loadBaekSection() {
+        const grid = document.getElementById('baekGrid');
+        const titleMap = await fetchTitles(baekVideoIds);
+        document.getElementById('baekCount').textContent = `영상 ${baekVideoIds.length}개 · 계속 업로드 중 🔄`;
+        baekVideoIds.forEach((id, i) => {
+            grid.appendChild(buildCard(id, i, titleMap));
+        });
+        // 업로드 예정 안내 카드
+        const more = document.createElement('div');
+        more.className = 'coming-soon';
+        more.innerHTML = `
+            <div class="cs-icon">🎬</div>
+            <p>더 많은 영상이 업로드되고 있어요!</p>
+            <small>백효찬 합격 인터뷰 영상이 순차적으로 추가됩니다</small>
+        `;
+        grid.appendChild(more);
+    }
+
+    // 두 섹션 동시 로드
+    loadSection(jeonVideoIds, 'jeonGrid', 'jeonLoading', 'jeonCount');
+    loadBaekSection();
 
     function openModal(id) {
         document.getElementById('modalIframe').src =
@@ -380,8 +504,6 @@
         if (e.target === this) closeModal();
     });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-    loadVideos();
 </script>
 </body>
 </html>

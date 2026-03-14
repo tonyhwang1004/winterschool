@@ -1,448 +1,574 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>⚔️ WARTIME PORTFOLIO MONITOR</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'JetBrains Mono',monospace;background:linear-gradient(135deg,#0a0a1a,#1a1a2e,#0d1117);color:#e6e6e6;min-height:100vh}
-input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
-input[type=number]{-moz-appearance:textfield}
-::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#0a0a1a}::-webkit-scrollbar-thumb{background:#00ff8844;border-radius:3px}
-.header{background:linear-gradient(90deg,#0d1117,#161b22,#0d1117);border-bottom:2px solid #00ff8833;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-.title{font-size:17px;font-weight:900;color:#00ff88;letter-spacing:2px}
-.subtitle{font-size:10px;color:#8892b0;margin-top:2px}
-.clock{font-size:15px;color:#00ff88;font-weight:700;text-align:right}
-.clock-sub{font-size:10px;color:#8892b0}
-.pnl{padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;border-bottom:1px solid #ffffff11}
-.pnl-label{color:#8892b0;font-size:11px}
-.pnl-val{font-size:16px;font-weight:700}
-.pnl-big{font-size:22px;font-weight:900}
-.tabs{display:flex;gap:3px;padding:10px 20px 0;flex-wrap:wrap}
-.tab{padding:9px 14px;background:transparent;color:#8892b0;border:1px solid transparent;border-bottom:none;cursor:pointer;font-family:inherit;font-size:11px;border-radius:6px 6px 0 0;font-weight:400}
-.tab.active{background:#1a1a2e;color:#00ff88;border-color:#00ff88;font-weight:700}
-.content{margin:0 20px 20px;background:#1a1a2e;border:1px solid #00ff8833;border-radius:0 8px 8px 8px;padding:18px;min-height:400px}
-.card{background:#0d1117;border:1px solid #ffffff11;border-radius:8px;padding:14px}
-.grid{display:grid;gap:10px}
-.grid-2{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
-.grid-3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
-.tag{padding:2px 7px;border-radius:4px;font-size:9px;font-weight:700;display:inline-block}
-.green{color:#00ff88}.red{color:#ff4444}.yellow{color:#FFD700}.muted{color:#8892b0}
-table{width:100%;border-collapse:collapse;font-size:11px}
-th{padding:7px 5px;text-align:left;color:#8892b0;font-size:10px;border-bottom:2px solid #00ff8833}
-td{padding:7px 5px;border-bottom:1px solid #ffffff06}
-.inp{background:#1a1a2e;border:1px solid #00ff8844;border-radius:6px;padding:9px 11px;color:#00ff88;font-size:17px;font-weight:700;font-family:inherit;outline:none;width:100%}
-.inp-news{font-size:13px;color:#e6e6e6;flex:1;min-width:200px}
-.btn{background:#00ff88;color:#0a0a1a;border:none;border-radius:6px;padding:10px 20px;font-weight:700;cursor:pointer;font-family:inherit;font-size:12px}
-.btn-sm{padding:5px 8px;font-size:9px;background:#0d1117;border:1px solid #ffffff15;color:#8892b0;border-radius:4px;cursor:pointer;font-family:inherit}
-.alert-item{border-radius:6px;padding:9px 12px;display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:5px;font-size:11px}
-.scenario-item{cursor:pointer;display:flex;align-items:center;gap:11px;transition:all .2s}
-.check{width:21px;height:21px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0}
-.phase{border-left-width:4px;border-left-style:solid;border-radius:0 8px 8px 0;margin-bottom:9px}
-.flow-btn{width:100%;background:#0d1117;border:1px solid #00ff8833;border-radius:8px;padding:10px;color:#00ff88;font-size:11px;cursor:pointer;font-family:inherit;margin-top:10px}
-.flow-box{background:#0d1117;border:1px solid #ff444444;border-radius:0 0 8px 8px;padding:15px;font-size:11px;line-height:2.1;margin:0 20px 20px}
-.auto-badge{display:inline-block;background:#00ff8822;color:#00ff88;padding:2px 8px;border-radius:10px;font-size:9px;font-weight:700;margin-left:8px;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
-.refresh-bar{background:#0d111799;padding:6px 20px;display:flex;justify-content:space-between;align-items:center;font-size:9px;color:#8892b0;border-bottom:1px solid #ffffff08}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김엄마 관리형 독서실 - 합격후기 영상</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Black+Han+Sans&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a3a5c;
+            --primary-light: #2a5a8c;
+            --bg-warm: #faf8f5;
+            --bg-card: #ffffff;
+            --text-dark: #1e293b;
+            --text-mid: #475569;
+            --text-light: #94a3b8;
+            --border: #e2e8f0;
+            --shadow: 0 4px 20px rgba(0,0,0,0.10);
+            --radius: 16px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--bg-warm);
+            color: var(--text-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, #3b82f6 100%);
+            padding: 48px 24px 56px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.06) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(245,158,11,0.08) 0%, transparent 40%);
+            animation: heroFloat 20s ease-in-out infinite;
+        }
+        @keyframes heroFloat {
+            0%, 100% { transform: translate(0,0) rotate(0deg); }
+            50% { transform: translate(-2%, 1%) rotate(1deg); }
+        }
+        .hero h1 {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            color: #fff;
+            position: relative;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+        .hero p {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.05rem;
+            font-weight: 300;
+            position: relative;
+        }
+        .home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            padding: 10px 24px;
+            background: rgba(255,255,255,0.15);
+            border: 1.5px solid rgba(255,255,255,0.5);
+            border-radius: 100px;
+            color: #fff;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            position: relative;
+            transition: background 0.25s, transform 0.2s;
+        }
+        .home-btn:hover { background: rgba(255,255,255,0.28); transform: translateY(-2px); }
+
+        .content {
+            max-width: 1100px;
+            margin: 0 auto 48px;
+            padding: 0 20px;
+        }
+
+        /* 학생 섹션 구분 */
+        .student-section {
+            margin-top: 40px;
+        }
+        .student-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 24px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .student-header.jeon {
+            background: linear-gradient(135deg, #1a3a5c 0%, #2a5a8c 100%);
+        }
+        .student-header.baek {
+            background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+        }
+        .student-avatar {
+            width: 56px; height: 56px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            flex-shrink: 0;
+            border: 2px solid rgba(255,255,255,0.4);
+        }
+        .student-info { flex: 1; }
+        .student-name {
+            font-family: 'Black Han Sans', sans-serif;
+            font-size: 1.3rem;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+        .student-detail {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.75);
+            font-weight: 400;
+            margin-top: 2px;
+        }
+        .student-badge {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.4);
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 100px;
+            white-space: nowrap;
+        }
+        .section-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .count-label {
+            font-size: 0.9rem;
+            color: var(--text-mid);
+            font-weight: 500;
+        }
+        .yt-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: #ff0000;
+            color: #fff;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+        .yt-btn:hover { opacity: 0.85; transform: translateY(-2px); }
+
+        /* 구분선 */
+        .divider {
+            border: none;
+            border-top: 2px dashed var(--border);
+            margin: 48px 0 0;
+        }
+
+        /* 로딩 */
+        .loading {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-mid);
+            font-size: 1rem;
+        }
+        .spinner {
+            width: 36px; height: 36px;
+            border: 3px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 12px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* 그리드 */
+        .shorts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        @media (min-width: 600px)  { .shorts-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 900px)  { .shorts-grid { grid-template-columns: repeat(4, 1fr); } }
+
+        .short-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .short-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 40px rgba(0,0,0,0.16);
+        }
+        .thumb-wrap {
+            position: relative;
+            width: 100%;
+            padding-bottom: 177.78%;
+            background: #111;
+            overflow: hidden;
+        }
+        .thumb-wrap img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+        .thumb-wrap img.no-thumb {
+            display: none;
+        }
+        .thumb-placeholder {
+            position: absolute;
+            inset: 0;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1e1b4b 0%, #3730a3 50%, #4f46e5 100%);
+            color: rgba(255,255,255,0.9);
+            text-align: center;
+            padding: 16px;
+            gap: 8px;
+        }
+        .thumb-placeholder.show { display: flex; }
+        .thumb-placeholder .ph-icon { font-size: 2rem; }
+        .thumb-placeholder .ph-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.6);
+            text-transform: uppercase;
+        }
+        .thumb-placeholder .ph-soon {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #a5b4fc;
+            background: rgba(255,255,255,0.12);
+            padding: 3px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .short-card:hover .thumb-wrap img { transform: scale(1.05); }
+        .play-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.22);
+            transition: background 0.2s;
+        }
+        .short-card:hover .play-overlay { background: rgba(0,0,0,0.08); }
+        .play-icon {
+            width: 52px; height: 52px;
+            background: rgba(255,255,255,0.92);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            padding-left: 4px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+        }
+        .shorts-badge {
+            position: absolute;
+            bottom: 10px; left: 10px;
+            background: #ff0000;
+            color: #fff;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        .card-num {
+            position: absolute;
+            top: 10px; right: 10px;
+            background: rgba(0,0,0,0.55);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+        .card-title {
+            padding: 12px 14px 14px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* 업로드 예정 안내 */
+        .coming-soon {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 32px 20px;
+            background: linear-gradient(135deg, #f8f4ff, #ede9fe);
+            border-radius: var(--radius);
+            border: 2px dashed #c4b5fd;
+            color: #7c3aed;
+        }
+        .coming-soon .cs-icon { font-size: 2rem; margin-bottom: 8px; }
+        .coming-soon p { font-size: 0.9rem; font-weight: 600; }
+        .coming-soon small { font-size: 0.8rem; color: #a78bfa; font-weight: 400; }
+
+        /* 모달 */
+        .modal-bg {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.88);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-bg.open { display: flex; }
+        .modal-box { position: relative; width: 100%; max-width: 380px; }
+        .modal-close {
+            position: absolute;
+            top: -48px; right: 0;
+            background: none; border: none;
+            color: #fff; font-size: 40px;
+            cursor: pointer; line-height: 1;
+            transition: transform 0.2s;
+        }
+        .modal-close:hover { transform: scale(1.2); }
+        .modal-video {
+            position: relative;
+            width: 100%;
+            padding-bottom: 177.78%;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        .modal-video iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }
+        .footer-note {
+            text-align: center;
+            padding: 0 16px 40px;
+            color: var(--text-light);
+            font-size: 0.82rem;
+        }
+    </style>
 </head>
 <body>
-<div id="app"></div>
-<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<script type="text/babel">
-const {useState,useEffect,useCallback,useRef}=React;
 
-const PORTFOLIO=[
-{name:"KODEX 골드선물(H)",code:"132030",cat:"금",amt:5000000,w:"16.7%",c:"#FFD700"},
-{name:"ACE KRX금현물",code:"411060",cat:"금",amt:4000000,w:"13.3%",c:"#FFC107"},
-{name:"KODEX 미국달러선물",code:"261240",cat:"달러",amt:4000000,w:"13.3%",c:"#4CAF50"},
-{name:"TIGER 미국달러단기채권",code:"329750",cat:"달러",amt:3500000,w:"11.7%",c:"#66BB6A"},
-{name:"KODEX WTI원유선물(H)",code:"261220",cat:"에너지",amt:3000000,w:"10%",c:"#FF5722"},
-{name:"KODEX 200선물인버스2X",code:"252670",cat:"인버스",amt:2000000,w:"6.7%",c:"#9C27B0"},
-{name:"한화에어로스페이스",code:"012450",cat:"방산",amt:2000000,w:"6.7%",c:"#2196F3"},
-{name:"KODEX 코스닥150인버스",code:"251340",cat:"인버스",amt:1000000,w:"3.3%",c:"#AB47BC"},
-{name:"LIG넥스원",code:"079550",cat:"방산",amt:1000000,w:"3.3%",c:"#42A5F5"},
-{name:"금융인버스(4월)",code:"TBD",cat:"인버스",amt:1500000,w:"5%",c:"#CE93D8"},
-{name:"천연가스/추가",code:"396520",cat:"에너지",amt:1500000,w:"5%",c:"#FF7043"},
-];
+<header class="hero">
+    <h1>김엄마 관리형 독서실</h1>
+    <p>합격후기 영상 🎬</p>
+    <a href="https://www.kmsongdo.store/" class="home-btn">← 홈으로 돌아가기</a>
+</header>
 
-const SCENARIOS=[
-{id:"s1",label:"이란 항복/휴전",lv:"RED",action:"🔴 전량 매도",icon:"🏳️"},
-{id:"s2",label:"호르무즈 봉쇄 해제",lv:"RED",action:"🔴 에너지 전량 매도",icon:"🚢"},
-{id:"s3",label:"미-이란 공식 협상",lv:"YELLOW",action:"🟡 50% 축소",icon:"🤝"},
-{id:"s4",label:"트럼프 작전종료",lv:"RED",action:"🔴 방산 외 매도",icon:"📢"},
-{id:"s5",label:"러시아 중립 선언",lv:"YELLOW",action:"🟡 30% 축소",icon:"🇷🇺"},
-{id:"s6",label:"은행 부실 공개",lv:"GREEN",action:"🟢 금융인버스 매수",icon:"🏦"},
-{id:"s7",label:"유가 $100 돌파",lv:"GREEN",action:"🟢 원유 절반 익절",icon:"🛢️"},
-{id:"s8",label:"금 $3,000 돌파",lv:"GREEN",action:"🟢 금 일부 익절",icon:"🥇"},
-];
+<div class="content">
 
-const KW={
-red:["휴전","항복","협상 타결","봉쇄 해제","작전 종료","ceasefire","surrender","deal reached"],
-yellow:["협상 개시","대화 재개","중립","평화","talks resume","negotiations"],
-green:["보복 공격","봉쇄 강화","추가 공습","확전","부실 공개","PF대출","escalation","retaliation","워크아웃"],
-};
+    <!-- ===== 전지영 섹션 ===== -->
+    <div class="student-section">
+        <div class="student-header jeon">
+            <div class="student-avatar">🎓</div>
+            <div class="student-info">
+                <div class="student-name">전지영</div>
+                <div class="student-detail">인천포스코고 졸업 · 고려대학교 바이오의공학과 합격</div>
+            </div>
+            <div class="student-badge">고3 합격생</div>
+        </div>
+        <div class="section-meta">
+            <span class="count-label" id="jeonCount"></span>
+            <a href="https://www.youtube.com/@kimmom_songdo/shorts" target="_blank" class="yt-btn">▶ 채널 전체보기</a>
+        </div>
+        <div id="jeonLoading" class="loading">
+            <div class="spinner"></div>
+            영상 정보를 불러오는 중...
+        </div>
+        <div class="shorts-grid" id="jeonGrid" style="display:none;"></div>
+    </div>
 
-const fmt=n=>{if(n>=1e8)return(n/1e8).toFixed(1)+"억";if(n>=1e4)return(n/1e4).toFixed(0)+"만";return n.toLocaleString()};
+    <hr class="divider">
 
-function App(){
-const[time,setTime]=useState(new Date());
-const[tab,setTab]=useState("overview");
-const[alerts,setAlerts]=useState([]);
-const[scChecks,setScChecks]=useState({});
-const[prices,setPrices]=useState({wti:67.02,gold:2650,usdkrw:1450,natgas:3.8,kospi:6244,kosdaq:1165});
-const[lastFetch,setLastFetch]=useState(null);
-const[autoOn,setAutoOn]=useState(true);
-const[newsIn,setNewsIn]=useState("");
-const[newsRes,setNewsRes]=useState(null);
-const[showFlow,setShowFlow]=useState(false);
-const prevPrices=useRef(prices);
+    <!-- ===== 백효찬 섹션 ===== -->
+    <div class="student-section">
+        <div class="student-header baek">
+            <div class="student-avatar">🏆</div>
+            <div class="student-info">
+                <div class="student-name">백효찬</div>
+                <div class="student-detail">고려대학교 합격</div>
+            </div>
+            <div class="student-badge">고3 합격생</div>
+        </div>
+        <div class="section-meta">
+            <span class="count-label" id="baekCount"></span>
+            <a href="https://www.youtube.com/@kimmom_songdo/shorts" target="_blank" class="yt-btn">▶ 채널 전체보기</a>
+        </div>
+        <div id="baekLoading" class="loading" style="display:none;"></div>
+        <div class="shorts-grid" id="baekGrid"></div>
+    </div>
 
-useEffect(()=>{const t=setInterval(()=>setTime(new Date()),1000);return()=>clearInterval(t)},[]);
+</div>
 
-// 자동 시세 갱신 (5분마다)
-const fetchPrices=useCallback(async()=>{
-  try{
-    // 여러 무료 API를 시도
-    const results={};
-    
-    // 1. 유가 (WTI)
-    try{
-      const r=await fetch('https://api.exchangerate-api.com/v4/latest/USD');
-      const d=await r.json();
-      if(d.rates&&d.rates.KRW) results.usdkrw=Math.round(d.rates.KRW*100)/100;
-    }catch(e){}
+<div class="footer-note">© 김엄마 관리형 독서실 · 영상은 YouTube에서 제공됩니다</div>
 
-    // 2. 금/원유 - Yahoo Finance proxy
-    try{
-      const r=await fetch('https://query1.finance.yahoo.com/v8/finance/chart/GC=F?interval=1d&range=1d');
-      const d=await r.json();
-      if(d.chart?.result?.[0]?.meta?.regularMarketPrice) results.gold=Math.round(d.chart.result[0].meta.regularMarketPrice*100)/100;
-    }catch(e){}
+<div class="modal-bg" id="modalBg">
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal()">×</button>
+        <div class="modal-video">
+            <iframe id="modalIframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
 
-    try{
-      const r=await fetch('https://query1.finance.yahoo.com/v8/finance/chart/CL=F?interval=1d&range=1d');
-      const d=await r.json();
-      if(d.chart?.result?.[0]?.meta?.regularMarketPrice) results.wti=Math.round(d.chart.result[0].meta.regularMarketPrice*100)/100;
-    }catch(e){}
+<script>
+    const API_KEY = 'AIzaSyDUBvXLy9V4XL3A5QUWCze9I0c4jxXLR1U';
 
-    try{
-      const r=await fetch('https://query1.finance.yahoo.com/v8/finance/chart/NG=F?interval=1d&range=1d');
-      const d=await r.json();
-      if(d.chart?.result?.[0]?.meta?.regularMarketPrice) results.natgas=Math.round(d.chart.result[0].meta.regularMarketPrice*100)/100;
-    }catch(e){}
+    // 전지영 영상 ID 목록
+    const jeonVideoIds = [
+        "kqzuGt6LABA","u8v2UMCzIjM","J125Jtr4PB0","Jpwaa6-YlrA",
+        "2m9zZiK2TX8","mKfFxb8aGkE","7yRFUM93O9A","ytcKvayo90s",
+        "QBQ6g4ujXtI","7ud_xGUm6IQ","SQ6GU83wILA","LBAUObTnF0Q",
+        "kHEIzuyt2uo","Z5zX9CfeFRM","fhp-0v8c2-o","P0yAMFkqpqo",
+        "P6qC4nvmBws","2VMNZcevpLQ"
+    ];
 
-    // 3. 코스피
-    try{
-      const r=await fetch('https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?interval=1d&range=1d');
-      const d=await r.json();
-      if(d.chart?.result?.[0]?.meta?.regularMarketPrice) results.kospi=Math.round(d.chart.result[0].meta.regularMarketPrice*100)/100;
-    }catch(e){}
+    // 백효찬 영상 ID 목록 — 업로드되는대로 여기에 추가!
+    const baekVideoIds = [
+        "Q7u0BiYGF20",
+        "ErqMWhDxKco",
+        "Cpzp_Q6TTYo",
+        "23Ks71lkEzU",
+        "iEvSbW1vb44",
+        "dGM62PDssKc",
+        "gtA7zmKIgM0"
+        // 새 영상 업로드 후 여기에 ID 추가:
+        // "영상ID",
+    ];
 
-    try{
-      const r=await fetch('https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?interval=1d&range=1d');
-      const d=await r.json();
-      if(d.chart?.result?.[0]?.meta?.regularMarketPrice) results.kosdaq=Math.round(d.chart.result[0].meta.regularMarketPrice*100)/100;
-    }catch(e){}
-
-    if(Object.keys(results).length>0){
-      setPrices(p=>{
-        const newP={...p,...results};
-        checkAlerts(newP,p);
-        return newP;
-      });
-      setLastFetch(new Date());
+    async function fetchTitles(ids) {
+        try {
+            const url = `https://www.googleapis.com/youtube/v3/videos?id=${ids.join(',')}&part=snippet&key=${API_KEY}`;
+            const res = await fetch(url);
+            const data = await res.json();
+            const map = {};
+            (data.items || []).forEach(item => { map[item.id] = item.snippet.title; });
+            return map;
+        } catch(e) {
+            return {};
+        }
     }
-  }catch(e){console.log('Fetch error:',e)}
-},[]);
 
-useEffect(()=>{
-  if(!autoOn)return;
-  fetchPrices();
-  const interval=setInterval(fetchPrices,5*60*1000); // 5분마다
-  return()=>clearInterval(interval);
-},[autoOn,fetchPrices]);
+    function buildCard(id, index, titleMap) {
+        const raw = titleMap[id] || '';
+        const cleanTitle = raw.replace(/#Shorts?/gi, '').replace(/\| 김엄마.*$/i, '').trim() || '합격후기 영상';
+        const card = document.createElement('div');
+        card.className = 'short-card';
+        card.onclick = () => openModal(id);
+        card.innerHTML = `
+            <div class="thumb-wrap">
+                <img src="https://i.ytimg.com/vi/${id}/maxresdefault.jpg" alt="${cleanTitle}" loading="lazy">
+                <div class="thumb-placeholder">
+                    <div class="ph-icon">🎬</div>
+                    <div class="ph-label">합격후기 영상</div>
+                    <div class="ph-soon">공개 예정</div>
+                </div>
+                <div class="play-overlay"><div class="play-icon">▶</div></div>
+                <span class="shorts-badge">Shorts</span>
+                <span class="card-num">${index + 1}</span>
+            </div>
+            <div class="card-title">${cleanTitle}</div>
+        `;
+        // 썸네일 순차 시도: hqdefault → mqdefault → 플레이스홀더
+        const img = card.querySelector('img');
+        const ph = card.querySelector('.thumb-placeholder');
+        // 쇼츠는 세로 영상 → maxresdefault → hqdefault → oq1080p → 플레이스홀더 순서로 시도
+        const thumbUrls = [
+            `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`,
+            `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+            `https://i.ytimg.com/vi/${id}/oq1080p.jpg`,
+        ];
+        let thumbIdx = 0;
+        img.src = thumbUrls[0];
+        img.onload = () => { img.style.display = 'block'; ph.classList.remove('show'); };
+        img.onerror = () => {
+            thumbIdx++;
+            if (thumbIdx < thumbUrls.length) {
+                img.src = thumbUrls[thumbIdx];
+            } else {
+                // 모두 실패 → 플레이스홀더 표시
+                img.style.display = 'none';
+                ph.classList.add('show');
+            }
+        };
+        return card;
+    }
 
-const checkAlerts=(np,op)=>{
-  const na=[];
-  if(np.wti>=100&&op.wti<100)na.push({time:new Date(),lv:"GREEN",msg:"🛢️ 유가 $100 돌파! 원유 ETF 절반 익절 권고"});
-  if(np.wti>=130&&op.wti<130)na.push({time:new Date(),lv:"RED",msg:"🛢️ 유가 $130! 원유 ETF 추가 익절 → 금 전환"});
-  if(np.wti<=60&&op.wti>60)na.push({time:new Date(),lv:"RED",msg:"⚠️ 유가 $60↓ 시나리오 붕괴! 에너지 매도"});
-  if(np.gold>=3000&&op.gold<3000)na.push({time:new Date(),lv:"GREEN",msg:"🥇 금 $3,000 돌파! 일부 익절"});
-  if(np.gold>=3500&&op.gold<3500)na.push({time:new Date(),lv:"GREEN",msg:"🥇 금 $3,500! 30% 익절 권고"});
-  if(np.usdkrw>=1600&&op.usdkrw<1600)na.push({time:new Date(),lv:"GREEN",msg:"💵 환율 1,600 돌파!"});
-  if(np.usdkrw>=1800&&op.usdkrw<1800)na.push({time:new Date(),lv:"RED",msg:"🚨 환율 1,800! 달러 절반 익절"});
-  if(np.kospi<=5000&&op.kospi>5000)na.push({time:new Date(),lv:"GREEN",msg:"📉 코스피 5,000↓ 인버스 수익! 우량주 준비"});
-  if(np.kospi<=4000&&op.kospi>4000)na.push({time:new Date(),lv:"RED",msg:"🚨 코스피 4,000! 인버스 익절 → 바닥 매수"});
-  if(na.length)setAlerts(p=>[...na,...p].slice(0,50));
-};
+    async function loadSection(videoIds, gridId, loadingId, countId) {
+        const titleMap = await fetchTitles(videoIds);
+        document.getElementById(loadingId).style.display = 'none';
+        const grid = document.getElementById(gridId);
+        grid.style.display = 'grid';
+        document.getElementById(countId).textContent = `영상 ${videoIds.length}개`;
+        videoIds.forEach((id, i) => {
+            grid.appendChild(buildCard(id, i, titleMap));
+        });
+    }
 
-const handlePrice=(k,v)=>{
-  const n=parseFloat(v)||0;
-  const old={...prices};
-  setPrices(p=>({...p,[k]:n}));
-  checkAlerts({...prices,[k]:n},old);
-};
+    async function loadBaekSection() {
+        const grid = document.getElementById('baekGrid');
+        const titleMap = await fetchTitles(baekVideoIds);
+        document.getElementById('baekCount').textContent = `영상 ${baekVideoIds.length}개 · 계속 업로드 중 🔄`;
+        baekVideoIds.forEach((id, i) => {
+            grid.appendChild(buildCard(id, i, titleMap));
+        });
+        // 업로드 예정 안내 카드
+        const more = document.createElement('div');
+        more.className = 'coming-soon';
+        more.innerHTML = `
+            <div class="cs-icon">🎬</div>
+            <p>더 많은 영상이 업로드되고 있어요!</p>
+            <small>백효찬 합격 인터뷰 영상이 순차적으로 추가됩니다</small>
+        `;
+        grid.appendChild(more);
+    }
 
-const analyzeNews=()=>{
-  if(!newsIn.trim())return;
-  const lo=newsIn.toLowerCase();
-  let lv="NEUTRAL",rec="",ic="⚪",kw="";
-  for(const w of KW.red)if(lo.includes(w.toLowerCase())){lv="RED";kw=w;rec="⚠️ 시나리오 붕괴! 에너지·인버스 축소/매도. 금·달러 유지.";ic="🔴";break}
-  if(lv==="NEUTRAL")for(const w of KW.yellow)if(lo.includes(w.toLowerCase())){lv="YELLOW";kw=w;rec="⚡ 주의. 에너지 50% 축소 대기. 추가 확인 필요.";ic="🟡";break}
-  if(lv==="NEUTRAL")for(const w of KW.green)if(lo.includes(w.toLowerCase())){lv="GREEN";kw=w;rec="✅ 시나리오 강화! 포지션 유지/추가 매수 검토.";ic="🟢";break}
-  if(lv==="NEUTRAL")rec="ℹ️ 직접 영향 판단 어려움. 포지션 유지.";
-  setNewsRes({lv,rec,ic,text:newsIn,kw,time:new Date()});
-  setAlerts(p=>[{time:new Date(),lv,msg:`${ic} [${kw||"분석"}] ${rec}`},...p].slice(0,50));
-  setNewsIn("");
-};
+    // 두 섹션 동시 로드
+    loadSection(jeonVideoIds, 'jeonGrid', 'jeonLoading', 'jeonCount');
+    loadBaekSection();
 
-// 수익률 계산
-const BASE={wti:67.02,gold:2650,usdkrw:1450,natgas:3.8,kospi:6244};
-const rets=PORTFOLIO.map(item=>{
-  let r=0;
-  if(item.cat==="금")r=((prices.gold-BASE.gold)/BASE.gold)*100;
-  else if(item.cat==="달러")r=((prices.usdkrw-BASE.usdkrw)/BASE.usdkrw)*100;
-  else if(item.cat==="에너지"&&item.code==="261220")r=((prices.wti-BASE.wti)/BASE.wti)*100;
-  else if(item.cat==="에너지"&&item.code==="396520")r=((prices.natgas-BASE.natgas)/BASE.natgas)*100;
-  else if(item.cat==="인버스")r=((BASE.kospi-prices.kospi)/BASE.kospi)*100*(item.code==="252670"?2:1);
-  else if(item.cat==="방산")r=prices.kospi<BASE.kospi?((BASE.kospi-prices.kospi)/BASE.kospi)*30:-((prices.kospi-BASE.kospi)/BASE.kospi)*20;
-  return{r,cv:item.amt*(1+r/100)};
-});
-
-const totI=PORTFOLIO.reduce((s,p)=>s+p.amt,0);
-const totC=rets.reduce((s,r)=>s+r.cv,0);
-const totR=((totC-totI)/totI)*100;
-
-const catT={};
-PORTFOLIO.forEach((p,i)=>{
-  if(!catT[p.cat])catT[p.cat]={inv:0,cur:0,c:p.c};
-  catT[p.cat].inv+=p.amt;catT[p.cat].cur+=rets[i].cv;
-});
-
-const h=time.getHours(),d=time.getDay();
-const mst=d===0||d===6?"⚫ 휴장":h>=9&&(h<15||(h===15&&time.getMinutes()<=30))?"🟢 장중":"🟠 장외";
-
-const lvColor=lv=>lv==="RED"?"#ff4444":lv==="YELLOW"?"#FFD700":lv==="GREEN"?"#00ff88":"#666";
-
-return React.createElement("div",null,
-  // Auto-refresh bar
-  React.createElement("div",{className:"refresh-bar"},
-    React.createElement("div",null,
-      autoOn?React.createElement("span",null,"🔄 자동 갱신 ",React.createElement("span",{className:"auto-badge"},"ON")," (5분 간격)"):"⏸️ 자동 갱신 OFF",
-      lastFetch&&React.createElement("span",{style:{marginLeft:12}},"마지막: "+lastFetch.toLocaleTimeString("ko-KR"))
-    ),
-    React.createElement("div",{style:{display:"flex",gap:8,alignItems:"center"}},
-      React.createElement("button",{onClick:fetchPrices,className:"btn-sm"},"🔄 지금 갱신"),
-      React.createElement("button",{onClick:()=>setAutoOn(!autoOn),className:"btn-sm"},autoOn?"⏸️ 중지":"▶️ 시작")
-    )
-  ),
-
-  // Header
-  React.createElement("div",{className:"header"},
-    React.createElement("div",null,
-      React.createElement("div",{className:"title"},"⚔️ WARTIME PORTFOLIO"),
-      React.createElement("div",{className:"subtitle"},"중동 3차대전 + 은행부실 | 24시간 자동 모니터링")
-    ),
-    React.createElement("div",null,
-      React.createElement("div",{className:"clock"},time.toLocaleTimeString("ko-KR")),
-      React.createElement("div",{className:"clock-sub"},time.toLocaleDateString("ko-KR",{year:"numeric",month:"long",day:"numeric",weekday:"short"})+" "+mst)
-    )
-  ),
-
-  // P&L
-  React.createElement("div",{className:"pnl",style:{background:totR>=0?"linear-gradient(90deg,rgba(0,255,136,.06),transparent)":"linear-gradient(90deg,rgba(255,68,68,.06),transparent)"}},
-    React.createElement("div",null,React.createElement("span",{className:"pnl-label"},"투자금 "),React.createElement("span",{className:"pnl-val"},fmt(totI)+"원")),
-    React.createElement("div",null,React.createElement("span",{className:"pnl-label"},"평가금 "),React.createElement("span",{className:"pnl-val",style:{color:totR>=0?"#00ff88":"#ff4444"}},fmt(Math.round(totC))+"원")),
-    React.createElement("div",null,
-      React.createElement("span",{className:"pnl-big",style:{color:totR>=0?"#00ff88":"#ff4444"}},(totR>=0?"+":"")+totR.toFixed(2)+"%"),
-      React.createElement("span",{style:{color:totR>=0?"#00ff88":"#ff4444",fontSize:12,marginLeft:8}},"("+(totR>=0?"+":"")+fmt(Math.round(totC-totI))+"원)")
-    )
-  ),
-
-  // 시세 요약 바
-  React.createElement("div",{style:{padding:"8px 20px",display:"flex",gap:16,flexWrap:"wrap",borderBottom:"1px solid #ffffff08",fontSize:11}},
-    [{k:"wti",l:"WTI",u:"$",b:67.02},{k:"gold",l:"금",u:"$",b:2650},{k:"usdkrw",l:"USD/KRW",u:"₩",b:1450},{k:"natgas",l:"가스",u:"$",b:3.8},{k:"kospi",l:"코스피",u:"",b:6244}].map(({k,l,u,b})=>{
-      const chg=((prices[k]-b)/b)*100;
-      return React.createElement("span",{key:k,style:{color:"#8892b0"}},
-        l+" ",
-        React.createElement("span",{style:{color:chg>=0?"#00ff88":"#ff4444",fontWeight:700}},
-          u+prices[k].toLocaleString()+" "+(chg>=0?"▲":"▼")+Math.abs(chg).toFixed(1)+"%"
-        )
-      );
-    })
-  ),
-
-  // Tabs
-  React.createElement("div",{className:"tabs"},
-    ["overview","prices","news","scenarios","timeline","alerts"].map((t,i)=>{
-      const labels=["📊 현황","💹 시세","📰 뉴스","🎯 시나리오","📅 타임라인","🚨 알림("+alerts.length+")"];
-      return React.createElement("button",{key:t,className:"tab"+(tab===t?" active":""),onClick:()=>setTab(t)},labels[i]);
-    })
-  ),
-
-  // Content
-  React.createElement("div",{className:"content"},
-
-    // OVERVIEW
-    tab==="overview"&&React.createElement("div",null,
-      React.createElement("h3",{style:{color:"#00ff88",marginBottom:14,fontSize:14}},"📊 포트폴리오 현황"),
-      React.createElement("div",{className:"grid grid-2",style:{marginBottom:18}},
-        Object.entries(catT).map(([cat,d])=>{
-          const r=((d.cur-d.inv)/d.inv)*100;
-          return React.createElement("div",{key:cat,className:"card",style:{borderLeft:"4px solid "+d.c}},
-            React.createElement("div",{style:{fontSize:10,color:"#8892b0"}},cat),
-            React.createElement("div",{style:{fontSize:15,fontWeight:700,color:d.c}},fmt(d.inv)+"원"),
-            React.createElement("div",{style:{fontSize:12,color:r>=0?"#00ff88":"#ff4444",marginTop:3}},
-              (r>=0?"▲":"▼")+" "+Math.abs(r).toFixed(1)+"% ("+(r>=0?"+":"")+fmt(Math.round(d.cur-d.inv))+")")
-          );
-        })
-      ),
-      React.createElement("div",{style:{overflowX:"auto"}},
-        React.createElement("table",null,
-          React.createElement("thead",null,React.createElement("tr",null,
-            ["종목","코드","구분","투자금","수익률","평가금"].map(h=>React.createElement("th",{key:h},h))
-          )),
-          React.createElement("tbody",null,
-            PORTFOLIO.map((item,i)=>React.createElement("tr",{key:i},
-              React.createElement("td",{style:{color:item.c,fontWeight:600}},item.name),
-              React.createElement("td",{className:"muted"},item.code),
-              React.createElement("td",null,React.createElement("span",{className:"tag",style:{background:item.c+"22",color:item.c}},item.cat)),
-              React.createElement("td",null,fmt(item.amt)),
-              React.createElement("td",{style:{color:rets[i].r>=0?"#00ff88":"#ff4444",fontWeight:700}},(rets[i].r>=0?"+":"")+rets[i].r.toFixed(1)+"%"),
-              React.createElement("td",{style:{color:rets[i].r>=0?"#00ff88":"#ff4444"}},fmt(Math.round(rets[i].cv)))
-            ))
-          )
-        )
-      )
-    ),
-
-    // PRICES
-    tab==="prices"&&React.createElement("div",null,
-      React.createElement("h3",{style:{color:"#00ff88",marginBottom:4,fontSize:14}},"💹 시세 입력/자동갱신"),
-      React.createElement("p",{className:"muted",style:{fontSize:10,marginBottom:14}},"자동 갱신 중. 수동 입력도 가능합니다."),
-      React.createElement("div",{className:"grid grid-3"},
-        [{k:"wti",l:"WTI 원유",u:"$/배럴",ic:"🛢️",b:67.02},{k:"gold",l:"금",u:"$/oz",ic:"🥇",b:2650},
-         {k:"usdkrw",l:"원/달러",u:"원",ic:"💵",b:1450},{k:"natgas",l:"천연가스",u:"$/MMBtu",ic:"🔥",b:3.8},
-         {k:"kospi",l:"코스피",u:"pt",ic:"📊",b:6244},{k:"kosdaq",l:"코스닥",u:"pt",ic:"📈",b:1165}].map(({k,l,u,ic,b})=>{
-          const chg=((prices[k]-b)/b)*100;
-          return React.createElement("div",{key:k,className:"card"},
-            React.createElement("div",{style:{display:"flex",justifyContent:"space-between",marginBottom:7}},
-              React.createElement("span",{style:{fontSize:12,fontWeight:600}},ic+" "+l),
-              React.createElement("span",{style:{fontSize:12,color:chg>=0?"#00ff88":"#ff4444",fontWeight:700}},(chg>=0?"+":"")+chg.toFixed(2)+"%")
-            ),
-            React.createElement("div",{style:{display:"flex",alignItems:"center",gap:7}},
-              React.createElement("input",{type:"number",step:"any",value:prices[k],onChange:e=>handlePrice(k,e.target.value),className:"inp"}),
-              React.createElement("span",{className:"muted",style:{fontSize:10,minWidth:40}},u)
-            ),
-            React.createElement("div",{className:"muted",style:{marginTop:4,fontSize:9}},"기준: "+b)
-          );
-        })
-      )
-    ),
-
-    // NEWS
-    tab==="news"&&React.createElement("div",null,
-      React.createElement("h3",{style:{color:"#00ff88",marginBottom:4,fontSize:14}},"📰 뉴스 AI 분석"),
-      React.createElement("p",{className:"muted",style:{fontSize:10,marginBottom:12}},"헤드라인 입력 → 포트폴리오 영향 분석"),
-      React.createElement("div",{style:{display:"flex",gap:8,marginBottom:14,flexWrap:"wrap"}},
-        React.createElement("input",{value:newsIn,onChange:e=>setNewsIn(e.target.value),onKeyDown:e=>e.key==="Enter"&&analyzeNews(),placeholder:"뉴스 입력...",className:"inp inp-news"}),
-        React.createElement("button",{onClick:analyzeNews,className:"btn"},"분석")
-      ),
-      newsRes&&React.createElement("div",{className:"card",style:{background:lvColor(newsRes.lv)+"11",border:"1px solid "+lvColor(newsRes.lv)+"33",marginBottom:14}},
-        React.createElement("div",{style:{fontSize:13,fontWeight:700,marginBottom:5}},newsRes.ic," 판정: ",React.createElement("span",{style:{color:lvColor(newsRes.lv)}},newsRes.lv),
-          newsRes.kw&&React.createElement("span",{className:"muted",style:{fontSize:10,marginLeft:8}},'키워드: "'+newsRes.kw+'"')),
-        React.createElement("div",{className:"muted",style:{fontSize:11,marginBottom:5}},'"'+newsRes.text+'"'),
-        React.createElement("div",{style:{fontSize:12,lineHeight:1.7}},newsRes.rec)
-      ),
-      React.createElement("div",{className:"muted",style:{fontSize:10,marginBottom:5}},"⚡ 빠른 테스트:"),
-      React.createElement("div",{style:{display:"flex",gap:4,flexWrap:"wrap"}},
-        ["이란 호르무즈 봉쇄","미-이란 휴전 협상","이란 항복","러시아 병력 증강","PF대출 부실 30조","이란 추가 보복","트럼프 작전 종료","건설사 워크아웃","금 사상최고가"].map(t=>
-          React.createElement("button",{key:t,onClick:()=>setNewsIn(t),className:"btn-sm"},t)
-        )
-      )
-    ),
-
-    // SCENARIOS
-    tab==="scenarios"&&React.createElement("div",null,
-      React.createElement("h3",{style:{color:"#00ff88",marginBottom:4,fontSize:14}},"🎯 시나리오 체크"),
-      React.createElement("p",{className:"muted",style:{fontSize:10,marginBottom:12}},"매일 체크. 발생 이벤트 클릭 → 대응방안 표시"),
-      React.createElement("div",{className:"grid"},
-        SCENARIOS.map(sc=>{
-          const ck=scChecks[sc.id];const bc=lvColor(sc.lv);
-          return React.createElement("div",{key:sc.id,className:"card scenario-item",
-            onClick:()=>setScChecks(p=>({...p,[sc.id]:!p[sc.id]})),
-            style:{background:ck?bc+"0D":"#0d1117",border:"1px solid "+(ck?bc:"#ffffff11")}},
-            React.createElement("div",{className:"check",style:{border:"2px solid "+bc,background:ck?bc:"transparent",color:"#0a0a1a"}},ck?"✓":""),
-            React.createElement("div",{style:{flex:1}},
-              React.createElement("div",{style:{fontSize:12,fontWeight:600}},sc.icon+" "+sc.label),
-              ck&&React.createElement("div",{style:{fontSize:11,color:bc,marginTop:3,fontWeight:700}},"→ "+sc.action)
-            ),
-            React.createElement("span",{className:"tag",style:{background:bc+"22",color:bc}},sc.lv==="RED"?"손절":sc.lv==="YELLOW"?"주의":"익절")
-          );
-        })
-      )
-    ),
-
-    // TIMELINE
-    tab==="timeline"&&React.createElement("div",null,
-      React.createElement("h3",{style:{color:"#00ff88",marginBottom:12,fontSize:14}},"📅 연간 타임라인"),
-      [{m:"3월",t:"1차 포지션 구축",c:"#2196F3",st:"🔵 현재",items:["금·달러·원유 매수(60%)","인버스 구축","방산주 매수","스톱로스 설정"]},
-       {m:"4월",t:"은행 감사 ⚡",c:"#FF9800",st:"⏳",items:["기업채권 감사 확인","PF부실 규모 주시","금융인버스 편입","건설사 뉴스 체크"]},
-       {m:"5~6월",t:"확전 분기점",c:"#FF5722",st:"⏳",items:["러시아·터키 개입 확인","호르무즈 봉쇄 확인","유가$100→원유 절반 익절","은행 2차 공개"]},
-       {m:"7~8월",t:"폭풍의 핵심 🔥",c:"#f44336",st:"⏳",items:["인버스 익절→우량주 매수","삼성전자 바닥 매수","금·달러 유지","환율1800→달러 절반 익절"]},
-       {m:"9~12월",t:"수확/방어",c:"#4CAF50",st:"⏳",items:["전쟁 협상 따라 조정","저점 우량주 보유","세금 정리","2027 전략"]},
-      ].map(p=>React.createElement("div",{key:p.m,className:"card phase",style:{borderLeftColor:p.c}},
-        React.createElement("div",{style:{display:"flex",justifyContent:"space-between",marginBottom:5}},
-          React.createElement("div",null,React.createElement("span",{style:{color:p.c,fontWeight:700,fontSize:13}},p.m),React.createElement("span",{style:{marginLeft:8,fontSize:12}},p.t)),
-          React.createElement("span",{className:"muted",style:{fontSize:10}},p.st)
-        ),
-        React.createElement("div",{style:{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(180px,1fr))",gap:3}},
-          p.items.map((item,i)=>React.createElement("div",{key:i,className:"muted",style:{fontSize:10}},React.createElement("span",{style:{color:p.c}},"▸ "),item))
-        )
-      ))
-    ),
-
-    // ALERTS
-    tab==="alerts"&&React.createElement("div",null,
-      React.createElement("div",{style:{display:"flex",justifyContent:"space-between",marginBottom:12}},
-        React.createElement("h3",{style:{color:"#00ff88",fontSize:14}},"🚨 알림 로그"),
-        React.createElement("button",{onClick:()=>setAlerts([]),className:"btn-sm",style:{color:"#ff4444",borderColor:"#ff444444"}},"삭제")
-      ),
-      alerts.length===0
-        ?React.createElement("div",{style:{textAlign:"center",padding:40},className:"muted"},"알림 없음")
-        :alerts.map((a,i)=>React.createElement("div",{key:i,className:"alert-item",
-          style:{background:lvColor(a.lv)+"10",border:"1px solid "+lvColor(a.lv)+"22"}},
-          React.createElement("div",{style:{flex:1}},a.msg),
-          React.createElement("div",{className:"muted",style:{fontSize:9,whiteSpace:"nowrap"}},a.time.toLocaleTimeString("ko-KR"))
-        ))
-    )
-  ),
-
-  // Flow
-  React.createElement("div",{style:{padding:"0 20px 20px"}},
-    React.createElement("button",{className:"flow-btn",onClick:()=>setShowFlow(!showFlow)},showFlow?"▲ 손절 플로우 닫기":"▼ 손절 플로우차트"),
-    showFlow&&React.createElement("div",{className:"flow-box"},
-      React.createElement("div",{style:{color:"#ff4444",fontWeight:700,fontSize:13,marginBottom:6}},"🚨 손절 의사결정"),
-      React.createElement("div",{className:"red"},"🔴 이란 항복/휴전 → 전량 매도"),
-      React.createElement("div",{className:"red"},"🔴 호르무즈 해제 → 에너지 매도"),
-      React.createElement("div",{className:"red"},"🔴 작전 종료 → 방산 외 매도"),
-      React.createElement("div",{className:"yellow"},"🟡 협상 개시 → 50% 축소"),
-      React.createElement("div",{className:"yellow"},"🟡 1주 유가$70↓ → 에너지 매도"),
-      React.createElement("div",{className:"yellow"},"🟡 2주 확전 無 → 50% 축소"),
-      React.createElement("div",{className:"red"},"🔴 종목 -8~15% → 해당 매도"),
-      React.createElement("div",{className:"green",style:{marginTop:8,borderTop:"1px solid #ffffff11",paddingTop:8}},"✅ 해당없음 → 보유"),
-      React.createElement("div",{className:"yellow",style:{marginTop:4}},"⚠️ 금은 최후까지 보유")
-    )
-  )
-);
-}
-
-ReactDOM.createRoot(document.getElementById("app")).render(React.createElement(App));
+    function openModal(id) {
+        document.getElementById('modalIframe').src =
+            `https://www.youtube.com/embed/${id}?autoplay=1&loop=1&playlist=${id}`;
+        document.getElementById('modalBg').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+        document.getElementById('modalIframe').src = '';
+        document.getElementById('modalBg').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    document.getElementById('modalBg').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.kmsongdo.store/sitemap.xml
+Sitemap: https://www.kimmom.co.kr/sitemap.xml

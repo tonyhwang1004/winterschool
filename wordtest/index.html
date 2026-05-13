@@ -1,0 +1,3419 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📚 김엄마 단어시험</title>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f7f5ef;
+    --paper: #ffffff;
+    --ink: #1a1a2e;
+    --muted: #7d7d8e;
+    --line: #e6e3d8;
+    --accent: #d4753a;
+    --accent-dark: #b85f29;
+    --success: #5a8a52;
+    --success-bg: #eef6ec;
+    --error: #c84f4f;
+    --error-bg: #fceeec;
+    --warn: #b8860b;
+    --warn-bg: #fff4d6;
+    --7f: #d4753a;
+    --8f: #5e7eb6;
+    --gold: #d4af37;
+  }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Noto Sans KR', sans-serif;
+    min-height: 100vh;
+    padding: 16px;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(212, 117, 58, 0.05), transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(94, 126, 182, 0.05), transparent 50%);
+  }
+
+  .container {
+    background: var(--paper);
+    border-radius: 18px;
+    padding: 32px 28px;
+    max-width: 560px;
+    width: 100%;
+    margin: 24px auto;
+    box-shadow: 0 8px 36px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--line);
+  }
+
+  /* ── Brand ── */
+  .brand {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .brand .logo {
+    font-family: 'Gowun Dodum', serif;
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .brand .logo .em { color: var(--accent); }
+  .brand .sub {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1.5px;
+    margin-top: 3px;
+  }
+  .brand .student-badge {
+    display: none;
+    margin-top: 12px;
+    padding: 8px 14px;
+    background: var(--success-bg);
+    border: 1px solid #d2e6cf;
+    border-radius: 100px;
+    font-size: 12px;
+    color: var(--success);
+    font-weight: 600;
+  }
+  .brand .student-badge.show { display: inline-block; }
+  .brand .student-badge .x {
+    margin-left: 8px;
+    cursor: pointer;
+    opacity: 0.6;
+  }
+  .brand .student-badge .x:hover { opacity: 1; }
+
+  /* ── Step indicator ── */
+  .steps {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 22px;
+  }
+  .steps .dot {
+    width: 28px;
+    height: 4px;
+    background: var(--line);
+    border-radius: 2px;
+    transition: background 0.3s;
+  }
+  .steps .dot.active { background: var(--accent); }
+  .steps .dot.done { background: var(--success); }
+
+  h1 {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 6px;
+  }
+  .hint {
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 22px;
+    line-height: 1.6;
+  }
+
+  /* ── Step Sections ── */
+  .step { display: none; animation: fadeIn 0.3s ease; }
+  .step.active { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── 층 선택 ── */
+  .floor-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .floor-btn {
+    background: var(--paper);
+    border: 2px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.18s ease;
+  }
+  .floor-btn .ic { font-size: 24px; margin-bottom: 4px; }
+  .floor-btn .ttl { font-size: 14px; font-weight: 700; }
+  .floor-btn .sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .floor-btn:hover { border-color: var(--muted); transform: translateY(-1px); }
+  .floor-btn[data-floor="7층"].active {
+    border-color: var(--7f);
+    background: rgba(212, 117, 58, 0.07);
+  }
+  .floor-btn[data-floor="8층"].active {
+    border-color: var(--8f);
+    background: rgba(94, 126, 182, 0.07);
+  }
+
+  /* ── 입력 필드 ── */
+  .field { margin-bottom: 14px; }
+  .field label {
+    display: block;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .field input, .field select {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    color: var(--ink);
+    background: var(--paper);
+    transition: border 0.15s;
+  }
+  .field input:focus, .field select:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .field .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  /* ── 버튼 ── */
+  .btn {
+    width: 100%;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.18s;
+    font-family: inherit;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: white;
+  }
+  .btn-primary:hover { background: #2d2d4a; }
+  .btn-primary:disabled { background: #aaa; cursor: not-allowed; }
+  .btn-secondary {
+    background: transparent;
+    border: 1.5px solid var(--line);
+    color: var(--muted);
+    margin-top: 8px;
+  }
+  .btn-secondary:hover { background: var(--bg); }
+  .btn-accent {
+    background: var(--accent);
+    color: white;
+  }
+  .btn-accent:hover { background: var(--accent-dark); }
+
+  /* ── 메시지 ── */
+  .msg {
+    margin-top: 14px;
+    padding: 11px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.5;
+    display: none;
+  }
+  .msg.error {
+    background: var(--error-bg);
+    color: var(--error);
+    border: 1px solid #f4d3d0;
+    display: block;
+  }
+  .msg.success {
+    background: var(--success-bg);
+    color: var(--success);
+    border: 1px solid #d2e6cf;
+    display: block;
+  }
+
+  /* ── 보안 노티 ── */
+  .security-note {
+    margin-top: 18px;
+    padding: 11px 14px;
+    background: #fafaf5;
+    border: 1px dashed var(--line);
+    border-radius: 8px;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .security-note .lock { color: var(--accent); }
+
+  /* ── 로딩 ── */
+  .loading {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── 시험 응시 화면 ── */
+  .test-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    background: var(--ink);
+    color: white;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    font-size: 12px;
+  }
+  .test-header .timer {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+  .progress {
+    height: 6px;
+    background: var(--line);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .progress-bar {
+    height: 100%;
+    background: var(--accent);
+    transition: width 0.4s ease;
+  }
+  .question-num {
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  .question {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    padding: 28px 16px;
+    background: var(--bg);
+    border-radius: 12px;
+    margin-bottom: 18px;
+    color: var(--ink);
+    word-break: break-all;
+  }
+  .question .ko { font-family: 'Noto Sans KR'; font-size: 20px; font-weight: 600; }
+  .choices {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .choice {
+    padding: 14px 16px;
+    background: var(--paper);
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: left;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: inherit;
+    color: var(--ink);
+  }
+  .choice .idx {
+    width: 24px;
+    height: 24px;
+    background: var(--line);
+    color: var(--muted);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .choice:hover {
+    border-color: var(--accent);
+    background: rgba(212, 117, 58, 0.04);
+  }
+  .choice.selected {
+    border-color: var(--accent);
+    background: rgba(212, 117, 58, 0.08);
+  }
+  .choice.selected .idx {
+    background: var(--accent);
+    color: white;
+  }
+  .test-actions {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 8px;
+  }
+  .test-actions .btn { margin-top: 0; }
+
+  /* ─── 오늘의 시험 화면 (STEP today) ─── */
+  .today-card {
+    border: 2px solid var(--line);
+    border-radius: 16px;
+    padding: 20px 20px 16px;
+    margin-bottom: 14px;
+    background: linear-gradient(135deg, #fff 0%, #fefbf5 100%);
+    transition: all 0.18s;
+  }
+  .today-card.has-schedule {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, #fff 0%, #fff4eb 100%);
+  }
+  .today-card.completed {
+    border-color: var(--success);
+    background: #f0f9f3;
+    opacity: 0.78;
+  }
+  .today-card .tc-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .today-card .tc-book {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .today-card .tc-time {
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--paper);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+  }
+  .today-card .tc-days {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-size: 15px;
+    color: var(--ink);
+  }
+  .today-card .tc-days b {
+    color: var(--accent);
+    font-size: 17px;
+  }
+  .today-card .tc-meta {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 14px;
+    line-height: 1.6;
+  }
+  .today-card .tc-actions {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 8px;
+  }
+  .today-card .tc-actions button {
+    padding: 12px 14px;
+    font-size: 14px;
+    margin: 0;
+  }
+  .today-card.completed .tc-actions { display: none; }
+  .today-card .tc-status {
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: rgba(0,0,0,0.04);
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+  .today-empty {
+    text-align: center;
+    padding: 24px 16px;
+    color: var(--muted);
+    border: 1.5px dashed var(--line);
+    border-radius: 12px;
+    margin-bottom: 14px;
+  }
+  .today-empty .te-icon { font-size: 36px; margin-bottom: 8px; }
+
+  /* ── 미루기 모달 ── */
+  .postpone-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 20px;
+  }
+  .postpone-modal.show { display: flex; }
+  .postpone-modal .pm-box {
+    background: white;
+    border-radius: 16px;
+    padding: 24px 20px;
+    max-width: 360px;
+    width: 100%;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.2);
+  }
+  .postpone-modal h3 {
+    margin: 0 0 6px;
+    font-size: 17px;
+    color: var(--ink);
+  }
+  .postpone-modal .pm-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .postpone-modal textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--ink);
+    background: var(--paper);
+    box-sizing: border-box;
+    resize: vertical;
+    min-height: 72px;
+    margin-bottom: 12px;
+  }
+  .postpone-modal textarea:focus { outline: none; border-color: var(--accent); }
+  .postpone-modal .pm-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .postpone-modal .pm-btns button {
+    padding: 10px;
+    margin: 0;
+    font-size: 13px;
+  }
+
+  /* ─── 직원용 일괄 출력 화면 (STEP batch-print) ─── */
+  .batch-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 14px 0 16px;
+    padding: 12px;
+    background: var(--paper);
+    border-radius: 10px;
+  }
+  .batch-filter-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .batch-filter-row .bf-label {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 600;
+    min-width: 52px;
+  }
+  .batch-filter-row .bf-btn {
+    flex: 1;
+    padding: 8px 10px;
+    border: 1.5px solid var(--line);
+    background: white;
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .batch-filter-row .bf-btn:hover { border-color: var(--accent); }
+  .batch-filter-row .bf-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+    font-weight: 600;
+  }
+  .batch-counter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    background: #fff4eb;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    font-size: 13px;
+  }
+  .batch-counter .bc-label { color: var(--ink); font-weight: 600; }
+  .batch-counter .bc-toggle {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .batch-counter .bc-toggle:hover { background: var(--accent); color: white; }
+  .batch-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .batch-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .batch-item:hover { border-color: var(--accent); background: #fffaf5; }
+  .batch-item.selected {
+    border-color: var(--accent);
+    background: #fff4eb;
+  }
+  .batch-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--accent);
+  }
+  .batch-item .bi-num {
+    font-size: 11px;
+    color: var(--muted);
+    min-width: 20px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .batch-item .bi-main { flex: 1; min-width: 0; }
+  .batch-item .bi-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .batch-item .bi-name .bi-seat {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 500;
+    margin-left: 4px;
+  }
+  .batch-item .bi-detail {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .batch-item .bi-detail b { color: var(--ink); font-weight: 600; }
+  .batch-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 12px;
+    border-top: 1.5px solid var(--line);
+  }
+  .batch-actions .btn { margin-top: 0; }
+  .batch-empty {
+    text-align: center;
+    padding: 32px 16px;
+    color: var(--muted);
+    border: 1.5px dashed var(--line);
+    border-radius: 12px;
+    margin-bottom: 12px;
+  }
+  .batch-empty .be-icon { font-size: 36px; margin-bottom: 8px; }
+  .batch-loading {
+    text-align: center;
+    padding: 20px;
+    color: var(--muted);
+  }
+
+  /* 인쇄 시험지 (일괄): 학생별 페이지 분리용
+     인쇄 시 화면 제어는 아래쪽 @media print 블록에서 통합 처리 */
+  .batch-sheet {
+    page-break-after: always;
+    padding: 14px;
+  }
+  .batch-sheet:last-child { page-break-after: auto; }
+  @media print {
+    .batch-sheet {
+      padding: 7mm 8mm 5mm;
+      font-size: 10px;
+    }
+  }
+
+  /* ─── 신청 폼 (STEP apply) ─── */
+  .apply-radio-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .apply-radio-row.cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .apply-radio {
+    display: block;
+    cursor: pointer;
+    position: relative;
+  }
+  .apply-radio input { position: absolute; opacity: 0; pointer-events: none; }
+  .apply-radio .ar-label {
+    display: block;
+    text-align: center;
+    padding: 12px 8px;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    background: white;
+    font-size: 13px;
+    transition: all 0.15s;
+    line-height: 1.3;
+  }
+  .apply-radio .ar-label small {
+    color: var(--muted);
+    font-size: 10px;
+  }
+  .apply-radio:hover .ar-label { border-color: var(--accent); }
+  .apply-radio input:checked + .ar-label {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+  .apply-radio input:checked + .ar-label small { color: rgba(255,255,255,0.85); }
+
+  .apply-day-row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+  .apply-day {
+    display: block;
+    cursor: pointer;
+    position: relative;
+  }
+  .apply-day input { position: absolute; opacity: 0; pointer-events: none; }
+  .apply-day span {
+    display: block;
+    text-align: center;
+    padding: 10px 0;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    background: white;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    transition: all 0.15s;
+  }
+  .apply-day:hover span { border-color: var(--accent); }
+  .apply-day input:checked + span {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  .apply-summary {
+    background: #fff4eb;
+    border: 1.5px solid var(--accent);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin: 16px 0;
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+  .apply-summary .as-title {
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--accent);
+  }
+  .apply-summary b { color: var(--ink); }
+
+  /* ── 주관식 입력란 (온라인 시험) ── */
+  .answer-input-wrap {
+    margin-bottom: 16px;
+  }
+  .answer-input {
+    width: 100%;
+    padding: 18px 20px;
+    font-size: 22px;
+    font-weight: 600;
+    border: 2px solid var(--line);
+    border-radius: 12px;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: inherit;
+    text-align: center;
+    transition: all 0.15s;
+    box-sizing: border-box;
+  }
+  .answer-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: rgba(212, 117, 58, 0.04);
+  }
+  .answer-input-hint {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 6px;
+  }
+
+  /* ── 답안 입력 화면용 주관식 그리드 ── */
+  .ai-grid-text {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .ai-cell-text {
+    display: grid;
+    grid-template-columns: 40px 1fr 2fr;
+    gap: 10px;
+    align-items: center;
+    padding: 8px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  .ai-cell-text .n {
+    font-weight: 700;
+    color: var(--muted);
+    text-align: center;
+    font-size: 13px;
+  }
+  .ai-cell-text .en {
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 15px;
+  }
+  .ai-cell-text input {
+    padding: 8px 10px;
+    border: 1.5px solid var(--line);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 14px;
+    background: white;
+    color: var(--ink);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .ai-cell-text input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  /* ── 결과 화면 ── */
+  .result-hero {
+    text-align: center;
+    padding: 28px 0 20px;
+  }
+  .result-hero .badge {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    margin: 0 auto 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    color: white;
+  }
+  .result-hero .badge.gold { background: linear-gradient(135deg, #f3c969, #d4af37); }
+  .result-hero .badge.green { background: var(--success); }
+  .result-hero .badge.orange { background: var(--accent); }
+  .result-hero .badge.red { background: var(--error); }
+  .result-hero .score {
+    font-family: 'Playfair Display', 'Gowun Dodum', serif;
+    font-size: 52px;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .result-hero .score .max {
+    font-size: 18px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+  .result-hero .grade {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 1px;
+  }
+  .result-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .stat {
+    background: var(--bg);
+    padding: 14px 8px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  .stat .num {
+    font-size: 22px;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .stat .num.green { color: var(--success); }
+  .stat .num.red { color: var(--error); }
+  .stat .lbl {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .feedback-box {
+    background: #fafaf5;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+  }
+  .wrong-words {
+    background: var(--error-bg);
+    border: 1px solid #f4d3d0;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .wrong-words h4 {
+    font-size: 12px;
+    color: var(--error);
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .wrong-words .item {
+    display: inline-block;
+    margin: 3px 4px 0 0;
+    padding: 4px 10px;
+    background: white;
+    border: 1px solid #f4d3d0;
+    border-radius: 100px;
+    font-size: 12px;
+    color: var(--error);
+  }
+
+  @media (max-width: 480px) {
+    .container { padding: 22px 18px; }
+    .question { font-size: 26px; padding: 22px 12px; }
+    .result-hero .score { font-size: 42px; }
+  }
+
+  /* ════════════════════════════════════════════════════════════ */
+  /* ── 오프라인 시험지 (인쇄용) ──                                  */
+  /* ════════════════════════════════════════════════════════════ */
+
+  .print-toolbar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .print-toolbar .btn { margin-top: 0; flex: 1; min-width: 120px; }
+
+  .printable {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 24px 22px;
+    margin-bottom: 14px;
+    color: #111;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .ts-head {
+    border-bottom: 2px solid #111;
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+  }
+  .ts-head .ttl {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+  .ts-head .sub {
+    font-size: 12px;
+    color: #555;
+  }
+  .ts-meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 14px;
+    font-size: 12px;
+    margin-top: 8px;
+    color: #333;
+  }
+  .ts-meta-grid b { color: #111; font-weight: 700; }
+
+  .ts-q {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    column-gap: 8px;
+    padding: 8px 0;
+    border-bottom: 1px dashed #ddd;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .ts-q:last-child { border-bottom: none; }
+  .ts-q .qno {
+    font-weight: 800;
+    color: #111;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .ts-q .qword {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 4px;
+    color: #111;
+  }
+  .ts-q .qopts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px 14px;
+    font-size: 12px;
+    color: #222;
+  }
+  .ts-q .qopts .op { padding: 1px 0; }
+
+  /* 학생용 OMR 답안란 */
+  .ts-omr {
+    margin-top: 20px;
+    padding: 12px;
+    border: 1px solid #111;
+    border-radius: 6px;
+  }
+  .ts-omr h4 {
+    font-size: 12px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    text-align: center;
+    color: #111;
+  }
+  .ts-omr-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 4px;
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .ts-omr-cell {
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 3px 0;
+    border-radius: 3px;
+  }
+  .ts-omr-cell .n { font-weight: 700; color: #111; display: block; }
+  .ts-omr-cell .b { color: #888; }
+
+  /* 정답표 (새 페이지) */
+  .ts-answer-key {
+    margin-top: 22px;
+    padding: 16px;
+    border: 2px dashed #c84f4f;
+    border-radius: 8px;
+    background: #fff7f5;
+    page-break-before: always;
+    break-before: page;
+  }
+  .ts-answer-key h3 {
+    color: #c84f4f;
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+  .ts-answer-key .ak-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #333;
+  }
+  .ts-answer-key .ak-grid .ak {
+    background: white;
+    border: 1px solid #f4d3d0;
+    padding: 4px 6px;
+    border-radius: 4px;
+  }
+  .ts-answer-key .ak b { color: #c84f4f; }
+
+  /* ── 답안 입력 화면 (오프라인 채점용) ── */
+  .ai-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .ai-cell {
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    padding: 8px 4px;
+    text-align: center;
+    background: var(--paper);
+  }
+  .ai-cell .n {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 700;
+    margin-bottom: 4px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .ai-cell .opts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+  .ai-cell .opt {
+    cursor: pointer;
+    padding: 4px 0;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-size: 11px;
+    color: var(--muted);
+    background: white;
+    user-select: none;
+    transition: all 0.1s;
+  }
+  .ai-cell .opt:hover { border-color: var(--accent); }
+  .ai-cell .opt.sel {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+    font-weight: 700;
+  }
+  .ai-progress {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  /* ── 인쇄용: 시험지만 보이게 ── */
+  @media print {
+    @page {
+      size: A4;
+      margin: 14mm 12mm;
+    }
+    body {
+      background: white !important;
+      background-image: none !important;
+      padding: 0 !important;
+      color: #000 !important;
+      font-size: 12px;
+    }
+    .container {
+      box-shadow: none !important;
+      border: none !important;
+      border-radius: 0 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      max-width: none !important;
+    }
+    .brand, .steps, .print-toolbar, .step:not(#step-print):not(#step-batch-print-output),
+    .btn, .field, .msg, .security-note, h1, .hint {
+      display: none !important;
+    }
+    #step-print { display: block !important; }
+    #step-batch-print-output { display: block !important; }
+    /* batch 인쇄 시 토구바/안내 숨김 (인쇄물에 안 보이게) */
+    #step-batch-print-output > .print-toolbar,
+    #step-batch-print-output > div[style*="text-align: center"] {
+      display: none !important;
+    }
+    /* batch-sheet는 보이게 (위 .step:not(...)와 함께 작동) */
+    #step-batch-print-output .batch-sheet { display: block !important; }
+    .printable {
+      border: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      background: white !important;
+    }
+    .ts-q { break-inside: avoid; page-break-inside: avoid; }
+    .ts-answer-key { page-break-before: always; break-before: page; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ── Brand ── -->
+  <div class="brand">
+    <div class="logo">📚 김엄마 <span class="em">단어시험</span></div>
+    <div class="sub">VOCABULARY · ONLINE TEST</div>
+    <div class="student-badge" id="student-badge">
+      <span id="student-badge-text"></span>
+      <span class="x" onclick="logout()">✕ 로그아웃</span>
+    </div>
+  </div>
+
+  <!-- 진행 단계 -->
+  <div class="steps">
+    <div class="dot active" id="dot-1"></div>
+    <div class="dot" id="dot-2"></div>
+    <div class="dot" id="dot-3"></div>
+    <div class="dot" id="dot-4"></div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- STEP 1: 본인확인                                              -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="step active" id="step-1">
+    <h1>본인확인</h1>
+    <p class="hint">등록된 학생만 시험에 응시할 수 있습니다.<br>층 / 이름 / 학부모 뒷자리 4자리를 입력해주세요.</p>
+
+    <div class="floor-row">
+      <div class="floor-btn" data-floor="8층" onclick="selectFloor('8층')">
+        <div class="ic">📘</div>
+        <div class="ttl">8층</div>
+        <div class="sub">재학생</div>
+      </div>
+      <div class="floor-btn" data-floor="7층" onclick="selectFloor('7층')">
+        <div class="ic">📕</div>
+        <div class="ttl">7층</div>
+        <div class="sub">N수생</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>학생 이름</label>
+      <input type="text" id="name" placeholder="예: 한승주 (동명이인은 숫자 포함 — 김도윤2)" autocomplete="off">
+    </div>
+
+    <div class="field">
+      <label>학부모님 전화번호 뒷자리 4자리</label>
+      <input type="tel" id="parentLast4" placeholder="예: 3633" maxlength="4" inputmode="numeric">
+    </div>
+
+    <button class="btn btn-primary" id="btn-verify" onclick="verifyStudent()">
+      본인확인 →
+    </button>
+
+    <div class="msg" id="msg-1"></div>
+
+    <div class="security-note">
+      <span class="lock">🔒</span> 외부인 진입을 막기 위해 학원 등록 정보와 대조합니다.
+      학부모 전화번호 뒷자리는 본인만 알아야 합니다.
+    </div>
+
+    <!-- 직원용 일괄 출력 진입 -->
+    <div style="margin-top: 20px; padding-top: 16px; border-top: 1px dashed var(--line); text-align: center;">
+      <a href="#" onclick="event.preventDefault(); goBatchPrint();"
+         style="font-size: 12px; color: var(--muted); text-decoration: none;">
+        🖨️ 직원: 오늘 시험지 일괄 출력
+      </a>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- STEP TODAY: 오늘의 시험 (자동 매칭)                              -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="step" id="step-today">
+    <h1>오늘의 시험</h1>
+    <p class="hint" id="today-date-label">오늘 응시할 시험 일정을 불러오는 중...</p>
+
+    <div id="today-list">
+      <!-- JS로 채워짐 -->
+      <div class="today-empty">
+        <div class="te-icon">⏳</div>
+        <div>일정을 불러오는 중입니다...</div>
+      </div>
+    </div>
+
+    <button class="btn btn-secondary" onclick="goApply()" style="margin-top: 12px;">
+      ✏️ 내 시험 신청 수정
+    </button>
+    <button class="btn btn-secondary" onclick="logout()" style="margin-top: 8px;">
+      ← 본인확인으로
+    </button>
+  </div>
+
+  <!-- 미루기 모달 -->
+  <div class="postpone-modal" id="postpone-modal">
+    <div class="pm-box">
+      <h3>📅 오늘 시험 미루기</h3>
+      <div class="pm-sub" id="pm-target">시험을 다음 응시 요일로 이동합니다.</div>
+      <textarea id="pm-reason" placeholder="미루기 사유를 입력하세요 (예: 학원, 컨디션 난조, 병결 등)"></textarea>
+      <div class="pm-btns">
+        <button class="btn btn-secondary" onclick="closePostponeModal()">취소</button>
+        <button class="btn btn-primary" onclick="confirmPostpone()">미루기 확정</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- STEP APPLY: 시험 신청 (학생 자가 신청)                          -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="step" id="step-apply">
+    <h1>📝 시험 신청</h1>
+    <p class="hint" id="apply-hint">원하는 단어장과 응시 방식을 직접 선택하세요. 신청 즉시 적용됩니다.</p>
+
+    <!-- 단어장 -->
+    <div class="field">
+      <label>📚 단어장</label>
+      <select id="apply-book" onchange="onApplyBookChange()">
+        <option value="">단어장을 선택하세요...</option>
+        <option value="suneung-2000|수능2000">수능2000 (DAY 1~50)</option>
+        <option value="hyper|하이퍼">하이퍼 (DAY 1~50)</option>
+        <option value="highest|하이스트">하이스트 (DAY 1~50)</option>
+        <option value="neungyul-eowon|능률보카 어원">능률보카 어원 (DAY 1~67)</option>
+        <option value="neungyul-gohyo-pilsu|능률보카고교필수">능률보카고교필수 (DAY 1~60)</option>
+        <option value="neungyul-suneung-2200|능률보카 수능완성 2200">능률보카 수능완성 2200 ⚠️ 데이터 준비중</option>
+        <option value="eohwi-suneung|어휘 끝 수능">어휘 끝 수능 (DAY 1~45)</option>
+        <option value="27-suneung-teukgang|27수능특강 영어">27수능특강 영어 (DAY 1~30)</option>
+        <option value="teukgeup-ebs-voca|특급 수능EBS 기출VOCA">특급 수능EBS 기출VOCA ⚠️ 데이터 준비중</option>
+        <option value="suneung-yeongye-1800|수능연계1800">수능연계1800 (DAY 1~60)</option>
+      </select>
+      <div class="hint" id="apply-book-info" style="font-size: 11px; margin-top: 6px; color: var(--muted);"></div>
+    </div>
+
+    <!-- 시작 DAY -->
+    <div class="field">
+      <label>📖 시작 DAY</label>
+      <input type="number" id="apply-start-day" min="1" value="1" inputmode="numeric"
+             style="width: 100%; padding: 12px; border: 1.5px solid var(--line); border-radius: 8px; background: var(--paper); font-size: 15px;">
+      <div class="hint" style="font-size: 11px; margin-top: 6px; color: var(--muted);">
+        💡 처음 시작하면 1, 이어서 한다면 진행 중인 DAY부터.
+      </div>
+    </div>
+
+    <!-- 순서 -->
+    <div class="field">
+      <label>📋 진행 순서</label>
+      <div class="apply-radio-row">
+        <label class="apply-radio">
+          <input type="radio" name="apply-order" value="순차" checked>
+          <span class="ar-label"><b>순차</b><br><small>DAY 1 → 60</small></span>
+        </label>
+        <label class="apply-radio">
+          <input type="radio" name="apply-order" value="역순">
+          <span class="ar-label"><b>역순</b><br><small>DAY 60 → 1</small></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- 응시 요일 -->
+    <div class="field">
+      <label>📅 응시 요일 <small style="font-weight: 400; color: var(--muted);">(여러 개 선택 가능)</small></label>
+      <div class="apply-day-row">
+        <label class="apply-day"><input type="checkbox" value="월" checked><span>월</span></label>
+        <label class="apply-day"><input type="checkbox" value="화" checked><span>화</span></label>
+        <label class="apply-day"><input type="checkbox" value="수" checked><span>수</span></label>
+        <label class="apply-day"><input type="checkbox" value="목" checked><span>목</span></label>
+        <label class="apply-day"><input type="checkbox" value="금"><span>금</span></label>
+        <label class="apply-day"><input type="checkbox" value="토" checked><span>토</span></label>
+        <label class="apply-day"><input type="checkbox" value="일"><span>일</span></label>
+      </div>
+    </div>
+
+    <!-- 요일당 분량 -->
+    <div class="field">
+      <label>📊 요일당 분량 <small style="font-weight: 400; color: var(--muted);">(하루에 몇 DAY 씩)</small></label>
+      <div class="apply-radio-row">
+        <label class="apply-radio">
+          <input type="radio" name="apply-count" value="1" checked>
+          <span class="ar-label"><b>1 DAY</b></span>
+        </label>
+        <label class="apply-radio">
+          <input type="radio" name="apply-count" value="2">
+          <span class="ar-label"><b>2 DAY</b></span>
+        </label>
+        <label class="apply-radio">
+          <input type="radio" name="apply-count" value="3">
+          <span class="ar-label"><b>3 DAY</b></span>
+        </label>
+        <label class="apply-radio">
+          <input type="radio" name="apply-count" value="4">
+          <span class="ar-label"><b>4 DAY</b></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- 시간대 -->
+    <div class="field">
+      <label>⏰ 시험 시간대</label>
+      <div class="apply-radio-row">
+        <label class="apply-radio">
+          <input type="radio" name="apply-time" value="오전">
+          <span class="ar-label"><b>오전</b></span>
+        </label>
+        <label class="apply-radio">
+          <input type="radio" name="apply-time" value="오후" checked>
+          <span class="ar-label"><b>오후</b></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- 메모 -->
+    <div class="field">
+      <label>💬 메모 <small style="font-weight: 400; color: var(--muted);">(선택)</small></label>
+      <input type="text" id="apply-memo" placeholder="예: 토요일은 1개씩 / 학원 끝나고"
+             style="width: 100%; padding: 12px; border: 1.5px solid var(--line); border-radius: 8px; background: var(--paper); font-size: 14px;">
+    </div>
+
+    <!-- 신청 요약 -->
+    <div id="apply-summary" class="apply-summary">
+      <div class="as-title">📋 신청 요약</div>
+      <div id="apply-summary-text">단어장과 응시 요일을 선택해주세요.</div>
+    </div>
+
+    <button class="btn btn-primary" id="btn-apply-submit" onclick="submitApplication()">
+      ✅ 신청하기
+    </button>
+    <button class="btn btn-secondary" onclick="goStep('today'); loadTodaySchedule();">
+      ← 오늘의 시험으로
+    </button>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- STEP BATCH-PRINT: 직원용 일괄 출력 (학생 선택 화면)              -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="step" id="step-batch-print">
+    <h1>🖨️ 시험지 일괄 출력</h1>
+    <p class="hint" id="batch-date-label">오늘 응시 예정 학생을 불러오는 중...</p>
+
+    <div class="batch-filters">
+      <div class="batch-filter-row">
+        <div class="bf-label">⏰ 시간대</div>
+        <button class="bf-btn active" data-batch-time="오후" onclick="setBatchFilter('time', '오후')">오후</button>
+        <button class="bf-btn" data-batch-time="오전" onclick="setBatchFilter('time', '오전')">오전</button>
+        <button class="bf-btn" data-batch-time="" onclick="setBatchFilter('time', '')">전체</button>
+      </div>
+      <div class="batch-filter-row">
+        <div class="bf-label">🏢 층</div>
+        <button class="bf-btn" data-batch-floor="7층" onclick="setBatchFilter('floor', '7층')">7층</button>
+        <button class="bf-btn" data-batch-floor="8층" onclick="setBatchFilter('floor', '8층')">8층</button>
+        <button class="bf-btn active" data-batch-floor="" onclick="setBatchFilter('floor', '')">전체</button>
+      </div>
+    </div>
+
+    <div class="batch-counter">
+      <span class="bc-label" id="batch-counter-label">선택: 0 / 0명</span>
+      <button class="bc-toggle" id="btn-batch-toggle-all" onclick="toggleBatchSelectAll()">전체 선택</button>
+    </div>
+
+    <div id="batch-list" class="batch-list">
+      <div class="batch-loading">⏳ 학생 목록 불러오는 중...</div>
+    </div>
+
+    <div class="batch-actions">
+      <button class="btn btn-primary" id="btn-batch-print" onclick="generateBatchPrint()" disabled>
+        🖨️ 선택한 학생 시험지 생성
+      </button>
+      <button class="btn btn-secondary" onclick="loadBatchSchedules()">🔄 새로고침</button>
+      <button class="btn btn-secondary" onclick="goStep(1)">← 본인확인으로</button>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- STEP BATCH-PRINT-OUTPUT: 일괄 시험지 + 인쇄 화면                  -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="step" id="step-batch-print-output">
+    <div class="print-toolbar" style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;">
+      <button class="btn btn-primary" onclick="window.print()" style="flex: 2; margin: 0;">
+        🖨️ 인쇄 / PDF 저장
+      </button>
+      <button class="btn btn-secondary" onclick="goBatchPrint()" style="flex: 1; margin: 0;">
+        ← 목록으로
+      </button>
+    </div>
+    <div style="text-align: center; color: var(--muted); font-size: 12px; margin-bottom: 8px;">
+      💡 인쇄 시 학생마다 시험지+정답표가 페이지 분리됩니다.
+    </div>
+    <div id="batch-print-area">
+      <!-- JS로 학생별 시험지 + 정답표 채워짐 -->
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- STEP 2: 시험 설정                                             -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="step" id="step-2">
+    <h1>시험 설정</h1>
+    <p class="hint" id="hint-step2">오늘 응시할 시험 내용을 선택하세요.</p>
+
+    <div class="field">
+      <label>시험 유형</label>
+      <div class="field-row">
+        <div class="floor-btn" data-mode="online" onclick="selectMode('online')">
+          <div class="ic">💻</div>
+          <div class="ttl">온라인 시험</div>
+          <div class="sub">한글 뜻 입력 · 즉시 채점</div>
+        </div>
+        <div class="floor-btn" data-mode="offline" onclick="selectMode('offline')">
+          <div class="ic">📄</div>
+          <div class="ttl">오프라인 시험</div>
+          <div class="sub">시험지 출력 + 답안 입력</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>단어장</label>
+      <select id="book">
+        <option value="suneung-2000">수능 2000</option>
+        <option value="hyper">하이퍼</option>
+        <option value="highest">하이스트</option>
+        <option value="neungyul-eowon">능률보카 어원</option>
+        <option value="neungyul-suneung-2200">능률 수능완성 2200</option>
+        <option value="neungyul-gohyo-pilsu">능률보카 고교필수</option>
+        <option value="eohwi-suneung">어휘 끝 수능</option>
+        <option value="27-suneung-teukgang">27수능특강 영어</option>
+        <option value="teukgeup-ebs-voca">특급 수능EBS 기출VOCA</option>
+        <option value="suneung-yeongye-1800">수능연계 1800</option>
+        <option value="godeung-complete-25">고등 complete 25개정</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>DAY 범위</label>
+      <select id="day" style="width: 100%;">
+        <option value="">DAY 선택...</option>
+        <!-- JS로 생성 -->
+      </select>
+      <div class="hint" style="font-size: 11px; margin-top: 6px; color: var(--muted);">
+        💡 선택한 DAY의 단어를 <b>전체</b> 무작위 순서로 출제합니다.
+      </div>
+    </div>
+
+    <button class="btn btn-primary" onclick="startTest()">시험 시작 →</button>
+    <button class="btn btn-secondary" onclick="goStep('today'); loadTodaySchedule();">← 오늘의 시험으로</button>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- STEP 3: 시험 응시                                             -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="step" id="step-3">
+    <div class="test-header">
+      <div id="test-info">수능 2000 · DAY 03</div>
+      <div class="timer" id="timer">00:00</div>
+    </div>
+    <div class="progress"><div class="progress-bar" id="progress-bar"></div></div>
+    <div class="question-num" id="qnum">문제 1 / 10</div>
+    <div class="question" id="question">
+      <div class="en" id="qword">loading...</div>
+    </div>
+    <div class="answer-input-wrap">
+      <input type="text"
+             id="answer-input"
+             class="answer-input"
+             placeholder="한글 뜻을 입력하세요"
+             autocomplete="off"
+             autocapitalize="off"
+             spellcheck="false">
+      <div class="answer-input-hint">Enter 키로 다음 문제 이동</div>
+    </div>
+    <div class="test-actions">
+      <button class="btn btn-secondary" onclick="skipQuestion()" style="margin-top:0;">건너뛰기</button>
+      <button class="btn btn-accent" id="btn-next" onclick="nextQuestion()" disabled>다음 →</button>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- STEP 4: 결과 화면                                             -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="step" id="step-4">
+    <div class="result-hero">
+      <div class="badge" id="result-badge">🏆</div>
+      <div class="score"><span id="score-num">0</span><span class="max"> / 100</span></div>
+      <div class="grade" id="grade-label">결과 계산 중...</div>
+    </div>
+
+    <div class="result-stats">
+      <div class="stat">
+        <div class="num green" id="stat-correct">0</div>
+        <div class="lbl">정답</div>
+      </div>
+      <div class="stat">
+        <div class="num red" id="stat-wrong">0</div>
+        <div class="lbl">오답</div>
+      </div>
+      <div class="stat">
+        <div class="num" id="stat-time">00:00</div>
+        <div class="lbl">소요시간</div>
+      </div>
+    </div>
+
+    <div class="feedback-box" id="feedback-box">결과 분석 중...</div>
+
+    <div class="wrong-words" id="wrong-words-box" style="display:none;">
+      <h4>🔴 다시 봐야 할 단어</h4>
+      <div id="wrong-words-list"></div>
+    </div>
+
+    <button class="btn btn-primary" onclick="restartTest()">새 시험 보기</button>
+    <button class="btn btn-secondary" onclick="logout()">로그아웃</button>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- STEP PRINT: 오프라인 시험지 미리보기 / 인쇄                    -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="step" id="step-print">
+    <h1>📄 오프라인 시험지</h1>
+    <p class="hint">시험지를 인쇄하거나 PDF로 저장하세요.<br>학생이 종이에 답안을 푼 뒤, [답안 입력] 버튼으로 채점할 수 있습니다.</p>
+
+    <div class="print-toolbar">
+      <button class="btn btn-accent" onclick="printTestSheet()">🖨️ 인쇄 / PDF 저장</button>
+      <button class="btn btn-primary" onclick="goAnswerInput()">📝 답안 입력 →</button>
+      <button class="btn btn-secondary" onclick="goStep(2)" style="margin-top:0;">← 다시 설정</button>
+    </div>
+
+    <!-- 인쇄 영역 -->
+    <div class="printable" id="printable">
+      <div class="ts-head">
+        <div class="ttl">김엄마관리형독서실 · 단어시험</div>
+        <div class="sub" id="p-floor-sub">VOCABULARY TEST</div>
+        <div class="ts-meta-grid">
+          <div>학생: <b id="p-name">-</b></div>
+          <div>좌석: <b id="p-seat">-</b></div>
+          <div>단어장: <b id="p-book">-</b></div>
+          <div>DAY: <b id="p-day">-</b></div>
+          <div>총문항: <b id="p-count">-</b></div>
+          <div>날짜: <b id="p-date">-</b></div>
+        </div>
+      </div>
+
+      <div class="ts-q-list" id="p-q-list">
+        <!-- JS로 문제 채워짐 -->
+      </div>
+
+      <!-- 정답표 (새 페이지로 인쇄됨) -->
+      <div class="ts-answer-key">
+        <h3>🔐 정답표 (교사용 — 학생에게는 잘라내고 주세요)</h3>
+        <div class="ak-grid" id="p-ak-grid"></div>
+        <div style="margin-top:10px; font-size:11px; color:#888;">
+          ※ 인쇄 시 정답표는 별도 페이지로 출력됩니다. 학생용 시험지만 떼어서 배부하세요.
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- STEP ANSWER-INPUT: 오프라인 답안 빠른 입력                     -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="step" id="step-answer-input">
+    <h1>📝 빠른 채점</h1>
+    <p class="hint">학생이 종이로 자가 채점 후<br>
+       <b style="color: var(--accent);">틀린 문제 번호만</b> 입력하세요.</p>
+
+    <!-- 메인: 틀린 번호 입력 모드 -->
+    <div id="ai-wrong-mode">
+      <div style="text-align: center; color: var(--muted); font-size: 13px; margin: 12px 0 16px;">
+        총 <b id="ai-total" style="color: var(--ink); font-size: 16px;">10</b>문항
+      </div>
+
+      <div class="field">
+        <label>❌ 틀린 문제 번호</label>
+        <input type="text"
+               id="wrong-numbers"
+               class="answer-input"
+               placeholder="예: 1, 4, 7 (모두 맞으면 빈 칸으로 두기)"
+               autocomplete="off"
+               style="text-align: left; font-size: 17px; padding: 14px 16px;">
+        <div class="answer-input-hint" style="text-align: left;">
+          💡 쉼표나 공백으로 구분 — <code>1, 4, 7</code> 또는 <code>1 4 7</code> 둘 다 OK
+        </div>
+      </div>
+
+      <!-- 자동 계산 결과 -->
+      <div id="ai-summary" style="
+        background: var(--paper);
+        border: 1.5px solid var(--line);
+        border-radius: 12px;
+        padding: 16px;
+        margin: 16px 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 12px;
+        text-align: center;">
+        <div>
+          <div style="font-size: 11px; color: var(--muted); margin-bottom: 4px;">맞은 개수</div>
+          <div id="ai-correct-count" style="font-size: 24px; font-weight: 800; color: var(--success);">10</div>
+        </div>
+        <div>
+          <div style="font-size: 11px; color: var(--muted); margin-bottom: 4px;">틀린 개수</div>
+          <div id="ai-wrong-count" style="font-size: 24px; font-weight: 800; color: var(--danger);">0</div>
+        </div>
+        <div>
+          <div style="font-size: 11px; color: var(--muted); margin-bottom: 4px;">점수</div>
+          <div id="ai-score-preview" style="font-size: 24px; font-weight: 800; color: var(--ink);">100<span style="font-size: 14px;">점</span></div>
+        </div>
+      </div>
+
+      <!-- 틀린 단어 미리보기 -->
+      <div id="ai-wrong-preview" style="display: none; background: rgba(220, 53, 69, 0.06); border-radius: 10px; padding: 12px; margin-bottom: 16px; font-size: 13px;"></div>
+
+      <button class="btn btn-primary" id="btn-grade-wrong" onclick="gradeByWrongNumbers()">
+        ✅ 채점 완료
+      </button>
+    </div>
+
+    <!-- 보조: 한 문제씩 답 입력 모드 -->
+    <div id="ai-detail-mode" style="display: none;">
+      <p class="hint" style="margin-top: 0;">각 문제의 답을 한글로 직접 입력하세요.<br>
+        모두 입력하면 자동 채점됩니다.</p>
+      <div class="ai-progress" id="ai-progress">입력: 0 / 0</div>
+      <div class="ai-grid" id="ai-grid"></div>
+
+      <button class="btn btn-primary" id="btn-grade" onclick="gradeOfflineAnswers()" disabled>채점하기 →</button>
+    </div>
+
+    <!-- 모드 전환 -->
+    <button class="btn btn-secondary" id="btn-toggle-mode" onclick="toggleAnswerMode()" style="margin-top: 8px;">
+      🔄 한 문제씩 답 입력 모드
+    </button>
+
+    <button class="btn btn-secondary" onclick="goStep('print')">← 시험지로 돌아가기</button>
+  </div>
+
+</div>
+
+
+<script>
+  // Apps Script Web App URL
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxMfdsigca0XRr7PRUs6xdIaGSuq55uWGOvGntzHKbwf10N-7pqLgwzMMoZ6TdeOppb/exec';
+
+  // ─── 상태 ───
+  const state = {
+    student: null,
+    floor: '',
+    mode: 'online',
+    book: 'suneung-2000',
+    day: '',
+    count: 10,
+    words: [],         // 실제 출제할 단어들 (state.count개)
+    wordPool: [],      // (이전 호환용 — 오답 선지 풀이었으나 주관식에선 안 씀)
+    currentIdx: 0,
+    answers: [],
+    timerInterval: null,
+    startTime: null,
+    elapsedSec: 0,
+    // ── 오프라인 전용 ──
+    offlineSheet: null,
+    offlineAnswers: null,
+    // ── 오늘의 시험 일정 (자동 매칭 시) ──
+    scheduleEntry: null    // {rowIndex, daysCount, bookName} or null
+  };
+
+  // ═══════════════════════════════════════════════════════════
+  // 데모 단어 (서버 연결 실패 시 fallback용)
+  // 실제 단어는 서버 getWords API로 vocabooster에서 가져옴
+  // ═══════════════════════════════════════════════════════════
+  const DEMO_WORDS = [
+    { en: 'abandon', ko: '버리다, 포기하다' },
+    { en: 'ability', ko: '능력' },
+    { en: 'abundant', ko: '풍부한' },
+    { en: 'accept', ko: '받아들이다' },
+    { en: 'achieve', ko: '성취하다' },
+    { en: 'acquire', ko: '습득하다' },
+    { en: 'adapt', ko: '적응시키다' },
+    { en: 'admire', ko: '존경하다' },
+    { en: 'advance', ko: '전진하다' },
+    { en: 'affect', ko: '영향을 주다' },
+    { en: 'analyze', ko: '분석하다' },
+    { en: 'announce', ko: '발표하다' },
+    { en: 'appear', ko: '나타나다' },
+    { en: 'apply', ko: '신청하다' },
+    { en: 'approach', ko: '접근하다' },
+    { en: 'argue', ko: '논쟁하다' },
+    { en: 'arrange', ko: '정리하다' },
+    { en: 'assume', ko: '가정하다' },
+    { en: 'attempt', ko: '시도하다' },
+    { en: 'attract', ko: '끌어당기다' },
+    { en: 'available', ko: '이용 가능한' },
+    { en: 'avoid', ko: '피하다' },
+    { en: 'beautiful', ko: '아름다운' },
+    { en: 'behavior', ko: '행동' },
+    { en: 'belong', ko: '속하다' },
+    { en: 'benefit', ko: '이익' },
+    { en: 'bother', ko: '괴롭히다' },
+    { en: 'capable', ko: '~할 수 있는' },
+    { en: 'capture', ko: '포착하다' },
+    { en: 'careful', ko: '조심스러운' },
+    { en: 'celebrate', ko: '축하하다' },
+    { en: 'challenge', ko: '도전하다' },
+    { en: 'character', ko: '성격, 등장인물' },
+    { en: 'chase', ko: '쫓다' },
+    { en: 'cite', ko: '인용하다' },
+    { en: 'claim', ko: '주장하다' },
+    { en: 'clear', ko: '분명한' },
+    { en: 'climb', ko: '오르다' },
+    { en: 'collapse', ko: '붕괴하다' },
+    { en: 'comfortable', ko: '편안한' }
+  ];
+
+  const CIRCLED = { 1: '①', 2: '②', 3: '③', 4: '④' };
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // 초기화
+  // ═══════════════════════════════════════════════════════════
+  window.addEventListener('DOMContentLoaded', () => {
+    // 단어장별 DAY 개수 (vocabooster 실제 데이터 기준)
+    const BOOK_DAY_COUNT = {
+      'suneung-2000':         50,  // 수능 2000 (DAY 01~50, 40단어/일)
+      'hyper':                50,  // 하이퍼 (추정)
+      'highest':              50,  // 하이스트 (DAY 1~50, 30단어/일)
+      'neungyul-eowon':       67,  // 능률보카 어원 (DAY 01~67, 20단어/일)
+      'neungyul-gohyo-pilsu': 60,  // 능률보카 고교필수 (실제로는 60일 분량까지 응시함)
+      // 데이터 없는 단어장들은 0
+      'neungyul-suneung-2200': 0,
+      'eohwi-suneung':         45,
+      '27-suneung-teukgang':   30,
+      'teukgeup-ebs-voca':     0,
+      'suneung-yeongye-1800':  60,
+      'godeung-complete-25':   0
+    };
+
+    // 선택된 단어장에 맞춰 DAY 드롭다운을 다시 채우는 함수 (전역)
+    window.refillDayOptions = function() {
+      const bookVal = document.getElementById('book').value;
+      const daySelect = document.getElementById('day');
+      const dayCount = BOOK_DAY_COUNT[bookVal] || 60;
+
+      // 기존 옵션 모두 지우고 placeholder 다시
+      daySelect.innerHTML = '<option value="">DAY 선택...</option>';
+
+      if (dayCount === 0) {
+        const opt = document.createElement('option');
+        opt.value = '';
+        opt.textContent = '(이 단어장은 준비 중)';
+        opt.disabled = true;
+        daySelect.appendChild(opt);
+        return;
+      }
+
+      for (let i = 1; i <= dayCount; i++) {
+        const opt = document.createElement('option');
+        opt.value = String(i);                  // 서버는 "1" 또는 "01" 둘 다 처리 가능
+        opt.textContent = `DAY ${i}`;           // 화면 표시는 "DAY 1, DAY 2..."
+        daySelect.appendChild(opt);
+      }
+    };
+
+    // 초기 1회 + 단어장 변경 시마다 다시 생성
+    refillDayOptions();
+    document.getElementById('book').addEventListener('change', refillDayOptions);
+
+    // 기본 모드 선택
+    selectMode('online');
+
+    // 엔터 키 처리
+    document.getElementById('name').addEventListener('keypress', e => {
+      if (e.key === 'Enter') document.getElementById('parentLast4').focus();
+    });
+    document.getElementById('parentLast4').addEventListener('keypress', e => {
+      if (e.key === 'Enter') verifyStudent();
+    });
+    document.getElementById('parentLast4').addEventListener('input', e => {
+      e.target.value = e.target.value.replace(/\D/g, '').slice(0, 4);
+    });
+
+    // ── 시험 응시 화면 (주관식) 입력란 이벤트 ──
+    const answerInput = document.getElementById('answer-input');
+    if (answerInput) {
+      answerInput.addEventListener('input', onAnswerInputChange);
+      answerInput.addEventListener('keypress', e => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          if (!document.getElementById('btn-next').disabled) {
+            nextQuestion();
+          }
+        }
+      });
+    }
+
+    // ── 신청 폼 입력 변경 시 자동 요약 업데이트 ──
+    const applyInputs = document.querySelectorAll(
+      '#apply-start-day, input[name="apply-order"], .apply-day input, input[name="apply-count"], input[name="apply-time"]'
+    );
+    applyInputs.forEach(el => {
+      el.addEventListener('change', updateApplySummary);
+      if (el.type === 'number') el.addEventListener('input', updateApplySummary);
+    });
+
+    // ── 자동 로그인 (sessionStorage에 본인확인 정보 있으면 today 화면으로) ──
+    // 주의: 이 로직은 refillDayOptions 등 모든 초기화가 끝난 다음에 실행되어야 함
+    try {
+      const saved = sessionStorage.getItem('verifiedStudent');
+      if (saved) {
+        const s = JSON.parse(saved);
+        // 24시간 이내면 자동 로그인 유지
+        if (s.verifiedAt && new Date() - new Date(s.verifiedAt) < 24 * 60 * 60 * 1000) {
+          state.student = s;
+          state.floor = s.floor;
+          showStudentBadge();
+          // 오늘의 시험 화면으로 (기존엔 goStep(2) → 시험 설정으로 갔는데, 이제 today 거치도록)
+          goStep('today');
+          loadTodaySchedule();
+        }
+      }
+    } catch (e) {
+      console.warn('자동 로그인 실패:', e);
+    }
+  });
+
+  // ═══════════════════════════════════════════════════════════
+  // 화면 전환
+  // ═══════════════════════════════════════════════════════════
+  function goStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step-' + n).classList.add('active');
+
+    // 숫자 step(1~4)일 때만 진행 dot 표시
+    const num = typeof n === 'number' ? n : parseInt(n, 10);
+    for (let i = 1; i <= 4; i++) {
+      const dot = document.getElementById('dot-' + i);
+      dot.classList.remove('active', 'done');
+      if (!isNaN(num)) {
+        if (i < num) dot.classList.add('done');
+        else if (i === num) dot.classList.add('active');
+      }
+    }
+
+    // 시험지/답안입력 화면(문자열 step)에서는 진행 dot 숨김
+    const stepsEl = document.querySelector('.steps');
+    if (stepsEl) {
+      stepsEl.style.display = isNaN(num) ? 'none' : 'flex';
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function selectFloor(floor) {
+    state.floor = floor;
+    document.querySelectorAll('.floor-btn[data-floor]').forEach(b => {
+      b.classList.toggle('active', b.dataset.floor === floor);
+    });
+    hideMsg(1);
+  }
+
+  function selectMode(mode) {
+    state.mode = mode;
+    document.querySelectorAll('.floor-btn[data-mode]').forEach(b => {
+      b.classList.toggle('active', b.dataset.mode === mode);
+    });
+  }
+
+  function showMsg(step, text, type) {
+    const el = document.getElementById('msg-' + step);
+    if (!el) return;
+    el.textContent = text;
+    el.className = 'msg ' + type;
+  }
+  function hideMsg(step) {
+    const el = document.getElementById('msg-' + step);
+    if (el) el.className = 'msg';
+  }
+
+  function showStudentBadge() {
+    if (!state.student) return;
+    const badge = document.getElementById('student-badge');
+    const txt = document.getElementById('student-badge-text');
+    const seat = state.student.seatType + ' ' + state.student.seatNo + '번';
+    txt.textContent = '✓ ' + state.student.name + ' (' + state.floor + ' · ' + seat + ')';
+    badge.classList.add('show');
+  }
+
+  function logout() {
+    if (!confirm('정말 로그아웃 하시겠어요?')) return;
+    state.student = null;
+    state.floor = '';
+    sessionStorage.removeItem('verifiedStudent');
+    document.getElementById('student-badge').classList.remove('show');
+    document.getElementById('name').value = '';
+    document.getElementById('parentLast4').value = '';
+    document.querySelectorAll('.floor-btn[data-floor]').forEach(b => b.classList.remove('active'));
+    goStep(1);
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // STEP 1: 본인확인
+  // ═══════════════════════════════════════════════════════════
+  async function verifyStudent() {
+    const name = document.getElementById('name').value.trim();
+    const parentLast4 = document.getElementById('parentLast4').value.replace(/\D/g, '');
+    const btn = document.getElementById('btn-verify');
+
+    if (!state.floor) { showMsg(1, '층을 선택해주세요.', 'error'); return; }
+    if (!name) { showMsg(1, '학생 이름을 입력해주세요.', 'error'); return; }
+    if (parentLast4.length !== 4) { showMsg(1, '학부모 뒷자리는 4자리 숫자로 입력해주세요.', 'error'); return; }
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="loading"></span> 확인 중...';
+    hideMsg(1);
+
+    try {
+      const result = await postToScript({
+        action: 'checkStudent',
+        floor: state.floor,
+        name: name,
+        parentLast4: parentLast4
+      });
+
+      if (result.status === 'success') {
+        state.student = { ...result.student, parentLast4 };
+        sessionStorage.setItem('verifiedStudent', JSON.stringify({
+          ...state.student,
+          floor: state.floor,
+          verifiedAt: new Date().toISOString()
+        }));
+        showStudentBadge();
+        showMsg(1, '✓ ' + result.student.name + '님 환영합니다!', 'success');
+        setTimeout(() => {
+          goStep('today');
+          loadTodaySchedule();
+        }, 800);
+      } else {
+        showMsg(1, result.message || '본인확인에 실패했습니다.', 'error');
+      }
+    } catch (err) {
+      showMsg(1, '네트워크 오류: ' + err.message, 'error');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '본인확인 →';
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // STEP TODAY: 오늘의 시험 자동 매칭
+  // ═══════════════════════════════════════════════════════════
+  // 본인확인 성공 직후 호출됨
+  // 서버 getTodaySchedule API → 학생의 오늘 응시할 시험 자동 표시
+  // 각 시험마다 [지금 응시], [미루기] 버튼
+  // ═══════════════════════════════════════════════════════════
+  let _todaySchedules = [];  // 현재 화면의 일정 목록 (rowIndex 포함)
+  let _postponeTarget = null;  // 미루기 모달이 가리키는 일정
+
+  async function loadTodaySchedule() {
+    const listEl = document.getElementById('today-list');
+    const dateEl = document.getElementById('today-date-label');
+
+    if (!state.student) {
+      listEl.innerHTML = '<div class="today-empty"><div class="te-icon">⚠️</div>본인확인 정보가 없습니다.</div>';
+      return;
+    }
+
+    // 로딩 표시
+    listEl.innerHTML = '<div class="today-empty"><div class="te-icon">⏳</div>일정 불러오는 중...</div>';
+
+    try {
+      const result = await postToScript({
+        action: 'getTodaySchedule',
+        name: state.student.name,
+        floor: state.floor
+      });
+
+      if (result.status !== 'success') {
+        listEl.innerHTML = '<div class="today-empty"><div class="te-icon">⚠️</div>' +
+          (result.message || '일정을 가져올 수 없습니다.') + '</div>';
+        dateEl.textContent = '단어장 직접 선택으로 진행하세요.';
+        return;
+      }
+
+      // 날짜 표시
+      const dateStr = result.todayDate || '';
+      const dayStr = result.today || '';
+      dateEl.textContent = dateStr + ' (' + dayStr + ') · ' + state.student.name + '님의 시험';
+
+      _todaySchedules = result.schedules || [];
+
+      if (_todaySchedules.length === 0) {
+        listEl.innerHTML =
+          '<div class="today-empty">' +
+            '<div class="te-icon">🎉</div>' +
+            '<div style="font-weight:600; color: var(--ink); margin-bottom:4px;">오늘은 시험 없는 날입니다!</div>' +
+            '<div style="margin-bottom: 10px;">또는 아직 신청을 안 하신 상태일 수도 있어요.</div>' +
+            '<button class="btn btn-primary" onclick="goApply()" style="max-width: 240px; margin: 0 auto;">' +
+              '✏️ 신청하러 가기' +
+            '</button>' +
+          '</div>';
+        return;
+      }
+
+      // 일정 카드 렌더링
+      listEl.innerHTML = _todaySchedules.map((s, idx) => renderScheduleCard(s, idx)).join('');
+
+    } catch (err) {
+      listEl.innerHTML = '<div class="today-empty"><div class="te-icon">⚠️</div>네트워크 오류: ' +
+        escapeHtml(err.message) + '</div>';
+    }
+  }
+
+  function renderScheduleCard(schedule, idx) {
+    const dayList = schedule.days.map(d => 'DAY ' + d).join(', ');
+    const meta = [];
+    if (schedule.seat) meta.push('자리 ' + formatSeat(schedule.seat));
+    if (schedule.order && schedule.order !== '순차') meta.push('순서: ' + escapeHtml(schedule.order));
+    if (schedule.lastDate) {
+      const dateStr = formatDateShort(schedule.lastDate);
+      if (dateStr) {
+        meta.push('지난 응시 ' + escapeHtml(dateStr) +
+          (schedule.lastScore ? ' (' + escapeHtml(schedule.lastScore) + '점)' : ''));
+      }
+    }
+
+    return `
+      <div class="today-card has-schedule" data-idx="${idx}">
+        <div class="tc-head">
+          <div class="tc-book">📚 ${escapeHtml(schedule.book)}</div>
+          <div class="tc-time">🕐 ${escapeHtml(schedule.timeSlot || '시간 미정')}</div>
+        </div>
+        <div class="tc-days">📖 <b>${dayList}</b> · 총 ${schedule.days.length}개 DAY</div>
+        ${meta.length > 0 ? `<div class="tc-meta">${meta.join(' · ')}</div>` : ''}
+        <div class="tc-actions">
+          <button class="btn btn-primary" onclick="useScheduleEntry(${idx})">
+            📝 지금 응시
+          </button>
+          <button class="btn btn-secondary" onclick="openPostponeModal(${idx})">
+            ⏭️ 미루기
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  // 일정 선택 → STEP 2로 자동 입력하며 이동
+  function useScheduleEntry(idx) {
+    const s = _todaySchedules[idx];
+    if (!s) return;
+
+    // state에 일정 정보 저장 (응시 완료 후 진도 업데이트용)
+    state.scheduleEntry = {
+      rowIndex: s.rowIndex,
+      daysCount: s.days.length,
+      bookName: s.book
+    };
+
+    // 먼저 STEP 2로 이동 (DOM 활성화)
+    goStep(2);
+
+    // 다음 tick에서 폼 자동 입력 (DOM이 보이는 상태에서)
+    setTimeout(() => {
+      // 1. 단어장 설정
+      const bookSel = document.getElementById('book');
+      if (bookSel && s.bookCode) {
+        bookSel.value = s.bookCode;
+        // 변경 이벤트 명시적 발생 → refillDayOptions 자동 호출
+        bookSel.dispatchEvent(new Event('change'));
+      }
+
+      // 2. DAY 설정 (refillDayOptions가 완료된 후)
+      setTimeout(() => {
+        if (s.days && s.days.length > 0) {
+          const dayVal = String(s.days[0]);
+          const daySel = document.getElementById('day');
+          let found = false;
+          for (const opt of daySel.options) {
+            if (opt.value === dayVal) {
+              daySel.value = dayVal;
+              found = true;
+              break;
+            }
+          }
+          if (!found) {
+            // 옵션에 없으면 알림
+            console.warn('DAY ' + dayVal + ' 옵션 없음 — 수동으로 선택해주세요');
+          }
+        }
+        // 문항 수는 더 이상 폼에서 받지 않음 (항상 DAY 전체 단어 출제)
+      }, 50);
+    }, 100);
+  }
+
+  // 미루기 모달
+  function openPostponeModal(idx) {
+    const s = _todaySchedules[idx];
+    if (!s) return;
+    _postponeTarget = s;
+    document.getElementById('pm-target').textContent =
+      s.book + ' · DAY ' + s.days.join(', ') + ' 응시를 다음 응시 요일로 미룹니다.';
+    document.getElementById('pm-reason').value = '';
+    document.getElementById('postpone-modal').classList.add('show');
+    setTimeout(() => document.getElementById('pm-reason').focus(), 100);
+  }
+
+  function closePostponeModal() {
+    document.getElementById('postpone-modal').classList.remove('show');
+    _postponeTarget = null;
+  }
+
+  async function confirmPostpone() {
+    if (!_postponeTarget) return;
+    const reason = document.getElementById('pm-reason').value.trim();
+    const btn = document.querySelector('#postpone-modal .btn-primary');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="loading"></span> 처리 중...';
+
+    try {
+      const result = await postToScript({
+        action: 'postponeSchedule',
+        rowIndex: _postponeTarget.rowIndex,
+        reason: reason
+      });
+
+      if (result.status === 'success') {
+        closePostponeModal();
+        alert('✅ 미루기 처리되었습니다.\n다음 응시 요일에 다시 표시됩니다.');
+        // 화면 새로고침
+        loadTodaySchedule();
+      } else {
+        alert('❌ 미루기 실패: ' + (result.message || '알 수 없는 오류'));
+      }
+    } catch (err) {
+      alert('❌ 네트워크 오류: ' + err.message);
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '미루기 확정';
+    }
+  }
+
+  // 응시 완료 시 → 서버에 진도 업데이트 요청
+  async function notifyScheduleCompleted(score) {
+    if (!state.scheduleEntry || !state.scheduleEntry.rowIndex) return;
+    try {
+      await postToScript({
+        action: 'completeSchedule',
+        rowIndex: state.scheduleEntry.rowIndex,
+        score: score,
+        daysCompleted: state.scheduleEntry.daysCount || 1
+      });
+      // 다음 응시에 사용 안 함
+      state.scheduleEntry = null;
+    } catch (err) {
+      // 실패해도 시험은 그대로 — 조용히 무시
+      console.error('completeSchedule 실패:', err);
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // STEP 2 → (3 또는 시험지): 시험 시작
+  // ═══════════════════════════════════════════════════════════
+  async function startTest() {
+    state.book = document.getElementById('book').value;
+    state.day = document.getElementById('day').value;
+    // 문항 수는 단어를 받은 후 전체로 자동 설정
+
+    if (!state.day) {
+      alert('DAY를 선택해주세요.');
+      return;
+    }
+
+    // 시험 시작 버튼들 비활성화 + 로딩 표시
+    const startBtns = document.querySelectorAll('#step-2 .btn-primary');
+    startBtns.forEach(b => {
+      b.disabled = true;
+      b.dataset.origText = b.innerHTML;
+      b.innerHTML = '<span class="loading"></span> 단어 불러오는 중...';
+    });
+
+    // 서버에서 실제 단어 가져오기 (vocabooster GitHub)
+    // 이제 항상 DAY 전체 단어를 받음 (count=200 이상은 충분히 큰 값)
+    let serverWords = null;
+    try {
+      const result = await postToScript({
+        action: 'getWords',
+        book: state.book,
+        day: state.day,
+        count: 200   // DAY 전체 단어 받기
+      });
+
+      if (result.status === 'success' && result.words && result.words.length > 0) {
+        serverWords = result.words;
+      } else {
+        // 단어장 미준비 등 — 사용자에게 알림
+        alert((result.message || '단어를 불러올 수 없습니다.') +
+              '\n\n임시로 데모 단어로 진행합니다.');
+      }
+    } catch (err) {
+      alert('네트워크 오류로 단어를 불러올 수 없어요.\n임시로 데모 단어로 진행합니다.\n\n' + err.message);
+    } finally {
+      startBtns.forEach(b => {
+        b.disabled = false;
+        if (b.dataset.origText) b.innerHTML = b.dataset.origText;
+      });
+    }
+
+    // 단어 풀 결정: 서버 응답 우선, 없으면 데모 단어로 fallback
+    const sourceWords = (serverWords && serverWords.length >= 4) ? serverWords : DEMO_WORDS;
+    state.wordPool = sourceWords;
+
+    // 단어 전체를 무작위 셔플 → state.words 가 그대로 출제 단어
+    state.words = sourceWords.slice().sort(() => Math.random() - 0.5);
+    state.count = state.words.length;   // 문항 수 = 전체 단어 수
+    state.currentIdx = 0;
+    state.answers = [];
+
+    if (state.mode === 'offline') {
+      // ── 오프라인: 시험지 생성 화면으로 ──
+      buildOfflineTestSheet();
+      goStep('print');
+    } else {
+      // ── 온라인: 4지선다 시험 응시 화면으로 ──
+      document.getElementById('test-info').textContent =
+        getBookLabel(state.book) + ' · DAY ' + state.day;
+      goStep(3);
+      startTimer();
+      renderQuestion();
+    }
+  }
+
+  function getBookLabel(b) {
+    const m = {
+      'suneung-2000': '수능 2000',
+      'hyper': '하이퍼',
+      'highest': '하이스트',
+      'neungyul-eowon': '능률보카 어원',
+      'neungyul-suneung-2200': '능률 수능완성 2200',
+      'neungyul-gohyo-pilsu': '능률보카 고교필수',
+      'eohwi-suneung': '어휘 끝 수능',
+      '27-suneung-teukgang': '27수능특강 영어',
+      'teukgeup-ebs-voca': '특급 수능EBS 기출VOCA',
+      'suneung-yeongye-1800': '수능연계 1800',
+      'godeung-complete-25': '고등 complete 25개정'
+    };
+    return m[b] || b;
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // 정답 비교: 관대한 매칭 (띄어쓰기/괄호/특수문자 무시)
+  //
+  // 정답에 "/", "," , ";" 로 여러 뜻이 적혀있으면 그 중 하나만 맞아도 OK
+  // 예: "쫓다 / 따라가다" → 학생이 "쫓다" 또는 "따라가다" 적으면 정답
+  //
+  // 비교 시 무시하는 것:
+  //   - 모든 공백
+  //   - 괄호 안 내용 "(n) 종아리" → "종아리"
+  //   - 문장부호 . , ; : ! ?
+  // ═══════════════════════════════════════════════════════════
+  function normalizeKorean(s) {
+    if (!s) return '';
+    return String(s)
+      .replace(/\([^)]*\)/g, '')   // 괄호 안 내용 제거 ("(n) 쫓다" → " 쫓다")
+      .replace(/\[[^\]]*\]/g, '')  // 대괄호도 제거
+      .replace(/[\s.,;:!?~\-=·•·]/g, '')  // 공백, 문장부호 제거
+      .toLowerCase()
+      .trim();
+  }
+
+  function isCorrectAnswer(userInput, correctKo) {
+    const user = normalizeKorean(userInput);
+    if (!user) return false;
+
+    // 정답을 구분자로 분리하여 후보들 만들기
+    // 구분자: / , ; " " (한글 두 단어 사이의 공백은 좀 위험하니 제외)
+    const candidates = String(correctKo)
+      .split(/[\/,;]|\s+또는\s+/)
+      .map(c => normalizeKorean(c))
+      .filter(c => c.length > 0);
+
+    // 후보 중 하나라도 일치하면 정답
+    return candidates.some(cand => cand === user);
+  }
+
+
+  // ═══════════════════════════════════════════════════════════
+  // 온라인 시험 응시 (주관식)
+  // ═══════════════════════════════════════════════════════════
+  function renderQuestion() {
+    const w = state.words[state.currentIdx];
+    if (!w) return finishTest();
+
+    document.getElementById('progress-bar').style.width =
+      ((state.currentIdx) / state.count * 100) + '%';
+    document.getElementById('qnum').textContent =
+      `문제 ${state.currentIdx + 1} / ${state.count}`;
+
+    document.getElementById('question').innerHTML =
+      `<div class="en">${w.en}</div>`;
+
+    // 입력란 초기화 + 포커스
+    const inp = document.getElementById('answer-input');
+    inp.value = '';
+    inp.disabled = false;
+    setTimeout(() => inp.focus(), 50);
+
+    // 다음 버튼 라벨
+    document.getElementById('btn-next').disabled = true;
+    document.getElementById('btn-next').textContent =
+      state.currentIdx === state.count - 1 ? '결과 보기 →' : '다음 →';
+  }
+
+  // 입력값에 따라 [다음] 버튼 활성/비활성 (한 글자라도 있으면 활성)
+  function onAnswerInputChange() {
+    const v = document.getElementById('answer-input').value.trim();
+    document.getElementById('btn-next').disabled = v.length === 0;
+  }
+
+  function nextQuestion() {
+    const inp = document.getElementById('answer-input');
+    const userInput = inp.value.trim();
+    if (!userInput) return;   // 빈 답안 방지
+
+    const w = state.words[state.currentIdx];
+    const correct = isCorrectAnswer(userInput, w.ko);
+    state.answers.push({
+      en: w.en,
+      ko: w.ko,
+      selected: userInput,   // 학생이 적은 답
+      correct: correct
+    });
+    state.currentIdx++;
+    if (state.currentIdx >= state.count) finishTest();
+    else renderQuestion();
+  }
+
+  function skipQuestion() {
+    const w = state.words[state.currentIdx];
+    state.answers.push({ en: w.en, ko: w.ko, selected: null, correct: false });
+    state.currentIdx++;
+    if (state.currentIdx >= state.count) finishTest();
+    else renderQuestion();
+  }
+
+  // 타이머
+  function startTimer() {
+    state.startTime = Date.now();
+    state.elapsedSec = 0;
+    state.timerInterval = setInterval(() => {
+      state.elapsedSec = Math.floor((Date.now() - state.startTime) / 1000);
+      const m = String(Math.floor(state.elapsedSec / 60)).padStart(2, '0');
+      const s = String(state.elapsedSec % 60).padStart(2, '0');
+      document.getElementById('timer').textContent = m + ':' + s;
+    }, 1000);
+  }
+  function stopTimer() {
+    if (state.timerInterval) clearInterval(state.timerInterval);
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // STEP 4: 시험 종료 + 결과 표시 (온/오프라인 공통)
+  // ═══════════════════════════════════════════════════════════
+  async function finishTest() {
+    stopTimer();
+    document.getElementById('progress-bar').style.width = '100%';
+
+    const correct = state.answers.filter(a => a.correct).length;
+    const wrong = state.count - correct;
+    const score = Math.round((correct / state.count) * 100);
+
+    const grade = calcGrade(score);
+    const badge = document.getElementById('result-badge');
+    if (score >= 90) { badge.className = 'badge gold'; badge.textContent = '🏆'; }
+    else if (score >= 75) { badge.className = 'badge green'; badge.textContent = '✓'; }
+    else if (score >= 60) { badge.className = 'badge orange'; badge.textContent = '📖'; }
+    else { badge.className = 'badge red'; badge.textContent = '💪'; }
+
+    animateNumber('score-num', 0, score, 1000);
+    document.getElementById('grade-label').textContent = grade.label;
+    document.getElementById('stat-correct').textContent = correct;
+    document.getElementById('stat-wrong').textContent = wrong;
+    const m = String(Math.floor(state.elapsedSec / 60)).padStart(2, '0');
+    const s = String(state.elapsedSec % 60).padStart(2, '0');
+    // 오프라인은 정확한 소요시간 측정 불가 → 대시 표시
+    document.getElementById('stat-time').textContent =
+      state.mode === 'offline' ? '—' : (m + ':' + s);
+
+    const wrongWordsList = state.answers
+      .filter(a => !a.correct)
+      .map(a => a.en + '(' + a.ko + ')');
+
+    let feedback = '결과 분석 중...';
+    if (score >= 90) feedback = '🎯 훌륭해요! 거의 다 맞히셨네요. 이 흐름 유지하세요!';
+    else if (score >= 75) feedback = '👍 잘하셨어요. 오답 단어만 따로 정리해두면 완벽!';
+    else if (score >= 60) feedback = '📖 꽤 잘하셨어요. 오답 단어를 따로 정리해서 내일 다시 복습해보세요.';
+    else feedback = '💪 같은 DAY를 한 번 더 반복하고 다시 시험을 보세요. 차근차근!';
+
+    document.getElementById('feedback-box').textContent = feedback + '\n\n결과를 시트에 저장 중...';
+
+    if (wrongWordsList.length > 0) {
+      document.getElementById('wrong-words-box').style.display = 'block';
+      document.getElementById('wrong-words-list').innerHTML =
+        wrongWordsList.map(w => `<span class="item">${w}</span>`).join('');
+    } else {
+      document.getElementById('wrong-words-box').style.display = 'none';
+    }
+
+    goStep(4);
+
+    try {
+      const result = await postToScript({
+        action: 'submitTest',
+        student: state.student.name,
+        floor: state.floor.replace('층', ''),
+        seat: state.student.seatNo,
+        parentPhoneLast4: state.student.parentLast4,
+        mode: state.mode,
+        book: state.book,
+        day: state.day,
+        total: state.count,
+        correct: correct,
+        wrong: wrong,
+        score: score,
+        elapsedSec: state.elapsedSec,
+        feedback: feedback,
+        wrongWords: wrongWordsList.join(', '),
+        timestamp: new Date().toISOString()
+      });
+
+      if (result.status === 'success') {
+        if (result.enhancedFeedback) {
+          document.getElementById('feedback-box').textContent = result.enhancedFeedback;
+        } else {
+          document.getElementById('feedback-box').textContent = feedback + '\n\n✓ 결과가 시트에 저장되었습니다.';
+        }
+      } else {
+        document.getElementById('feedback-box').textContent =
+          feedback + '\n\n⚠️ 저장 실패: ' + (result.message || '관리자에게 문의해주세요.');
+      }
+    } catch (err) {
+      document.getElementById('feedback-box').textContent =
+        feedback + '\n\n⚠️ 네트워크 오류로 저장이 안 됐어요: ' + err.message;
+    }
+
+    // 시험_일정 시트의 진도 업데이트 (오늘의 시험으로 응시한 경우만)
+    // 별도 try-catch — 실패해도 시험 결과는 그대로
+    if (state.scheduleEntry) {
+      notifyScheduleCompleted(score);
+    }
+  }
+
+  function calcGrade(score) {
+    if (score >= 90) return { label: '최우수 · OUTSTANDING' };
+    if (score >= 75) return { label: '우수 · EXCELLENT' };
+    if (score >= 60) return { label: '양호 · GOOD' };
+    if (score >= 40) return { label: '학습필요 · NEEDS PRACTICE' };
+    return { label: '집중학습 · FOCUS REQUIRED' };
+  }
+
+  function animateNumber(elId, from, to, duration) {
+    const el = document.getElementById(elId);
+    const start = Date.now();
+    const tick = () => {
+      const elapsed = Date.now() - start;
+      const t = Math.min(elapsed / duration, 1);
+      el.textContent = Math.round(from + (to - from) * t);
+      if (t < 1) requestAnimationFrame(tick);
+    };
+    tick();
+  }
+
+  function restartTest() {
+    // 시험 일정 항목이 있었으면 오늘의 시험 화면으로 (다른 일정도 확인 가능)
+    if (state.student) {
+      goStep('today');
+      loadTodaySchedule();
+    } else {
+      goStep(2);
+    }
+  }
+
+
+  // ═══════════════════════════════════════════════════════════
+  // ★ 오프라인 시험지 생성 / 인쇄 / 답안 입력 / 채점
+  // ═══════════════════════════════════════════════════════════
+
+  // 시험지 빌드 - state.words 기반으로 문제·선택지·정답 만들기
+  // ※ 각 문제마다 정답 위치(①~④) 무작위, 오답 선지 3개도 무작위 셔플
+  function buildOfflineTestSheet() {
+    const s = state.student || {};
+    const seat = (s.seatType || '') + (s.seatNo ? ' ' + s.seatNo + '번' : '');
+
+    // 헤더 채우기
+    document.getElementById('p-floor-sub').textContent =
+      'VOCABULARY TEST · ' + (state.floor || '');
+    document.getElementById('p-name').textContent = s.name || '-';
+    document.getElementById('p-seat').textContent = seat || '-';
+    document.getElementById('p-book').textContent = getBookLabel(state.book);
+    document.getElementById('p-day').textContent = 'DAY ' + state.day;
+    document.getElementById('p-count').textContent = state.count + '문항';
+    const d = new Date();
+    document.getElementById('p-date').textContent =
+      d.getFullYear() + '. ' + (d.getMonth()+1) + '. ' + d.getDate();
+
+    // 각 문항: 영단어만 (빈 줄에 한글 뜻 적기)
+    state.offlineSheet = state.words.map((w, idx) => {
+      return {
+        no: idx + 1,
+        en: w.en,
+        ko: w.ko        // 정답 (정답표용)
+      };
+    });
+
+    // 문제 영역 렌더 — 영단어 + 빈 줄 (한글 답 적기)
+    const qList = document.getElementById('p-q-list');
+    qList.innerHTML = state.offlineSheet.map(q => {
+      return `
+        <div class="ts-q">
+          <div class="qno">${String(q.no).padStart(2,'0')}.</div>
+          <div class="qbody">
+            <div class="qword">${escapeHtml(q.en)}</div>
+            <div style="border-bottom:1.5px solid #444; height:28px; margin-top:8px;">&nbsp;</div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // 학생용 답안란은 별도로 두지 않음 — 영단어 옆 빈 줄에 직접 적기
+
+    // 정답표 (교사용)
+    const ak = document.getElementById('p-ak-grid');
+    ak.innerHTML = state.offlineSheet.map(q =>
+      `<div class="ak">${String(q.no).padStart(2,'0')}. <b>${escapeHtml(q.ko)}</b></div>`
+    ).join('');
+  }
+
+  function printTestSheet() {
+    window.print();
+  }
+
+  // ── 답안 입력 화면으로 이동 ──
+  function goAnswerInput() {
+    if (!state.offlineSheet || state.offlineSheet.length === 0) {
+      alert('먼저 시험지를 생성해주세요.');
+      return;
+    }
+    state.offlineAnswers = new Array(state.offlineSheet.length).fill(null);
+
+    // 빠른 채점 모드(메인) 초기화
+    initWrongMode();
+
+    // 한 문제씩 입력 모드는 보조 — 미리 준비만
+    renderAnswerGrid();
+    updateAnswerProgress();
+
+    goStep('answer-input');
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // 빠른 채점 모드 — 틀린 번호만 입력
+  // ═══════════════════════════════════════════════════════════
+  function initWrongMode() {
+    const total = state.offlineSheet.length;
+    document.getElementById('ai-total').textContent = total;
+    document.getElementById('wrong-numbers').value = '';
+
+    // 기본: 모두 정답
+    updateWrongPreview([]);
+
+    // 입력 이벤트
+    const inp = document.getElementById('wrong-numbers');
+    inp.oninput = function() {
+      const nums = parseWrongNumbers(inp.value, total);
+      updateWrongPreview(nums);
+    };
+
+    // 빠른 채점 모드를 메인으로 보이기
+    document.getElementById('ai-wrong-mode').style.display = 'block';
+    document.getElementById('ai-detail-mode').style.display = 'none';
+    document.getElementById('btn-toggle-mode').textContent = '🔄 한 문제씩 답 입력 모드';
+
+    // 입력란 자동 포커스
+    setTimeout(() => inp.focus(), 100);
+  }
+
+  // "1, 4, 7" 또는 "1 4 7" → [1, 4, 7]
+  function parseWrongNumbers(text, total) {
+    if (!text) return [];
+    const tokens = String(text).split(/[\s,;]+/).filter(t => t.length > 0);
+    const nums = [];
+    for (const t of tokens) {
+      const n = parseInt(t, 10);
+      if (!isNaN(n) && n >= 1 && n <= total && nums.indexOf(n) === -1) {
+        nums.push(n);
+      }
+    }
+    return nums.sort((a, b) => a - b);
+  }
+
+  function updateWrongPreview(wrongNums) {
+    const total = state.offlineSheet.length;
+    const wrongCount = wrongNums.length;
+    const correctCount = total - wrongCount;
+    const score = Math.round((correctCount / total) * 100);
+
+    document.getElementById('ai-correct-count').textContent = correctCount;
+    document.getElementById('ai-wrong-count').textContent = wrongCount;
+    document.getElementById('ai-score-preview').innerHTML = score + '<span style="font-size:14px;">점</span>';
+
+    // 틀린 단어 미리보기
+    const previewEl = document.getElementById('ai-wrong-preview');
+    if (wrongCount > 0) {
+      const items = wrongNums.map(n => {
+        const q = state.offlineSheet[n - 1];
+        return '<b>' + n + '.</b> ' + escapeHtml(q.en) + ' = ' + escapeHtml(q.ko);
+      });
+      previewEl.innerHTML = '<div style="font-weight:600; color: var(--danger); margin-bottom:6px;">❌ 틀린 단어 (' + wrongCount + '개):</div>' +
+        items.join('<br>');
+      previewEl.style.display = 'block';
+    } else {
+      previewEl.style.display = 'none';
+    }
+  }
+
+  // 빠른 채점 실행
+  async function gradeByWrongNumbers() {
+    const total = state.offlineSheet.length;
+    const wrongNums = parseWrongNumbers(document.getElementById('wrong-numbers').value, total);
+    const wrongSet = new Set(wrongNums);
+
+    // 가짜 answers 구성 (틀린 번호만 correct=false, 나머지는 true)
+    state.answers = state.offlineSheet.map((q, i) => {
+      const no = i + 1;
+      const isWrong = wrongSet.has(no);
+      return {
+        en: q.en,
+        ko: q.ko,
+        selected: isWrong ? '(틀림)' : q.ko,  // 학생 답 — 맞은 건 정답 그대로
+        correct: !isWrong
+      };
+    });
+
+    state.elapsedSec = 0;
+
+    // 기존 finishTest 흐름 재사용 (점수/등급/저장 동일)
+    await finishTest();
+  }
+
+  // 모드 토글 (빠른 채점 ↔ 한 문제씩)
+  function toggleAnswerMode() {
+    const wrong = document.getElementById('ai-wrong-mode');
+    const detail = document.getElementById('ai-detail-mode');
+    const btn = document.getElementById('btn-toggle-mode');
+    if (wrong.style.display !== 'none') {
+      // 빠른 → 상세
+      wrong.style.display = 'none';
+      detail.style.display = 'block';
+      btn.textContent = '🔄 빠른 채점 모드 (틀린 번호만)';
+      // 상세 모드 첫 입력란 포커스
+      const firstInput = detail.querySelector('input');
+      if (firstInput) setTimeout(() => firstInput.focus(), 100);
+    } else {
+      // 상세 → 빠른
+      wrong.style.display = 'block';
+      detail.style.display = 'none';
+      btn.textContent = '🔄 한 문제씩 답 입력 모드';
+      setTimeout(() => document.getElementById('wrong-numbers').focus(), 100);
+    }
+  }
+
+  function renderAnswerGrid() {
+    const grid = document.getElementById('ai-grid');
+    grid.className = 'ai-grid-text';   // 새 스타일 적용
+    grid.innerHTML = state.offlineSheet.map((q, idx) => `
+      <div class="ai-cell-text">
+        <div class="n">${String(q.no).padStart(2,'0')}</div>
+        <div class="en">${escapeHtml(q.en)}</div>
+        <input type="text"
+               data-idx="${idx}"
+               placeholder="한글 뜻"
+               autocomplete="off"
+               autocapitalize="off"
+               spellcheck="false">
+      </div>
+    `).join('');
+
+    // 입력 이벤트
+    grid.querySelectorAll('input').forEach(inp => {
+      const idx = parseInt(inp.dataset.idx, 10);
+      inp.addEventListener('input', e => {
+        state.offlineAnswers[idx] = e.target.value.trim() || null;
+        updateAnswerProgress();
+      });
+      // Enter 시 다음 입력란으로
+      inp.addEventListener('keypress', e => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const inputs = grid.querySelectorAll('input');
+          const next = inputs[idx + 1];
+          if (next) next.focus();
+          else if (!document.getElementById('btn-grade').disabled) gradeOfflineAnswers();
+        }
+      });
+    });
+
+    // 첫 입력란 자동 포커스
+    const first = grid.querySelector('input');
+    if (first) setTimeout(() => first.focus(), 100);
+  }
+
+  function updateAnswerProgress() {
+    const filled = state.offlineAnswers.filter(a => a !== null && a !== '').length;
+    const total = state.offlineSheet.length;
+    document.getElementById('ai-progress').textContent = '입력: ' + filled + ' / ' + total;
+    document.getElementById('btn-grade').disabled = filled !== total;
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // 📝 시험 신청 (학생 자가 신청)
+  // ═══════════════════════════════════════════════════════════
+  // BOOK_MAX_DAY는 단어장별 최대 DAY (서버 BOOK_MAX_DAY와 동일해야 함)
+  const APPLY_BOOK_MAX_DAY = {
+    'suneung-2000': 50,
+    'hyper': 50,
+    'highest': 50,
+    'neungyul-eowon': 67,
+    'neungyul-gohyo-pilsu': 60,
+    'neungyul-suneung-2200': 0,
+    'eohwi-suneung': 45,
+    '27-suneung-teukgang': 30,
+    'teukgeup-ebs-voca': 0,
+    'suneung-yeongye-1800': 60
+  };
+
+  // 신청 폼 화면 진입
+  async function goApply() {
+    if (!state.student) {
+      alert('본인확인이 필요합니다.');
+      return;
+    }
+    goStep('apply');
+
+    // 기존 신청 조회 → 폼 초기값 채우기
+    try {
+      const result = await postToScript({
+        action: 'getMyApplication',
+        name: state.student.name,
+        floor: state.floor
+      });
+
+      if (result.status === 'success' && result.application) {
+        // 기존 신청 있음 — 폼에 채우기
+        fillApplyForm(result.application);
+        document.getElementById('apply-hint').innerHTML =
+          '<b>현재 신청을 수정합니다.</b> 변경 후 [신청하기] 버튼을 눌러주세요.<br>' +
+          '<small style="color: var(--muted);">진도(현재 DAY)와 응시 기록은 그대로 유지됩니다.</small>';
+        document.getElementById('btn-apply-submit').innerHTML = '✏️ 신청 수정하기';
+      } else {
+        // 새 신청
+        document.getElementById('apply-hint').textContent =
+          '원하는 단어장과 응시 방식을 직접 선택하세요. 신청 즉시 적용됩니다.';
+        document.getElementById('btn-apply-submit').innerHTML = '✅ 신청하기';
+      }
+    } catch (err) {
+      console.warn('기존 신청 조회 실패:', err);
+    }
+
+    updateApplySummary();
+  }
+
+  // 폼에 기존 신청 데이터 채우기
+  function fillApplyForm(app) {
+    // 단어장 (코드|이름 형식의 value)
+    const bookSel = document.getElementById('apply-book');
+    if (bookSel && app.bookCode) {
+      for (const opt of bookSel.options) {
+        if (opt.value.indexOf(app.bookCode + '|') === 0) {
+          bookSel.value = opt.value;
+          break;
+        }
+      }
+    }
+    // 시작DAY
+    if (app.startDay) document.getElementById('apply-start-day').value = app.startDay;
+    // 순서
+    document.querySelectorAll('input[name="apply-order"]').forEach(r => {
+      r.checked = (r.value === app.order);
+    });
+    // 요일
+    document.querySelectorAll('.apply-day input').forEach(c => {
+      c.checked = (app.days || []).indexOf(c.value) >= 0;
+    });
+    // 분량
+    document.querySelectorAll('input[name="apply-count"]').forEach(r => {
+      r.checked = (parseInt(r.value, 10) === (app.countPerDay || 1));
+    });
+    // 시간대
+    document.querySelectorAll('input[name="apply-time"]').forEach(r => {
+      r.checked = (r.value === app.timeSlot);
+    });
+    // 메모는 그대로 두기 (memo 컬럼은 시스템 로그도 같이 있어서)
+    onApplyBookChange();
+  }
+
+  // 단어장 선택 변경 시 안내문구
+  function onApplyBookChange() {
+    const sel = document.getElementById('apply-book').value;  // 'code|name'
+    const code = sel.split('|')[0];
+    const infoEl = document.getElementById('apply-book-info');
+    if (!code) {
+      infoEl.textContent = '';
+    } else {
+      const maxDay = APPLY_BOOK_MAX_DAY[code];
+      if (maxDay === 0) {
+        infoEl.innerHTML = '⚠️ 이 단어장은 단어 데이터가 아직 준비 중입니다. 시험지에 데모 단어가 출제될 수 있어요.';
+        infoEl.style.color = '#c0392b';
+      } else {
+        infoEl.innerHTML = '💡 이 단어장은 총 <b>' + maxDay + '일</b> 분량입니다.';
+        infoEl.style.color = 'var(--muted)';
+      }
+    }
+    updateApplySummary();
+  }
+
+  // 신청 요약 자동 계산
+  function updateApplySummary() {
+    const sel = document.getElementById('apply-book').value;
+    const [code, name] = sel.split('|');
+    const startDay = parseInt(document.getElementById('apply-start-day').value, 10) || 1;
+    const order = document.querySelector('input[name="apply-order"]:checked').value;
+    const days = Array.from(document.querySelectorAll('.apply-day input:checked')).map(c => c.value);
+    const countPerDay = parseInt(document.querySelector('input[name="apply-count"]:checked').value, 10);
+    const timeSlot = document.querySelector('input[name="apply-time"]:checked').value;
+
+    const sumEl = document.getElementById('apply-summary-text');
+    if (!code || days.length === 0) {
+      sumEl.textContent = '단어장과 응시 요일을 선택해주세요.';
+      return;
+    }
+
+    const maxDay = APPLY_BOOK_MAX_DAY[code] || 50;
+    const totalDays = order === '역순' ? startDay : (maxDay - startDay + 1);
+    const perWeek = days.length * countPerDay;
+    const weeks = perWeek > 0 ? Math.ceil(totalDays / perWeek) : '?';
+
+    sumEl.innerHTML =
+      '• 단어장: <b>' + escapeHtml(name) + '</b> (총 ' + maxDay + '일 분량)<br>' +
+      '• 진행: <b>DAY ' + startDay + (order === '역순' ? ' → 1' : ' → ' + maxDay) + '</b> (' + order + ')<br>' +
+      '• 응시: <b>' + days.join('/') + '요일</b> (주 ' + days.length + '회)<br>' +
+      '• 분량: <b>매 응시일마다 ' + countPerDay + ' DAY</b> → 약 ' + weeks + '주 소요<br>' +
+      '• 시간대: <b>' + timeSlot + '</b>';
+  }
+
+  // 신청 제출
+  async function submitApplication() {
+    const sel = document.getElementById('apply-book').value;
+    const [code, name] = sel.split('|');
+    if (!code || !name) {
+      alert('단어장을 선택해주세요.');
+      return;
+    }
+    const startDay = parseInt(document.getElementById('apply-start-day').value, 10) || 1;
+    if (startDay < 1) {
+      alert('시작 DAY는 1 이상이어야 합니다.');
+      return;
+    }
+    const order = document.querySelector('input[name="apply-order"]:checked').value;
+    const days = Array.from(document.querySelectorAll('.apply-day input:checked')).map(c => c.value);
+    if (days.length === 0) {
+      alert('응시 요일을 1개 이상 선택해주세요.');
+      return;
+    }
+    const countPerDay = parseInt(document.querySelector('input[name="apply-count"]:checked').value, 10);
+    const timeSlot = document.querySelector('input[name="apply-time"]:checked').value;
+    const memo = document.getElementById('apply-memo').value.trim();
+
+    const btn = document.getElementById('btn-apply-submit');
+    const origText = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<span class="loading"></span> 신청 중...';
+
+    try {
+      const result = await postToScript({
+        action: 'submitApplication',
+        name: state.student.name,
+        floor: state.floor,
+        seat: state.student.seat || '',
+        bookCode: code,
+        bookName: name,
+        startDay: startDay,
+        order: order,
+        days: days,
+        countPerDay: countPerDay,
+        timeSlot: timeSlot,
+        memo: memo
+      });
+
+      if (result.status === 'success') {
+        alert('✅ ' + result.message + '\n오늘의 시험 화면으로 이동합니다.');
+        goStep('today');
+        loadTodaySchedule();
+      } else {
+        alert('❌ 신청 실패: ' + (result.message || '알 수 없는 오류'));
+      }
+    } catch (err) {
+      alert('❌ 네트워크 오류: ' + err.message);
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = origText;
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // 🖨️ 직원용 일괄 출력
+  // ═══════════════════════════════════════════════════════════
+  let _batchSchedules = [];     // 서버에서 받아온 학생 목록
+  let _batchSelected = new Set(); // 선택된 rowIndex 집합
+  let _batchFilter = { time: '오후', floor: '' }; // 기본: 오후 / 전체 층
+
+  // 진입
+  function goBatchPrint() {
+    _batchFilter = { time: '오후', floor: '' };
+    _batchSelected = new Set();
+    // 버튼 상태 갱신
+    document.querySelectorAll('[data-batch-time]').forEach(b => {
+      b.classList.toggle('active', b.dataset.batchTime === _batchFilter.time);
+    });
+    document.querySelectorAll('[data-batch-floor]').forEach(b => {
+      b.classList.toggle('active', b.dataset.batchFloor === _batchFilter.floor);
+    });
+    goStep('batch-print');
+    loadBatchSchedules();
+  }
+
+  function setBatchFilter(kind, value) {
+    _batchFilter[kind] = value;
+    // 버튼 활성 토글
+    const attr = (kind === 'time') ? 'data-batch-time' : 'data-batch-floor';
+    document.querySelectorAll('[' + attr + ']').forEach(b => {
+      b.classList.toggle('active', b.getAttribute(attr) === value);
+    });
+    loadBatchSchedules();
+  }
+
+  async function loadBatchSchedules() {
+    const listEl = document.getElementById('batch-list');
+    const dateEl = document.getElementById('batch-date-label');
+    listEl.innerHTML = '<div class="batch-loading">⏳ 학생 목록 불러오는 중...</div>';
+    _batchSelected = new Set();
+    updateBatchCounter();
+
+    try {
+      const result = await postToScript({
+        action: 'getAllTodaySchedules',
+        floor: _batchFilter.floor,
+        timeSlot: _batchFilter.time
+      });
+
+      if (result.status !== 'success') {
+        listEl.innerHTML = '<div class="batch-empty"><div class="be-icon">⚠️</div>' +
+          escapeHtml(result.message || '목록을 가져올 수 없습니다.') + '</div>';
+        dateEl.textContent = '오류가 발생했습니다.';
+        return;
+      }
+
+      _batchSchedules = result.schedules || [];
+      const dateStr = result.todayDate || '';
+      const dayStr = result.today || '';
+      const filterStr = (_batchFilter.time || '전체') + ' · ' +
+                        (_batchFilter.floor || '전체 층');
+      dateEl.textContent = dateStr + ' (' + dayStr + ') · ' + filterStr +
+                           ' · 총 ' + _batchSchedules.length + '명';
+
+      if (_batchSchedules.length === 0) {
+        listEl.innerHTML = '<div class="batch-empty"><div class="be-icon">🎉</div>' +
+          '<div>해당 조건으로 오늘 응시할 학생이 없습니다.</div></div>';
+        document.getElementById('btn-batch-print').disabled = true;
+        return;
+      }
+
+      renderBatchList();
+      // 기본: 모두 선택 상태로 시작
+      _batchSchedules.forEach(s => _batchSelected.add(s.rowIndex));
+      updateBatchCounter();
+      updateBatchItemStyles();
+      document.getElementById('btn-batch-print').disabled = false;
+
+    } catch (err) {
+      listEl.innerHTML = '<div class="batch-empty"><div class="be-icon">⚠️</div>' +
+        '네트워크 오류: ' + escapeHtml(err.message) + '</div>';
+    }
+  }
+
+  function renderBatchList() {
+    const listEl = document.getElementById('batch-list');
+    listEl.innerHTML = _batchSchedules.map((s, i) => {
+      const dayList = s.days.map(d => 'DAY ' + d).join(', ');
+      const seat = s.seat ? '자리 ' + formatSeat(s.seat) : '';
+      const lastDateStr = s.lastDate ? formatDateShort(s.lastDate) : '';
+      const lastInfo = lastDateStr ? '· 지난 응시 ' + escapeHtml(lastDateStr) +
+                       (s.lastScore ? ' (' + escapeHtml(s.lastScore) + '점)' : '') : '';
+      return '' +
+        '<label class="batch-item" data-row="' + s.rowIndex + '">' +
+          '<input type="checkbox" checked onchange="toggleBatchItem(' + s.rowIndex + ', this.checked)">' +
+          '<div class="bi-num">' + (i + 1) + '.</div>' +
+          '<div class="bi-main">' +
+            '<div class="bi-name">' + escapeHtml(s.name) +
+              '<span class="bi-seat">' + escapeHtml(s.floor) + ' ' + escapeHtml(seat) + '</span>' +
+            '</div>' +
+            '<div class="bi-detail">' +
+              '<b>' + escapeHtml(s.book) + '</b> · ' + dayList + ' · ' + escapeHtml(s.timeSlot || '') +
+              (lastInfo ? '<br>' + lastInfo : '') +
+            '</div>' +
+          '</div>' +
+        '</label>';
+    }).join('');
+  }
+
+  // 자리 번호 포맷: "26번"이든 "26"이든 모두 "26번"으로 (중복 방지)
+  function formatSeat(seat) {
+    if (!seat) return '';
+    const s = String(seat).trim();
+    if (!s) return '';
+    return s.endsWith('번') ? s : (s + '번');
+  }
+
+  // 날짜 포맷: "Wed May 13 2026 00:00:00 GMT+0900 (한국 표준시)" → "2026-05-13"
+  function formatDateShort(d) {
+    if (!d) return '';
+    const s = String(d).trim();
+    if (!s) return '';
+    // 이미 YYYY-MM-DD 형식이면 그대로 (시트에 텍스트로 저장된 경우)
+    const isoMatch = s.match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (isoMatch) return isoMatch[1] + '-' + isoMatch[2] + '-' + isoMatch[3];
+    // "2026. 5. 13" 형식 → "2026-05-13"
+    const krMatch = s.match(/^(\d{4})\.\s*(\d{1,2})\.\s*(\d{1,2})/);
+    if (krMatch) {
+      return krMatch[1] + '-' + String(krMatch[2]).padStart(2, '0') + '-' + String(krMatch[3]).padStart(2, '0');
+    }
+    // JS Date 문자열 파싱 시도 — 사용자 로컬 타임존 기준
+    const date = new Date(s);
+    if (!isNaN(date.getTime())) {
+      const y = date.getFullYear();
+      const m = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return y + '-' + m + '-' + day;
+    }
+    return s;
+  }
+
+  function toggleBatchItem(rowIndex, checked) {
+    if (checked) _batchSelected.add(rowIndex);
+    else _batchSelected.delete(rowIndex);
+    updateBatchCounter();
+    updateBatchItemStyles();
+  }
+
+  function updateBatchItemStyles() {
+    document.querySelectorAll('.batch-item').forEach(item => {
+      const row = parseInt(item.dataset.row, 10);
+      item.classList.toggle('selected', _batchSelected.has(row));
+      const cb = item.querySelector('input[type="checkbox"]');
+      if (cb) cb.checked = _batchSelected.has(row);
+    });
+  }
+
+  function updateBatchCounter() {
+    const sel = _batchSelected.size;
+    const tot = _batchSchedules.length;
+    document.getElementById('batch-counter-label').textContent =
+      '선택: ' + sel + ' / ' + tot + '명';
+    const btn = document.getElementById('btn-batch-toggle-all');
+    if (btn) {
+      btn.textContent = (sel === tot && tot > 0) ? '전체 해제' : '전체 선택';
+    }
+    const printBtn = document.getElementById('btn-batch-print');
+    if (printBtn) {
+      printBtn.disabled = sel === 0;
+      printBtn.innerHTML = '🖨️ 선택한 학생 시험지 생성' + (sel > 0 ? ' (' + sel + '명)' : '');
+    }
+  }
+
+  function toggleBatchSelectAll() {
+    if (_batchSelected.size === _batchSchedules.length) {
+      _batchSelected.clear();
+    } else {
+      _batchSchedules.forEach(s => _batchSelected.add(s.rowIndex));
+    }
+    updateBatchCounter();
+    updateBatchItemStyles();
+  }
+
+  // 선택된 학생들의 단어를 한꺼번에 받아 시험지 생성
+  async function generateBatchPrint() {
+    const targets = _batchSchedules.filter(s => _batchSelected.has(s.rowIndex));
+    if (targets.length === 0) return;
+
+    const btn = document.getElementById('btn-batch-print');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="loading"></span> 시험지 생성 중... (0 / ' + targets.length + ')';
+
+    const sheets = [];   // { schedule, words: [...] }
+    let done = 0;
+
+    for (const sch of targets) {
+      // 학생의 모든 DAY 단어를 한꺼번에 가져옴 (DAY 17, 18 → 80단어)
+      const allWords = [];
+      let anyFetched = false;
+      let errorMsg = null;
+
+      for (const dayNum of sch.days) {
+        try {
+          const result = await postToScript({
+            action: 'getWords',
+            book: sch.bookCode,
+            day: dayNum,
+            count: 200   // 충분히 큰 값으로 DAY 전체 단어 받기
+          });
+          if (result.status === 'success' && result.words && result.words.length > 0) {
+            // 각 단어에 출처 DAY 정보 (디버그용)
+            result.words.forEach(w => allWords.push(w));
+            anyFetched = true;
+          }
+        } catch (e) {
+          errorMsg = e.message;
+        }
+      }
+
+      const words = anyFetched ? allWords : null;
+      sheets.push({
+        schedule: sch,
+        words: words,
+        dayLabel: 'DAY ' + sch.days.join(','),
+        error: errorMsg
+      });
+
+      done++;
+      btn.innerHTML = '<span class="loading"></span> 시험지 생성 중... (' + done + ' / ' + targets.length + ')';
+    }
+
+    renderBatchPrintOutput(sheets);
+    goStep('batch-print-output');
+
+    btn.disabled = false;
+    updateBatchCounter();
+  }
+
+  // 문항 수에 따른 동적 레이아웃 계산 (A4 한 페이지에 꽉 차도록)
+  // count: 문항 수
+  // isAnswer: 정답표면 true (영어+한글 한 줄), false면 시험지 (영어+빈줄)
+  function computeLayout(count, isAnswer) {
+    // A4 인쇄 영역 (헤더/푸터 제외)
+    // 시험지: 약 880px / 정답표: 약 900px (정답표는 푸터 안내 없음)
+    const PAGE_HEIGHT = isAnswer ? 900 : 880;
+
+    let cols, perCol, fontSize, padding, minHeight, lineHeight, numSize;
+
+    if (isAnswer) {
+      // 정답표: 영어+한글 한 줄
+      if (count <= 30) cols = 2;
+      else if (count <= 60) cols = 2;
+      else if (count <= 90) cols = 3;
+      else if (count <= 140) cols = 3;
+      else cols = 4;
+      perCol = Math.ceil(count / cols);
+
+      // 한 컬럼당 사용 가능 높이 / 항목 수 = 항목당 높이
+      const rowHeight = PAGE_HEIGHT / perCol;
+
+      // 폰트는 항목당 높이에 맞춰 결정
+      if (rowHeight >= 30) { fontSize = 12; padding = 2; lineHeight = 1.5; }
+      else if (rowHeight >= 22) { fontSize = 11; padding = 1.5; lineHeight = 1.4; }
+      else if (rowHeight >= 16) { fontSize = 10; padding = 1; lineHeight = 1.35; }
+      else if (rowHeight >= 12) { fontSize = 9; padding = 0.5; lineHeight = 1.3; }
+      else { fontSize = 8; padding = 0; lineHeight = 1.25; }
+
+      // 항목 실제 높이 = fontSize × lineHeight + padding × 2
+      const itemHeight = fontSize * lineHeight + padding * 2;
+      // 남는 공간 = 페이지 - (항목 수 × 항목 높이)
+      const remainingSpace = PAGE_HEIGHT - (perCol * itemHeight);
+      // 항목 간 간격 = 남는 공간을 (항목 수 - 1)로 나누기 (음수면 0)
+      const marginBetween = perCol > 1 ? Math.max(0, remainingSpace / (perCol - 1)) : 0;
+
+      return { cols, perCol, fontSize, padding, lineHeight, marginBetween };
+    }
+
+    // 시험지: 영어 + 빈 줄
+    if (count <= 20) cols = 1;
+    else if (count <= 40) cols = 2;
+    else if (count <= 70) cols = 2;
+    else if (count <= 110) cols = 3;
+    else cols = 4;
+    perCol = Math.ceil(count / cols);
+
+    const rowHeight = PAGE_HEIGHT / perCol;
+
+    // 시험지는 답을 적을 공간이 필요하므로 폰트 비교적 일정하게
+    if (rowHeight >= 40) {
+      fontSize = 14; numSize = 10; padding = 4; minHeight = 18;
+    } else if (rowHeight >= 30) {
+      fontSize = 13; numSize = 10; padding = 3; minHeight = 16;
+    } else if (rowHeight >= 22) {
+      fontSize = 12; numSize = 9.5; padding = 2.5; minHeight = 14;
+    } else if (rowHeight >= 18) {
+      fontSize = 11; numSize = 9; padding = 2; minHeight = 13;
+    } else if (rowHeight >= 14) {
+      fontSize = 10; numSize = 8.5; padding = 1.5; minHeight = 12;
+    } else if (rowHeight >= 11) {
+      fontSize = 9; numSize = 8; padding = 1; minHeight = 10;
+    } else {
+      fontSize = 8; numSize = 7.5; padding = 0.5; minHeight = 9;
+    }
+
+    // 항목 실제 높이 = max(폰트 높이 + 패딩, minHeight) + 점선 보더(1px)
+    const itemHeight = Math.max(fontSize * 1.4 + padding * 2, minHeight) + 1;
+    // 남는 공간을 항목 사이에 분배
+    const remainingSpace = PAGE_HEIGHT - (perCol * itemHeight);
+    const marginBetween = perCol > 1 ? Math.max(0, remainingSpace / (perCol - 1)) : 0;
+
+    return { cols, perCol, fontSize, numSize, padding, minHeight, marginBetween };
+  }
+
+  // 인쇄 영역 렌더링
+  function renderBatchPrintOutput(sheets) {
+    const area = document.getElementById('batch-print-area');
+    const today = new Date();
+    const dateStr = today.getFullYear() + '. ' + (today.getMonth() + 1) + '. ' + today.getDate();
+
+    const parts = sheets.map(s => {
+      const sch = s.schedule;
+      const words = (s.words && s.words.length > 0) ? s.words : null;
+
+      // 단어 없으면 안내
+      if (!words) {
+        return '' +
+          '<div class="batch-sheet">' +
+            '<h2 style="margin: 0 0 6px;">김엄마관리형독서실 · 단어시험</h2>' +
+            '<div style="font-size: 11px; color: #999; letter-spacing: 1px; margin-bottom: 14px;">VOCABULARY TEST · ' + escapeHtml(sch.floor) + '</div>' +
+            '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; font-size: 13px; margin-bottom: 12px;">' +
+              '<div>학생: <b>' + escapeHtml(sch.name) + '</b></div>' +
+              '<div>좌석: <b>' + escapeHtml(formatSeat(sch.seat)) + '</b></div>' +
+              '<div>단어장: <b>' + escapeHtml(sch.book) + '</b></div>' +
+              '<div>DAY: <b>' + escapeHtml(s.dayLabel) + '</b></div>' +
+              '<div>날짜: <b>' + dateStr + '</b></div>' +
+            '</div>' +
+            '<hr style="border: 0; border-top: 1.5px solid #333; margin: 10px 0 14px;">' +
+            '<div style="padding: 20px; text-align: center; color: #999; font-size: 13px;">' +
+              '⚠️ ' + escapeHtml(sch.bookCode) + ' DAY ' + escapeHtml(s.dayLabel) + ' 단어 데이터가 없습니다.<br>' +
+              '관리자에게 확인 요청 바랍니다.' +
+            '</div>' +
+          '</div>';
+      }
+
+      // 출제할 단어: 단어장의 모든 단어를 무작위 셔플 (제한 없이 전체)
+      const shuffled = words.slice().sort(() => Math.random() - 0.5);
+      const count = shuffled.length;
+      const selected = shuffled;
+
+      // ─── 동적 레이아웃 계산 ───
+      // A4 약 250mm 높이 - 헤더/푸터 약 35mm = 약 215mm 사용 가능
+      // 문항 수에 따라 컬럼/폰트/간격을 자동으로 조정해 한 페이지에 꽉 차게
+      const layout = computeLayout(count, /*isAnswer*/ false);
+      const akLayout = computeLayout(count, /*isAnswer*/ true);
+
+      // 시험지: 줄 단위 항목
+      // marginBottom으로 항목 간 간격을 추가해 페이지 꽉 채우기
+      const sheetItems = selected.map((w, i) => {
+        const no = String(i + 1).padStart(2, '0');
+        return '<div style="display: flex; gap: 5px; align-items: baseline; padding: ' + layout.padding + 'px 0; margin-bottom: ' + layout.marginBetween + 'px; border-bottom: 1px dotted #ccc; min-height: ' + layout.minHeight + 'px; break-inside: avoid;">' +
+                 '<span style="font-family: monospace; color: #888; font-size: ' + layout.numSize + 'px; min-width: 16px;">' + no + '.</span>' +
+                 '<b style="font-family: monospace; font-size: ' + layout.fontSize + 'px; min-width: 60px;">' + escapeHtml(w.en) + '</b>' +
+                 '<span style="flex: 1; border-bottom: 1px solid #ddd; height: 1px; margin: 0 4px;"></span>' +
+               '</div>';
+      }).join('');
+
+      // 정답표: 좀 더 컴팩트한 한 줄
+      const akItems = selected.map((w, i) => {
+        const no = String(i + 1).padStart(2, '0');
+        return '<div style="padding: ' + akLayout.padding + 'px 0; margin-bottom: ' + akLayout.marginBetween + 'px; font-size: ' + akLayout.fontSize + 'px; break-inside: avoid; line-height: ' + akLayout.lineHeight + ';">' +
+                 '<span style="color: #888; font-family: monospace; margin-right: 3px;">' + no + '.</span>' +
+                 '<span style="color: #555; font-family: monospace;">' + escapeHtml(w.en) + '</span> ' +
+                 '<b style="color: #000;">' + escapeHtml(w.ko) + '</b>' +
+               '</div>';
+      }).join('');
+
+      return '' +
+        // 시험지 페이지 (자동 레이아웃)
+        '<div class="batch-sheet">' +
+          '<h2 style="margin: 0 0 2px; font-size: 13px;">김엄마관리형독서실 · 단어시험</h2>' +
+          '<div style="font-size: 9px; color: #999; letter-spacing: 1px; margin-bottom: 5px;">VOCABULARY TEST · ' + escapeHtml(sch.floor) + '</div>' +
+          '<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px 12px; font-size: 9.5px; margin-bottom: 5px;">' +
+            '<div>학생: <b>' + escapeHtml(sch.name) + '</b></div>' +
+            '<div>좌석: <b>' + escapeHtml(formatSeat(sch.seat)) + '</b></div>' +
+            '<div>날짜: <b>' + dateStr + '</b></div>' +
+            '<div>단어장: <b>' + escapeHtml(sch.book) + '</b></div>' +
+            '<div>DAY: <b>' + escapeHtml(s.dayLabel) + '</b></div>' +
+            '<div>총문항: <b>' + count + '</b></div>' +
+          '</div>' +
+          '<hr style="border: 0; border-top: 1.2px solid #333; margin: 4px 0 5px;">' +
+          // 자동 컬럼 레이아웃
+          '<div style="column-count: ' + layout.cols + '; column-gap: 12px; column-rule: 1px solid #ddd;">' +
+            sheetItems +
+          '</div>' +
+          '<div style="margin-top: 5px; padding-top: 3px; border-top: 1px solid #ddd; font-size: 9px; color: #888;">' +
+            '※ 채점 후 틀린 번호를 시험지 맨 위에 적어주세요. (예: <b>오답: 1, 4, 7</b>)' +
+          '</div>' +
+        '</div>' +
+        // 정답표 페이지 (자동 레이아웃, 한 페이지에)
+        '<div class="batch-sheet">' +
+          '<div style="font-size: 9px; color: #888; margin-bottom: 1px;">📑 정답표 (교사용)</div>' +
+          '<h3 style="margin: 0 0 3px; font-size: 11.5px;">' + escapeHtml(sch.name) + ' · ' + escapeHtml(sch.book) + ' · ' + escapeHtml(s.dayLabel) + ' (' + count + '문항)</h3>' +
+          '<hr style="border: 0; border-top: 1px solid #333; margin: 0 0 3px;">' +
+          // 자동 컬럼 레이아웃
+          '<div style="column-count: ' + akLayout.cols + '; column-gap: 10px; column-rule: 1px solid #ddd;">' +
+            akItems +
+          '</div>' +
+        '</div>';
+    });
+
+    area.innerHTML = parts.join('');
+  }
+
+
+  // ── 오프라인 답안 채점 → 결과 화면 ──
+  async function gradeOfflineAnswers() {
+    state.answers = state.offlineSheet.map((q, i) => {
+      const userInput = state.offlineAnswers[i];   // 학생이 적은 한글
+      const ok = userInput ? isCorrectAnswer(userInput, q.ko) : false;
+      return {
+        en: q.en,
+        ko: q.ko,
+        selected: userInput || null,
+        correct: ok
+      };
+    });
+
+    // 오프라인은 정확한 소요시간 측정 불가
+    state.elapsedSec = 0;
+
+    // 기존 finishTest 흐름 재사용 (점수/등급/저장 동일)
+    await finishTest();
+  }
+
+
+  // ═══════════════════════════════════════════════════════════
+  // Apps Script POST 호출 (CORS 회피: text/plain)
+  // ═══════════════════════════════════════════════════════════
+  async function postToScript(payload) {
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+    return await response.json();
+  }
+</script>
+
+</body>
+</html>

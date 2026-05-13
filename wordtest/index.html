@@ -1193,12 +1193,12 @@
 
     <div class="field">
       <label>학생 이름</label>
-      <input type="text" id="name" placeholder="예: 한승주 (동명이인은 숫자 포함 — 김도윤2)" autocomplete="off">
+      <input type="text" id="name" placeholder="이름 입력 (동명이인은 이름 뒤에 숫자 — 예: 홍길동2)" autocomplete="off">
     </div>
 
     <div class="field">
       <label>학부모님 전화번호 뒷자리 4자리</label>
-      <input type="tel" id="parentLast4" placeholder="예: 3633" maxlength="4" inputmode="numeric">
+      <input type="tel" id="parentLast4" placeholder="숫자 4자리" maxlength="4" inputmode="numeric">
     </div>
 
     <button class="btn btn-primary" id="btn-verify" onclick="verifyStudent()">
@@ -1389,9 +1389,15 @@
   <!-- ══════════════════════════════════════════════════════════ -->
   <div class="step" id="step-batch-print">
     <h1>🖨️ 시험지 일괄 출력</h1>
-    <p class="hint" id="batch-date-label">오늘 응시 예정 학생을 불러오는 중...</p>
+    <p class="hint" id="batch-date-label">응시 예정 학생을 불러오는 중...</p>
 
     <div class="batch-filters">
+      <div class="batch-filter-row">
+        <div class="bf-label">📅 날짜</div>
+        <button class="bf-btn active" data-batch-day="0" onclick="setBatchFilter('dayOffset', 0)">오늘</button>
+        <button class="bf-btn" data-batch-day="1" onclick="setBatchFilter('dayOffset', 1)">내일</button>
+        <button class="bf-btn" data-batch-day="2" onclick="setBatchFilter('dayOffset', 2)">모레</button>
+      </div>
       <div class="batch-filter-row">
         <div class="bf-label">⏰ 시간대</div>
         <button class="bf-btn active" data-batch-time="오후" onclick="setBatchFilter('time', '오후')">오후</button>
@@ -2974,11 +2980,11 @@
   // ═══════════════════════════════════════════════════════════
   let _batchSchedules = [];     // 서버에서 받아온 학생 목록
   let _batchSelected = new Set(); // 선택된 rowIndex 집합
-  let _batchFilter = { time: '오후', floor: '' }; // 기본: 오후 / 전체 층
+  let _batchFilter = { time: '오후', floor: '', dayOffset: 0 }; // 기본: 오후 / 전체 층 / 오늘
 
   // 진입
   function goBatchPrint() {
-    _batchFilter = { time: '오후', floor: '' };
+    _batchFilter = { time: '오후', floor: '', dayOffset: 0 };
     _batchSelected = new Set();
     // 버튼 상태 갱신
     document.querySelectorAll('[data-batch-time]').forEach(b => {
@@ -2987,6 +2993,9 @@
     document.querySelectorAll('[data-batch-floor]').forEach(b => {
       b.classList.toggle('active', b.dataset.batchFloor === _batchFilter.floor);
     });
+    document.querySelectorAll('[data-batch-day]').forEach(b => {
+      b.classList.toggle('active', parseInt(b.dataset.batchDay, 10) === _batchFilter.dayOffset);
+    });
     goStep('batch-print');
     loadBatchSchedules();
   }
@@ -2994,10 +3003,19 @@
   function setBatchFilter(kind, value) {
     _batchFilter[kind] = value;
     // 버튼 활성 토글
-    const attr = (kind === 'time') ? 'data-batch-time' : 'data-batch-floor';
-    document.querySelectorAll('[' + attr + ']').forEach(b => {
-      b.classList.toggle('active', b.getAttribute(attr) === value);
-    });
+    let attr;
+    if (kind === 'time') attr = 'data-batch-time';
+    else if (kind === 'floor') attr = 'data-batch-floor';
+    else if (kind === 'dayOffset') attr = 'data-batch-day';
+    else attr = null;
+    if (attr) {
+      document.querySelectorAll('[' + attr + ']').forEach(b => {
+        const btnVal = (kind === 'dayOffset')
+          ? parseInt(b.getAttribute(attr), 10)
+          : b.getAttribute(attr);
+        b.classList.toggle('active', btnVal === value);
+      });
+    }
     loadBatchSchedules();
   }
 
@@ -3012,7 +3030,8 @@
       const result = await postToScript({
         action: 'getAllTodaySchedules',
         floor: _batchFilter.floor,
-        timeSlot: _batchFilter.time
+        timeSlot: _batchFilter.time,
+        dayOffset: _batchFilter.dayOffset
       });
 
       if (result.status !== 'success') {
@@ -3025,14 +3044,16 @@
       _batchSchedules = result.schedules || [];
       const dateStr = result.todayDate || '';
       const dayStr = result.today || '';
+      const offset = _batchFilter.dayOffset || 0;
+      const dayLabel = offset === 0 ? '오늘' : offset === 1 ? '내일' : offset === 2 ? '모레' : (offset + '일 후');
       const filterStr = (_batchFilter.time || '전체') + ' · ' +
                         (_batchFilter.floor || '전체 층');
-      dateEl.textContent = dateStr + ' (' + dayStr + ') · ' + filterStr +
+      dateEl.textContent = '[' + dayLabel + '] ' + dateStr + ' (' + dayStr + ') · ' + filterStr +
                            ' · 총 ' + _batchSchedules.length + '명';
 
       if (_batchSchedules.length === 0) {
         listEl.innerHTML = '<div class="batch-empty"><div class="be-icon">🎉</div>' +
-          '<div>해당 조건으로 오늘 응시할 학생이 없습니다.</div></div>';
+          '<div>해당 조건으로 ' + dayLabel + ' 응시할 학생이 없습니다.</div></div>';
         document.getElementById('btn-batch-print').disabled = true;
         return;
       }
@@ -3282,8 +3303,10 @@
   // 인쇄 영역 렌더링
   function renderBatchPrintOutput(sheets) {
     const area = document.getElementById('batch-print-area');
-    const today = new Date();
-    const dateStr = today.getFullYear() + '. ' + (today.getMonth() + 1) + '. ' + today.getDate();
+    // 인쇄 시험지 날짜: 선택된 dayOffset 반영 (오늘=0, 내일=1, 모레=2)
+    const offset = (_batchFilter && _batchFilter.dayOffset) ? _batchFilter.dayOffset : 0;
+    const targetDate = new Date(Date.now() + offset * 24 * 60 * 60 * 1000);
+    const dateStr = targetDate.getFullYear() + '. ' + (targetDate.getMonth() + 1) + '. ' + targetDate.getDate();
 
     const parts = sheets.map(s => {
       const sch = s.schedule;

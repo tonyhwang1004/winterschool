@@ -1222,6 +1222,11 @@
 <a href="https://www.kimmom.co.kr/gradeinput/"
    style="font-size: 12px; color: var(--muted); text-decoration: none; display: inline-block; margin-top: 8px;">
   📝 직원: 오늘 시험결과 입력
+ <br>
+<a href="#" onclick="event.preventDefault(); goNewStudent();"
+   style="font-size: 12px; color: var(--accent); text-decoration: none; display: inline-block; margin-top: 8px; font-weight: 600;">
+  🆕 직원: 신규 학생 등록
+</a>
 </a>
     </div>
   </div>
@@ -1456,7 +1461,92 @@
     </div>
   </div>
 
+<!-- ══════════════════════════════════════════════════════════ -->
+  <!-- STEP NEWSTUDENT: 신규 학생 등록 (직원 전용)                       -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="step" id="step-newstudent">
+    <h1>🆕 신규 학생 등록</h1>
+    <p class="hint">직원 인증 후 신규 학생을 명단에 등록합니다.</p>
 
+    <!-- 단계 1: 비밀번호 입력 -->
+    <div id="ns-auth-section">
+      <div class="field">
+        <label>🔐 직원 비밀번호</label>
+        <input type="password" id="ns-password" placeholder="직원 비밀번호 입력" autocomplete="off">
+      </div>
+      <button class="btn btn-primary" onclick="verifyStaffAndShowForm()">
+        인증 후 등록 화면으로 →
+      </button>
+      <button class="btn btn-secondary" onclick="goStep(1)">
+        ← 본인확인으로 돌아가기
+      </button>
+      <div class="msg" id="msg-ns-auth"></div>
+    </div>
+
+    <!-- 단계 2: 등록 폼 (인증 후 표시) -->
+    <div id="ns-form-section" style="display: none;">
+      <div style="background: var(--success-bg); border: 1px solid #d2e6cf; border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; font-size: 12px; color: var(--success);">
+        ✓ 직원 인증 완료. 학생 정보를 입력해주세요.
+      </div>
+
+      <div class="field">
+        <label>📍 등록할 층</label>
+        <div class="floor-row">
+          <div class="floor-btn" data-ns-floor="8층" onclick="selectNsFloor('8층')">
+            <div class="ic">📘</div>
+            <div class="ttl">8층</div>
+            <div class="sub">재학생</div>
+          </div>
+          <div class="floor-btn" data-ns-floor="7층" onclick="selectNsFloor('7층')">
+            <div class="ic">📕</div>
+            <div class="ttl">7층</div>
+            <div class="sub">N수생</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>👤 학생 이름</label>
+        <input type="text" id="ns-name" placeholder="이름 (동명이인은 이름 뒤에 숫자: 홍길동2)" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label>📱 학부모 전화번호 <small style="font-weight: 400; color: var(--muted);">(전체 또는 뒷자리 4자리)</small></label>
+        <input type="tel" id="ns-parent-phone" placeholder="01012345678 또는 1234" inputmode="numeric">
+        <div class="hint" style="font-size: 11px; margin-top: 6px; color: var(--muted); text-align: left;">
+          💡 학생이 본인확인 시 입력할 뒷자리 4자리가 됩니다.
+        </div>
+      </div>
+
+      <div class="field">
+        <label>💺 자리번호</label>
+        <input type="text" id="ns-seat" placeholder="예: 15" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label>🪑 좌석 유형 <small style="font-weight: 400; color: var(--muted);">(선택)</small></label>
+        <select id="ns-seat-type">
+          <option value="">선택 안 함</option>
+          <option value="지정">지정석</option>
+          <option value="자유">자유석</option>
+          <option value="칸막이">칸막이</option>
+          <option value="프리미엄">프리미엄</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" id="btn-ns-submit" onclick="submitNewStudent()">
+        ✅ 신규 학생 등록
+      </button>
+      <button class="btn btn-secondary" onclick="resetNewStudentForm()">
+        🔄 폼 초기화 (연속 등록)
+      </button>
+      <button class="btn btn-secondary" onclick="goStep(1)">
+        ← 본인확인으로
+      </button>
+
+      <div class="msg" id="msg-ns-submit"></div>
+    </div>
+  </div>
   <!-- ══════════════════════════════════════════════════════════ -->
   <!-- STEP 2: 시험 설정                                             -->
   <!-- ══════════════════════════════════════════════════════════ -->
@@ -3428,6 +3518,140 @@
     await finishTest();
   }
 
+ // ═══════════════════════════════════════════════════════════
+  // 🆕 신규 학생 등록 (직원 전용)
+  // ═══════════════════════════════════════════════════════════
+  let _nsAuthenticated = false;   // 직원 인증 상태
+  let _nsFloor = '';              // 선택한 층
+
+  // 신규등록 화면 진입
+  function goNewStudent() {
+    _nsAuthenticated = false;
+    document.getElementById('ns-auth-section').style.display = 'block';
+    document.getElementById('ns-form-section').style.display = 'none';
+    document.getElementById('ns-password').value = '';
+    resetNewStudentForm();
+    hideMsg('ns-auth');
+    hideMsg('ns-submit');
+    goStep('newstudent');
+    setTimeout(() => document.getElementById('ns-password').focus(), 100);
+  }
+
+  // 직원 비밀번호 인증
+  async function verifyStaffAndShowForm() {
+    const password = document.getElementById('ns-password').value;
+    if (!password) {
+      showMsg('ns-auth', '비밀번호를 입력해주세요.', 'error');
+      return;
+    }
+
+    try {
+      const result = await postToScript({
+        action: 'verifyStaffPassword',
+        password: password
+      });
+
+      if (result.status === 'success') {
+        _nsAuthenticated = true;
+        document.getElementById('ns-auth-section').style.display = 'none';
+        document.getElementById('ns-form-section').style.display = 'block';
+        hideMsg('ns-auth');
+        setTimeout(() => document.getElementById('ns-name').focus(), 100);
+      } else {
+        showMsg('ns-auth', result.message || '인증에 실패했습니다.', 'error');
+      }
+    } catch (err) {
+      showMsg('ns-auth', '네트워크 오류: ' + err.message, 'error');
+    }
+  }
+
+  // 층 선택
+  function selectNsFloor(floor) {
+    _nsFloor = floor;
+    document.querySelectorAll('.floor-btn[data-ns-floor]').forEach(b => {
+      b.classList.toggle('active', b.dataset.nsFloor === floor);
+    });
+    hideMsg('ns-submit');
+  }
+
+  // 폼 초기화
+  function resetNewStudentForm() {
+    _nsFloor = '';
+    document.querySelectorAll('.floor-btn[data-ns-floor]').forEach(b => b.classList.remove('active'));
+    document.getElementById('ns-name').value = '';
+    document.getElementById('ns-parent-phone').value = '';
+    document.getElementById('ns-seat').value = '';
+    document.getElementById('ns-seat-type').value = '';
+    hideMsg('ns-submit');
+  }
+
+  // 신규 학생 등록 제출
+  async function submitNewStudent() {
+    if (!_nsAuthenticated) {
+      showMsg('ns-submit', '직원 인증이 필요합니다.', 'error');
+      return;
+    }
+    if (!_nsFloor) {
+      showMsg('ns-submit', '층을 선택해주세요.', 'error');
+      return;
+    }
+    const name = document.getElementById('ns-name').value.trim();
+    const parentPhone = document.getElementById('ns-parent-phone').value.replace(/\D/g, '');
+    const seat = document.getElementById('ns-seat').value.trim();
+    const seatType = document.getElementById('ns-seat-type').value;
+
+    if (!name) {
+      showMsg('ns-submit', '학생 이름을 입력해주세요.', 'error');
+      return;
+    }
+    if (!parentPhone || parentPhone.length < 4) {
+      showMsg('ns-submit', '학부모 전화번호 뒷자리 4자리 이상이 필요합니다.', 'error');
+      return;
+    }
+    if (!seat) {
+      showMsg('ns-submit', '자리번호를 입력해주세요.', 'error');
+      return;
+    }
+
+    const btn = document.getElementById('btn-ns-submit');
+    const origText = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<span class="loading"></span> 등록 중...';
+
+    try {
+      const result = await postToScript({
+        action: 'registerNewStudent',
+        password: document.getElementById('ns-password').value,
+        floor: _nsFloor,
+        name: name,
+        parentPhone: parentPhone,
+        seat: seat,
+        seatType: seatType
+      });
+
+      if (result.status === 'success') {
+        const last4 = parentPhone.slice(-4);
+        showMsg('ns-submit',
+          '✅ 등록 완료!\n\n' +
+          '【학생 정보】\n' +
+          '층: ' + _nsFloor + '\n' +
+          '이름: ' + name + '\n' +
+          '자리: ' + seat + '번\n' +
+          '학부모 뒷자리: ' + last4 + '\n\n' +
+          '학생에게 본인확인 화면에서 위 정보로 로그인하라고 안내해주세요.',
+          'success');
+        resetNewStudentForm();
+        setTimeout(() => document.getElementById('ns-name').focus(), 100);
+      } else {
+        showMsg('ns-submit', '❌ ' + (result.message || '등록 실패'), 'error');
+      }
+    } catch (err) {
+      showMsg('ns-submit', '❌ 네트워크 오류: ' + err.message, 'error');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = origText;
+    }
+  }
 
   // ═══════════════════════════════════════════════════════════
   // Apps Script POST 호출 (CORS 회피: text/plain)

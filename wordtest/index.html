@@ -3322,22 +3322,29 @@
   // 문항 수에 따른 동적 레이아웃 계산 (A4 한 페이지에 꽉 차도록)
   // count: 문항 수
   // isAnswer: 정답표면 true (영어+한글 한 줄), false면 시험지 (영어+빈줄)
-  function computeLayout(count, isAnswer) {
+  
+ function computeLayout(count, isAnswer) {
+    // ─── 페이지 수 자동 결정 ───
+    // 시험지: 100문제 초과 시 2장
+    // 정답표: 120문제 초과 시 2장
+    let pages = 1;
+    if (!isAnswer && count > 100) pages = 2;
+    if (isAnswer && count > 120) pages = 2;
+    const perPage = Math.ceil(count / pages);
+
     // A4 인쇄 영역 (헤더/푸터 제외)
-    // 시험지: 약 880px / 정답표: 약 900px (정답표는 푸터 안내 없음)
     const PAGE_HEIGHT = isAnswer ? 900 : 880;
 
     let cols, perCol, fontSize, padding, minHeight, lineHeight, numSize;
 
     if (isAnswer) {
-      // 정답표: 영어+한글 한 줄
-      if (count <= 30) cols = 2;
-      else if (count <= 60) cols = 2;
-      else if (count <= 90) cols = 3;
-      else if (count <= 140) cols = 3;
+     // 정답표: 영어+한글 한 줄
+      if (perPage <= 30) cols = 2;
+      else if (perPage <= 60) cols = 2;
+      else if (perPage <= 90) cols = 3;
+      else if (perPage <= 140) cols = 3;
       else cols = 4;
-      perCol = Math.ceil(count / cols);
-
+      perCol = Math.ceil(perPage / cols);
       // 한 컬럼당 사용 가능 높이 / 항목 수 = 항목당 높이
       const rowHeight = PAGE_HEIGHT / perCol;
 
@@ -3355,17 +3362,17 @@
       // 항목 간 간격 = 남는 공간을 (항목 수 - 1)로 나누기 (음수면 0)
       const marginBetween = perCol > 1 ? Math.max(0, remainingSpace / (perCol - 1)) : 0;
 
-      return { cols, perCol, fontSize, padding, lineHeight, marginBetween };
+return { cols, perCol, fontSize, padding, lineHeight, marginBetween, pages, perPage };
     }
 
     // 시험지: 영어 + 빈 줄
-    if (count <= 20) cols = 1;
-    else if (count <= 40) cols = 2;
-    else if (count <= 70) cols = 2;
-    else if (count <= 110) cols = 3;
+    if (perPage <= 20) cols = 1;
+    else if (perPage <= 40) cols = 2;
+    else if (perPage <= 70) cols = 2;
+    else if (perPage <= 110) cols = 3;
     else cols = 4;
-    perCol = Math.ceil(count / cols);
-
+    perCol = Math.ceil(perPage / cols);
+  
     const rowHeight = PAGE_HEIGHT / perCol;
 
     // 시험지는 답을 적을 공간이 필요하므로 폰트 비교적 일정하게
@@ -3391,7 +3398,7 @@
     const remainingSpace = PAGE_HEIGHT - (perCol * itemHeight);
     const marginBetween = perCol > 1 ? Math.max(0, remainingSpace / (perCol - 1)) : 0;
 
-    return { cols, perCol, fontSize, numSize, padding, minHeight, marginBetween };
+    return { cols, perCol, fontSize, numSize, padding, minHeight, marginBetween, pages, perPage };
   }
 
   // 인쇄 영역 렌더링
@@ -3440,57 +3447,77 @@
 
       // 시험지: 줄 단위 항목
       // marginBottom으로 항목 간 간격을 추가해 페이지 꽉 채우기
-      const sheetItems = selected.map((w, i) => {
-        const no = String(i + 1).padStart(2, '0');
-        return '<div style="display: flex; gap: 5px; align-items: baseline; padding: ' + layout.padding + 'px 0; margin-bottom: ' + layout.marginBetween + 'px; border-bottom: 1px dotted #ccc; min-height: ' + layout.minHeight + 'px; break-inside: avoid;">' +
-                 '<span style="font-family: monospace; color: #888; font-size: ' + layout.numSize + 'px; min-width: 16px;">' + no + '.</span>' +
-                 '<b style="font-family: monospace; font-size: ' + layout.fontSize + 'px; min-width: 60px;">' + escapeHtml(w.en) + '</b>' +
-                 '<span style="flex: 1; border-bottom: 1px solid #ddd; height: 1px; margin: 0 4px;"></span>' +
-               '</div>';
-      }).join('');
+      // ─── 시험지 페이지 생성 (1장 또는 2장 자동) ───
+      const sheetPages = [];
+      for (let p = 0; p < layout.pages; p++) {
+        const start = p * layout.perPage;
+        const end = Math.min(start + layout.perPage, count);
+        const pageWords = selected.slice(start, end);
+        const pageLabel = layout.pages > 1 ? ' (' + (p + 1) + '/' + layout.pages + ')' : '';
 
-      // 정답표: 좀 더 컴팩트한 한 줄
-      const akItems = selected.map((w, i) => {
-        const no = String(i + 1).padStart(2, '0');
-        return '<div style="padding: ' + akLayout.padding + 'px 0; margin-bottom: ' + akLayout.marginBetween + 'px; font-size: ' + akLayout.fontSize + 'px; break-inside: avoid; line-height: ' + akLayout.lineHeight + ';">' +
-                 '<span style="color: #888; font-family: monospace; margin-right: 3px;">' + no + '.</span>' +
-                 '<span style="color: #555; font-family: monospace;">' + escapeHtml(w.en) + '</span> ' +
-                 '<b style="color: #000;">' + escapeHtml(w.ko) + '</b>' +
-               '</div>';
-      }).join('');
+        const sheetItems = pageWords.map((w, i) => {
+          const no = String(start + i + 1).padStart(2, '0');
+          return '<div style="display: flex; gap: 5px; align-items: baseline; padding: ' + layout.padding + 'px 0; margin-bottom: ' + layout.marginBetween + 'px; border-bottom: 1px dotted #ccc; min-height: ' + layout.minHeight + 'px; break-inside: avoid;">' +
+                   '<span style="font-family: monospace; color: #888; font-size: ' + layout.numSize + 'px; min-width: 16px;">' + no + '.</span>' +
+                   '<b style="font-family: monospace; font-size: ' + layout.fontSize + 'px; min-width: 60px;">' + escapeHtml(w.en) + '</b>' +
+                   '<span style="flex: 1; border-bottom: 1px solid #ddd; height: 1px; margin: 0 4px;"></span>' +
+                 '</div>';
+        }).join('');
 
-      return '' +
-        // 시험지 페이지 (자동 레이아웃)
-        '<div class="batch-sheet">' +
-          '<h2 style="margin: 0 0 2px; font-size: 13px;">김엄마관리형독서실 · 단어시험</h2>' +
-          '<div style="font-size: 9px; color: #999; letter-spacing: 1px; margin-bottom: 5px;">VOCABULARY TEST · ' + escapeHtml(sch.floor) + '</div>' +
-          '<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px 12px; font-size: 9.5px; margin-bottom: 5px;">' +
-            '<div>학생: <b>' + escapeHtml(sch.name) + '</b></div>' +
-            '<div>좌석: <b>' + escapeHtml(formatSeat(sch.seat)) + '</b></div>' +
-            '<div>날짜: <b>' + dateStr + '</b></div>' +
-            '<div>단어장: <b>' + escapeHtml(sch.book) + '</b></div>' +
-            '<div>DAY: <b>' + escapeHtml(s.dayLabel) + '</b></div>' +
-            '<div>총문항: <b>' + count + '</b></div>' +
-          '</div>' +
-          '<hr style="border: 0; border-top: 1.2px solid #333; margin: 4px 0 5px;">' +
-          // 자동 컬럼 레이아웃
-          '<div style="column-count: ' + layout.cols + '; column-gap: 12px; column-rule: 1px solid #ddd;">' +
-            sheetItems +
-          '</div>' +
-          '<div style="margin-top: 5px; padding-top: 3px; border-top: 1px solid #ddd; font-size: 9px; color: #888;">' +
-            '※ 채점 후 틀린 번호를 시험지 맨 위에 적어주세요. (예: <b>오답: 1, 4, 7</b>)' +
-          '</div>' +
-        '</div>' +
-        // 정답표 페이지 (자동 레이아웃, 한 페이지에)
-        '<div class="batch-sheet">' +
-          '<div style="font-size: 9px; color: #888; margin-bottom: 1px;">📑 정답표 (교사용)</div>' +
-          '<h3 style="margin: 0 0 3px; font-size: 11.5px;">' + escapeHtml(sch.name) + ' · ' + escapeHtml(sch.book) + ' · ' + escapeHtml(s.dayLabel) + ' (' + count + '문항)</h3>' +
-          '<hr style="border: 0; border-top: 1px solid #333; margin: 0 0 3px;">' +
-          // 자동 컬럼 레이아웃
-          '<div style="column-count: ' + akLayout.cols + '; column-gap: 10px; column-rule: 1px solid #ddd;">' +
-            akItems +
-          '</div>' +
-        '</div>';
+        sheetPages.push(
+          '<div class="batch-sheet">' +
+            '<h2 style="margin: 0 0 2px; font-size: 13px;">김엄마관리형독서실 · 단어시험' + pageLabel + '</h2>' +
+            '<div style="font-size: 9px; color: #999; letter-spacing: 1px; margin-bottom: 5px;">VOCABULARY TEST · ' + escapeHtml(sch.floor) + '</div>' +
+            '<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px 12px; font-size: 9.5px; margin-bottom: 5px;">' +
+              '<div>학생: <b>' + escapeHtml(sch.name) + '</b></div>' +
+              '<div>좌석: <b>' + escapeHtml(formatSeat(sch.seat)) + '</b></div>' +
+              '<div>날짜: <b>' + dateStr + '</b></div>' +
+              '<div>단어장: <b>' + escapeHtml(sch.book) + '</b></div>' +
+              '<div>DAY: <b>' + escapeHtml(s.dayLabel) + '</b></div>' +
+              '<div>총문항: <b>' + count + '</b></div>' +
+            '</div>' +
+            '<hr style="border: 0; border-top: 1.2px solid #333; margin: 4px 0 5px;">' +
+            '<div style="column-count: ' + layout.cols + '; column-gap: 12px; column-rule: 1px solid #ddd;">' +
+              sheetItems +
+            '</div>' +
+            (p === layout.pages - 1 ?
+              '<div style="margin-top: 5px; padding-top: 3px; border-top: 1px solid #ddd; font-size: 9px; color: #888;">' +
+                '※ 채점 후 틀린 번호를 시험지 맨 위에 적어주세요. (예: <b>오답: 1, 4, 7</b>)' +
+              '</div>' : '') +
+          '</div>'
+        );
+      }
+
+      // ─── 정답표 페이지 생성 (1장 또는 2장 자동) ───
+      const akPages = [];
+      for (let p = 0; p < akLayout.pages; p++) {
+        const start = p * akLayout.perPage;
+        const end = Math.min(start + akLayout.perPage, count);
+        const pageWords = selected.slice(start, end);
+        const pageLabel = akLayout.pages > 1 ? ' (' + (p + 1) + '/' + akLayout.pages + ')' : '';
+
+        const akItems = pageWords.map((w, i) => {
+          const no = String(start + i + 1).padStart(2, '0');
+          return '<div style="padding: ' + akLayout.padding + 'px 0; margin-bottom: ' + akLayout.marginBetween + 'px; font-size: ' + akLayout.fontSize + 'px; break-inside: avoid; line-height: ' + akLayout.lineHeight + ';">' +
+                   '<span style="color: #888; font-family: monospace; margin-right: 3px;">' + no + '.</span>' +
+                   '<span style="color: #555; font-family: monospace;">' + escapeHtml(w.en) + '</span> ' +
+                   '<b style="color: #000;">' + escapeHtml(w.ko) + '</b>' +
+                 '</div>';
+        }).join('');
+
+        akPages.push(
+          '<div class="batch-sheet">' +
+            '<div style="font-size: 9px; color: #888; margin-bottom: 1px;">📑 정답표 (교사용)' + pageLabel + '</div>' +
+            '<h3 style="margin: 0 0 3px; font-size: 11.5px;">' + escapeHtml(sch.name) + ' · ' + escapeHtml(sch.book) + ' · ' + escapeHtml(s.dayLabel) + ' (' + count + '문항)</h3>' +
+            '<hr style="border: 0; border-top: 1px solid #333; margin: 0 0 3px;">' +
+            '<div style="column-count: ' + akLayout.cols + '; column-gap: 10px; column-rule: 1px solid #ddd;">' +
+              akItems +
+            '</div>' +
+          '</div>'
+        );
+      }
+
+      return sheetPages.join('') + akPages.join('');
     });
 
     area.innerHTML = parts.join('');

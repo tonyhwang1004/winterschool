@@ -449,6 +449,18 @@ function normalizeSeat(raw) {
   return m ? m[0] : '';
 }
 
+// ★ NEW: days 배열을 "15-16" 형태의 문자열로 변환
+// [15,16] → "15-16", [8] → "8", [25,26,27,28] → "25-28"
+function formatDayRange(days) {
+  if (!Array.isArray(days) || days.length === 0) return '?';
+  if (days.length === 1) return String(days[0]);
+  // 연속된 숫자면 처음-끝, 아니면 쉼표로
+  const sorted = [...days].sort((a, b) => a - b);
+  const isContiguous = sorted.every((n, i) => i === 0 || n === sorted[i - 1] + 1);
+  if (isContiguous) return `${sorted[0]}-${sorted[sorted.length - 1]}`;
+  return sorted.join(',');
+}
+
 async function postToScript(payload) {
   const response = await fetch(APPS_SCRIPT_URL, {
     method: 'POST',
@@ -496,6 +508,8 @@ async function loadStudents() {
       _students.forEach(s => {
         s.floor = normalizeFloor(s.floor);
         s.seat = normalizeSeat(s.seat);
+        // ★ NEW: days 배열을 dayRange 문자열로 미리 변환
+        s.dayRange = formatDayRange(s.days);
       });
       renderStudents();
       updateStats();

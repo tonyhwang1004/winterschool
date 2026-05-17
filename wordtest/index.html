@@ -1278,21 +1278,33 @@
 
     <!-- 단어장 -->
     <div class="field">
-      <label>📚 단어장</label>
-      <select id="apply-book" onchange="onApplyBookChange()">
-        <option value="">단어장을 선택하세요...</option>
-        <option value="suneung-2000|수능2000">수능2000 (DAY 1~50)</option>
-        <option value="hyper|하이퍼">하이퍼 (DAY 1~50)</option>
-        <option value="highest|하이스트">하이스트 (DAY 1~50)</option>
-        <option value="neungyul-eowon|능률보카 어원">능률보카 어원 (DAY 1~67)</option>
-        <option value="neungyul-gohyo-pilsu|능률보카고교필수">능률보카고교필수 (DAY 1~60)</option>
-        <option value="neungyul-suneung-2200|능률보카 수능완성 2200">능률보카 수능완성 2200 ⚠️ 데이터 준비중</option>
-        <option value="eohwi-suneung|어휘 끝 수능">어휘 끝 수능 (DAY 1~45)</option>
-        <option value="27-suneung-teukgang|27수능특강 영어">27수능특강 영어 (DAY 1~30)</option>
-        <option value="teukgeup-ebs-voca|특급 수능EBS 기출VOCA">특급 수능EBS 기출VOCA ⚠️ 데이터 준비중</option>
-        <option value="suneung-yeongye-1800|수능연계1800">수능연계1800 (DAY 1~60)</option>
-      </select>
-      <div class="hint" id="apply-book-info" style="font-size: 11px; margin-top: 6px; color: var(--muted);"></div>
+        <label>📚 단어장</label>
+        <select id="apply-book" onchange="onApplyBookChange()">
+          <option value="">단어장을 선택하세요...</option>
+          <optgroup label="── 수능 대비 ──">
+            <option value="suneung-2000|수능2000">수능2000 (DAY 1~50)</option>
+            <option value="hyper|하이퍼">하이퍼 (DAY 1~50)</option>
+            <option value="highest|하이스트">하이스트 (DAY 1~50)</option>
+            <option value="eohwi-suneung|어휘 끝 수능">어휘 끝 수능 (DAY 1~45)</option>
+            <option value="27-suneung-teukgang|27수능특강 영어">27수능특강 영어 (DAY 1~30)</option>
+            <option value="suneung-yeongye-1800|수능연계 1800">수능연계 1800 (DAY 1~60)</option>
+            <option value="teukgeup-ebs-voca-2021|특급 수능EBS 기출VOCA">특급 수능EBS 기출VOCA (DAY 1~50)</option>
+            <option value="neungyul-suneung-2200|능률보카 수능완성 2200">능률보카 수능완성 2200 (DAY 1~44)</option>
+          </optgroup>
+          <optgroup label="── 능률보카 시리즈 ──">
+            <option value="neungyul-ipmun|능률보카 입문">능률보카 입문 (DAY 1~50)</option>
+            <option value="neungyul-gibon|능률보카 기본">능률보카 기본 (DAY 1~60)</option>
+            <option value="neungyul-silryuk|능률보카 실력">능률보카 실력 (DAY 1~60)</option>
+            <option value="neungyul-eowon|능률보카 어원">능률보카 어원 (DAY 1~67)</option>
+            <option value="neungyul-gohyo-pilsu-2000|능률보카 고교필수 2000">능률보카 고교필수 2000 (DAY 1~70)</option>
+          </optgroup>
+          <optgroup label="── 학년별 ──">
+            <option value="godeung-basic|고등 베이직">고등 베이직 (DAY 1~30)</option>
+            <option value="jungdeung-gonando|중등 고난도">중등 고난도 (DAY 1~60)</option>
+            <option value="jungdeung-gonando-plus|중등 고난도 플러스">중등 고난도 플러스 (DAY 1~30)</option>
+          </optgroup>
+        </select>
+   <div class="hint" id="apply-book-info" style="font-size: 11px; margin-top: 6px; color: var(--muted);"></div>
     </div>
 
     <!-- 시작 DAY -->
@@ -1573,20 +1585,30 @@
     <div class="field">
       <label>단어장</label>
       <select id="book">
-        <option value="suneung-2000">수능 2000</option>
-        <option value="hyper">하이퍼</option>
-        <option value="highest">하이스트</option>
-        <option value="neungyul-eowon">능률보카 어원</option>
-        <option value="neungyul-suneung-2200">능률 수능완성 2200</option>
-        <option value="neungyul-gohyo-pilsu">능률보카 고교필수</option>
-        <option value="eohwi-suneung">어휘 끝 수능</option>
-        <option value="27-suneung-teukgang">27수능특강 영어</option>
-        <option value="teukgeup-ebs-voca">특급 수능EBS 기출VOCA</option>
-        <option value="suneung-yeongye-1800">수능연계 1800</option>
-        <option value="godeung-complete-25">고등 complete 25개정</option>
+        <optgroup label="── 수능 대비 ──">
+          <option value="suneung-2000">수능 2000</option>
+          <option value="hyper">하이퍼</option>
+          <option value="highest">하이스트</option>
+          <option value="eohwi-suneung">어휘 끝 수능</option>
+          <option value="27-suneung-teukgang">27수능특강 영어</option>
+          <option value="suneung-yeongye-1800">수능연계 1800</option>
+          <option value="teukgeup-ebs-voca-2021">특급 수능EBS 기출VOCA</option>
+          <option value="neungyul-suneung-2200">능률보카 수능완성 2200</option>
+        </optgroup>
+        <optgroup label="── 능률보카 시리즈 ──">
+          <option value="neungyul-ipmun">능률보카 입문</option>
+          <option value="neungyul-gibon">능률보카 기본</option>
+          <option value="neungyul-silryuk">능률보카 실력</option>
+          <option value="neungyul-eowon">능률보카 어원</option>
+          <option value="neungyul-gohyo-pilsu-2000">능률보카 고교필수 2000</option>
+        </optgroup>
+        <optgroup label="── 학년별 ──">
+          <option value="godeung-basic">고등 베이직</option>
+          <option value="jungdeung-gonando">중등 고난도</option>
+          <option value="jungdeung-gonando-plus">중등 고난도 플러스</option>
+        </optgroup>
       </select>
     </div>
-
     <div class="field">
       <label>DAY 범위</label>
       <select id="day" style="width: 100%;">
@@ -1879,22 +1901,28 @@
   // 초기화
   // ═══════════════════════════════════════════════════════════
   window.addEventListener('DOMContentLoaded', () => {
-    // 단어장별 DAY 개수 (vocabooster 실제 데이터 기준)
-    const BOOK_DAY_COUNT = {
-      'suneung-2000':         50,  // 수능 2000 (DAY 01~50, 40단어/일)
-      'hyper':                50,  // 하이퍼 (추정)
-      'highest':              50,  // 하이스트 (DAY 1~50, 30단어/일)
-      'neungyul-eowon':       67,  // 능률보카 어원 (DAY 01~67, 20단어/일)
-      'neungyul-gohyo-pilsu': 60,  // 능률보카 고교필수 (실제로는 60일 분량까지 응시함)
-      // 데이터 없는 단어장들은 0
-      'neungyul-suneung-2200': 0,
-      'eohwi-suneung':         45,
-      '27-suneung-teukgang':   30,
-      'teukgeup-ebs-voca':     0,
-      'suneung-yeongye-1800':  60,
-      'godeung-complete-25':   0
-    };
-
+    // 단어장별 DAY 개수 (vocabooster + 구글드라이브/시트 통합)
+      const BOOK_DAY_COUNT = {
+        // ── GitHub vocabooster ──
+        'suneung-2000':              50,
+        'hyper':                     50,
+        'highest':                   50,
+        'neungyul-eowon':            67,
+        'neungyul-ipmun':            50,
+        'neungyul-gibon':            60,
+        'neungyul-silryuk':          60,
+        'godeung-basic':             30,
+        'jungdeung-gonando':         60,
+        'jungdeung-gonando-plus':    30,
+        // ── 구글드라이브 ──
+        'eohwi-suneung':             45,
+        '27-suneung-teukgang':       30,
+        'suneung-yeongye-1800':      60,
+        'neungyul-gohyo-pilsu-2000': 70,
+        // ── 구글시트 신규 ──
+        'teukgeup-ebs-voca-2021':    50,
+        'neungyul-suneung-2200':     44
+      };
     // 선택된 단어장에 맞춰 DAY 드롭다운을 다시 채우는 함수 (전역)
     window.refillDayOptions = function() {
       const bookVal = document.getElementById('book').value;
@@ -2390,21 +2418,32 @@
 
   function getBookLabel(b) {
     const m = {
+      // GitHub vocabooster
       'suneung-2000': '수능 2000',
       'hyper': '하이퍼',
       'highest': '하이스트',
       'neungyul-eowon': '능률보카 어원',
-      'neungyul-suneung-2200': '능률 수능완성 2200',
-      'neungyul-gohyo-pilsu': '능률보카 고교필수',
+      'neungyul-ipmun': '능률보카 입문',
+      'neungyul-gibon': '능률보카 기본',
+      'neungyul-silryuk': '능률보카 실력',
+      'godeung-basic': '고등 베이직',
+      'jungdeung-gonando': '중등 고난도',
+      'jungdeung-gonando-plus': '중등 고난도 플러스',
+      // 구글드라이브
       'eohwi-suneung': '어휘 끝 수능',
       '27-suneung-teukgang': '27수능특강 영어',
-      'teukgeup-ebs-voca': '특급 수능EBS 기출VOCA',
       'suneung-yeongye-1800': '수능연계 1800',
+      'neungyul-gohyo-pilsu-2000': '능률보카 고교필수 2000',
+      // 구글시트 신규
+      'teukgeup-ebs-voca-2021': '특급 수능EBS 기출VOCA',
+      'neungyul-suneung-2200': '능률보카 수능완성 2200',
+      // 호환성 유지 (이전 코드)
+      'neungyul-gohyo-pilsu': '능률보카 고교필수',
+      'teukgeup-ebs-voca': '특급 수능EBS 기출VOCA',
       'godeung-complete-25': '고등 complete 25개정'
     };
     return m[b] || b;
   }
-
   // ═══════════════════════════════════════════════════════════
   // 정답 비교: 관대한 매칭 (띄어쓰기/괄호/특수문자 무시)
   //
@@ -2879,18 +2918,26 @@
   // ═══════════════════════════════════════════════════════════
   // BOOK_MAX_DAY는 단어장별 최대 DAY (서버 BOOK_MAX_DAY와 동일해야 함)
   const APPLY_BOOK_MAX_DAY = {
-    'suneung-2000': 50,
-    'hyper': 50,
-    'highest': 50,
-    'neungyul-eowon': 67,
-    'neungyul-gohyo-pilsu': 60,
-    'neungyul-suneung-2200': 0,
-    'eohwi-suneung': 45,
-    '27-suneung-teukgang': 30,
-    'teukgeup-ebs-voca': 0,
-    'suneung-yeongye-1800': 60
+    // ── GitHub vocabooster ──
+    'suneung-2000':              50,
+    'hyper':                     50,
+    'highest':                   50,
+    'neungyul-eowon':            67,
+    'neungyul-ipmun':            50,
+    'neungyul-gibon':            60,
+    'neungyul-silryuk':          60,
+    'godeung-basic':             30,
+    'jungdeung-gonando':         60,
+    'jungdeung-gonando-plus':    30,
+    // ── 구글드라이브 ──
+    'eohwi-suneung':             45,
+    '27-suneung-teukgang':       30,
+    'suneung-yeongye-1800':      60,
+    'neungyul-gohyo-pilsu-2000': 70,
+    // ── 구글시트 신규 ──
+    'teukgeup-ebs-voca-2021':    50,
+    'neungyul-suneung-2200':     44
   };
-
   // 신청 폼 화면 진입
   async function goApply() {
     if (!state.student) {

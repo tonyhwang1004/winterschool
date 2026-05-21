@@ -3413,17 +3413,34 @@
       }
 
       const words = anyFetched ? allWords : null;
-      sheets.push({
-        schedule: sch,
-        words: words,
-        dayLabel: 'DAY ' + sch.days.join(','),
-        error: errorMsg
-      });
+
+// ★ 데이터 없는 학생 필터링: words가 null이거나 빈 배열이면 제외
+if (words && words.length > 0) {
+  sheets.push({
+    schedule: sch,
+    words: words,
+    dayLabel: 'DAY ' + sch.days.join(','),
+    error: errorMsg
+  });
+} else {
+  skipped++;
+}
 
       done++;
       btn.innerHTML = '<span class="loading"></span> 시험지 생성 중... (' + done + ' / ' + targets.length + ')';
     }
+// 제외된 학생이 있으면 알림
+if (skipped > 0) {
+  alert('⚠️ ' + skipped + '명의 학생은 단어 데이터가 없어서 제외되었습니다.\n' +
+        '실제 출력될 시험지: ' + sheets.length + '명');
+}
 
+if (sheets.length === 0) {
+  alert('❌ 선택된 모든 학생의 단어 데이터가 없습니다.');
+  btn.disabled = false;
+  updateBatchCounter();
+  return;
+}
     renderBatchPrintOutput(sheets);
     goStep('batch-print-output');
 

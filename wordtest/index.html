@@ -3394,25 +3394,27 @@
       let anyFetched = false;
       let errorMsg = null;
 
-      for (const dayNum of sch.days) {
-        try {
-          const result = await postToScript({
-            action: 'getWords',
-            book: sch.bookCode,
-            day: dayNum,
-            count: 200   // 충분히 큰 값으로 DAY 전체 단어 받기
-          });
-          if (result.status === 'success' && result.words && result.words.length > 0) {
-            // 각 단어에 출처 DAY 정보 (디버그용)
-            result.words.forEach(w => allWords.push(w));
-            anyFetched = true;
-          }
-        } catch (e) {
-          errorMsg = e.message;
-        }
-      }
-
-      const words = anyFetched ? allWords : null;
+      try {
+  const results = await Promise.all(
+    sch.days.map(dayNum =>
+      postToScript({
+        action: 'getWords',
+        book: sch.bookCode,
+        day: dayNum,
+        count: 200
+      })
+    )
+  );
+  
+  results.forEach(result => {
+    if (result.status === 'success' && result.words && result.words.length > 0) {
+      result.words.forEach(w => allWords.push(w));
+      anyFetched = true;
+    }
+  });
+} catch (e) {
+  errorMsg = e.message;
+}
 
 // ★ 데이터 없는 학생 필터링: words가 null이거나 빈 배열이면 제외
 if (words && words.length > 0) {

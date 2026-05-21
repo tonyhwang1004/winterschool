@@ -1164,6 +1164,40 @@
     }
     .ts-q { break-inside: avoid; page-break-inside: avoid; }
     .ts-answer-key { page-break-before: auto; break-before: auto; }
+   /* ===== 빈 페이지 / 단어 한 개 넘침 방지 ===== */
+  /* 마지막 시험지 뒤 강제 페이지나누기 완전 제거 */
+  .batch-sheet:last-child,
+  .batch-sheet:last-child .ts-answer-key {
+    page-break-after: auto !important;
+    break-after: auto !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .batch-sheet > *:last-child,
+  #step-batch-print-output > *:last-child,
+  #step-print > *:last-child {
+    page-break-after: auto !important;
+    break-after: auto !important;
+    margin-bottom: 0 !important;
+  }
+  /* 컨테이너 하단 여백 제거 — 경계 밀림 방지 */
+  #step-batch-print-output, #step-print, .container, .printable {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  html, body { height: auto !important; }
+
+  /* 단어 목록을 더 촘촘하게 — 한 장에 더 담기게 */
+  .ts-q-list, #p-q-list, .ak-grid, #p-ak-grid {
+    column-gap: 12px !important;
+    row-gap: 0 !important;
+  }
+  .ts-q-list > *, #p-q-list > *,
+  .ak-grid > *, #p-ak-grid > * {
+    margin: 0 !important;
+    padding: 1px 0 !important;
+    line-height: 1.3 !important;
+  }
    .batch-sheet:last-child {
     page-break-after: auto !important;
     padding-bottom: 0 !important;

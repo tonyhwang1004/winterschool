@@ -2462,7 +2462,7 @@
     state.wordPool = sourceWords;
 
     // 단어 전체를 무작위 셔플 → state.words 가 그대로 출제 단어
-    state.words = sourceWords.slice().sort(() => Math.random() - 0.5);
+    state.words = sourceWords.slice();
     state.count = state.words.length;   // 문항 수 = 전체 단어 수
     state.currentIdx = 0;
     state.answers = [];
@@ -3572,7 +3572,7 @@ return { cols, perCol, fontSize, padding, lineHeight, marginBetween, pages, perP
       }
 
       // 출제할 단어: 단어장의 모든 단어를 무작위 셔플 (제한 없이 전체)
-      const shuffled = words.slice().sort(() => Math.random() - 0.5);
+      const shuffled = words.slice();
       const count = shuffled.length;
       const selected = shuffled;
 

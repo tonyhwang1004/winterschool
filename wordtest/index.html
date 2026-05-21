@@ -3387,6 +3387,7 @@
 
     const sheets = [];   // { schedule, words: [...] }
     let done = 0;
+    let skipped = 0;
 
     for (const sch of targets) {
       // 학생의 모든 DAY 단어를 한꺼번에 가져옴 (DAY 17, 18 → 80단어)
@@ -3395,55 +3396,58 @@
       let errorMsg = null;
 
       try {
-  const results = await Promise.all(
-    sch.days.map(dayNum =>
-      postToScript({
-        action: 'getWords',
-        book: sch.bookCode,
-        day: dayNum,
-        count: 200
-      })
-    )
-  );
-  
-  results.forEach(result => {
-    if (result.status === 'success' && result.words && result.words.length > 0) {
-      result.words.forEach(w => allWords.push(w));
-      anyFetched = true;
-    }
-  });
-} catch (e) {
-  errorMsg = e.message;
-       
-}
-const words = anyFetched ? allWords : null;
-// ★ 데이터 없는 학생 필터링: words가 null이거나 빈 배열이면 제외
-if (words && words.length > 0) {
-  sheets.push({
-    schedule: sch,
-    words: words,
-    dayLabel: 'DAY ' + sch.days.join(','),
-    error: errorMsg
-  });
-} else {
-  skipped++;
-}
+        const results = await Promise.all(
+          sch.days.map(dayNum =>
+            postToScript({
+              action: 'getWords',
+              book: sch.bookCode,
+              day: dayNum,
+              count: 200
+            })
+          )
+        );
+        
+        results.forEach(result => {
+          if (result.status === 'success' && result.words && result.words.length > 0) {
+            result.words.forEach(w => allWords.push(w));
+            anyFetched = true;
+          }
+        });
+      } catch (e) {
+        errorMsg = e.message;
+      }
+
+      const words = anyFetched ? allWords : null;
+      
+      // ★ 데이터 없는 학생 필터링: words가 null이거나 빈 배열이면 제외
+      if (words && words.length > 0) {
+        sheets.push({
+          schedule: sch,
+          words: words,
+          dayLabel: 'DAY ' + sch.days.join(','),
+          error: errorMsg
+        });
+      } else {
+        skipped++;
+      }
 
       done++;
       btn.innerHTML = '<span class="loading"></span> 시험지 생성 중... (' + done + ' / ' + targets.length + ')';
     }
-// 제외된 학생이 있으면 알림
-if (skipped > 0) {
-  alert('⚠️ ' + skipped + '명의 학생은 단어 데이터가 없어서 제외되었습니다.\n' +
-        '실제 출력될 시험지: ' + sheets.length + '명');
-}
 
-if (sheets.length === 0) {
-  alert('❌ 선택된 모든 학생의 단어 데이터가 없습니다.');
-  btn.disabled = false;
-  updateBatchCounter();
-  return;
-}
+    // 제외된 학생이 있으면 알림
+    if (skipped > 0) {
+      alert('⚠️ ' + skipped + '명의 학생은 단어 데이터가 없어서 제외되었습니다.\n' +
+            '실제 출력될 시험지: ' + sheets.length + '명');
+    }
+
+    if (sheets.length === 0) {
+      alert('❌ 선택된 모든 학생의 단어 데이터가 없습니다.');
+      btn.disabled = false;
+      updateBatchCounter();
+      return;
+    }
+
     renderBatchPrintOutput(sheets);
     goStep('batch-print-output');
 
@@ -3451,7 +3455,8 @@ if (sheets.length === 0) {
     updateBatchCounter();
   }
 
-  // 문항 수에 따른 동적 레이아웃 계산 (A4 한 페이지에 꽉 차도록)
+
+  // 문항 수에 따른  // 문항 수에 따른 동적 레이아웃 계산 (A4 한 페이지에 꽉 차도록)
   // count: 문항 수
   // isAnswer: 정답표면 true (영어+한글 한 줄), false면 시험지 (영어+빈줄)
   

@@ -650,7 +650,26 @@
       padding: 7mm 8mm 5mm;
       font-size: 10px;
     }
+    /* 빈 페이지 방지 보강 */
+    .batch-sheet:last-child {
+      page-break-after: auto !important;
+      padding-bottom: 0 !important;
+      margin-bottom: 0 !important;
+    }
+    .batch-sheet > *:last-child,
+    #step-batch-print-output > *:last-child,
+    #printable > *:last-child,
+    .printable > *:last-child {
+      page-break-after: auto !important;
+      margin-bottom: 0 !important;
+    }
+    #step-batch-print-output, #printable, .printable {
+      margin-bottom: 0 !important;
+      padding-bottom: 0 !important;
+    }
+    html, body { height: auto !important; }
   }
+  @page { size: A4; margin: 8mm; }
 
   /* ─── 신청 폼 (STEP apply) ─── */
   .apply-radio-row {

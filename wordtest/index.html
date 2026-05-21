@@ -3414,9 +3414,9 @@
   });
 } catch (e) {
   errorMsg = e.message;
-       const words = anyFetched ? allWords : null;
+       
 }
-
+const words = anyFetched ? allWords : null;
 // ★ 데이터 없는 학생 필터링: words가 null이거나 빈 배열이면 제외
 if (words && words.length > 0) {
   sheets.push({

@@ -1768,6 +1768,15 @@
     </div>
 
     <button class="btn btn-primary" onclick="restartTest()">새 시험 보기</button>
+   <button class="btn btn-accent" id="btn-retake-wrong"
+        onclick="startRetakeFromResult()"
+        style="display:none; margin-bottom:8px;">
+  🔁 오답 재시험
+</button>
+<button class="btn btn-secondary" onclick="goWrongNote()"
+        style="margin-top:0; margin-bottom:8px;">
+  📖 내 오답노트 보기
+</button>
     <button class="btn btn-secondary" onclick="logout()">로그아웃</button>
   </div>
 
@@ -1919,8 +1928,12 @@
     offlineSheet: null,
     offlineAnswers: null,
     // ── 오늘의 시험 일정 (자동 매칭 시) ──
-    scheduleEntry: null    // {rowIndex, daysCount, bookName} or null
-  };
+scheduleEntry: null,    // {rowIndex, daysCount, bookName} or null
+lastSessionId: null,
+retakeWords: [],
+_sessions: [],
+_allWords: [],
+};
 
   // ═══════════════════════════════════════════════════════════
   // 데모 단어 (서버 연결 실패 시 fallback용)
@@ -2687,39 +2700,46 @@
 
     try {
       const result = await postToScript({
-        action: 'submitTest',
-        student: state.student.name,
-        floor: state.floor.replace('층', ''),
-        seat: state.student.seatNo,
-        parentPhoneLast4: state.student.parentLast4,
-        mode: state.mode,
-        book: state.book,
-        day: state.day,
-        total: state.count,
-        correct: correct,
-        wrong: wrong,
-        score: score,
-        elapsedSec: state.elapsedSec,
-        feedback: feedback,
-        wrongWords: wrongWordsList.join(', '),
-        timestamp: new Date().toISOString()
-      });
-
-      if (result.status === 'success') {
-        if (result.enhancedFeedback) {
-          document.getElementById('feedback-box').textContent = result.enhancedFeedback;
-        } else {
-          document.getElementById('feedback-box').textContent = feedback + '\n\n✓ 결과가 시트에 저장되었습니다.';
-        }
-      } else {
-        document.getElementById('feedback-box').textContent =
-          feedback + '\n\n⚠️ 저장 실패: ' + (result.message || '관리자에게 문의해주세요.');
-      }
-    } catch (err) {
-      document.getElementById('feedback-box').textContent =
-        feedback + '\n\n⚠️ 네트워크 오류로 저장이 안 됐어요: ' + err.message;
+  action: 'submitTest',
+  student: state.student.name,
+  floor: state.floor.replace('층', ''),
+  seat: state.student.seatNo,
+  parentPhoneLast4: state.student.parentLast4,
+  mode: state.mode,
+  book: state.book,
+  day: state.day,
+  total: state.count,
+  correct: correct,
+  wrong: wrong,
+  score: score,
+  elapsedSec: state.elapsedSec,
+  feedback: feedback,
+  wrongWords: wrongWordsList.join(', '),
+  wrongWordList: state.answers
+    .filter(a => !a.correct)
+    .map(a => ({ en: a.en, ko: a.ko })),
+  timestamp: new Date().toISOString()
+});
+if (result.status === 'success') {
+  state.lastSessionId = result.sessionId || null;
+  const retakeBtn = document.getElementById('btn-retake-wrong');
+  if (retakeBtn) {
+    if (result.wrongCount > 0) {
+      retakeBtn.style.display = 'block';
+      retakeBtn.textContent = '🔁 오답 재시험 (' + (result.wrongCount || 0) + '개 단어)';
+    } else {
+      retakeBtn.style.display = 'none';
     }
-
+  }
+  if (result.enhancedFeedback) {
+    document.getElementById('feedback-box').textContent = result.enhancedFeedback;
+  } else {
+    document.getElementById('feedback-box').textContent = feedback + '\n\n✓ 결과가 저장되었습니다.';
+  }
+} else {
+  document.getElementById('feedback-box').textContent =
+    feedback + '\n\n⚠️ 저장 실패: ' + (result.message || '관리자에게 문의해주세요.');
+}
     // 시험_일정 시트의 진도 업데이트 (오늘의 시험으로 응시한 경우만)
     // 별도 try-catch — 실패해도 시험 결과는 그대로
     if (state.scheduleEntry) {
@@ -3835,7 +3855,140 @@ return { cols, perCol, fontSize, padding, lineHeight, marginBetween, pages, perP
     });
     return await response.json();
   }
+   function startRetakeFromResult() {
+  const wrongWords = state.answers.filter(a => !a.correct).map(a => ({ en: a.en, ko: a.ko }));
+  if (wrongWords.length === 0) { alert('틀린 단어가 없습니다! 만점입니다 🎉'); return; }
+  launchRetake_(wrongWords, '오답 재시험 (' + wrongWords.length + '단어)');
+}
+
+async function goWrongNote() {
+  if (!state.student) { alert('본인확인이 필요합니다.'); return; }
+  goStep('wrong-note');
+  const loadingEl  = document.getElementById('wn-loading');
+  const contentEl  = document.getElementById('wn-content');
+  const sessionsEl = document.getElementById('wn-sessions');
+  const emptyEl    = document.getElementById('wn-empty');
+  const allBtnWrap = document.getElementById('wn-all-btn-wrap');
+  loadingEl.style.display = 'block';
+  contentEl.style.display = 'none';
+  try {
+    const result = await postToScript({ action:'getMyWrongWords', name:state.student.name, limit:10 });
+    loadingEl.style.display = 'none';
+    contentEl.style.display = 'block';
+    if (result.status !== 'success' || !result.sessions || result.sessions.length === 0) {
+      emptyEl.style.display = 'block'; sessionsEl.innerHTML = ''; allBtnWrap.style.display = 'none'; return;
+    }
+    emptyEl.style.display = 'none';
+    state._sessions = result.sessions;
+    state._allWords = result.allWrongWords || [];
+    if (state._allWords.length >= 2) {
+      allBtnWrap.style.display = 'block';
+      allBtnWrap.querySelector('button').textContent = '🔁 전체 오답 모아서 재시험 (' + state._allWords.length + '단어)';
+      allBtnWrap.querySelector('button').onclick = function() { launchRetake_(state._allWords, '전체 오답 재시험'); };
+    } else { allBtnWrap.style.display = 'none'; }
+    sessionsEl.innerHTML = result.sessions.map((s, idx) => `
+      <div style="border:1.5px solid var(--line);border-radius:12px;padding:14px;margin-bottom:10px;background:white;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+          <b>${s.book} DAY ${s.day}</b>
+          <span style="font-size:12px;color:var(--muted);">${s.date.substring(0,10)}</span>
+        </div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:8px;">
+          점수 <b>${s.score}점</b> · 오답 <b style="color:var(--error)">${s.wrongCount}개</b>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;">
+          ${s.words.slice(0,5).map(w=>`<span style="background:var(--error-bg);color:var(--error);border-radius:100px;padding:3px 10px;font-size:11px;">${w.en}</span>`).join('')}
+          ${s.words.length>5?`<span style="font-size:11px;color:var(--muted);">+${s.words.length-5}개</span>`:''}
+        </div>
+        <div style="display:grid;grid-template-columns:2fr 1fr;gap:8px;">
+          <button class="btn btn-accent" onclick="launchTestByIdx(${idx})" style="margin:0;padding:10px;font-size:13px;">
+            🔁 이 오답 재시험 (${s.words.length}단어)
+          </button>
+          <button class="btn btn-secondary" onclick="deleteWrongSession_('${s.sessionId}',this)" style="margin:0;padding:10px;font-size:12px;">
+            🗑️ 삭제
+          </button>
+        </div>
+      </div>`).join('');
+  } catch(err) {
+    loadingEl.style.display = 'none';
+    contentEl.style.display = 'block';
+    sessionsEl.innerHTML = '<div style="color:var(--error);text-align:center;">오류: ' + err.message + '</div>';
+  }
+}
+
+function launchTestByIdx(idx) {
+  const s = state._sessions[idx];
+  if (!s || !s.words) { alert('세션 정보를 찾을 수 없습니다.'); return; }
+  launchRetake_(s.words, s.book + ' 오답재시험');
+}
+
+function launchTestAll() {
+  if (!state._allWords || state._allWords.length === 0) { alert('오답 단어가 없습니다.'); return; }
+  launchRetake_(state._allWords, '전체 오답 재시험');
+}
+
+async function deleteWrongSession_(sessionId, btn) {
+  if (!confirm('이 오답 기록을 삭제할까요?')) return;
+  btn.disabled = true;
+  try {
+    await postToScript({ action:'deleteWrongSession', name:state.student.name, sessionId:sessionId });
+    btn.closest('div[style*="border:1.5px"]').remove();
+  } catch(e) { btn.disabled = false; }
+}
+
+function launchRetake_(words, label) {
+  if (!words || words.length === 0) { alert('재시험할 단어가 없습니다.'); return; }
+  state.retakeWords = words;
+  state.words       = words.slice();
+  state.count       = words.length;
+  state.currentIdx  = 0;
+  state.answers     = [];
+  state.book        = '_retake';
+  state.day         = '오답재시험';
+  state.mode        = 'online';
+  document.getElementById('test-info').textContent = label || '오답 재시험';
+  goStep(3);
+  startTimer();
+  renderQuestion();
+}
+
+async function startRetakeAll() {
+  const btn = document.querySelector('#wn-all-btn-wrap button');
+  const orig = btn ? btn.innerHTML : '';
+  if (btn) { btn.disabled = true; btn.innerHTML = '준비 중...'; }
+  try {
+    const result = await postToScript({ action:'getMyWrongWords', name:state.student.name, limit:20 });
+    const allWords = result.allWrongWords || [];
+    if (allWords.length === 0) { alert('오답 단어가 없습니다.'); return; }
+    launchRetake_(allWords, '전체 오답 재시험 (' + allWords.length + '단어)');
+  } catch(e) { alert('오류: ' + e.message); }
+  finally { if (btn) { btn.disabled = false; btn.innerHTML = orig; } }
+}
 </script>
+ <div class="step" id="step-wrong-note">
+  <h1>📖 내 오답노트</h1>
+  <p class="hint">틀렸던 단어만 모아 재시험을 볼 수 있습니다.</p>
+  <div id="wn-loading" style="text-align:center;padding:24px;color:var(--muted);">
+    ⏳ 오답 기록 불러오는 중...
+  </div>
+  <div id="wn-content" style="display:none;">
+    <div id="wn-all-btn-wrap" style="display:none;margin-bottom:14px;">
+      <button class="btn btn-accent" onclick="startRetakeAll()" style="margin:0;">
+        🔁 전체 오답 모아서 재시험
+      </button>
+    </div>
+    <div id="wn-sessions"></div>
+    <div id="wn-empty" style="display:none;">
+      <div class="today-empty">
+        <div class="te-icon">🎉</div>
+        <div style="font-weight:600;margin-bottom:4px;">오답 기록이 없습니다!</div>
+        <div>계속 이 페이스로 유지하세요.</div>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-secondary" onclick="goStep('today'); loadTodaySchedule();" style="margin-top:12px;">
+    ← 오늘의 시험으로
+  </button>
+</div>
 
 </body>
 </html>

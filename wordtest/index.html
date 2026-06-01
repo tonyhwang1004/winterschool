@@ -3476,11 +3476,7 @@
 
     if (isAnswer) {
      // 정답표: 영어+한글 한 줄
-      if (perPage <= 30) cols = 2;
-      else if (perPage <= 60) cols = 2;
-      else if (perPage <= 90) cols = 3;
-      else if (perPage <= 140) cols = 3;
-      else cols = 4;
+      cols = 2;
       perCol = Math.ceil(perPage / cols);
       // 한 컬럼당 사용 가능 높이 / 항목 수 = 항목당 높이
       const rowHeight = PAGE_HEIGHT / perCol;
@@ -3503,11 +3499,7 @@ return { cols, perCol, fontSize, padding, lineHeight, marginBetween, pages, perP
     }
 
     // 시험지: 영어 + 빈 줄
-    if (perPage <= 20) cols = 1;
-    else if (perPage <= 40) cols = 2;
-    else if (perPage <= 70) cols = 2;
-    else if (perPage <= 110) cols = 3;
-    else cols = 4;
+    cols = 2;
     perCol = Math.ceil(perPage / cols);
   
     const rowHeight = PAGE_HEIGHT / perCol;

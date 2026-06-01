@@ -2700,52 +2700,50 @@ _allWords: [],
 
     try {
       const result = await postToScript({
-  action: 'submitTest',
-  student: state.student.name,
-  floor: state.floor.replace('층', ''),
-  seat: state.student.seatNo,
-  parentPhoneLast4: state.student.parentLast4,
-  mode: state.mode,
-  book: state.book,
-  day: state.day,
-  total: state.count,
-  correct: correct,
-  wrong: wrong,
-  score: score,
-  elapsedSec: state.elapsedSec,
-  feedback: feedback,
-  wrongWords: wrongWordsList.join(', '),
-  wrongWordList: state.answers
-    .filter(a => !a.correct)
-    .map(a => ({ en: a.en, ko: a.ko })),
-  timestamp: new Date().toISOString()
-});
-if (result.status === 'success') {
-  state.lastSessionId = result.sessionId || null;
-  const retakeBtn = document.getElementById('btn-retake-wrong');
-  if (retakeBtn) {
-    if (result.wrongCount > 0) {
-      retakeBtn.style.display = 'block';
-      retakeBtn.textContent = '🔁 오답 재시험 (' + (result.wrongCount || 0) + '개 단어)';
-    } else {
-      retakeBtn.style.display = 'none';
+        action: 'submitTest',
+        student: state.student.name,
+        floor: state.floor.replace('층', ''),
+        seat: state.student.seatNo,
+        parentPhoneLast4: state.student.parentLast4,
+        mode: state.mode,
+        book: state.book,
+        day: state.day,
+        total: state.count,
+        correct: correct,
+        wrong: wrong,
+        score: score,
+        elapsedSec: state.elapsedSec,
+        feedback: feedback,
+        wrongWords: wrongWordsList.join(', '),
+        wrongWordList: state.answers
+          .filter(a => !a.correct)
+          .map(a => ({ en: a.en, ko: a.ko })),
+        timestamp: new Date().toISOString()
+      });
+      if (result.status === 'success') {
+        state.lastSessionId = result.sessionId || null;
+        const retakeBtn = document.getElementById('btn-retake-wrong');
+        if (retakeBtn) {
+          if (result.wrongCount > 0) {
+            retakeBtn.style.display = 'block';
+            retakeBtn.textContent = '🔁 오답 재시험 (' + (result.wrongCount || 0) + '개 단어)';
+          } else {
+            retakeBtn.style.display = 'none';
+          }
+        }
+        if (result.enhancedFeedback) {
+          document.getElementById('feedback-box').textContent = result.enhancedFeedback;
+        } else {
+          document.getElementById('feedback-box').textContent = feedback + '\n\n✓ 결과가 저장되었습니다.';
+        }
+      } else {
+        document.getElementById('feedback-box').textContent =
+          feedback + '\n\n⚠️ 저장 실패: ' + (result.message || '관리자에게 문의해주세요.');
+      }
+    } catch (err) {
+      document.getElementById('feedback-box').textContent =
+        feedback + '\n\n⚠️ 네트워크 오류로 저장이 안 됐어요: ' + err.message;
     }
-  }
-  if (result.enhancedFeedback) {
-    document.getElementById('feedback-box').textContent = result.enhancedFeedback;
-  } else {
-    document.getElementById('feedback-box').textContent = feedback + '\n\n✓ 결과가 저장되었습니다.';
-  }
-} else {
-  document.getElementById('feedback-box').textContent =
-    feedback + '\n\n⚠️ 저장 실패: ' + (result.message || '관리자에게 문의해주세요.');
-}
-    // 시험_일정 시트의 진도 업데이트 (오늘의 시험으로 응시한 경우만)
-    // 별도 try-catch — 실패해도 시험 결과는 그대로
-    if (state.scheduleEntry) {
-      notifyScheduleCompleted(score);
-    }
-  }
 
   function calcGrade(score) {
     if (score >= 90) return { label: '최우수 · OUTSTANDING' };

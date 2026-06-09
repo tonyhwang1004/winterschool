@@ -1226,6 +1226,101 @@
   }
   html, body { height: auto !important; }
   }
+ /* ─── 탭 메뉴 (단어시험 / 오답노트) ─── */
+.tab-menu {
+  display: none;
+  justify-content: center;
+  gap: 8px;
+  margin: 12px 0 0;
+}
+.tab-menu.show { display: flex; }
+.tab-btn {
+  padding: 7px 20px;
+  border: 1.5px solid var(--line);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.18s;
+}
+.tab-btn.active {
+  background: var(--ink);
+  color: white;
+  border-color: var(--ink);
+}
+.tab-btn:hover:not(.active) { border-color: var(--muted); }
+
+/* ─── 오답노트 전용 스텝 ─── */
+.wn-step { display: none; animation: fadeIn 0.3s ease; }
+.wn-step.active { display: block; }
+
+/* 오답노트 세션 카드 */
+.session-card {
+  border: 1.5px solid var(--line); border-radius: 14px; padding: 16px;
+  margin-bottom: 10px; background: white; transition: border-color 0.15s;
+}
+.session-card:hover { border-color: var(--accent); }
+.session-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+.session-book { font-size: 15px; font-weight: 700; color: var(--ink); }
+.session-day { font-size: 12px; color: var(--muted); }
+.session-date { font-size: 11px; color: var(--muted); white-space: nowrap; margin-left: 8px; }
+.session-stats { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+.session-stats b { color: var(--ink); }
+.session-stats .score-bad { color: var(--error); }
+.word-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 12px; }
+.word-chip {
+  background: var(--error-bg); color: var(--error); border-radius: 100px;
+  padding: 3px 10px; font-size: 11px; font-family: 'JetBrains Mono', monospace;
+}
+.word-more { font-size: 11px; color: var(--muted); padding: 3px 6px; }
+.session-actions { display: grid; grid-template-columns: 2fr 1fr; gap: 8px; }
+.session-actions .btn { margin: 0; padding: 10px; font-size: 13px; }
+.all-retake-banner {
+  background: linear-gradient(135deg, #fff4eb, #fff);
+  border: 2px solid var(--accent); border-radius: 14px;
+  padding: 16px; margin-bottom: 16px; text-align: center;
+}
+.ar-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.ar-sub { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+.empty-state { text-align: center; padding: 40px 20px; color: var(--muted); }
+.empty-icon { font-size: 48px; margin-bottom: 12px; }
+.empty-title { font-size: 17px; font-weight: 700; }
+
+/* 오답 재시험 문제 화면 */
+.wn-test-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 12px; font-size: 13px; color: var(--muted); font-weight: 600;
+}
+.wn-timer { font-family: 'JetBrains Mono', monospace; font-size: 15px; color: var(--ink); }
+.wn-progress { height: 4px; background: var(--line); border-radius: 2px; margin-bottom: 20px; }
+.wn-progress-bar { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.3s; width: 0%; }
+.wn-qnum { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+.wn-question { font-size: 28px; font-weight: 700; text-align: center; padding: 24px 0; letter-spacing: 1px; }
+.wn-answer-input {
+  width: 100%; padding: 14px; border: 2px solid var(--line); border-radius: 10px;
+  font-size: 16px; font-family: inherit; text-align: center;
+}
+.wn-answer-input:focus { outline: none; border-color: var(--accent); }
+.wn-answer-hint { text-align: center; font-size: 11px; color: var(--muted); margin-top: 6px; }
+.wn-test-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px; }
+
+/* 오답 재시험 결과 */
+.wn-result-hero { text-align: center; padding: 24px 0 16px; }
+.wn-result-hero .badge { font-size: 48px; margin-bottom: 8px; }
+.wn-score { font-size: 52px; font-weight: 800; }
+.wn-score .max { font-size: 18px; color: var(--muted); font-weight: 400; }
+.wn-grade { font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: 2px; margin-top: 4px; }
+.wn-result-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
+.wn-stat { background: var(--bg); border-radius: 10px; padding: 12px; text-align: center; }
+.wn-stat .num { font-size: 22px; font-weight: 700; }
+.wn-stat .lbl { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.wn-feedback-box { background: var(--bg); border-radius: 10px; padding: 14px; margin-bottom: 16px; font-size: 13px; line-height: 1.7; white-space: pre-line; }
+.wn-wrong-box { border: 1.5px solid var(--error); border-radius: 10px; padding: 14px; margin-bottom: 16px; }
+.wn-wrong-box h4 { font-size: 13px; margin-bottom: 8px; color: var(--error); }
+.wn-item { display: inline-block; background: var(--error-bg); color: var(--error); border-radius: 6px; padding: 3px 8px; font-size: 12px; margin: 2px; }
 </style>
 </head>
 <body>
@@ -1242,7 +1337,10 @@
       <span class="x" onclick="logout()">✕ 로그아웃</span>
     </div>
   </div>
-
+<div class="tab-menu" id="tab-menu">
+    <button class="tab-btn active" id="tab-word" onclick="switchTab('word')">📚 단어시험</button>
+    <button class="tab-btn" id="tab-note" onclick="switchTab('note')">📖 내 오답노트</button>
+  </div>
   <!-- 진행 단계 -->
   <div class="steps">
     <div class="dot active" id="dot-1"></div>
@@ -2165,6 +2263,7 @@ _allWords: [],
     const seat = state.student.seatType + ' ' + state.student.seatNo + '번';
     txt.textContent = '✓ ' + state.student.name + ' (' + state.floor + ' · ' + seat + ')';
     badge.classList.add('show');
+   showTabMenu();
   }
 
   function logout() {
@@ -3989,6 +4088,354 @@ async function startRetakeAll() {
     ← 오늘의 시험으로
   </button>
 </div>
+<!-- ══════════════════════════════════════════════════════════ -->
+  <!-- 오답노트 영역                                               -->
+  <!-- ══════════════════════════════════════════════════════════ -->
 
+  <!-- STEP WN-NOTE: 오답 목록 -->
+  <div class="wn-step" id="wn-step-note">
+    <h1>📖 내 오답노트</h1>
+    <p class="hint">틀렸던 단어를 모아 재시험을 볼 수 있습니다.</p>
+    <div id="wn-note-loading" style="text-align:center;padding:24px;color:var(--muted);">
+      ⏳ 오답 기록 불러오는 중...
+    </div>
+    <div id="wn-note-content" style="display:none;">
+      <div id="wn-note-all-banner" style="display:none;"></div>
+      <div id="wn-note-sessions"></div>
+      <div id="wn-note-empty" style="display:none;"></div>
+    </div>
+  </div>
+
+  <!-- STEP WN-TEST: 오답 재시험 -->
+  <div class="wn-step" id="wn-step-test">
+    <div class="wn-test-header">
+      <div id="wn-test-info">오답 재시험</div>
+      <div class="wn-timer" id="wn-timer">00:00</div>
+    </div>
+    <div class="wn-progress"><div class="wn-progress-bar" id="wn-progress-bar"></div></div>
+    <div class="wn-qnum" id="wn-qnum">문제 1 / 10</div>
+    <div class="wn-question" id="wn-question">loading...</div>
+    <input type="text" id="wn-answer-input" class="wn-answer-input"
+           placeholder="한글 뜻을 입력하세요"
+           autocomplete="off" autocapitalize="off" spellcheck="false">
+    <div class="wn-answer-hint">Enter 키로 다음 문제</div>
+    <div class="wn-test-actions">
+      <button class="btn btn-secondary" onclick="wnSkipQ()">건너뛰기</button>
+      <button class="btn btn-accent" id="wn-btn-next" onclick="wnNextQ()" disabled>다음 →</button>
+    </div>
+  </div>
+
+  <!-- STEP WN-RESULT: 결과 -->
+  <div class="wn-step" id="wn-step-result">
+    <div class="wn-result-hero">
+      <div class="badge" id="wn-r-badge">🏆</div>
+      <div class="wn-score"><span id="wn-r-score">0</span><span class="max"> / 100</span></div>
+      <div class="wn-grade" id="wn-r-grade"></div>
+    </div>
+    <div class="wn-result-stats">
+      <div class="wn-stat"><div class="num" style="color:var(--success)" id="wn-r-correct">0</div><div class="lbl">정답</div></div>
+      <div class="wn-stat"><div class="num" style="color:var(--error)"   id="wn-r-wrong">0</div><div class="lbl">오답</div></div>
+      <div class="wn-stat"><div class="num" id="wn-r-time">0:00</div><div class="lbl">소요시간</div></div>
+    </div>
+    <div class="wn-feedback-box" id="wn-r-feedback"></div>
+    <div class="wn-wrong-box" id="wn-r-wrong-box" style="display:none;">
+      <h4>🔴 아직 틀린 단어</h4>
+      <div id="wn-r-wrong-list"></div>
+    </div>
+    <button class="btn btn-accent" id="wn-btn-retake-again" onclick="wnRetakeWrongAgain()" style="display:none;margin-bottom:8px;">
+      🔁 틀린 것만 다시 재시험
+    </button>
+    <button class="btn btn-primary" onclick="wnGoNote()" style="margin-bottom:8px;">📖 오답노트로 돌아가기</button>
+    <button class="btn btn-secondary" onclick="switchTab('note')">← 오답노트 목록</button>
+  </div>
+
+<script>
+// ================================================================
+// 탭 전환 + 오답노트 기능
+// ================================================================
+function switchTab(tab) {
+  const wordSteps = document.querySelectorAll('.step');
+  const noteSteps = document.querySelectorAll('.wn-step');
+  const dots      = document.querySelector('.steps');
+
+  document.getElementById('tab-word').classList.toggle('active', tab === 'word');
+  document.getElementById('tab-note').classList.toggle('active', tab === 'note');
+
+  if (tab === 'word') {
+    wordSteps.forEach(s => { if (s._prevDisplay !== undefined) s.style.display = s._prevDisplay; });
+    noteSteps.forEach(s => s.classList.remove('active'));
+    if (dots) dots.style.display = '';
+  } else {
+    wordSteps.forEach(s => { s._prevDisplay = s.style.display; s.style.display = 'none'; });
+    if (dots) dots.style.display = 'none';
+    wnGoNote();
+  }
+}
+
+function showTabMenu() {
+  document.getElementById('tab-menu').classList.add('show');
+}
+
+// ── 오답노트 상태 ──
+const wnState = {
+  sessions: [], allWords: [],
+  words: [], count: 0, currentIdx: 0,
+  answers: [], testLabel: '',
+  timerInterval: null, startTime: null, elapsedSec: 0
+};
+
+function wnGoStep(id) {
+  document.querySelectorAll('.wn-step').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById('wn-step-' + id);
+  if (el) el.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function wnGoNote() {
+  wnGoStep('note');
+  const loadEl    = document.getElementById('wn-note-loading');
+  const contentEl = document.getElementById('wn-note-content');
+  const sessEl    = document.getElementById('wn-note-sessions');
+  const emptyEl   = document.getElementById('wn-note-empty');
+  const bannerEl  = document.getElementById('wn-note-all-banner');
+
+  loadEl.style.display    = 'block';
+  contentEl.style.display = 'none';
+
+  const studentName = (typeof state !== 'undefined' && state.student) ? state.student.name : '';
+  if (!studentName) {
+    loadEl.style.display = 'none';
+    contentEl.style.display = 'block';
+    emptyEl.style.display = 'block';
+    emptyEl.innerHTML = '<div class="empty-state"><div class="empty-icon">🔒</div><div class="empty-title">로그인이 필요합니다</div></div>';
+    return;
+  }
+
+  google.script.run
+    .withSuccessHandler(function(r) {
+      loadEl.style.display    = 'none';
+      contentEl.style.display = 'block';
+
+      if (!r || r.status !== 'success' || !r.sessions || r.sessions.length === 0) {
+        emptyEl.style.display = 'block';
+        emptyEl.innerHTML = '<div class="empty-state"><div class="empty-icon">🎉</div><div class="empty-title">오답 기록이 없어요!</div><div style="font-size:13px;margin-top:4px;">틀린 단어가 없거나 아직 시험을 보지 않았습니다.</div></div>';
+        bannerEl.style.display = 'none';
+        sessEl.innerHTML = '';
+        return;
+      }
+
+      emptyEl.style.display = 'none';
+      wnState.sessions = r.sessions;
+      wnState.allWords = r.allWrongWords || [];
+
+      if (wnState.allWords.length >= 2) {
+        bannerEl.style.display = 'block';
+        bannerEl.innerHTML = '<div class="all-retake-banner"><div class="ar-title">✨ 전체 오답 모아서 재시험</div><div class="ar-sub">최근 기록에서 중복 없이 <b>' + wnState.allWords.length + '개</b> 단어를 모았습니다</div><button class="btn btn-accent" onclick="wnLaunchTestAll()">🔁 지금 바로 시작 (' + wnState.allWords.length + '단어)</button></div>';
+      } else {
+        bannerEl.style.display = 'none';
+      }
+
+      sessEl.innerHTML = r.sessions.map(function(s, idx) {
+        return '<div class="session-card" id="wn-card-' + escWN(s.sessionId) + '">' +
+          '<div class="session-head"><div><span class="session-book">' + escWN(s.book) + '</span><span class="session-day"> DAY ' + escWN(String(s.day)) + '</span></div><span class="session-date">' + escWN(String(s.date).substring(0,10)) + '</span></div>' +
+          '<div class="session-stats">점수 <b class="' + (s.score >= 80 ? '' : 'score-bad') + '">' + s.score + '점</b> &nbsp;·&nbsp; 오답 <b style="color:var(--error)">' + s.wrongCount + '개</b></div>' +
+          '<div class="word-chips">' + s.words.slice(0,6).map(function(w){ return '<span class="word-chip">' + escWN(w.en) + '</span>'; }).join('') + (s.words.length > 6 ? '<span class="word-more">+' + (s.words.length-6) + '개</span>' : '') + '</div>' +
+          '<div class="session-actions"><button class="btn btn-accent" onclick="wnLaunchTestByIdx(' + idx + ')">🔁 이 오답 재시험 (' + s.words.length + '단어)</button><button class="btn btn-secondary" onclick="wnDeleteSession(\'' + escWN(s.sessionId) + '\')">🗑️ 삭제</button></div>' +
+          '</div>';
+      }).join('');
+    })
+    .withFailureHandler(function(err) {
+      loadEl.style.display    = 'none';
+      contentEl.style.display = 'block';
+      sessEl.innerHTML = '<div style="color:var(--error);text-align:center;padding:20px;">오류: ' + escWN(err.message) + '</div>';
+    })
+    .getMyWrongWords({ name: studentName, limit: 15 });
+}
+
+function wnLaunchTestByIdx(idx) {
+  const s = wnState.sessions[idx];
+  if (!s || !s.words) { alert('세션 정보를 찾을 수 없습니다.'); return; }
+  wnLaunchTest(s.words, s.book + ' 오답재시험');
+}
+
+function wnLaunchTestAll() {
+  if (!wnState.allWords || wnState.allWords.length === 0) { alert('오답 단어가 없습니다.'); return; }
+  wnLaunchTest(wnState.allWords, '전체 오답 재시험 (' + wnState.allWords.length + '단어)');
+}
+
+function wnDeleteSession(sessionId) {
+  if (!confirm('이 오답 기록을 삭제할까요?')) return;
+  const card = document.getElementById('wn-card-' + sessionId);
+  if (card) card.style.opacity = '0.4';
+  const studentName = (typeof state !== 'undefined' && state.student) ? state.student.name : '';
+  google.script.run
+    .withSuccessHandler(function() {
+      if (card) card.remove();
+      if (!document.querySelector('.session-card')) wnGoNote();
+    })
+    .withFailureHandler(function() { if (card) card.style.opacity = '1'; })
+    .deleteWrongSession({ name: studentName, sessionId: sessionId });
+}
+
+function wnLaunchTest(words, label) {
+  if (!words || words.length === 0) { alert('재시험할 단어가 없습니다.'); return; }
+  const shuffled     = words.slice().sort(function(){ return Math.random() - 0.5; });
+  wnState.words      = shuffled;
+  wnState.count      = shuffled.length;
+  wnState.currentIdx = 0;
+  wnState.answers    = [];
+  wnState.testLabel  = label || '오답 재시험';
+
+  const studentName = (typeof state !== 'undefined' && state.student) ? state.student.name : '';
+  const floor       = (typeof state !== 'undefined' && state.floor)   ? state.floor : '';
+  google.script.run.logRetakeStart({ name: studentName, floor: floor, wordCount: words.length });
+
+  wnGoStep('test');
+  wnStartTimer();
+  wnRenderQ();
+}
+
+function wnRenderQ() {
+  const w = wnState.words[wnState.currentIdx];
+  if (!w) { wnFinishTest(); return; }
+  document.getElementById('wn-progress-bar').style.width = (wnState.currentIdx / wnState.count * 100) + '%';
+  document.getElementById('wn-qnum').textContent = '문제 ' + (wnState.currentIdx + 1) + ' / ' + wnState.count;
+  document.getElementById('wn-question').textContent = w.en;
+  document.getElementById('wn-test-info').textContent = wnState.testLabel;
+  const inp = document.getElementById('wn-answer-input');
+  inp.value = ''; inp.disabled = false;
+  document.getElementById('wn-btn-next').disabled = true;
+  document.getElementById('wn-btn-next').textContent = wnState.currentIdx === wnState.count - 1 ? '결과 보기 →' : '다음 →';
+  setTimeout(function(){ inp.focus(); }, 50);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const inp = document.getElementById('wn-answer-input');
+  if (inp) {
+    inp.addEventListener('input', function() {
+      document.getElementById('wn-btn-next').disabled = this.value.trim().length === 0;
+    });
+    inp.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter' && !document.getElementById('wn-btn-next').disabled) {
+        e.preventDefault(); wnNextQ();
+      }
+    });
+  }
+});
+
+function wnNextQ() {
+  const inp  = document.getElementById('wn-answer-input');
+  const user = inp.value.trim();
+  if (!user) return;
+  const w  = wnState.words[wnState.currentIdx];
+  const ok = wnIsCorrect(user, w.ko);
+  wnState.answers.push({ en:w.en, ko:w.ko, selected:user, correct:ok });
+  wnState.currentIdx++;
+  if (wnState.currentIdx >= wnState.count) wnFinishTest();
+  else wnRenderQ();
+}
+
+function wnSkipQ() {
+  const w = wnState.words[wnState.currentIdx];
+  wnState.answers.push({ en:w.en, ko:w.ko, selected:null, correct:false });
+  wnState.currentIdx++;
+  if (wnState.currentIdx >= wnState.count) wnFinishTest();
+  else wnRenderQ();
+}
+
+function wnNormalize(s) {
+  return String(s||'').replace(/\([^)]*\)/g,'').replace(/[\s.,;:!?~\-]/g,'').toLowerCase().trim();
+}
+function wnIsCorrect(user, correct) {
+  const u = wnNormalize(user);
+  if (!u) return false;
+  return String(correct).split(/[\/,;]|\s+또는\s+/).map(function(c){ return wnNormalize(c); }).some(function(c){ return c === u; });
+}
+
+function wnStartTimer() {
+  wnState.startTime = Date.now(); wnState.elapsedSec = 0;
+  if (wnState.timerInterval) clearInterval(wnState.timerInterval);
+  wnState.timerInterval = setInterval(function() {
+    wnState.elapsedSec = Math.floor((Date.now() - wnState.startTime) / 1000);
+    const m = String(Math.floor(wnState.elapsedSec / 60)).padStart(2,'0');
+    const s = String(wnState.elapsedSec % 60).padStart(2,'0');
+    document.getElementById('wn-timer').textContent = m + ':' + s;
+  }, 1000);
+}
+function wnStopTimer() { clearInterval(wnState.timerInterval); }
+
+function wnFinishTest() {
+  wnStopTimer();
+  document.getElementById('wn-progress-bar').style.width = '100%';
+  const correct = wnState.answers.filter(function(a){ return a.correct; }).length;
+  const wrong   = wnState.count - correct;
+  const score   = Math.round(correct / wnState.count * 100);
+
+  const badge = document.getElementById('wn-r-badge');
+  if      (score >= 90) { badge.className='badge gold';   badge.textContent='🏆'; }
+  else if (score >= 75) { badge.className='badge green';  badge.textContent='✓';  }
+  else if (score >= 60) { badge.className='badge orange'; badge.textContent='📖'; }
+  else                  { badge.className='badge red';    badge.textContent='💪'; }
+
+  wnAnimateNum('wn-r-score', 0, score, 800);
+  document.getElementById('wn-r-grade').textContent =
+    score>=90 ? '완벽 · PERFECT' : score>=75 ? '우수 · GREAT' : score>=60 ? '양호 · GOOD' : '재도전 · TRY AGAIN';
+  document.getElementById('wn-r-correct').textContent = correct;
+  document.getElementById('wn-r-wrong').textContent   = wrong;
+  const m = String(Math.floor(wnState.elapsedSec/60)).padStart(2,'0');
+  const s = String(wnState.elapsedSec%60).padStart(2,'0');
+  document.getElementById('wn-r-time').textContent = m + ':' + s;
+
+  let msg = score>=90 ? '🏆 완벽합니다! 이 단어들은 이제 완전히 내 것!' :
+            score>=75 ? '👍 잘하셨어요! 남은 오답을 한 번 더 복습해보세요.' :
+            score>=60 ? '📖 조금 더 복습이 필요합니다. 다시 도전해보세요!' :
+                        '💪 포기하지 마세요. 반복이 최고의 공부법입니다!';
+  msg += '\n\n오답 재시험 ' + wnState.count + '단어 · ' + score + '점';
+  if (wrong > 0) msg += '\n아직 ' + wrong + '개 단어가 남았습니다.';
+  document.getElementById('wn-r-feedback').textContent = msg;
+
+  const stillWrong = wnState.answers.filter(function(a){ return !a.correct; });
+  const retakeBtn  = document.getElementById('wn-btn-retake-again');
+  if (stillWrong.length > 0) {
+    document.getElementById('wn-r-wrong-box').style.display = 'block';
+    document.getElementById('wn-r-wrong-list').innerHTML =
+      stillWrong.map(function(a){ return '<span class="wn-item">' + escWN(a.en) + ' (' + escWN(a.ko) + ')</span>'; }).join('');
+    retakeBtn.style.display = 'block';
+    retakeBtn.textContent = '🔁 틀린 것만 다시 재시험 (' + stillWrong.length + '단어)';
+  } else {
+    document.getElementById('wn-r-wrong-box').style.display = 'none';
+    retakeBtn.style.display = 'none';
+  }
+
+  wnGoStep('result');
+
+  const studentName = (typeof state !== 'undefined' && state.student) ? state.student.name : '';
+  const floor       = (typeof state !== 'undefined' && state.floor)   ? state.floor : '';
+  google.script.run.logRetakeComplete({ name: studentName, floor: floor, wordCount: wnState.count, score: score });
+}
+
+function wnRetakeWrongAgain() {
+  const stillWrong = wnState.answers.filter(function(a){ return !a.correct; }).map(function(a){ return { en:a.en, ko:a.ko }; });
+  wnLaunchTest(stillWrong, '재재시험 (' + stillWrong.length + '단어)');
+}
+
+function wnAnimateNum(id, from, to, dur) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const t0 = Date.now();
+  const tick = function() {
+    const p = Math.min((Date.now()-t0)/dur, 1);
+    el.textContent = Math.round(from + (to-from)*p);
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  tick();
+}
+
+function escWN(s) {
+  return String(s||'').replace(/[&<>"']/g, function(c) {
+    return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+  });
+}
+</script>
 </body>
 </html>

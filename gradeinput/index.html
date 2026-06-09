@@ -271,16 +271,15 @@ tbody tr:hover { background: #fffbf3; }
 .score.good { color: var(--accent); }
 .score.fail { color: var(--error); }
 
-.source-badge {
+/* .source-badge removed */
+._unused_source_badge {
   font-size: 0.68rem;
   padding: 2px 7px;
   border-radius: 4px;
   margin-left: 6px;
   font-weight: 600;
 }
-.source-old { background: var(--accent-soft); color: var(--accent); }
-.source-new { background: #e6f0ff; color: var(--8f); }
-.source-both { background: var(--success-bg); color: var(--success); }
+/* source badges removed */
 
 .footer {
   padding: 20px 32px;
@@ -548,9 +547,7 @@ function renderStudents() {
   `;
   
   students.forEach((s, i) => {
-    const sourceBadge = s.source === 'both'
-      ? '<span class="source-badge source-both">확인</span>'
-      : (s.source === 'old' ? '<span class="source-badge source-old">구</span>' : '<span class="source-badge source-new">신</span>');
+    const sourceBadge = '';
     
     let floorDisplay, floorClass;
     if (s.floor === '7') {

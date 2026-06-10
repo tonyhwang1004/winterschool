@@ -4218,8 +4218,8 @@ function wnGoNote() {
     return;
   }
 
-  google.script.run
-    .withSuccessHandler(function(r) {
+  wnApi({ action: 'getMyWrongWords', name: studentName, limit: 15 })
+    .then(function(r) {
       loadEl.style.display    = 'none';
       contentEl.style.display = 'block';
 
@@ -4251,12 +4251,11 @@ function wnGoNote() {
           '</div>';
       }).join('');
     })
-   .withFailureHandler(function(err) {
-        loadEl.style.display    = 'none';
-        contentEl.style.display = 'block';
-        sessEl.innerHTML = '<div style="color:var(--error);text-align:center;padding:20px;">오류: ' + escWN(err.message) + '</div>';
-      })
-      .getMyWrongWords({ name: studentName, limit: 15 });
+   .catch(function(err) {
+      loadEl.style.display    = 'none';
+      contentEl.style.display = 'block';
+      sessEl.innerHTML = '<div style="color:var(--error);text-align:center;padding:20px;">오류: ' + escWN(err.message) + '</div>';
+    });
 }
 
 function wnLaunchTestByIdx(idx) {
@@ -4276,13 +4275,12 @@ function wnDeleteSession(sessionId) {
   if (card) card.style.opacity = '0.4';
   const studentName = (typeof state !== 'undefined' && state.student) ? state.student.name : '';
   google.script.run
-    .withSuccessHandler(function() {
+    wnApi({ action: 'deleteWrongSession', name: studentName, sessionId: sessionId })
+    .then(function() {
       if (card) card.remove();
       if (!document.querySelector('.session-card')) wnGoNote();
     })
-    .withFailureHandler(function() { if (card) card.style.opacity = '1'; })
-    .deleteWrongSession({ name: studentName, sessionId: sessionId });
-}
+    .catch(function() { if (card) card.style.opacity = '1'; });
 
 function wnLaunchTest(words, label) {
   if (!words || words.length === 0) { alert('재시험할 단어가 없습니다.'); return; }

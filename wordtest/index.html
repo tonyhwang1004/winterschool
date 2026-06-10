@@ -4332,5 +4332,61 @@ function escWN(s) {
   });
 }
 </script>
+
+  <!-- ══ 오답노트 영역 ══ -->
+  <div class="wn-step" id="wn-step-note">
+    <h1>📖 내 오답노트</h1>
+    <p class="hint">틀렸던 단어를 모아 재시험을 볼 수 있습니다.</p>
+    <div id="wn-note-loading" style="text-align:center;padding:24px;color:var(--muted);">
+      ⏳ 오답 기록 불러오는 중...
+    </div>
+    <div id="wn-note-content" style="display:none;">
+      <div id="wn-note-all-banner" style="display:none;"></div>
+      <div id="wn-note-sessions"></div>
+      <div id="wn-note-empty" style="display:none;"></div>
+    </div>
+  </div>
+
+  <div class="wn-step" id="wn-step-test">
+    <div class="wn-test-header">
+      <div id="wn-test-info">오답 재시험</div>
+      <div class="wn-timer" id="wn-timer">00:00</div>
+    </div>
+    <div class="wn-progress"><div class="wn-progress-bar" id="wn-progress-bar"></div></div>
+    <div class="wn-qnum" id="wn-qnum">문제 1 / 10</div>
+    <div class="wn-question" id="wn-question">loading...</div>
+    <input type="text" id="wn-answer-input" class="wn-answer-input"
+           placeholder="한글 뜻을 입력하세요"
+           autocomplete="off" autocapitalize="off" spellcheck="false">
+    <div class="wn-answer-hint">Enter 키로 다음 문제</div>
+    <div class="wn-test-actions">
+      <button class="btn btn-secondary" onclick="wnSkipQ()">건너뛰기</button>
+      <button class="btn btn-accent" id="wn-btn-next" onclick="wnNextQ()" disabled>다음 →</button>
+    </div>
+  </div>
+
+  <div class="wn-step" id="wn-step-result">
+    <div class="wn-result-hero">
+      <div class="badge" id="wn-r-badge">🏆</div>
+      <div class="wn-score"><span id="wn-r-score">0</span><span class="max"> / 100</span></div>
+      <div class="wn-grade" id="wn-r-grade"></div>
+    </div>
+    <div class="wn-result-stats">
+      <div class="wn-stat"><div class="num" style="color:var(--success)" id="wn-r-correct">0</div><div class="lbl">정답</div></div>
+      <div class="wn-stat"><div class="num" style="color:var(--error)" id="wn-r-wrong">0</div><div class="lbl">오답</div></div>
+      <div class="wn-stat"><div class="num" id="wn-r-time">0:00</div><div class="lbl">소요시간</div></div>
+    </div>
+    <div class="wn-feedback-box" id="wn-r-feedback"></div>
+    <div class="wn-wrong-box" id="wn-r-wrong-box" style="display:none;">
+      <h4>🔴 아직 틀린 단어</h4>
+      <div id="wn-r-wrong-list"></div>
+    </div>
+    <button class="btn btn-accent" id="wn-btn-retake-again" onclick="wnRetakeWrongAgain()" style="display:none;margin-bottom:8px;">
+      🔁 틀린 것만 다시 재시험
+    </button>
+    <button class="btn btn-primary" onclick="wnGoNote()" style="margin-bottom:8px;">📖 오답노트로 돌아가기</button>
+    <button class="btn btn-secondary" onclick="switchTab('note')">← 오답노트 목록</button>
+  </div>
+
 </body>
 </html>

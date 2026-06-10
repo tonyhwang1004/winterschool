@@ -4460,7 +4460,7 @@ function wnFinishTest() {
 
   const studentName = (typeof state !== 'undefined' && state.student) ? state.student.name : '';
   const floor       = (typeof state !== 'undefined' && state.floor)   ? state.floor : '';
-  google.script.run.logRetakeComplete({ name: studentName, floor: floor, wordCount: wnState.count, score: score });
+  fetch(APPS_SCRIPT_URL,{method:'POST',mode:'cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'logRetakeComplete',name:studentName,floor:floor,wordCount:wnState.count,score:score})}).catch(function(){});
 }
 
 function wnRetakeWrongAgain() {

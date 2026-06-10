@@ -4096,7 +4096,7 @@ function wnGoStep(id) {
   if (el) el.classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
+let wnState = { sessions: [], allWords: [] };
 function wnGoNote() {
   wnGoStep('note');
   const loadEl    = document.getElementById('wn-note-loading');

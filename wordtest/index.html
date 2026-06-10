@@ -2263,7 +2263,10 @@ _allWords: [],
     const seat = state.student.seatType + ' ' + state.student.seatNo + '번';
     txt.textContent = '✓ ' + state.student.name + ' (' + state.floor + ' · ' + seat + ')';
     badge.classList.add('show');
-   if (typeof showTabMenu === 'function') showTabMenu();
+   setTimeout(function() {
+  var tabMenu = document.getElementById('tab-menu');
+  if (tabMenu) tabMenu.classList.add('show');
+}, 100);
   }
 
   function logout() {

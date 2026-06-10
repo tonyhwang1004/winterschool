@@ -4081,6 +4081,13 @@ async function startRetakeAll() {
   } catch(e) { alert('오류: ' + e.message); }
   finally { if (btn) { btn.disabled = false; btn.innerHTML = orig; } }
 }
+function wnGoStep(id) {
+  document.querySelectorAll('.wn-step').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById('wn-step-' + id);
+  if (el) el.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 function wnGoNote() {
   wnGoStep('note');
   const loadEl    = document.getElementById('wn-note-loading');

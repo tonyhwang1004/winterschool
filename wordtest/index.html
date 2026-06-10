@@ -4324,6 +4324,7 @@ function wnDeleteSession(sessionId) {
       if (!document.querySelector('.session-card')) wnGoNote();
     })
     .catch(function() { if (card) card.style.opacity = '1'; });
+}
 
 function wnLaunchTest(words, label) {
   if (!words || words.length === 0) { alert('재시험할 단어가 없습니다.'); return; }

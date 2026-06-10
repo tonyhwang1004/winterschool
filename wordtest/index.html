@@ -2254,8 +2254,25 @@ _allWords: [],
     const el = document.getElementById('msg-' + step);
     if (el) el.className = 'msg';
   }
+  function switchTab(tab) {
+  const wordSteps = document.querySelectorAll('.step');
+  const noteSteps = document.querySelectorAll('.wn-step');
+  const dots      = document.querySelector('.steps');
 
-  function showStudentBadge() {
+  document.getElementById('tab-word').classList.toggle('active', tab === 'word');
+  document.getElementById('tab-note').classList.toggle('active', tab === 'note');
+
+  if (tab === 'word') {
+    wordSteps.forEach(s => { if (s._prevDisplay !== undefined) s.style.display = s._prevDisplay; });
+    noteSteps.forEach(s => s.classList.remove('active'));
+    if (dots) dots.style.display = '';
+  } else {
+    wordSteps.forEach(s => { s._prevDisplay = s.style.display; s.style.display = 'none'; });
+    if (dots) dots.style.display = 'none';
+    wnGoNote();
+  }
+}
+ function showStudentBadge() {
     if (!state.student) return;
     const badge = document.getElementById('student-badge');
     const txt = document.getElementById('student-badge-text');
@@ -4155,24 +4172,7 @@ async function startRetakeAll() {
 // ================================================================
 // 탭 전환 + 오답노트 기능
 // ================================================================
-function switchTab(tab) {
-  const wordSteps = document.querySelectorAll('.step');
-  const noteSteps = document.querySelectorAll('.wn-step');
-  const dots      = document.querySelector('.steps');
 
-  document.getElementById('tab-word').classList.toggle('active', tab === 'word');
-  document.getElementById('tab-note').classList.toggle('active', tab === 'note');
-
-  if (tab === 'word') {
-    wordSteps.forEach(s => { if (s._prevDisplay !== undefined) s.style.display = s._prevDisplay; });
-    noteSteps.forEach(s => s.classList.remove('active'));
-    if (dots) dots.style.display = '';
-  } else {
-    wordSteps.forEach(s => { s._prevDisplay = s.style.display; s.style.display = 'none'; });
-    if (dots) dots.style.display = 'none';
-    wnGoNote();
-  }
-}
 
 function showTabMenu() {
   document.getElementById('tab-menu').classList.add('show');

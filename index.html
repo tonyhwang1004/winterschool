@@ -2805,6 +2805,68 @@
                 font-size: 16px;
             }
         }
+        .live-feed-bar {
+  background: #1a2744;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+.live-feed-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.live-badge {
+  background: #e03030;
+  color: white;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+  animation: pulse 2s infinite;
+  flex-shrink: 0;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+.feed-scroll-wrap {
+  flex: 1;
+  overflow: hidden;
+  height: 44px;
+  position: relative;
+}
+.feed-scroll-track {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 40px;
+  white-space: nowrap;
+  animation: scrollFeed 30s linear infinite;
+}
+.feed-scroll-track:hover { animation-play-state: paused; }
+@keyframes scrollFeed {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.feed-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.85);
+  font-size: 13px;
+  white-space: nowrap;
+}
+.feed-item .fi-icon { font-size: 15px; }
+.feed-item .fi-text { font-weight: 600; }
+.feed-item .fi-sub  { color: rgba(255,255,255,0.45); font-size: 11.5px; }
+.feed-item .fi-date { color: rgba(255,255,255,0.3); font-size: 11px; margin-left: 4px; }
+.feed-divider { color: rgba(255,255,255,0.15); font-size: 18px; }
     </style>
 </head>
 <body>
@@ -2823,6 +2885,19 @@
             <span></span>
         </div>
     </nav>
+    <div class="live-feed-bar" id="liveFeedBar">
+  <div class="live-feed-inner">
+    <span class="live-badge">LIVE</span>
+    <div class="feed-scroll-wrap">
+      <div class="feed-scroll-track" id="feedTrack">
+        <span class="feed-item">
+          <span class="fi-icon">📚</span>
+          <span class="fi-text">실시간 학습 현황 로딩 중...</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- Mobile Menu -->
     <div class="mobile-overlay" id="mobileOverlay"></div>
@@ -6147,6 +6222,56 @@ if (form.id === 'studentForm8f') {
 </script>
     <script>
 
+</script>
+        <script>
+(function() {
+  var FEED_URL = 'https://raw.githubusercontent.com/tonyhwang1004/winterschool/main/feed.json';
+
+  function loadFeed() {
+    fetch(FEED_URL + '?t=' + Date.now())
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var items = data.items || [];
+        if (!items.length) return;
+        renderFeed(items);
+      })
+      .catch(function() {
+        renderFeed([
+          { icon:'📚', text:'매일 멘토링 진행 중', sub:'맞춤 학습 지도', date:'' },
+          { icon:'🏅', text:'상점 캐시백 제도 운영', sub:'100점 = 현금 1,000원', date:'' },
+          { icon:'📋', text:'플래너 매일 검사', sub:'계획-실행 관리', date:'' },
+          { icon:'😴', text:'20분 단위 졸음 관리', sub:'집중력 유지', date:'' },
+          { icon:'📖', text:'영단어시험 매주 진행', sub:'꾸준한 어휘력 향상', date:'' },
+        ]);
+      });
+  }
+
+  function renderFeed(items) {
+    var track = document.getElementById('feedTrack');
+    if (!track) return;
+    var html = '';
+    [items, items].forEach(function(list) {
+      list.forEach(function(item) {
+        var dateStr = item.date ? item.date.slice(5, 16) : '';
+        html += '<span class="feed-item">'
+          + '<span class="fi-icon">' + (item.icon || '📌') + '</span>'
+          + '<span class="fi-text">' + escHtml(item.text || '') + '</span>'
+          + (item.sub ? '<span class="fi-sub">— ' + escHtml(item.sub) + '</span>' : '')
+          + (dateStr ? '<span class="fi-date">' + dateStr + '</span>' : '')
+          + '</span>'
+          + '<span class="feed-divider">·</span>';
+      });
+    });
+    track.innerHTML = html;
+  }
+
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  }
+
+  loadFeed();
+  setInterval(loadFeed, 300000);
+})();
 </script>
 </body>
    

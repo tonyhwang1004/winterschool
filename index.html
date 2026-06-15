@@ -5872,6 +5872,9 @@ if (form.id === 'studentForm8f') {
                 formSections.forEach(s => s.classList.remove('active'));
                 successMessage.classList.add('show');
                 form.reset();
+                // ★ 실시간 피드 업데이트
+                var fTypes = { studentForm:'📚 관리형독서실 대기 신청 접수', nsuForm:'🎯 독학재수학원 대기 신청 접수', academyForm:'🎓 어학원 레벨테스트 신청 접수' };
+                if(fTypes[form.id]) updateFeedOnSubmit(fTypes[form.id].slice(0,2), fTypes[form.id].slice(3));
             } catch (error) {
                 alert('신청 중 오류가 발생했습니다. 다시 시도해주세요.');
                 console.error('Error:', error);
@@ -6003,6 +6006,18 @@ if (form.id === 'studentForm8f') {
                 form.style.display = 'none';
                 document.getElementById(successMsgId).style.display = 'block';
                 form.reset();
+                // ★ 실시간 피드 업데이트
+                (function(){
+                  var icons = { studentForm8f:'📚', nsuForm7f:'🎯', academyFormNew:'🎓' };
+                  var texts = {
+                    studentForm8f: '관리형독서실 대기 신청 접수',
+                    nsuForm7f: '독학재수학원 대기 신청 접수',
+                    academyFormNew: '어학원 레벨테스트 신청 접수'
+                  };
+                  var icon = icons[formId] || '📋';
+                  var text = texts[formId] || '신청 접수';
+                  updateFeedOnSubmit(icon, text);
+                })();
             } catch (error) {
                 alert('신청 중 오류가 발생했습니다. 다시 시도해주세요.');
                 console.error('Error:', error);
@@ -6273,6 +6288,33 @@ if (form.id === 'studentForm8f') {
   setInterval(loadFeed, 300000);
 })();
 </script>
+
+        // ★ 신청 접수 시 실시간 피드 업데이트
+        async function updateFeedOnSubmit(icon, text) {
+          try {
+            var FEED_API = 'https://raw.githubusercontent.com/tonyhwang1004/winterschool/main/feed.json';
+            var now = new Date();
+            var dateStr = now.getFullYear() + '-'
+              + String(now.getMonth()+1).padStart(2,'0') + '-'
+              + String(now.getDate()).padStart(2,'0') + ' '
+              + String(now.getHours()).padStart(2,'0') + ':'
+              + String(now.getMinutes()).padStart(2,'0');
+            // GAS feed 업데이트 엔드포인트 호출
+            await fetch('https://script.google.com/macros/s/AKfycbzmi0aQq4OnQDgxdVzX9NZEqZDszKarRLuJTA6WYoJH_ETmGLtS4pP8Nv9iIQfHxJfh/exec', {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({action: 'addFeedItem', type: 'apply', icon: icon, text: text, sub: ''})
+            });
+            // 로컬 피드도 즉시 업데이트
+            var track = document.getElementById('feedTrack');
+            if(track) {
+              var newItem = '<span class="feed-item"><span class="fi-icon">' + icon + '</span><span class="fi-text">' + text + '</span><span class="fi-date">' + dateStr.slice(5) + '</span></span><span class="feed-divider">·</span>';
+              track.innerHTML = newItem + newItem + track.innerHTML;
+            }
+          } catch(e) { console.log('피드 업데이트 실패', e); }
+        }
+
 </body>
    
 </html>

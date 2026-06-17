@@ -3633,7 +3633,7 @@ _allWords: [],
      let pages = Math.ceil(count / 50);
      const perPage = Math.ceil(count / pages);
 
-     const PAGE_HEIGHT = isAnswer ? 1691 : 1651;
+     const PAGE_HEIGHT = isAnswer ? 1700 : 1669;
 
      let cols, perCol, fontSize, padding, minHeight, lineHeight, numSize;
 
@@ -3746,9 +3746,9 @@ _allWords: [],
 
         sheetPages.push(
           '<div class="batch-sheet">' +
-            '<h2 style="margin: 0; font-size: 13px;">김엄마관리형독서실 · 단어시험' + pageLabel + '</h2>' +
-            '<div style="font-size: 9px; color: #999; letter-spacing: 1px; margin-bottom: 3px;">VOCABULARY TEST · ' + escapeHtml(sch.floor) + '</div>' +
-            '<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px 12px; font-size: 9.5px; margin-bottom: 3px;">' +
+            '<h2 style="margin: 0 0 3px; font-size: 17px; font-weight: 700;">김엄마관리형독서실 · 단어시험' + pageLabel + '</h2>' +
+            '<div style="font-size: 11px; color: #777; letter-spacing: 1px; margin-bottom: 4px;">VOCABULARY TEST · ' + escapeHtml(sch.floor) + '</div>' +
+            '<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px 12px; font-size: 12px; margin-bottom: 4px;">' +
               '<div>학생: <b>' + escapeHtml(sch.name) + '</b></div>' +
               '<div>좌석: <b>' + escapeHtml(formatSeat(sch.seat)) + '</b></div>' +
               '<div>날짜: <b>' + dateStr + '</b></div>' +
@@ -3756,7 +3756,7 @@ _allWords: [],
               '<div>DAY: <b>' + escapeHtml(s.dayLabel) + '</b></div>' +
               '<div>총문항: <b>' + count + '</b></div>' +
             '</div>' +
-            '<hr style="border: 0; border-top: 1.2px solid #333; margin: 2px 0 3px;">' +
+            '<hr style="border: 0; border-top: 1.5px solid #333; margin: 3px 0 4px;">' +
             '<div style="column-count: ' + layout.cols + '; column-gap: 12px; column-rule: 1px solid #ddd;">' +
               sheetItems +
             '</div>' +

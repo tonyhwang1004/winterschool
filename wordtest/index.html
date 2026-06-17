@@ -3636,7 +3636,7 @@ _allWords: [],
        const perPage = count;
        const cols = 2;
        const perCol = Math.ceil(perPage / cols);
-       const akRowH = Math.min(60, Math.floor(1304 / perCol));  // 최대 60px 제한
+       const akRowH = Math.floor(1238 / perCol);  // 실측 가용높이 1238px 기준
        let fontSize, lineHeight;
        if (akRowH >= 50) { fontSize = 14; lineHeight = 1.2; }
        else if (akRowH >= 38) { fontSize = 13; lineHeight = 1.2; }

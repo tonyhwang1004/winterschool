@@ -3629,24 +3629,15 @@ _allWords: [],
   // isAnswer: 정답표면 true (영어+한글 한 줄), false면 시험지 (영어+빈줄)
   
  function computeLayout(count, isAnswer) {
-     // 50단어/페이지 고정, 2컬럼(컬럼당 25단어)
-     // 시험지: 50단어/페이지, 정답표: 100단어/페이지
-     let pages = isAnswer ? 1 : Math.ceil(count / 50);  // isAnswer는 아래서 재설정
-     const perPage = Math.ceil(count / pages);
-
-     const PAGE_HEIGHT = isAnswer ? 1490 : 1461;
-
-     let cols, perCol, fontSize, padding, minHeight, lineHeight, numSize;
 
      if (isAnswer) {
-       // 정답표: 무조건 1장, 줄간격 좁혀서 강제 압축
-       pages = 1;
-       const akPerPage = count;
-       cols = 2;
-       perCol = Math.ceil(akPerPage / cols);
-       // 실측 가용높이 1304px / perCol = 행높이
+       // 정답표: 무조건 1장, 행높이 역산으로 강제 압축
+       const pages = 1;
+       const perPage = count;
+       const cols = 2;
+       const perCol = Math.ceil(perPage / cols);
        const akRowH = Math.floor(1304 / perCol);
-       // 행높이에 따라 폰트 결정 (작게)
+       let fontSize, lineHeight;
        if (akRowH >= 50) { fontSize = 14; lineHeight = 1.2; }
        else if (akRowH >= 38) { fontSize = 13; lineHeight = 1.2; }
        else if (akRowH >= 28) { fontSize = 12; lineHeight = 1.15; }
@@ -3654,38 +3645,19 @@ _allWords: [],
        else if (akRowH >= 15) { fontSize = 10; lineHeight = 1.1; }
        else if (akRowH >= 11) { fontSize = 9; lineHeight = 1.1; }
        else { fontSize = 8; lineHeight = 1.05; }
-       padding = 0; const marginBetween = 0;
-       return { cols, perCol, fontSize, padding, lineHeight, marginBetween, akRowH, pages, perPage: akPerPage };
+       return { cols, perCol, fontSize, padding: 0, lineHeight,
+                marginBetween: 0, akRowH, pages, perPage };
      }
 
-     cols = 2;
-     perCol = Math.ceil(perPage / cols);
-     const rowHeight = PAGE_HEIGHT / perCol;
-
-     if (rowHeight >= 60) {
-       fontSize = 16; numSize = 12; padding = 6; minHeight = 22;
-     } else if (rowHeight >= 40) {
-       fontSize = 14; numSize = 10; padding = 4; minHeight = 18;
-     } else if (rowHeight >= 30) {
-       fontSize = 13; numSize = 10; padding = 3; minHeight = 16;
-     } else if (rowHeight >= 22) {
-       fontSize = 12; numSize = 9.5; padding = 2.5; minHeight = 14;
-     } else if (rowHeight >= 18) {
-       fontSize = 11; numSize = 9; padding = 2; minHeight = 13;
-     } else if (rowHeight >= 14) {
-       fontSize = 10; numSize = 8.5; padding = 1.5; minHeight = 12;
-     } else if (rowHeight >= 11) {
-       fontSize = 9; numSize = 8; padding = 1; minHeight = 10;
-     } else {
-       fontSize = 8; numSize = 7.5; padding = 0.5; minHeight = 9;
-     }
-
-     const itemHeight = Math.max(fontSize * 1.4 + padding * 2, minHeight) + 1;
-     const remainingSpace = PAGE_HEIGHT - (perCol * itemHeight);
-     const marginBetween = perCol > 1 ? Math.max(0, remainingSpace / (perCol - 1)) : 0;
-
-     const rowHeightPx = 39;  // 실측: 34단어=17행×58px=986px → 25행으로 나누면 39px
-     return { cols, perCol, fontSize, numSize, padding, minHeight, marginBetween, rowHeightPx, pages, perPage };
+     // 시험지: 50단어/페이지, 2컬럼, 행높이 39px 고정
+     const pages = Math.ceil(count / 50);
+     const perPage = Math.ceil(count / pages);
+     const cols = 2;
+     const perCol = Math.ceil(perPage / cols);
+     const rowHeightPx = 39;
+     return { cols, perCol,
+              fontSize: 16, numSize: 12, padding: 0, minHeight: 18,
+              marginBetween: 0, rowHeightPx, pages, perPage };
    }
 
   // 인쇄 영역 렌더링

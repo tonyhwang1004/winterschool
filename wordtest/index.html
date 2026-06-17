@@ -3657,40 +3657,6 @@ _allWords: [],
      return { cols, perCol, fontSize, numSize, padding, minHeight, marginBetween, pages, perPage };
    }
 
-    // 시험지: 영어 + 빈 줄
-    cols = 2;
-    perCol = Math.ceil(perPage / cols);
-  
-    const rowHeight = PAGE_HEIGHT / perCol;
-
-    // 시험지는 답을 적을 공간이 필요하므로 폰트 비교적 일정하게
-    if (rowHeight >= 50) {
-      fontSize = 15; numSize = 11; padding = 0; minHeight = 26;
-    } else if (rowHeight >= 40) {
-      fontSize = 14; numSize = 10; padding = 0; minHeight = 22;
-    } else if (rowHeight >= 30) {
-      fontSize = 13; numSize = 10; padding = 4; minHeight = 17;
-    } else if (rowHeight >= 22) {
-      fontSize = 12; numSize = 9.5; padding = 3; minHeight = 15;
-    } else if (rowHeight >= 18) {
-      fontSize = 11; numSize = 9; padding = 2; minHeight = 13;
-    } else if (rowHeight >= 14) {
-      fontSize = 10; numSize = 8.5; padding = 1.5; minHeight = 12;
-    } else if (rowHeight >= 11) {
-      fontSize = 9; numSize = 8; padding = 1; minHeight = 10;
-    } else {
-      fontSize = 8; numSize = 7.5; padding = 0.5; minHeight = 9;
-    }
-
-    // 항목 실제 높이 = max(폰트 높이 + 패딩, minHeight) + 점선 보더(1px)
-    const itemHeight = Math.max(fontSize * 1.4 + padding * 2, minHeight) + 1;
-    // 남는 공간을 항목 사이에 분배
-    const remainingSpace = PAGE_HEIGHT - (perCol * itemHeight);
-    const marginBetween = perCol > 1 ? Math.max(0, remainingSpace / (perCol - 1)) : 0;
-
-    return { cols, perCol, fontSize, numSize, padding, minHeight, marginBetween, pages, perPage };
-  }
-
   // 인쇄 영역 렌더링
   function renderBatchPrintOutput(sheets) {
     const area = document.getElementById('batch-print-area');

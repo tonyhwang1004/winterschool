@@ -3643,7 +3643,7 @@ _allWords: [],
        cols = 4;
        perCol = Math.ceil(perPage / cols);
        // 행높이 고정: 가용높이(1447px) / 25행 = 57px
-       const akRowH = Math.floor(1447 / perCol);
+        const akRowH = 14;  // 폰트 9px 기준 고정 행높이
        fontSize = 9; padding = 0; lineHeight = 1.3;
        const marginBetween = 0;
        return { cols, perCol, fontSize, padding, lineHeight, marginBetween, akRowH, pages, perPage };

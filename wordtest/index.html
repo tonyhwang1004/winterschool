@@ -662,7 +662,7 @@
   .batch-sheet:last-child { page-break-after: auto; }
   @media print {
     .batch-sheet {
-      padding: 7mm 8mm 5mm;
+      padding: 5mm 6mm 0mm;
       font-size: 10px;
     }
     /* 빈 페이지 방지 보강 */
@@ -684,7 +684,7 @@
     }
     html, body { height: auto !important; }
   }
-  @page { size: A4; margin: 8mm; }
+  @page { size: A4; margin: 6mm 6mm 0mm; }
 
   /* ─── 신청 폼 (STEP apply) ─── */
   .apply-radio-row {
@@ -1141,14 +1141,14 @@
   @media print {
     @page {
       size: A4;
-      margin: 8mm 8mm;
+      margin: 6mm 6mm 0mm;
     }
     body {
       background: white !important;
       background-image: none !important;
       padding: 0 !important;
       color: #000 !important;
-      font-size: 12px;
+      font-size: 13px;
     }
     .container {
       box-shadow: none !important;
@@ -1210,8 +1210,8 @@
   .ts-q-list > *, #p-q-list > *,
   .ak-grid > *, #p-ak-grid > * {
     margin: 0 !important;
-    padding: 1px 0 !important;
-    line-height: 1.3 !important;
+    padding: 0px 0 !important;
+    line-height: 1.2 !important;
   }
    .batch-sheet:last-child {
     page-break-after: auto !important;

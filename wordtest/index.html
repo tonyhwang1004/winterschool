@@ -3639,26 +3639,24 @@ _allWords: [],
      let cols, perCol, fontSize, padding, minHeight, lineHeight, numSize;
 
      if (isAnswer) {
-       // 정답표: 문제수에 따라 1장 또는 2장
-       // 50단어 이하 → 무조건 1장
-       // 51~200단어 → 최대 2장 (페이지당 100단어)
-       const AK_PER_PAGE = count <= 50 ? count : 100;
-       pages = Math.ceil(count / AK_PER_PAGE);
+       // 정답표: 무조건 1장 (100단어 이하), 101~200은 2장
+       pages = count <= 100 ? 1 : 2;
        const akPerPage = Math.ceil(count / pages);
-       // 컬럼 수: 단어 수에 따라 자동
-       // ~25개 → 2컬럼, ~50개 → 4컬럼, ~100개 → 4컬럼
-       cols = akPerPage <= 25 ? 2 : 4;
+       // 컬럼 수: 문제수에 맞게
+       if (akPerPage <= 20) cols = 2;
+       else if (akPerPage <= 50) cols = 4;
+       else cols = 4;
        perCol = Math.ceil(akPerPage / cols);
-       // 가용높이 1420px / perCol = 행높이
+       // 가용높이 1420px에서 행높이 역산 → 무조건 1장에 맞춤
        const akRowH = Math.floor(1420 / perCol);
-       // 행높이에 따라 폰트 결정
-       if (akRowH >= 40) { fontSize = 12; lineHeight = 1.4; }
-       else if (akRowH >= 28) { fontSize = 11; lineHeight = 1.35; }
-       else if (akRowH >= 20) { fontSize = 10; lineHeight = 1.3; }
-       else if (akRowH >= 15) { fontSize = 9; lineHeight = 1.25; }
-       else { fontSize = 8; lineHeight = 1.2; }
-       padding = 0;
-       const marginBetween = 0;
+       // 행높이에 따라 폰트 자동 결정
+       if (akRowH >= 50) { fontSize = 12; lineHeight = 1.4; }
+       else if (akRowH >= 35) { fontSize = 11; lineHeight = 1.35; }
+       else if (akRowH >= 25) { fontSize = 10; lineHeight = 1.3; }
+       else if (akRowH >= 18) { fontSize = 9; lineHeight = 1.25; }
+       else if (akRowH >= 13) { fontSize = 8; lineHeight = 1.2; }
+       else { fontSize = 7; lineHeight = 1.15; }
+       padding = 0; const marginBetween = 0;
        return { cols, perCol, fontSize, padding, lineHeight, marginBetween, akRowH, pages, perPage: akPerPage };
      }
 

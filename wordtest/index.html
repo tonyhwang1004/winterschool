@@ -3633,8 +3633,8 @@ _allWords: [],
     // 시험지: 100문제 초과 시 2장
     // 정답표: 120문제 초과 시 2장
     let pages = 1;
-    if (!isAnswer && count > 100) pages = 2;
-    if (isAnswer && count > 120) pages = 2;
+    if (!isAnswer && count > 50) pages = Math.ceil(count / 50);
+    if (isAnswer && count > 50) pages = Math.ceil(count / 50);
     const perPage = Math.ceil(count / pages);
 
     // A4 인쇄 영역 (헤더/푸터 제외)
@@ -3673,12 +3673,14 @@ return { cols, perCol, fontSize, padding, lineHeight, marginBetween, pages, perP
     const rowHeight = PAGE_HEIGHT / perCol;
 
     // 시험지는 답을 적을 공간이 필요하므로 폰트 비교적 일정하게
-    if (rowHeight >= 40) {
-      fontSize = 14; numSize = 10; padding = 4; minHeight = 18;
+    if (rowHeight >= 50) {
+      fontSize = 15; numSize = 11; padding = 8; minHeight = 26;
+    } else if (rowHeight >= 40) {
+      fontSize = 14; numSize = 10; padding = 6; minHeight = 22;
     } else if (rowHeight >= 30) {
-      fontSize = 13; numSize = 10; padding = 3; minHeight = 16;
+      fontSize = 13; numSize = 10; padding = 4; minHeight = 17;
     } else if (rowHeight >= 22) {
-      fontSize = 12; numSize = 9.5; padding = 2.5; minHeight = 14;
+      fontSize = 12; numSize = 9.5; padding = 3; minHeight = 15;
     } else if (rowHeight >= 18) {
       fontSize = 11; numSize = 9; padding = 2; minHeight = 13;
     } else if (rowHeight >= 14) {

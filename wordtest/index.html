@@ -3633,7 +3633,7 @@ _allWords: [],
      let pages = Math.ceil(count / 50);
      const perPage = Math.ceil(count / pages);
 
-     const PAGE_HEIGHT = isAnswer ? 910 : 871;
+     const PAGE_HEIGHT = isAnswer ? 1713 : 1673;
 
      let cols, perCol, fontSize, padding, minHeight, lineHeight, numSize;
 
@@ -3656,7 +3656,9 @@ _allWords: [],
      perCol = Math.ceil(perPage / cols);
      const rowHeight = PAGE_HEIGHT / perCol;
 
-     if (rowHeight >= 40) {
+     if (rowHeight >= 60) {
+       fontSize = 16; numSize = 12; padding = 6; minHeight = 22;
+     } else if (rowHeight >= 40) {
        fontSize = 14; numSize = 10; padding = 4; minHeight = 18;
      } else if (rowHeight >= 30) {
        fontSize = 13; numSize = 10; padding = 3; minHeight = 16;

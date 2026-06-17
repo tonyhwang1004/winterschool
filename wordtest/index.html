@@ -3638,7 +3638,7 @@ _allWords: [],
     const perPage = Math.ceil(count / pages);
 
     // A4 인쇄 영역 (헤더/푸터 제외)
-    const PAGE_HEIGHT = isAnswer ? 1040 : 1020;
+    const PAGE_HEIGHT = isAnswer ? 1150 : 1130;
 
     let cols, perCol, fontSize, padding, minHeight, lineHeight, numSize;
 
@@ -3763,9 +3763,9 @@ return { cols, perCol, fontSize, padding, lineHeight, marginBetween, pages, perP
 
         sheetPages.push(
           '<div class="batch-sheet">' +
-            '<h2 style="margin: 0 0 2px; font-size: 13px;">김엄마관리형독서실 · 단어시험' + pageLabel + '</h2>' +
-            '<div style="font-size: 9px; color: #999; letter-spacing: 1px; margin-bottom: 5px;">VOCABULARY TEST · ' + escapeHtml(sch.floor) + '</div>' +
-            '<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px 12px; font-size: 9.5px; margin-bottom: 5px;">' +
+            '<h2 style="margin: 0; font-size: 13px;">김엄마관리형독서실 · 단어시험' + pageLabel + '</h2>' +
+            '<div style="font-size: 9px; color: #999; letter-spacing: 1px; margin-bottom: 3px;">VOCABULARY TEST · ' + escapeHtml(sch.floor) + '</div>' +
+            '<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px 12px; font-size: 9.5px; margin-bottom: 3px;">' +
               '<div>학생: <b>' + escapeHtml(sch.name) + '</b></div>' +
               '<div>좌석: <b>' + escapeHtml(formatSeat(sch.seat)) + '</b></div>' +
               '<div>날짜: <b>' + dateStr + '</b></div>' +
@@ -3773,7 +3773,7 @@ return { cols, perCol, fontSize, padding, lineHeight, marginBetween, pages, perP
               '<div>DAY: <b>' + escapeHtml(s.dayLabel) + '</b></div>' +
               '<div>총문항: <b>' + count + '</b></div>' +
             '</div>' +
-            '<hr style="border: 0; border-top: 1.2px solid #333; margin: 4px 0 5px;">' +
+            '<hr style="border: 0; border-top: 1.2px solid #333; margin: 2px 0 3px;">' +
             '<div style="column-count: ' + layout.cols + '; column-gap: 12px; column-rule: 1px solid #ddd;">' +
               sheetItems +
             '</div>' +

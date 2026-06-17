@@ -3678,7 +3678,8 @@ _allWords: [],
      const remainingSpace = PAGE_HEIGHT - (perCol * itemHeight);
      const marginBetween = perCol > 1 ? Math.max(0, remainingSpace / (perCol - 1)) : 0;
 
-     return { cols, perCol, fontSize, numSize, padding, minHeight, marginBetween, pages, perPage };
+     const rowHeightPx = Math.floor((1485) / perCol);  // 실측 가용높이 1485px / 25행
+     return { cols, perCol, fontSize, numSize, padding, minHeight, marginBetween, rowHeightPx, pages, perPage };
    }
 
   // 인쇄 영역 렌더링
@@ -3737,7 +3738,7 @@ _allWords: [],
 
         const sheetItems = pageWords.map((w, i) => {
           const no = String(start + i + 1).padStart(2, '0');
-          return '<div style="display: flex; gap: 5px; align-items: baseline; padding: ' + layout.padding + 'px 0; margin-bottom: ' + layout.marginBetween + 'px; border-bottom: 1px dotted #ccc; min-height: ' + layout.minHeight + 'px; break-inside: avoid;">' +
+          return '<div style="display: flex; gap: 5px; align-items: center; height: ' + layout.rowHeightPx + 'px; box-sizing: border-box; border-bottom: 1px dotted #ccc; break-inside: avoid;">' +
                    '<span style="font-family: monospace; color: #888; font-size: ' + layout.numSize + 'px; min-width: 16px;">' + no + '.</span>' +
                    '<b style="font-family: monospace; font-size: ' + layout.fontSize + 'px; min-width: 60px;">' + escapeHtml(w.en) + '</b>' +
                    '<span style="flex: 1; border-bottom: 1px solid #ddd; height: 1px; margin: 0 4px;"></span>' +

@@ -2682,29 +2682,150 @@ _allWords: [],
   //   - 괄호 안 내용 "(n) 종아리" → "종아리"
   //   - 문장부호 . , ; : ! ?
   // ═══════════════════════════════════════════════════════════
+  // ═══════════════════════════════════════════════════════════
+  // 정답 비교 엔진 v3 (온라인 · 오프라인 · 오답재시험 공통)
+  //   1) 뜻 하나만 써도 정답      "도전, 난제; 도전하다" → "난제"
+  //   2) 뜻을 전부 써도 정답      "비슷한, 유사한" → "비슷한 유사한" (순서 무관)
+  //   3) 대괄호 치환 양쪽 다 정답  "고려[숙고]하다" → "고려하다" / "숙고하다"
+  //   4) 괄호는 있어도 없어도 정답 "(자연·주변의) 환경" → "환경"
+  //   5) 품사표기·앞머리 ~을/~를 무시
+  // ※ 괄호·대괄호를 먼저 처리한 뒤에 구분자로 나눈다
+  // ═══════════════════════════════════════════════════════════
+
+  var _POS_TAG_RE = /^\s*(?:[\(\[]\s*(?:n|v|a|ad|adj|adv|prep|conj|pron|int|명|동|형|부|전|접|대|감)\s*\.?\s*[\)\]]|(?:n|v|a|adj|adv)\.)\s*/i;
+  var _SPLIT_RE   = /[\/,;|·•・、]|\s+또는\s+|\s+및\s+/;
+  var _PUNCT_RE   = /[\s.,;:!?~∼·•・、'"“”‘’`\-–—=…()\[\]]/g;
+
+  function _kmBracketVariants(s) {
+    var out = [String(s)];
+    for (var iter = 0; iter < 4; iter++) {
+      var next = [], changed = false;
+      for (var k = 0; k < out.length; k++) {
+        var t = out[k];
+        var m = /\[([^\]]*)\]/.exec(t);
+        if (!m) { next.push(t); continue; }
+        changed = true;
+        var before = t.slice(0, m.index);
+        var after  = t.slice(m.index + m[0].length);
+        var inner  = m[1];
+        next.push(before + after);
+        var run = /[가-힣]+$/.exec(before);
+        if (run) {
+          var innerH = inner.replace(/[^가-힣]/g, '');
+          var cut = Math.min(innerH.length || inner.length, run[0].length);
+          next.push(before.slice(0, before.length - cut) + inner + after);
+          next.push(before.slice(0, before.length - run[0].length) + inner + after);
+        } else {
+          next.push(before + inner + after);
+        }
+      }
+      out = next;
+      if (!changed) break;
+      if (out.length > 32) out = out.slice(0, 32);
+    }
+    return out;
+  }
+
+  function _kmParenVariants(s) {
+    var base = [String(s)];
+    var noDouble = String(s).replace(/\(\([^)]*\)\)/g, ' ');
+    if (noDouble !== String(s)) base.push(noDouble);
+    var out = [];
+    for (var i = 0; i < base.length; i++) {
+      out.push(base[i].replace(/\([^)]*\)/g, ' '));
+      out.push(base[i].replace(/[()]/g, ' '));
+    }
+    return out;
+  }
+
+  function _kmExpand(s) {
+    var out = [];
+    var b = _kmBracketVariants(s);
+    for (var i = 0; i < b.length; i++) {
+      var p = _kmParenVariants(b[i]);
+      for (var j = 0; j < p.length; j++) out.push(p[j]);
+    }
+    return out;
+  }
+
+  function _kmStripEdge(t) {
+    return String(t)
+      .replace(/^[~∼\-–—\s]+/, '')
+      .replace(/[~∼\-–—\s]+$/, '')
+      .replace(/^(?:을|를|이|가|에|에게|와|과|의|로|으로)\s+/, '');
+  }
+
+  function _kmKey(s) {
+    if (s === null || s === undefined) return '';
+    var t = String(s).replace(_POS_TAG_RE, ' ');
+    t = _kmStripEdge(t);
+    return t.replace(_PUNCT_RE, '').toLowerCase();
+  }
+
   function normalizeKorean(s) {
-    if (!s) return '';
-    return String(s)
-      .replace(/\([^)]*\)/g, '')   // 괄호 안 내용 제거 ("(n) 쫓다" → " 쫓다")
-      .replace(/\[[^\]]*\]/g, '')  // 대괄호도 제거
-      .replace(/[\s.,;:!?~\-=·•·]/g, '')  // 공백, 문장부호 제거
-      .toLowerCase()
-      .trim();
+    var t = String(s === null || s === undefined ? '' : s)
+      .replace(/\([^)]*\)/g, ' ')
+      .replace(/\[[^\]]*\]/g, ' ');
+    return _kmKey(t);
+  }
+
+  function _kmSplit(s) {
+    return String(s === null || s === undefined ? '' : s).split(_SPLIT_RE);
+  }
+
+  function _kmPerms(arr) {
+    if (arr.length < 2) return [];
+    if (arr.length > 4) return [arr.join('')];
+    var out = [];
+    (function rec(rest, acc) {
+      if (rest.length === 0) { out.push(acc); return; }
+      for (var i = 0; i < rest.length; i++) {
+        rec(rest.slice(0, i).concat(rest.slice(i + 1)), acc + rest[i]);
+      }
+    })(arr, '');
+    return out;
+  }
+
+  function _kmCandidates(correctKo) {
+    var cands = Object.create(null);
+    var variants = _kmExpand(correctKo);
+    for (var v = 0; v < variants.length; v++) {
+      var whole = _kmKey(variants[v]);
+      if (whole) cands[whole] = true;
+      var parts = _kmSplit(variants[v]);
+      var seq = [];
+      for (var i = 0; i < parts.length; i++) {
+        var key = _kmKey(parts[i]);
+        if (key) { cands[key] = true; seq.push(key); }
+      }
+      var perms = _kmPerms(seq);
+      for (var p = 0; p < perms.length; p++) if (perms[p]) cands[perms[p]] = true;
+    }
+    return cands;
   }
 
   function isCorrectAnswer(userInput, correctKo) {
-    const user = normalizeKorean(userInput);
-    if (!user) return false;
+    var raw = String(userInput === null || userInput === undefined ? '' : userInput);
+    if (!raw.trim()) return false;
+    var cands = _kmCandidates(correctKo);
 
-    // 정답을 구분자로 분리하여 후보들 만들기
-    // 구분자: / , ; " " (한글 두 단어 사이의 공백은 좀 위험하니 제외)
-    const candidates = String(correctKo)
-      .split(/[\/,;]|\s+또는\s+/)
-      .map(c => normalizeKorean(c))
-      .filter(c => c.length > 0);
+    var uVars = _kmExpand(raw);
+    for (var v = 0; v < uVars.length; v++) {
+      var whole = _kmKey(uVars[v]);
+      if (whole && cands[whole]) return true;
+    }
 
-    // 후보 중 하나라도 일치하면 정답
-    return candidates.some(cand => cand === user);
+    for (var v2 = 0; v2 < uVars.length; v2++) {
+      var uParts = _kmSplit(uVars[v2]).map(_kmKey).filter(function (x) { return !!x; });
+      if (uParts.length > 1) {
+        var allIn = true;
+        for (var j = 0; j < uParts.length; j++) {
+          if (!cands[uParts[j]]) { allIn = false; break; }
+        }
+        if (allIn) return true;
+      }
+    }
+    return false;
   }
 
 
@@ -4233,12 +4354,11 @@ function wnSkipQ() {
 }
 
 function wnNormalize(s) {
-  return String(s||'').replace(/\([^)]*\)/g,'').replace(/[\s.,;:!?~\-]/g,'').toLowerCase().trim();
+  return normalizeKorean(s);
 }
+// 오답 재시험도 본시험과 완전히 동일한 채점 규칙을 사용한다
 function wnIsCorrect(user, correct) {
-  const u = wnNormalize(user);
-  if (!u) return false;
-  return String(correct).split(/[\/,;]|\s+또는\s+/).map(function(c){ return wnNormalize(c); }).some(function(c){ return c === u; });
+  return isCorrectAnswer(user, correct);
 }
 
 function wnStartTimer() {

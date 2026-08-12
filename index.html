@@ -5647,7 +5647,103 @@
             </div>
         </div>
     </section>
+<!-- ==================== 네이버 블로그 최신글 ==================== -->
+    <section class="section" id="blogFeed" style="background: var(--bg-soft);">
+        <div class="section-header">
+            <span class="section-label">Blog</span>
+            <h2 class="section-title">김엄마 소식</h2>
+            <p class="section-desc">매일의 관리 현장을 블로그에 기록하고 있습니다</p>
+        </div>
+        <div class="bf-list" id="bfList">
+            <div class="bf-loading">불러오는 중…</div>
+        </div>
+        <div style="text-align:center; margin-top:40px;">
+            <a href="https://blog.naver.com/kimmmommy" target="_blank" rel="noopener"
+               class="btn btn-outline-dark">📝 블로그 전체보기</a>
+        </div>
+    </section>
 
+    <style>
+      #blogFeed .bf-list{
+        display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+        max-width:1200px; margin:0 auto;
+      }
+      @media (max-width:1024px){ #blogFeed .bf-list{grid-template-columns:repeat(2,1fr);} }
+      @media (max-width:768px){ #blogFeed .bf-list{grid-template-columns:1fr;} }
+
+      #blogFeed .bf-card{
+        display:block; text-decoration:none; background:var(--white);
+        border-radius:16px; overflow:hidden; box-shadow:var(--shadow-sm);
+        transition:var(--transition);
+      }
+      #blogFeed .bf-card:hover{ transform:translateY(-8px); box-shadow:var(--shadow-lg); }
+      #blogFeed .bf-thumb{ width:100%; height:190px; object-fit:cover; display:block; background:var(--bg-soft); }
+      #blogFeed .bf-body{ padding:24px 26px 28px; }
+      #blogFeed .bf-date{ font-size:13px; color:var(--accent); font-weight:700; margin-bottom:10px; }
+      #blogFeed .bf-title{
+        font-size:18px; font-weight:700; color:var(--text-dark); line-height:1.5;
+        letter-spacing:-0.3px; margin-bottom:12px;
+        display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+      }
+      #blogFeed .bf-desc{
+        font-size:14px; color:var(--text-muted); line-height:1.7;
+        display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+      }
+      #blogFeed .bf-loading{
+        grid-column:1/-1; text-align:center; padding:60px 0;
+        color:var(--text-light); font-size:15px;
+      }
+    </style>
+
+    <script>
+    (function(){
+      var BLOG_ID = 'kimmmommy';
+      var COUNT   = 3;
+
+      var RSS = 'https://rss.blog.naver.com/' + BLOG_ID + '.xml';
+      var API = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(RSS);
+      var box = document.getElementById('bfList');
+
+      function esc(s){
+        return String(s||'').replace(/[&<>"]/g, function(m){
+          return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m];
+        });
+      }
+      function firstImage(html){
+        var m = /<img[^>]+src=["']([^"']+)["']/i.exec(html || '');
+        return m ? m[1] : null;
+      }
+      function plain(html){
+        return String(html||'').replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim();
+      }
+      function fmt(d){
+        var t = new Date(d);
+        if (isNaN(t)) return '';
+        return t.getFullYear() + '. ' + (t.getMonth()+1) + '. ' + t.getDate();
+      }
+
+      fetch(API)
+        .then(function(r){ return r.json(); })
+        .then(function(data){
+          if (!data.items || !data.items.length) throw new Error('no items');
+          var html = '';
+          data.items.slice(0, COUNT).forEach(function(it){
+            var img = firstImage(it.content || it.description);
+            html += '<a class="bf-card" href="' + esc(it.link) + '" target="_blank" rel="noopener">'
+                  + (img ? '<img class="bf-thumb" src="' + esc(img) + '" alt="" loading="lazy">' : '')
+                  + '<div class="bf-body">'
+                  +   '<div class="bf-date">' + fmt(it.pubDate) + '</div>'
+                  +   '<div class="bf-title">' + esc(plain(it.title)) + '</div>'
+                  +   '<div class="bf-desc">' + esc(plain(it.description).slice(0,90)) + '…</div>'
+                  + '</div></a>';
+          });
+          box.innerHTML = html;
+        })
+        .catch(function(){
+          box.innerHTML = '<div class="bf-loading">최신 글은 블로그에서 확인해 주세요.</div>';
+        });
+    })();
+    </script>
     <!-- Location Section -->
     <section class="section location" id="location">
         <div class="location-inner">

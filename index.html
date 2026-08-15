@@ -3604,7 +3604,125 @@
             </div>
         </div>
     </section>
+<!-- ==================== 예비고1(현 중3) 대기 신청 ==================== -->
+    <section class="section application-section-brand application-section-alt" id="application-prehs">
+        <div class="section-header">
+            <span class="section-label">Application</span>
+            <h2 class="section-title">예비고1 대기 신청</h2>
+            <p class="section-desc">현 중3 · 고교 진학 전 선행 관리반</p>
+        </div>
 
+        <div class="application-form-container">
+            <form id="studentFormPreHS" class="brand-form">
+                <input type="hidden" name="formType" value="예비고1">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">학생 이름 <span class="required">*</span></label>
+                        <input type="text" class="form-input" name="studentName" placeholder="학생 이름" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">성별 <span class="required">*</span></label>
+                        <select class="form-select" name="gender" required>
+                            <option value="">선택해주세요</option>
+                            <option value="남학생">남학생</option>
+                            <option value="여학생">여학생</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">학생 연락처 <span class="required">*</span></label>
+                        <input type="tel" class="form-input" name="studentPhone" placeholder="010-0000-0000" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">부모님 연락처 <span class="required">*</span></label>
+                        <input type="tel" class="form-input" name="parentPhone" placeholder="010-0000-0000" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">재학중인 중학교 <span class="required">*</span></label>
+                        <input type="text" class="form-input" name="school" placeholder="예: 해송중학교" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">학년 <span class="required">*</span></label>
+                        <select class="form-select" name="grade" required>
+                            <option value="">선택해주세요</option>
+                            <option value="중3 (예비고1)">중3 (예비고1)</option>
+                            <option value="중2">중2</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">진학 예정 고등학교</label>
+                        <input type="text" class="form-input" name="targetHighSchool" placeholder="예: 인천포스코고 / 미정">
+                        <p class="form-hint">미정이신 경우 '미정'으로 적어주세요. (선택사항)</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">희망 등원일</label>
+                        <input type="date" class="form-input" name="startDate">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">중학교 성적 (국어/수학/영어)</label>
+                    <input type="text" class="form-input" name="gradeScore" placeholder="예: A/A/B 또는 90/95/88">
+                    <p class="form-hint">성취도 또는 점수 모두 가능합니다. (선택사항)</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">사전등록을 희망하시나요? <span class="required">*</span></label>
+                    <div class="form-radio-group">
+                        <label class="form-radio">
+                            <input type="radio" name="preRegisterPreHS" value="Yes" required>
+                            <span>Yes</span>
+                        </label>
+                        <label class="form-radio">
+                            <input type="radio" name="preRegisterPreHS" value="No">
+                            <span>No</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">사전등록 방법을 선택하세요</label>
+                    <select class="form-select" name="paymentMethod">
+                        <option value="">선택해주세요</option>
+                        <option value="계좌이체">계좌이체</option>
+                        <option value="온라인카드결제">온라인카드결제</option>
+                    </select>
+                    <p class="form-hint">계좌이체: 국민 4699-01-04-155186 수리딩교육</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">흡연 여부 확인 <span class="required">*</span></label>
+                    <p class="form-warning">⚠️ 흡연자는 신청서를 작성할 수 없습니다.</p>
+                    <div class="form-radio-group">
+                        <label class="form-radio">
+                            <input type="radio" name="smokingPreHS" value="확인하였습니다" required>
+                            <span>확인하였습니다 (비흡연)</span>
+                        </label>
+                        <label class="form-radio">
+                            <input type="radio" name="smokingPreHS" value="해당사항없습니다">
+                            <span>해당사항없습니다</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="form-submit">예비고1 대기 신청하기</button>
+            </form>
+            <div class="form-success" id="successMessagePreHS">
+                <div class="success-icon">✓</div>
+                <h3>신청이 완료되었습니다!</h3>
+                <p>빠른 시일 내에 연락드리겠습니다.</p>
+            </div>
+        </div>
+    </section>
     <!-- ==================== 7층 김엄마송도독학재수학원 브랜드 섹션 ==================== -->
     <section class="section brand-section brand-section-alt" id="brand-7f">
         <div class="section-header">

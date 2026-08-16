@@ -5084,9 +5084,10 @@ if (form.id === 'studentForm8f') {
             submitBtn.disabled = false;
         }
 
-        document.getElementById('studentForm').addEventListener('submit', handleSubmit);
-        document.getElementById('nsuForm').addEventListener('submit', handleSubmit);
-        document.getElementById('academyForm').addEventListener('submit', handleSubmit);
+        ['studentForm','nsuForm','academyForm'].forEach(function(id){
+  var f = document.getElementById(id);
+  if (f) f.addEventListener('submit', handleSubmit);
+});
         
         // 레벨테스트 시간 선택 업데이트 함수
         function updateTimeOptions() {

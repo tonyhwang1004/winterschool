@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-93YZLEHGBE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-93YZLEHGBE');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>송도 관리형독서실 · 독학재수학원 | 김엄마 송도점 (연수구 송도동)</title>
@@ -5503,6 +5511,37 @@ if (form.id === 'studentForm8f') {
             }
           } catch(e) { console.log('피드 업데이트 실패', e); }
         }
+</script>
+    <script>
+(function () {
+  function track(name, params) {
+    if (typeof gtag === 'function') gtag('event', name, params || {});
+  }
+
+  var forms = {
+    studentForm8f:    { type: '재학생',     floor: '8F' },
+    studentFormPreHS: { type: '예비고1',    floor: '8F' },
+    nsuForm7f:        { type: 'N수생',      floor: '7F' },
+    academyFormNew:   { type: '어학원상담', floor: 'Academy' }
+  };
+  Object.keys(forms).forEach(function (id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('submit', function () {
+      track('generate_lead', { form_type: forms[id].type, floor: forms[id].floor });
+    });
+  });
+
+  document.querySelectorAll('a[href^="tel:"]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      track('phone_click', { phone: a.getAttribute('href').replace('tel:', '') });
+    });
+  });
+
+  document.querySelectorAll('a[href*="script.google.com"]').forEach(function (a) {
+    a.addEventListener('click', function () { track('enrollment_form_open', {}); });
+  });
+})();
 </script>
 </body>
    

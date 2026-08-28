@@ -2886,6 +2886,26 @@
 @media (max-width: 768px) {
     .live-feed-bar { margin-top: 64px; }
 }
+        /* ===== 대기신청 관 선택 ===== */
+.apply-type-selector{
+  display:flex; gap:12px; justify-content:center; flex-wrap:wrap;
+  max-width:820px; margin:0 auto 36px;
+}
+.apply-type-btn{
+  flex:1; min-width:200px; padding:20px 18px;
+  background:#fff; border:2px solid var(--border); border-radius:12px;
+  font-family:inherit; font-size:17px; font-weight:700; color:var(--text-muted);
+  cursor:pointer; transition:var(--transition); line-height:1.4;
+}
+.apply-type-btn:hover{ border-color:var(--primary); color:var(--primary); transform:translateY(-2px); }
+.apply-type-btn.active{
+  background:var(--primary); border-color:var(--primary); color:#fff;
+  box-shadow:0 8px 24px rgba(10,36,99,.25);
+}
+.apply-type-btn small{ display:block; font-size:12px; font-weight:500; margin-top:6px; opacity:.8; }
+.apply-form-wrap{ display:none; }
+.apply-form-wrap.active{ display:block; }
+@media (max-width:768px){ .apply-type-selector{ flex-direction:column; } }
     </style>
     <script type="application/ld+json">
 {
@@ -3579,18 +3599,118 @@
   </a>
 </section>
 
-<!-- 8층 대기 신청 -->
-    <!-- 8층 대기 신청 -->
-    <section class="section application-section-brand" id="application-8f">
-        <div class="section-header">
-            <span class="section-label">Application</span>
-            <h2 class="section-title">8층 대기 신청</h2>
-            <p class="section-desc">김엄마관리형독서실 (고1~고3)</p>
-        </div>
+<!-- ==================== 대기 신청 (3개 관) ==================== -->
+<section class="section application-section-brand" id="application-8f">
+    <div class="section-header">
+        <span class="section-label">Application</span>
+        <h2 class="section-title">대기 신청</h2>
+        <p class="section-desc">신청하실 관을 선택해 주세요</p>
+    </div>
 
+    <div class="apply-type-selector">
+        <button type="button" class="apply-type-btn active" data-apply="suneung">
+            고3 수능관<small>고3 · 수능 대비</small>
+        </button>
+        <button type="button" class="apply-type-btn" data-apply="naesin">
+            고등 내신관<small>고1~고3 · 내신 대비</small>
+        </button>
+        <button type="button" class="apply-type-btn" data-apply="prehs">
+            예비고1관<small>현 중3 · 고교 선행</small>
+        </button>
+    </div>
+
+    <!-- ① 고3 수능관 -->
+    <div class="apply-form-wrap active" id="applyWrap-suneung">
         <div class="application-form-container">
-            <form id="studentForm8f" class="brand-form">
-                <input type="hidden" name="formType" value="재학생">
+            <form id="formSuneung" class="brand-form">
+                <input type="hidden" name="formType" value="고3수능관">
+                <input type="hidden" name="grade" value="고3">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">학생 이름 <span class="required">*</span></label>
+                        <input type="text" class="form-input" name="studentName" placeholder="학생 이름" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">성별 <span class="required">*</span></label>
+                        <select class="form-select" name="gender" required>
+                            <option value="">선택해주세요</option>
+                            <option value="남학생">남학생</option>
+                            <option value="여학생">여학생</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">학생 연락처 <span class="required">*</span></label>
+                        <input type="tel" class="form-input" name="studentPhone" placeholder="010-0000-0000" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">부모님 연락처 <span class="required">*</span></label>
+                        <input type="tel" class="form-input" name="parentPhone" placeholder="010-0000-0000" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">학교 <span class="required">*</span></label>
+                        <input type="text" class="form-input" name="school" placeholder="현재 재학중인 학교명" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">희망 등원일 <span class="required">*</span></label>
+                        <input type="date" class="form-input" name="startDate" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">최근 모의고사 등급 (국어/수학/영어)</label>
+                    <input type="text" class="form-input" name="gradeScore" placeholder="예: 2/1/2">
+                    <p class="form-hint">내신등급도 가능합니다. (선택사항)</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">사전등록을 희망하시나요? <span class="required">*</span></label>
+                    <div class="form-radio-group">
+                        <label class="form-radio"><input type="radio" name="preRegister" value="Yes" required><span>Yes</span></label>
+                        <label class="form-radio"><input type="radio" name="preRegister" value="No"><span>No</span></label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">사전등록 방법을 선택하세요</label>
+                    <select class="form-select" name="paymentMethod">
+                        <option value="">선택해주세요</option>
+                        <option value="계좌이체">계좌이체</option>
+                        <option value="온라인카드결제">온라인카드결제</option>
+                    </select>
+                    <p class="form-hint">계좌이체: 국민 4699-01-04-155186 수리딩교육</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">흡연 여부 확인 <span class="required">*</span></label>
+                    <p class="form-warning">⚠️ 흡연자는 신청서를 작성할 수 없습니다.</p>
+                    <div class="form-radio-group">
+                        <label class="form-radio"><input type="radio" name="smoking" value="확인하였습니다" required><span>확인하였습니다 (비흡연)</span></label>
+                        <label class="form-radio"><input type="radio" name="smoking" value="해당사항없습니다"><span>해당사항없습니다</span></label>
+                    </div>
+                </div>
+
+                <button type="submit" class="form-submit">고3 수능관 대기 신청하기</button>
+            </form>
+            <div class="form-success" id="successSuneung">
+                <div class="success-icon">✓</div>
+                <h3>신청이 완료되었습니다!</h3>
+                <p>빠른 시일 내에 연락드리겠습니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ② 고등 내신관 -->
+    <div class="apply-form-wrap" id="applyWrap-naesin">
+        <div class="application-form-container">
+            <form id="formNaesin" class="brand-form">
+                <input type="hidden" name="formType" value="고등내신관">
 
                 <div class="form-row">
                     <div class="form-group">
@@ -3637,7 +3757,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label">희망 등원일 <span class="required">*</span></label>
-                      <input type="date" class="form-input" name="startDate" required>
+                        <input type="date" class="form-input" name="startDate" required>
                     </div>
                     <div class="form-group">
                         <label class="form-label">내신등급 (국어/수학/영어)</label>
@@ -3645,18 +3765,12 @@
                         <p class="form-hint">모의고사등급도 가능합니다. (선택사항)</p>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label class="form-label">사전등록을 희망하시나요? <span class="required">*</span></label>
                     <div class="form-radio-group">
-                        <label class="form-radio">
-                            <input type="radio" name="preRegister" value="Yes" required>
-                            <span>Yes</span>
-                        </label>
-                        <label class="form-radio">
-                            <input type="radio" name="preRegister" value="No">
-                            <span>No</span>
-                        </label>
+                        <label class="form-radio"><input type="radio" name="preRegister" value="Yes" required><span>Yes</span></label>
+                        <label class="form-radio"><input type="radio" name="preRegister" value="No"><span>No</span></label>
                     </div>
                 </div>
 
@@ -3669,41 +3783,31 @@
                     </select>
                     <p class="form-hint">계좌이체: 국민 4699-01-04-155186 수리딩교육</p>
                 </div>
+
                 <div class="form-group">
                     <label class="form-label">흡연 여부 확인 <span class="required">*</span></label>
                     <p class="form-warning">⚠️ 흡연자는 신청서를 작성할 수 없습니다.</p>
                     <div class="form-radio-group">
-                        <label class="form-radio">
-                            <input type="radio" name="smoking8f" value="확인하였습니다" required>
-                            <span>확인하였습니다 (비흡연)</span>
-                        </label>
-                        <label class="form-radio">
-                            <input type="radio" name="smoking8f" value="해당사항없습니다">
-                            <span>해당사항없습니다</span>
-                        </label>
+                        <label class="form-radio"><input type="radio" name="smoking" value="확인하였습니다" required><span>확인하였습니다 (비흡연)</span></label>
+                        <label class="form-radio"><input type="radio" name="smoking" value="해당사항없습니다"><span>해당사항없습니다</span></label>
                     </div>
                 </div>
 
-                <button type="submit" class="form-submit">대기 신청하기</button>
+                <button type="submit" class="form-submit">고등 내신관 대기 신청하기</button>
             </form>
-            <div class="form-success" id="successMessage8f">
+            <div class="form-success" id="successNaesin">
                 <div class="success-icon">✓</div>
                 <h3>신청이 완료되었습니다!</h3>
                 <p>빠른 시일 내에 연락드리겠습니다.</p>
             </div>
         </div>
-    </section>
-<!-- ==================== 예비고1(현 중3) 대기 신청 ==================== -->
-    <section class="section application-section-brand application-section-alt" id="application-prehs">
-        <div class="section-header">
-            <span class="section-label">Application</span>
-            <h2 class="section-title">예비고1 대기 신청</h2>
-            <p class="section-desc">현 중3 · 고교 진학 전 선행 관리반</p>
-        </div>
+    </div>
 
+    <!-- ③ 예비고1관 -->
+    <div class="apply-form-wrap" id="applyWrap-prehs">
         <div class="application-form-container">
-            <form id="studentFormPreHS" class="brand-form">
-                <input type="hidden" name="formType" value="예비고1">
+            <form id="formPreHS" class="brand-form">
+                <input type="hidden" name="formType" value="예비고1관">
 
                 <div class="form-row">
                     <div class="form-group">
@@ -3759,22 +3863,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">중학교 성적 (국어/수학/영어)</label>
-                    <input type="text" class="form-input" name="gradeScore" placeholder="예: A/A/B 또는 90/95/88">
-                    <p class="form-hint">성취도 또는 점수 모두 가능합니다. (선택사항)</p>
+                    <label class="form-label">중학교 3학년 1학기 성적 (국어/영어/수학) <span class="required">*</span></label>
+                    <input type="text" class="form-input" name="gradeScore" placeholder="예: A/A/B 또는 92/95/88" required>
+                    <p class="form-warning" style="margin-top:8px;">⚠️ 3학년 1학기 성적은 필수 입력 항목입니다. 미입력 시 신청이 불가합니다.</p>
+                    <p class="form-hint">성취도(A~E) 또는 점수 모두 가능합니다. 반드시 <strong>3학년 1학기</strong> 성적을 기재해 주세요.</p>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">사전등록을 희망하시나요? <span class="required">*</span></label>
                     <div class="form-radio-group">
-                        <label class="form-radio">
-                            <input type="radio" name="preRegisterPreHS" value="Yes" required>
-                            <span>Yes</span>
-                        </label>
-                        <label class="form-radio">
-                            <input type="radio" name="preRegisterPreHS" value="No">
-                            <span>No</span>
-                        </label>
+                        <label class="form-radio"><input type="radio" name="preRegister" value="Yes" required><span>Yes</span></label>
+                        <label class="form-radio"><input type="radio" name="preRegister" value="No"><span>No</span></label>
                     </div>
                 </div>
 
@@ -3792,26 +3891,21 @@
                     <label class="form-label">흡연 여부 확인 <span class="required">*</span></label>
                     <p class="form-warning">⚠️ 흡연자는 신청서를 작성할 수 없습니다.</p>
                     <div class="form-radio-group">
-                        <label class="form-radio">
-                            <input type="radio" name="smokingPreHS" value="확인하였습니다" required>
-                            <span>확인하였습니다 (비흡연)</span>
-                        </label>
-                        <label class="form-radio">
-                            <input type="radio" name="smokingPreHS" value="해당사항없습니다">
-                            <span>해당사항없습니다</span>
-                        </label>
+                        <label class="form-radio"><input type="radio" name="smoking" value="확인하였습니다" required><span>확인하였습니다 (비흡연)</span></label>
+                        <label class="form-radio"><input type="radio" name="smoking" value="해당사항없습니다"><span>해당사항없습니다</span></label>
                     </div>
                 </div>
 
-                <button type="submit" class="form-submit">예비고1 대기 신청하기</button>
+                <button type="submit" class="form-submit">예비고1관 대기 신청하기</button>
             </form>
-            <div class="form-success" id="successMessagePreHS">
+            <div class="form-success" id="successPreHS">
                 <div class="success-icon">✓</div>
                 <h3>신청이 완료되었습니다!</h3>
                 <p>빠른 시일 내에 연락드리겠습니다.</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
     <!-- ==================== 7층 김엄마송도독학재수학원 브랜드 섹션 ==================== -->
     <section class="section brand-section brand-section-alt" id="brand-7f">
         <div class="section-header">
@@ -5139,99 +5233,85 @@ if (form.id === 'studentForm8f') {
             });
         }
 
-        // 새 브랜드별 폼 핸들러
-        document.getElementById('studentForm8f').addEventListener('submit', handleBrandFormSubmit);
-        document.getElementById('nsuForm7f').addEventListener('submit', handleBrandFormSubmit);
-        document.getElementById('academyFormNew').addEventListener('submit', handleBrandFormSubmit);
+        /* ===== 신청 URL ===== */
+const URL_MAIN  = 'https://script.google.com/macros/s/AKfycbzEXWlfZE5Flmxp-2WB2s12q441J7O1j8aGtc4bnAONCPK2_aUleIFEFKfLOmJwPLGakQ/exec';
+// 예비고1관 전용 시트 (4단계에서 배포한 URL로 교체)
+const URL_PREHS = 'PASTE_YOUR_NEW_PREHS_WEBAPP_URL_HERE';
 
-        // 브랜드별 폼 제출 핸들러
-        async function handleBrandFormSubmit(e) {
-            e.preventDefault();
-            const form = e.target;
-            const submitBtn = form.querySelector('.form-submit');
-            const formId = form.id;
-            
-            // 성공 메시지 ID 및 URL 결정
-            let successMsgId;
-            let submitUrl;
-            
-            if (formId === 'studentForm8f') {
-    successMsgId = 'successMessage8f';
-    submitUrl = 'https://script.google.com/macros/s/AKfycbzEXWlfZE5Flmxp-2WB2s12q441J7O1j8aGtc4bnAONCPK2_aUleIFEFKfLOmJwPLGakQ/exec';
-} else if (formId === 'nsuForm7f') {
-    successMsgId = 'successMessage7f';
-    submitUrl = 'https://script.google.com/macros/s/AKfycbzEXWlfZE5Flmxp-2WB2s12q441J7O1j8aGtc4bnAONCPK2_aUleIFEFKfLOmJwPLGakQ/exec';
-} else if (formId === 'academyFormNew') {
-    successMsgId = 'successMessageAcademy';
-    submitUrl = 'https://script.google.com/macros/s/AKfycbzEXWlfZE5Flmxp-2WB2s12q441J7O1j8aGtc4bnAONCPK2_aUleIFEFKfLOmJwPLGakQ/exec';
-}
-            
-            submitBtn.textContent = '처리 중...';
-            submitBtn.disabled = true;
+const FORM_CONFIG = {
+  formSuneung:    { success:'successSuneung',        url:URL_MAIN,  type:'고3수능관',   btn:'고3 수능관 대기 신청하기',  icon:'📚', feed:'고3 수능관 대기 신청 접수' },
+  formNaesin:     { success:'successNaesin',         url:URL_MAIN,  type:'고등내신관',  btn:'고등 내신관 대기 신청하기', icon:'📘', feed:'고등 내신관 대기 신청 접수' },
+  formPreHS:      { success:'successPreHS',          url:URL_PREHS, type:'예비고1관',   btn:'예비고1관 대기 신청하기',   icon:'🌱', feed:'예비고1관 대기 신청 접수' },
+  nsuForm7f:      { success:'successMessage7f',      url:URL_MAIN,  type:'N수생',       btn:'대기 신청하기',             icon:'🎯', feed:'독학재수학원 대기 신청 접수' },
+  academyFormNew: { success:'successMessageAcademy', url:URL_MAIN,  type:'어학원상담',  btn:'레벨테스트 신청하기',       icon:'🎓', feed:'어학원 레벨테스트 신청 접수' }
+};
 
-            const formData = new FormData(form);
-            const data = {};
-            formData.forEach((value, key) => {
-                if (key === 'programs') {
-                    if (!data[key]) data[key] = [];
-                    data[key].push(value);
-                } else {
-                    data[key] = value;
-                }
-            });
-
-            // formType 설정
-            if (formId === 'studentForm8f') {
-                data.formType = '재학생';
-            } else if (formId === 'nsuForm7f') {
-                data.formType = 'N수생';
-            } else if (formId === 'academyFormNew') {
-                data.formType = '어학원상담';
-            }
-            
-            // 어학원 폼의 경우 요일+시간을 합쳐서 희망상담일시로 저장
-            if (formId === 'academyFormNew' && data.consultDay && data.consultTime) {
-                data.consultDate = data.consultDay + ' ' + data.consultTime;
-                delete data.consultDay;
-                delete data.consultTime;
-            }
-
-            try {
-                // Google Apps Script 웹앱 URL로 전송
-                await fetch(submitUrl, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data)
+/* 관 선택 탭 */
+document.querySelectorAll('.apply-type-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var key = btn.dataset.apply;
+    document.querySelectorAll('.apply-type-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.querySelectorAll('.apply-form-wrap').forEach(function(w){ w.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('applyWrap-' + key).classList.add('active');
+  });
 });
 
-                // 성공 메시지 표시
-                form.style.display = 'none';
-                document.getElementById(successMsgId).style.display = 'block';
-                form.reset();
-                // ★ 실시간 피드 업데이트
-                (function(){
-                  var icons = { studentForm8f:'📚', nsuForm7f:'🎯', academyFormNew:'🎓' };
-                  var texts = {
-                    studentForm8f: '관리형독서실 대기 신청 접수',
-                    nsuForm7f: '독학재수학원 대기 신청 접수',
-                    academyFormNew: '어학원 레벨테스트 신청 접수'
-                  };
-                  var icon = icons[formId] || '📋';
-                  var text = texts[formId] || '신청 접수';
-                  updateFeedOnSubmit(icon, text);
-                })();
-            } catch (error) {
-                alert('신청 중 오류가 발생했습니다. 다시 시도해주세요.');
-                console.error('Error:', error);
-            }
+/* 폼 제출 */
+async function handleBrandFormSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const cfg  = FORM_CONFIG[form.id];
+  if (!cfg) return;
 
-            submitBtn.textContent = form.id.includes('academy') ? '레벨테스트 신청하기' : '대기 신청하기';
-            submitBtn.disabled = false;
-        }
+  if (form.id === 'formPreHS') {
+    const el = form.querySelector('[name="gradeScore"]');
+    if (!(el.value || '').trim()) {
+      alert('중학교 3학년 1학기 성적은 필수 입력 항목입니다.\n성적을 입력해 주셔야 신청이 가능합니다.');
+      el.focus();
+      return;
+    }
+  }
 
+  const submitBtn = form.querySelector('.form-submit');
+  submitBtn.textContent = '처리 중...';
+  submitBtn.disabled = true;
+
+  const data = {};
+  new FormData(form).forEach(function(value, key){
+    if (key === 'programs') { (data[key] = data[key] || []).push(value); }
+    else { data[key] = value; }
+  });
+  data.formType = cfg.type;
+
+  if (form.id === 'academyFormNew' && data.consultDay && data.consultTime) {
+    data.consultDate = data.consultDay + ' ' + data.consultTime;
+    delete data.consultDay; delete data.consultTime;
+  }
+
+  try {
+    await fetch(cfg.url, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    form.style.display = 'none';
+    document.getElementById(cfg.success).style.display = 'block';
+    form.reset();
+    if (typeof updateFeedOnSubmit === 'function') updateFeedOnSubmit(cfg.icon, cfg.feed);
+  } catch (error) {
+    alert('신청 중 오류가 발생했습니다. 다시 시도해주세요.');
+    console.error('Error:', error);
+    submitBtn.textContent = cfg.btn;
+    submitBtn.disabled = false;
+  }
+}
+
+Object.keys(FORM_CONFIG).forEach(function(id){
+  var f = document.getElementById(id);
+  if (f) f.addEventListener('submit', handleBrandFormSubmit);
+});
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -5527,8 +5607,9 @@ if (form.id === 'studentForm8f') {
   }
 
   var forms = {
-    studentForm8f:    { type: '재학생',     floor: '8F' },
-    studentFormPreHS: { type: '예비고1',    floor: '8F' },
+    formSuneung:      { type: '고3수능관',  floor: '8F' },
+    formNaesin:       { type: '고등내신관', floor: '8F' },
+    formPreHS:        { type: '예비고1관',  floor: '8F' },
     nsuForm7f:        { type: 'N수생',      floor: '7F' },
     academyFormNew:   { type: '어학원상담', floor: 'Academy' }
   };

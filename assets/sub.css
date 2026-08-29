@@ -236,3 +236,10 @@ a:focus-visible,summary:focus-visible,.btn:focus-visible{
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
+
+
+/* ---------- 선택 가능한 카드 ---------- */
+.pick a.card{display:block;text-decoration:none;color:inherit;transition:.2s;position:relative}
+.pick a.card:hover{border-color:var(--navy);transform:translateY(-3px);box-shadow:var(--shadow)}
+.pick a.card .go{display:inline-block;margin-top:16px;font-size:14px;font-weight:700;color:var(--navy)}
+.pick a.card:hover .go{color:var(--accent)}

@@ -3625,6 +3625,7 @@
     </div>
 
     <!-- ① 고3 수능관 -->
+    <div id="apply-suneung" style="position:relative;top:-90px"></div>
     <div class="apply-form-wrap active" id="applyWrap-suneung">
         <div class="application-form-container">
             <form id="formSuneung" class="brand-form">
@@ -3712,6 +3713,7 @@
     </div>
 
     <!-- ② 고등 내신관 -->
+    <div id="apply-naesin" style="position:relative;top:-90px"></div>
     <div class="apply-form-wrap" id="applyWrap-naesin">
         <div class="application-form-container">
             <form id="formNaesin" class="brand-form">
@@ -3809,6 +3811,7 @@
     </div>
 
     <!-- ③ 예비고1관 -->
+    <div id="apply-prehs" style="position:relative;top:-90px"></div>
     <div class="apply-form-wrap" id="applyWrap-prehs">
         <div class="application-form-container">
             <form id="formPreHS" class="brand-form">
@@ -5129,6 +5132,18 @@ const FORM_CONFIG = {
   nsuForm7f:      { success:'successMessage7f',      url:URL_MAIN,  type:'N수생',       btn:'대기 신청하기',             icon:'🎯', feed:'독학재수학원 대기 신청 접수' },
   academyFormNew: { success:'successMessageAcademy', url:URL_MAIN,  type:'어학원상담',  btn:'레벨테스트 신청하기',       icon:'🎓', feed:'어학원 레벨테스트 신청 접수' }
 };
+
+/* URL 해시로 관 자동 선택 */
+(function(){
+  function openByHash(){
+    var m = (location.hash||'').match(/^#apply-(suneung|naesin|prehs)$/);
+    if(!m) return;
+    var btn = document.querySelector('.apply-type-btn[data-apply="'+m[1]+'"]');
+    if(btn) btn.click();
+  }
+  window.addEventListener('hashchange', openByHash);
+  window.addEventListener('load', function(){ setTimeout(openByHash, 120); });
+})();
 
 /* 관 선택 탭 */
 document.querySelectorAll('.apply-type-btn').forEach(function(btn){

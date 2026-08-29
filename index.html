@@ -5176,6 +5176,7 @@ async function handleBrandFormSubmit(e) {
     });
     form.style.display = 'none';
     document.getElementById(cfg.success).style.display = 'block';
+          if (typeof celebrate === 'function') celebrate();
     form.reset();
     if (typeof updateFeedOnSubmit === 'function') updateFeedOnSubmit(cfg.icon, cfg.feed);
   } catch (error) {
@@ -5508,6 +5509,73 @@ Object.keys(FORM_CONFIG).forEach(function(id){
   document.querySelectorAll('a[href*="script.google.com"]').forEach(function (a) {
     a.addEventListener('click', function () { track('enrollment_form_open', {}); });
   });
+})();
+</script>
+    <canvas id="confettiCanvas"
+        style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:99999;display:none;"></canvas>
+<script>
+/* ===== 신청 완료 폭죽 ===== */
+(function(){
+  var canvas = document.getElementById('confettiCanvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var pieces = [], raf = null;
+  var COLORS = ['#0a2463','#3e92cc','#f9c74f','#f8961e','#90be6d','#f94144','#9b5de5','#ffffff'];
+
+  function resize(){ canvas.width = innerWidth; canvas.height = innerHeight; }
+  addEventListener('resize', resize);
+
+  function burst(ox, oy, count){
+    for (var i = 0; i < count; i++){
+      var angle = Math.random() * Math.PI * 2;
+      var speed = 4 + Math.random() * 9;
+      pieces.push({
+        x: ox, y: oy,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 4,
+        w: 6 + Math.random() * 7,
+        h: 9 + Math.random() * 9,
+        color: COLORS[(Math.random() * COLORS.length) | 0],
+        rot: Math.random() * Math.PI,
+        vr: (Math.random() - 0.5) * 0.3,
+        life: 1
+      });
+    }
+  }
+
+  function tick(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (var i = pieces.length - 1; i >= 0; i--){
+      var p = pieces[i];
+      p.vy += 0.22;
+      p.vx *= 0.99;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rot += p.vr;
+      p.life -= 0.008;
+      if (p.life <= 0 || p.y > canvas.height + 60){ pieces.splice(i, 1); continue; }
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, p.life);
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      ctx.restore();
+    }
+    if (pieces.length){ raf = requestAnimationFrame(tick); }
+    else { canvas.style.display = 'none'; raf = null; }
+  }
+
+  window.celebrate = function(){
+    resize();
+    canvas.style.display = 'block';
+    var w = canvas.width, h = canvas.height;
+    burst(w * 0.5, h * 0.45, 90);
+    setTimeout(function(){ burst(w * 0.22, h * 0.4, 60); }, 220);
+    setTimeout(function(){ burst(w * 0.78, h * 0.4, 60); }, 420);
+    setTimeout(function(){ burst(w * 0.5, h * 0.35, 50); }, 650);
+    if (!raf) raf = requestAnimationFrame(tick);
+  };
 })();
 </script>
 </body>

@@ -5133,16 +5133,21 @@ const FORM_CONFIG = {
   academyFormNew: { success:'successMessageAcademy', url:URL_MAIN,  type:'어학원상담',  btn:'레벨테스트 신청하기',       icon:'🎓', feed:'어학원 레벨테스트 신청 접수' }
 };
 
-/* URL 해시로 관 자동 선택 */
+/* URL 해시로 관 자동 선택 + 해당 위치로 이동 */
 (function(){
   function openByHash(){
     var m = (location.hash||'').match(/^#apply-(suneung|naesin|prehs)$/);
     if(!m) return;
     var btn = document.querySelector('.apply-type-btn[data-apply="'+m[1]+'"]');
     if(btn) btn.click();
+    var sec = document.getElementById('application-8f');
+    if(sec){
+      var y = sec.getBoundingClientRect().top + window.pageYOffset - 80;
+      window.scrollTo({top:y, behavior:'smooth'});
+    }
   }
   window.addEventListener('hashchange', openByHash);
-  window.addEventListener('load', function(){ setTimeout(openByHash, 120); });
+  window.addEventListener('load', function(){ setTimeout(openByHash, 350); });
 })();
 
 /* 관 선택 탭 */

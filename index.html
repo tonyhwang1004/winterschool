@@ -5239,8 +5239,8 @@ const URL_MAIN  = 'https://script.google.com/macros/s/AKfycbzEXWlfZE5Flmxp-2WB2s
 const URL_PREHS = 'https://script.google.com/macros/s/AKfycbymAO-G3o11hg99S6ZsprHln-HOsV_zwm0hyyeE5wmHpgtZccsJK5fIbqYK2ufciQb_/exec';
 
 const FORM_CONFIG = {
-  formSuneung:    { success:'successSuneung',        url:URL_MAIN,  type:'고3수능관',   btn:'고3 수능관 대기 신청하기',  icon:'📚', feed:'고3 수능관 대기 신청 접수' },
-  formNaesin:     { success:'successNaesin',         url:URL_MAIN,  type:'고등내신관',  btn:'고등 내신관 대기 신청하기', icon:'📘', feed:'고등 내신관 대기 신청 접수' },
+  formSuneung:    { success:'successSuneung',        url:URL_MAIN,  type:'재학생', hall:'고3수능관',  btn:'고3 수능관 대기 신청하기',  icon:'📚', feed:'고3 수능관 대기 신청 접수' },
+  formNaesin:     { success:'successNaesin',         url:URL_MAIN,  type:'재학생', hall:'고등내신관', btn:'고등 내신관 대기 신청하기', icon:'📘', feed:'고등 내신관 대기 신청 접수' },
   formPreHS:      { success:'successPreHS',          url:URL_PREHS, type:'예비고1관',   btn:'예비고1관 대기 신청하기',   icon:'🌱', feed:'예비고1관 대기 신청 접수' },
   nsuForm7f:      { success:'successMessage7f',      url:URL_MAIN,  type:'N수생',       btn:'대기 신청하기',             icon:'🎯', feed:'독학재수학원 대기 신청 접수' },
   academyFormNew: { success:'successMessageAcademy', url:URL_MAIN,  type:'어학원상담',  btn:'레벨테스트 신청하기',       icon:'🎓', feed:'어학원 레벨테스트 신청 접수' }
@@ -5282,7 +5282,11 @@ async function handleBrandFormSubmit(e) {
     if (key === 'programs') { (data[key] = data[key] || []).push(value); }
     else { data[key] = value; }
   });
-  data.formType = cfg.type;
+    data.formType = cfg.type;
+  if (cfg.hall) {
+    data.hall = cfg.hall;
+    data.smoking8f = data.smoking;
+  }
 
   if (form.id === 'academyFormNew' && data.consultDay && data.consultTime) {
     data.consultDate = data.consultDay + ' ' + data.consultTime;

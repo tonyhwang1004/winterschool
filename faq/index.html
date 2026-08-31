@@ -619,7 +619,14 @@ body{
     }
   }
 
-  input.addEventListener('input', apply);
+    input.addEventListener('input', function(){
+    if (input.value.trim()) {
+      catBtns.forEach(function(x){ x.classList.remove('active'); });
+      catBtns[0].classList.add('active');
+      curCat = 'all';
+    }
+    apply();
+  });
   clearBt.addEventListener('click', function(){ input.value=''; apply(); input.focus(); });
 
   catBtns.forEach(function(b){

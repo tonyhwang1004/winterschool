@@ -24,63 +24,173 @@
 
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@graph":[
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
     {
-      "@type":"BreadcrumbList",
-      "itemListElement":[
-        {"@type":"ListItem","position":1,"name":"홈","item":"https://www.kimmom.co.kr/"},
-        {"@type":"ListItem","position":2,"name":"이용료 안내","item":"https://www.kimmom.co.kr/pricing/"}
-      ]
+     "@type": "ListItem",
+     "position": 1,
+     "name": "홈",
+     "item": "https://www.kimmom.co.kr/"
     },
     {
-      "@type":"EducationalOrganization",
-      "@id":"https://www.kimmom.co.kr/#studyroom",
-      "name":"김엄마관리형독서실 송도점",
-      "url":"https://www.kimmom.co.kr/",
-      "telephone":"+82-507-1378-1953",
-      "priceRange":"390,000원~690,000원",
-      "address":{
-        "@type":"PostalAddress",
-        "streetAddress":"컨벤시아대로130번길 18 해온프라자 더 라운지 8층",
-        "addressLocality":"연수구","addressRegion":"인천광역시",
-        "postalCode":"22003","addressCountry":"KR"
-      },
-      "openingHoursSpecification":[{
-        "@type":"OpeningHoursSpecification",
-        "dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-        "opens":"08:00","closes":"01:00"
-      }],
-      "hasOfferCatalog":{
-        "@type":"OfferCatalog","name":"좌석 이용료",
-        "itemListElement":[
-          {"@type":"Offer","name":"8층 자유석 종일권","price":"530000","priceCurrency":"KRW","availability":"https://schema.org/InStock"},
-          {"@type":"Offer","name":"8층 오픈형 지정석 종일권","price":"630000","priceCurrency":"KRW","availability":"https://schema.org/InStock"},
-          {"@type":"Offer","name":"8층 칸막이 지정석 종일권","price":"690000","priceCurrency":"KRW","availability":"https://schema.org/InStock"},
-          {"@type":"Offer","name":"8층 자유석 오후권","price":"390000","priceCurrency":"KRW","availability":"https://schema.org/InStock"},
-          {"@type":"Offer","name":"8층 오픈형 지정석 오후권","price":"490000","priceCurrency":"KRW","availability":"https://schema.org/InStock"},
-          {"@type":"Offer","name":"8층 칸막이 지정석 오후권","price":"550000","priceCurrency":"KRW","availability":"https://schema.org/InStock"},
-          {"@type":"Offer","name":"7층 독학재수학원 오픈형 지정석","price":"630000","priceCurrency":"KRW","availability":"https://schema.org/InStock"},
-          {"@type":"Offer","name":"7층 독학재수학원 칸막이 지정석","price":"690000","priceCurrency":"KRW","availability":"https://schema.org/InStock"}
-        ]
-      }
-    },
-    {
-      "@type":"FAQPage",
-      "mainEntity":[
-        {"@type":"Question","name":"송도 김엄마 관리형독서실 한 달 이용료는 얼마인가요?",
-         "acceptedAnswer":{"@type":"Answer","text":"8층 고등부는 종일권 기준 자유석 530,000원, 오픈형 지정석 630,000원, 칸막이 지정석 690,000원입니다. 오후권은 각각 390,000원, 490,000원, 550,000원입니다. 7층 독학재수학원은 오픈형 지정석 630,000원, 칸막이 지정석 690,000원입니다. 모두 VAT 포함 금액입니다."}},
-        {"@type":"Question","name":"자유석과 지정석은 무엇이 다른가요?",
-         "acceptedAnswer":{"@type":"Answer","text":"자유석은 등원할 때마다 남은 자리 중에서 원하는 좌석을 고르는 방식이고, 지정석은 한 달 동안 같은 자리를 본인만 사용하는 방식입니다. 지정석은 칸막이 유무에 따라 오픈형과 칸막이형으로 나뉩니다."}},
-        {"@type":"Question","name":"등록은 언제 하나요? 중간 등록도 되나요?",
-         "acceptedAnswer":{"@type":"Answer","text":"월단위 등록이며 등록 기간은 매월 1일입니다. 잔여석이 있는 경우 중간 등록도 가능하니 전화로 문의해 주세요."}},
-        {"@type":"Question","name":"환불 규정은 어떻게 되나요?",
-         "acceptedAnswer":{"@type":"Answer","text":"학원의 설립·운영 및 과외교습에 관한 법률 제18조 3항의 환불 기준을 그대로 적용합니다."}},
-        {"@type":"Question","name":"운영 시간과 휴관일은 어떻게 되나요?",
-         "acceptedAnswer":{"@type":"Answer","text":"평일과 주말 모두 오전 8시부터 다음날 새벽 1시까지 운영합니다. 공식 휴관일은 12월 24일과 25일 이틀뿐입니다."}}
-      ]
+     "@type": "ListItem",
+     "position": 2,
+     "name": "이용료 안내",
+     "item": "https://www.kimmom.co.kr/pricing/"
     }
-  ]
+   ]
+  },
+  {
+   "@type": "EducationalOrganization",
+   "@id": "https://www.kimmom.co.kr/#studyroom",
+   "name": "김엄마관리형독서실 송도점",
+   "url": "https://www.kimmom.co.kr/",
+   "telephone": "+82-507-1378-1953",
+   "priceRange": "390,000원~690,000원",
+   "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "컨벤시아대로130번길 18 해온프라자 더 라운지 8층",
+    "addressLocality": "연수구",
+    "addressRegion": "인천광역시",
+    "postalCode": "22003",
+    "addressCountry": "KR"
+   },
+   "openingHoursSpecification": [
+    {
+     "@type": "OpeningHoursSpecification",
+     "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+     ],
+     "opens": "08:00",
+     "closes": "01:00"
+    }
+   ],
+   "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "좌석 이용료",
+    "itemListElement": [
+     {
+      "@type": "Offer",
+      "name": "8층 자유석 종일권",
+      "price": "530000",
+      "priceCurrency": "KRW",
+      "availability": "https://schema.org/InStock"
+     },
+     {
+      "@type": "Offer",
+      "name": "8층 오픈형 지정석 종일권",
+      "price": "630000",
+      "priceCurrency": "KRW",
+      "availability": "https://schema.org/InStock"
+     },
+     {
+      "@type": "Offer",
+      "name": "8층 칸막이 지정석 종일권",
+      "price": "690000",
+      "priceCurrency": "KRW",
+      "availability": "https://schema.org/InStock"
+     },
+     {
+      "@type": "Offer",
+      "name": "8층 자유석 오후권",
+      "price": "390000",
+      "priceCurrency": "KRW",
+      "availability": "https://schema.org/InStock"
+     },
+     {
+      "@type": "Offer",
+      "name": "8층 오픈형 지정석 오후권",
+      "price": "490000",
+      "priceCurrency": "KRW",
+      "availability": "https://schema.org/InStock"
+     },
+     {
+      "@type": "Offer",
+      "name": "8층 칸막이 지정석 오후권",
+      "price": "550000",
+      "priceCurrency": "KRW",
+      "availability": "https://schema.org/InStock"
+     },
+     {
+      "@type": "Offer",
+      "name": "7층 독학재수학원 오픈형 지정석",
+      "price": "630000",
+      "priceCurrency": "KRW",
+      "availability": "https://schema.org/InStock"
+     },
+     {
+      "@type": "Offer",
+      "name": "7층 독학재수학원 칸막이 지정석",
+      "price": "690000",
+      "priceCurrency": "KRW",
+      "availability": "https://schema.org/InStock"
+     }
+    ]
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "중간에 등록해도 되나요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "기본은 매월 1일 등록입니다. 다만 잔여석이 있으면 중간 등록도 가능합니다. 좌석 상황이 수시로 바뀌니 전화로 확인해 주세요."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "종일권과 오후권은 어떻게 다른가요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "종일권은 개원 시간부터 마감까지 하루 전체를 이용하고, 오후권은 오후 시간대부터 이용합니다. 학교 수업 후에만 오시는 재학생은 오후권을, 방학이나 자퇴·검정고시 학생은 종일권을 주로 선택합니다."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "식비와 인강 패스도 이용료에 포함되나요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "포함되지 않습니다. 식비는 충전금을 미리 예치한 뒤 식사할 때마다 해당 금액이 차감되는 방식입니다. 인강 패스도 이용료에 포함되지 않으며, 학생이 본인에게 필요한 강의와 패스를 개별로 선택해 구입합니다. 학생마다 필요한 강의와 식사 횟수가 다르기 때문에 필요한 만큼만 이용하실 수 있도록 운영하고 있습니다."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "형제자매 할인이나 장학 제도가 있나요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "7층 독학재수학원은 직전 수능 성적 제출 시 장학 혜택 대상이 될 수 있습니다. 그 외 할인은 상담 시 안내드립니다."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "등록 전에 시설을 볼 수 있나요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "가능합니다. 방문 상담 시 8층과 7층 자습실, 리프레쉬룸을 함께 둘러보실 수 있습니다. 자습 중인 학생들이 있으므로 사전에 전화로 시간을 정해 주시면 좋습니다."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "흡연 학생도 등록할 수 있나요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "받지 않습니다. 흡연이 적발되거나 담배 냄새로 인한 건의가 접수되면 강제 퇴원 대상이 됩니다. 신청서에도 비흡연 확인 항목이 있습니다."
+     }
+    }
+   ]
+  }
+ ]
 }
 </script>
 </head>
@@ -245,6 +355,7 @@
         <p>휴식과 환기를 위한 별도 공간이 있습니다. 도시락을 신청해 원내에서 식사할 수 있습니다.</p>
       </article>
     </div>
+    <p class="sec-desc" style="margin-top:22px"><b>별도로 부담하시는 것:</b> 식비와 인강 패스는 이용료에 포함되지 않습니다. 식비는 미리 예치한 충전금에서 식사할 때마다 차감되고, 인강 패스는 학생이 필요한 강의만 골라 개별 구입합니다.</p>
   </div>
 </section>
 
@@ -261,6 +372,10 @@
       <details>
         <summary>종일권과 오후권은 어떻게 다른가요?</summary>
         <div class="a">종일권은 개원 시간부터 마감까지 하루 전체를 이용하고, 오후권은 오후 시간대부터 이용합니다. 학교 수업 후에만 오시는 재학생은 오후권을, 방학이나 자퇴·검정고시 학생은 종일권을 주로 선택합니다.</div>
+      </details>
+      <details>
+        <summary>식비와 인강 패스도 이용료에 포함되나요?</summary>
+        <div class="a">포함되지 않습니다. 식비는 충전금을 미리 예치한 뒤 식사할 때마다 해당 금액이 차감되는 방식입니다. 인강 패스도 이용료에 포함되지 않으며, 학생이 본인에게 필요한 강의와 패스를 개별로 선택해 구입합니다. 학생마다 필요한 강의와 식사 횟수가 다르기 때문에 필요한 만큼만 이용하실 수 있도록 운영하고 있습니다.</div>
       </details>
       <details>
         <summary>형제자매 할인이나 장학 제도가 있나요?</summary>

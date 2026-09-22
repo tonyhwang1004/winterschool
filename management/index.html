@@ -24,39 +24,87 @@
 
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@graph":[
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
     {
-      "@type":"BreadcrumbList",
-      "itemListElement":[
-        {"@type":"ListItem","position":1,"name":"홈","item":"https://www.kimmom.co.kr/"},
-        {"@type":"ListItem","position":2,"name":"관리 방식","item":"https://www.kimmom.co.kr/management/"}
-      ]
+     "@type": "ListItem",
+     "position": 1,
+     "name": "홈",
+     "item": "https://www.kimmom.co.kr/"
     },
     {
-      "@type":"Article",
-      "headline":"김엄마 관리형독서실의 관리 방식",
-      "description":"매 교시 출결 확인, 휴대폰 의무 제출, 20분 단위 순찰과 관리일지, 와이파이 방화벽, 벌점 제도의 운영 기준.",
-      "inLanguage":"ko-KR",
-      "isPartOf":{"@type":"WebSite","url":"https://www.kimmom.co.kr/","name":"송도 김엄마 관리형독서실"},
-      "publisher":{"@type":"Organization","name":"(주)수리딩교육","url":"https://www.kimmom.co.kr/"}
-    },
-    {
-      "@type":"FAQPage",
-      "mainEntity":[
-        {"@type":"Question","name":"관리형독서실은 일반 독서실과 무엇이 다른가요?",
-         "acceptedAnswer":{"@type":"Answer","text":"자리만 제공하는 것이 아니라 출결과 학습 태도를 사람이 직접 관리합니다. 매 교시 착석을 확인하고, 20분 간격으로 자습실을 순찰하며 관찰 내용을 기록합니다. 휴대폰은 등원 시 보관하고, 와이파이는 인강 외 사이트 접속이 차단됩니다."}},
-        {"@type":"Question","name":"휴대폰은 어떻게 관리되나요?",
-         "acceptedAnswer":{"@type":"Answer","text":"등원 시 휴대폰을 의무적으로 제출하며, 자습실 내에서는 전 시간 소지가 금지됩니다. 식사 시간에 휴게실에서만 사용할 수 있습니다. 공기계를 제출한 것이 적발되면 즉시 퇴원 처리됩니다."}},
-        {"@type":"Question","name":"학부모가 아이의 출결을 확인할 수 있나요?",
-         "acceptedAnswer":{"@type":"Answer","text":"전용 앱에서 모든 입퇴실 기록과 시간대별 관리 기록을 학생과 학부모가 함께 확인할 수 있습니다. 벌점이 부여되면 학부모에게 알림톡으로 전송됩니다."}},
-        {"@type":"Question","name":"벌점은 몇 점까지 받을 수 있나요?",
-         "acceptedAnswer":{"@type":"Answer","text":"누적 20점 초과 시 의무자습을 권고하고, 30점 초과 시 개별 경고와 함께 학부모에게 연락드립니다. 45점을 초과하면 강제 퇴원 대상이 됩니다. 벌점은 매월 초기화됩니다."}},
-        {"@type":"Question","name":"자습실에서 인터넷 강의는 볼 수 있나요?",
-         "acceptedAnswer":{"@type":"Answer","text":"인강 사이트는 접속할 수 있습니다. 그 외 사이트는 와이파이 방화벽으로 차단됩니다. 학원 보강 영상이 유튜브로 제공되는 경우처럼 학습 목적이 분명하면 앱으로 방화벽 해제를 신청할 수 있습니다."}}
-      ]
+     "@type": "ListItem",
+     "position": 2,
+     "name": "관리 방식",
+     "item": "https://www.kimmom.co.kr/management/"
     }
-  ]
+   ]
+  },
+  {
+   "@type": "Article",
+   "headline": "김엄마 관리형독서실의 관리 방식",
+   "description": "매 교시 출결 확인, 휴대폰 의무 제출, 20분 단위 순찰과 관리일지, 와이파이 방화벽, 벌점 제도의 운영 기준.",
+   "inLanguage": "ko-KR",
+   "isPartOf": {
+    "@type": "WebSite",
+    "url": "https://www.kimmom.co.kr/",
+    "name": "송도 김엄마 관리형독서실"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "(주)수리딩교육",
+    "url": "https://www.kimmom.co.kr/"
+   }
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "규칙이 너무 엄격한 것 아닌가요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "처음에는 그렇게 느끼는 학생이 많습니다. 다만 규칙의 목적은 통제가 아니라 옆자리 학생의 집중을 지키는 데 있습니다. 사적 대화 금지나 간식 반입 제한 같은 조항이 그래서 있습니다. 졸업생 후기에서도 익숙해진 뒤에는 공부 습관을 잡는 데 도움이 되었다는 이야기가 반복됩니다."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "친목·소음은 어떻게 관리하나요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "학습에 방해가 되는 친목과 소음은 엄격하게 관리합니다. 원내에서는 불필요한 사적 대화와 장시간의 친목 활동을 제한하며, 20분 단위 순찰로 학습 분위기와 소음 상태를 확인합니다. 반복적으로 학습 분위기를 방해하는 경우 주의와 벌점 등의 조치가 이루어집니다. 학생들이 서로 방해받지 않고 집중할 수 있는 환경을 유지하는 것을 가장 중요하게 봅니다."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "아이가 왔는지 그날 바로 알 수 있나요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "전용 앱에서 입퇴실 기록을 실시간으로 확인하실 수 있습니다. 무단 부재가 확인되면 관리 선생님이 학생에게 먼저 연락하고, 두 교시 연속 연락이 닿지 않으면 학부모께 직접 연락드립니다."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "학원 수업이 있는 날은 어떻게 하나요?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "앱의 등원 일정에 미리 등록해 두시면 됩니다. 등록된 일정은 출입 기록과 대조할 때 반영되어 무단 부재로 처리되지 않습니다."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "태블릿이나 노트북으로 인강을 듣고 싶습니다.",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "가능합니다. 다만 최초 사용 시 기기 등록 신청서를 작성해 본인 기기를 프로그램에 등록해야 합니다. 인강 사이트는 기본 허용이고, 그 외 학습 목적 사이트는 앱으로 해제를 신청합니다."
+     }
+    }
+   ]
+  }
+ ]
 }
 </script>
 </head>
@@ -233,6 +281,10 @@
       <details open>
         <summary>규칙이 너무 엄격한 것 아닌가요?</summary>
         <div class="a">처음에는 그렇게 느끼는 학생이 많습니다. 다만 규칙의 목적은 통제가 아니라 옆자리 학생의 집중을 지키는 데 있습니다. 사적 대화 금지나 간식 반입 제한 같은 조항이 그래서 있습니다. 졸업생 후기에서도 익숙해진 뒤에는 공부 습관을 잡는 데 도움이 되었다는 이야기가 반복됩니다.</div>
+      </details>
+      <details>
+        <summary>친목·소음은 어떻게 관리하나요?</summary>
+        <div class="a">학습에 방해가 되는 친목과 소음은 엄격하게 관리합니다. 원내에서는 불필요한 사적 대화와 장시간의 친목 활동을 제한하며, 20분 단위 순찰로 학습 분위기와 소음 상태를 확인합니다. 반복적으로 학습 분위기를 방해하는 경우 주의와 벌점 등의 조치가 이루어집니다. 학생들이 서로 방해받지 않고 집중할 수 있는 환경을 유지하는 것을 가장 중요하게 봅니다.</div>
       </details>
       <details>
         <summary>아이가 왔는지 그날 바로 알 수 있나요?</summary>

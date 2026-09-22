@@ -12,4 +12,6 @@
   <url><loc>https://www.kimmom.co.kr/videos/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.kimmom.co.kr/mento/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://www.kimmom.co.kr/wordtest/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <url><loc>https://www.kimmom.co.kr/winterschool/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 </urlset>

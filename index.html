@@ -5589,6 +5589,69 @@ Object.keys(FORM_CONFIG).forEach(function(id){
   };
 })();
 </script>
+<!-- 수능하루 홍보 팝업 (2026-10-03 추가 · 10/24 시험일이 지나면 자동으로 뜨지 않음) -->
+<style>
+#shp-wrap{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;background:rgba(5,20,56,.55);padding:16px;font-family:'Noto Sans KR',sans-serif}
+#shp-wrap.on{display:flex}
+#shp{position:relative;width:100%;max-width:420px;max-height:92vh;overflow:auto;background:#fff;border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+#shp .hd{background:linear-gradient(135deg,#0a2463,#1e4b8e);color:#fff;padding:22px 22px 18px;border-radius:18px 18px 0 0}
+#shp .tag{display:inline-block;background:#ffd23f;color:#0a2463;font-weight:800;font-size:12px;padding:3px 9px;border-radius:999px}
+#shp h2{margin:10px 0 6px;font-size:22px;line-height:1.35;font-weight:900;color:#fff}
+#shp .hd p{margin:0;font-size:14px;line-height:1.55;opacity:.92}
+#shp .bd{padding:16px 20px 6px}
+#shp .run{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #eef0f4;font-size:14px;line-height:1.45}
+#shp .run b{min-width:78px;color:#0a2463}
+#shp .hot{color:#d9480f;font-weight:800;font-size:12px;margin-left:4px}
+#shp ul{margin:12px 0 0;padding-left:18px;font-size:13.5px;line-height:1.7;color:#333}
+#shp .code{margin:14px 0 4px;background:#fff7d6;border:1px dashed #e0a800;border-radius:12px;padding:11px 12px;font-size:14px;text-align:center}
+#shp .code strong{font-size:20px;color:#0a2463;letter-spacing:.08em}
+#shp .ft{padding:12px 20px 18px}
+#shp .go{display:block;text-align:center;background:#e63946;color:#fff;text-decoration:none;font-weight:900;font-size:17px;padding:14px;border-radius:12px}
+#shp .more{display:block;text-align:center;margin-top:8px;color:#0a2463;font-size:14px;font-weight:700;text-decoration:none}
+#shp .row{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:13px;color:#666}
+#shp .row button{background:none;border:0;color:#666;font:inherit;cursor:pointer;padding:4px}
+#shp .x{position:absolute;top:10px;right:12px;background:rgba(255,255,255,.18);border:0;color:#fff;width:32px;height:32px;border-radius:50%;font-size:20px;line-height:32px;cursor:pointer}
+</style>
+<div id="shp-wrap" role="dialog" aria-modal="true" aria-labelledby="shp-title">
+  <div id="shp">
+    <button class="x" type="button" aria-label="닫기" data-shp-close>×</button>
+    <div class="hd">
+      <span class="tag">수능 실전 모의고사 접수 중</span>
+      <h2 id="shp-title">실제 학교 시험장에서<br>수능 하루를 미리 경험하세요</h2>
+      <p>수능하루 · 수능 시간표·OMR·방송·감독까지 실제 수능과 같은 방식으로 진행합니다.</p>
+    </div>
+    <div class="bd">
+      <div class="run"><b>10/9(금)</b><span>서울 대치 휘문중 · 인천 연수구 옥련중<br>시대인재 서바이벌 프로<span class="hot">마감 임박</span></span></div>
+      <div class="run"><b>10/17(토)</b><span>인천 연수구 옥련중 · 대성 더프리미엄</span></div>
+      <div class="run"><b>10/24(토)</b><span>서울 대치 휘문중 · 대성 더프리미엄</span></div>
+      <ul>
+        <li>실제 학교 교실에서 아침 입실부터 퇴실까지 수능 당일 그대로</li>
+        <li>시험 당일 문제지·해설지 배부, 출제기관 사이트에서 성적 확인</li>
+      </ul>
+      <div class="code">김엄마 추천인코드 <strong>1953</strong><br>신청할 때 입력하면 <b>10,000원 할인</b></div>
+    </div>
+    <div class="ft">
+      <a class="go" href="https://www.suneungharu.co.kr/info" target="_blank" rel="noopener">지금 접수하기 →</a>
+      <a class="more" href="https://www.suneungharu.co.kr/" target="_blank" rel="noopener">수능하루 자세히 보기</a>
+      <div class="row"><button type="button" data-shp-today>오늘 하루 보지 않기</button><button type="button" data-shp-close>닫기</button></div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY='shp_hide_until', END=Date.parse('2026-10-24T23:59:59+09:00');
+  if(Date.now()>END)return;
+  try{if(Number(localStorage.getItem(KEY)||0)>Date.now())return;}catch(e){}
+  var w=document.getElementById('shp-wrap');if(!w)return;
+  function close(){w.classList.remove('on');document.removeEventListener('keydown',esc);}
+  function esc(e){if(e.key==='Escape')close();}
+  w.addEventListener('click',function(e){if(e.target===w||e.target.hasAttribute('data-shp-close'))close();});
+  w.querySelector('[data-shp-today]').addEventListener('click',function(){
+    var d=new Date();d.setHours(24,0,0,0);try{localStorage.setItem(KEY,String(d.getTime()));}catch(e){}close();
+  });
+  setTimeout(function(){w.classList.add('on');document.addEventListener('keydown',esc);var g=w.querySelector('.go');if(g)g.focus({preventScroll:true});},700);
+})();
+</script>
 </body>
    
 </html>

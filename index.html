@@ -5602,6 +5602,14 @@ Object.keys(FORM_CONFIG).forEach(function(id){
 #shp .run{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #eef0f4;font-size:14px;line-height:1.45}
 #shp .run b{min-width:78px;color:#0a2463}
 #shp .hot{color:#d9480f;font-weight:800;font-size:12px;margin-left:4px}
+#shp .ok{display:inline-block;margin-left:6px;padding:2px 8px;border-radius:999px;background:#e7f6ed;color:#1b7a46;font-weight:800;font-size:11.5px;white-space:nowrap}
+/* 시험 현장 영상 — 글자 링크는 지나치기 쉬워 누를 수 있는 모양으로 둡니다. */
+#shp .vid{display:flex;align-items:center;gap:11px;margin-top:13px;padding:12px 14px;border-radius:12px;background:#0a2463;color:#fff;text-decoration:none}
+#shp .vid:hover{background:#071a4a}
+#shp .vid-ico{flex:none;display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.18);font-size:12px}
+#shp .vid-tx{flex:1;min-width:0;font-size:12.8px;line-height:1.5;color:#d8e2f5}
+#shp .vid-tx b{display:block;font-size:14.2px;font-weight:800;color:#fff;margin-bottom:1px}
+#shp .vid-ar{flex:none;font-weight:800}
 #shp ul{margin:12px 0 0;padding-left:18px;font-size:13.5px;line-height:1.7;color:#333}
 #shp .code{margin:14px 0 4px;background:#fff7d6;border:1px dashed #e0a800;border-radius:12px;padding:11px 12px;font-size:14px;text-align:center}
 #shp .code strong{font-size:20px;color:#0a2463;letter-spacing:.08em}
@@ -5618,16 +5626,20 @@ Object.keys(FORM_CONFIG).forEach(function(id){
     <div class="hd">
       <span class="tag">수능 실전 모의고사 접수 중</span>
       <h2 id="shp-title">실제 학교 시험장에서<br>수능 하루를 미리 경험하세요</h2>
-      <p>수능하루 · 수능 시간표·OMR·방송·감독까지 실제 수능과 같은 방식으로 진행합니다.</p>
+      <p>10월 17일·24일 두 회차를 접수 중입니다. 수능 시간표·OMR·방송·감독까지 실제 수능과 같은 방식으로 진행합니다.</p>
     </div>
     <div class="bd">
-      <div class="run"><b>10/9(금)</b><span>서울 대치 휘문중 · 인천 연수구 옥련중<br>시대인재 서바이벌 프로<span class="hot">마감 임박</span></span></div>
-      <div class="run"><b>10/17(토)</b><span>인천 연수구 옥련중 · 대성 더프리미엄</span></div>
-      <div class="run"><b>10/24(토)</b><span>서울 대치 휘문중 · 대성 더프리미엄</span></div>
+      <div class="run"><b>10/17(토)</b><span>인천 연수구 옥련중 · 대성 더프리미엄<span class="ok">접수 중</span></span></div>
+      <div class="run"><b>10/24(토)</b><span>서울 대치 휘문중 · 대성 더프리미엄<span class="ok">접수 중</span></span></div>
       <ul>
         <li>실제 학교 교실에서 아침 입실부터 퇴실까지 수능 당일 그대로</li>
         <li>시험 당일 문제지·해설지 배부, 출제기관 사이트에서 성적 확인</li>
       </ul>
+      <a class="vid" href="https://www.suneungharu.co.kr/venue#review" target="_blank" rel="noopener">
+        <span class="vid-ico" aria-hidden="true">▶</span>
+        <span class="vid-tx"><b>10월 9일 시험 현장 영상·사진</b>실제로 응시한 학생들의 이야기를 보세요</span>
+        <span class="vid-ar" aria-hidden="true">→</span>
+      </a>
       <div class="code">김엄마 추천인코드 <strong>1953</strong><br>신청할 때 입력하면 <b>10,000원 할인</b></div>
     </div>
     <div class="ft">

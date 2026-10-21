@@ -5639,15 +5639,15 @@ Object.keys(FORM_CONFIG).forEach(function(id){
         <li>실제 학교 교실에서 아침 입실부터 퇴실까지 수능 당일 그대로</li>
         <li>시험 당일 문제지·해설지 배부, 출제기관 사이트에서 성적 확인</li>
       </ul>
-      <a class="vid" href="https://www.suneungharu.co.kr/venue#review" target="_blank" rel="noopener">
+      <a class="vid" data-shp-track="영상·사진" href="https://www.suneungharu.co.kr/venue?utm_source=kimmom&utm_medium=popup&utm_campaign=1108#review" target="_blank" rel="noopener">
         <span class="vid-ico" aria-hidden="true">▶</span>
         <span class="vid-tx"><b>10월 9일 시험 현장 영상·사진</b>실제로 응시한 학생들의 이야기를 보세요</span>
         <span class="vid-ar" aria-hidden="true">→</span>
       </a>
     </div>
     <div class="ft">
-      <a class="go" href="https://www.suneungharu.co.kr/info" target="_blank" rel="noopener">지금 접수하기 →</a>
-      <a class="more" href="/suneungharu/">수능하루 자세히 보기</a>
+      <a class="go" data-shp-track="지금 접수하기" href="https://www.suneungharu.co.kr/info?utm_source=kimmom&utm_medium=popup&utm_campaign=1108" target="_blank" rel="noopener">지금 접수하기 →</a>
+      <a class="more" data-shp-track="자세히 보기" href="/suneungharu/">수능하루 자세히 보기</a>
       <div class="row"><button type="button" data-shp-today>오늘 하루 보지 않기</button><button type="button" data-shp-close>닫기</button></div>
     </div>
   </div>
@@ -5658,13 +5658,16 @@ Object.keys(FORM_CONFIG).forEach(function(id){
   if(Date.now()>END)return;
   try{if(Number(localStorage.getItem(KEY)||0)>Date.now())return;}catch(e){}
   var w=document.getElementById('shp-wrap');if(!w)return;
-  function close(){w.classList.remove('on');document.removeEventListener('keydown',esc);}
+  // 팝업 집계(구글 애널리틱스): 뜬 횟수 popup_view, 버튼 클릭 popup_click(button=버튼 이름), 닫기 popup_close
+  function track(name,params){try{if(typeof gtag==='function')gtag('event',name,Object.assign({popup:'suneungharu_1108'},params||{}));}catch(e){}}
+  function close(){if(w.classList.contains('on'))track('popup_close');w.classList.remove('on');document.removeEventListener('keydown',esc);}
+  w.querySelectorAll('[data-shp-track]').forEach(function(a){a.addEventListener('click',function(){track('popup_click',{button:a.getAttribute('data-shp-track')});});});
   function esc(e){if(e.key==='Escape')close();}
   w.addEventListener('click',function(e){if(e.target===w||e.target.hasAttribute('data-shp-close'))close();});
   w.querySelector('[data-shp-today]').addEventListener('click',function(){
-    var d=new Date();d.setHours(24,0,0,0);try{localStorage.setItem(KEY,String(d.getTime()));}catch(e){}close();
+    track('popup_click',{button:'오늘 하루 보지 않기'});var d=new Date();d.setHours(24,0,0,0);try{localStorage.setItem(KEY,String(d.getTime()));}catch(e){}close();
   });
-  setTimeout(function(){w.classList.add('on');document.addEventListener('keydown',esc);var g=w.querySelector('.go');if(g)g.focus({preventScroll:true});},700);
+  setTimeout(function(){w.classList.add('on');track('popup_view');document.addEventListener('keydown',esc);var g=w.querySelector('.go');if(g)g.focus({preventScroll:true});},700);
 })();
 </script>
 </body>

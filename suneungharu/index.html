@@ -27,6 +27,11 @@
 .runrow .p{flex:1;min-width:220px}
 .runrow .p b{display:block;font-size:16px}
 .runrow .p span{font-size:14px;color:var(--muted)}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+.gallery figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.gallery img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover}
+.gallery figcaption{padding:12px 14px;font-size:14px;line-height:1.5;color:var(--muted)}
+@media(max-width:720px){.gallery{grid-template-columns:1fr}}
 .st{font-size:13px;font-weight:800;border-radius:999px;padding:5px 12px;white-space:nowrap}
 .st-new{background:#e8293f;color:#fff}
 .st-hot{background:#fff4e5;color:#b45309}
@@ -165,6 +170,18 @@
   </div>
 </section>
 
+<section class="sec">
+  <div class="wrap">
+    <h2>현장 사진</h2>
+    <p class="sec-desc">10월 24일(토) 서울 대치 휘문중학교 · 대성 더프리미엄 전국 현장 모의고사 시험일 아침</p>
+    <div class="gallery">
+      <figure><img src="img/1024-hwimun-gate.jpg" width="1080" height="1440" loading="lazy" alt="수능하루 10월 24일 서울 대치 휘문중학교 시험장 정문으로 입실하는 수험생들"><figcaption>입실 시간, 휘문중학교 정문으로 들어서는 수험생들</figcaption></figure>
+      <figure><img src="img/1024-hwimun-entrance.jpg" width="1080" height="1440" loading="lazy" alt="수능하루 현장 모의고사 시험장 앞 차량 통제와 안전요원"><figcaption>교문 앞 차량 통제와 안전요원 배치 — 실제 수능 시험장처럼 운영합니다</figcaption></figure>
+      <figure><img src="img/1024-hwimun-banner.jpg" width="1080" height="1440" loading="lazy" alt="수능하루 현수막을 지나 시험장으로 들어가는 수험생"><figcaption>수능하루 응원 현수막을 지나 시험장으로</figcaption></figure>
+    </div>
+  </div>
+</section>
+
 <section class="sec sec-alt">
   <div class="wrap">
     <h2>수능하루가 일반 모의고사와 다른 점</h2>
@@ -187,6 +204,7 @@
     <ul class="rules" style="margin-top:18px">
       <li>10월 9일(금) 시대인재 서바이벌 프로 — 서울 대치 휘문중 · 인천 연수구 옥련중</li>
       <li>10월 17일(토) 대성 더프리미엄 — 인천 연수구 옥련중</li>
+      <li>10월 24일(토) 대성 더프리미엄 — 서울 대치 휘문중</li>
     </ul>
     <div class="btns" style="justify-content:flex-start;margin-top:18px">
       <a class="btn btn-n" href="https://www.suneungharu.co.kr/venue" target="_blank" rel="noopener">시험장 사진·후기 보기</a>

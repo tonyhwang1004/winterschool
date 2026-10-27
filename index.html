@@ -4808,8 +4808,10 @@
       var BLOG_ID = 'kimmmommy';
       var COUNT   = 3;
 
-      var RSS = 'https://rss.blog.naver.com/' + BLOG_ID + '.xml';
-      var API = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(RSS);
+      // 2026-10-27 — api.rss2json.com 이 403 을 돌려주면서 소식란이 비어 있었습니다.
+      // 남의 서비스에 기대지 않도록 우리 서버가 네이버 RSS 를 직접 가져옵니다.
+      var API = 'https://asia-northeast3-kimsmom-reading-room.cloudfunctions.net/api/blog/feed'
+              + '?blog=' + encodeURIComponent(BLOG_ID) + '&count=6';
       var box = document.getElementById('bfList');
 
       function esc(s){

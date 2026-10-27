@@ -1,0 +1,77 @@
+# ═══════════════════════════════════════════════════════
+#  이 저장소는 공개(public)입니다.
+#  학생 이름·연락처·주소가 들어간 파일이 올라가면
+#  인터넷 전체에 공개됩니다. 절대 금지.
+#
+#  그래서 "전부 차단 → 홈페이지 파일만 허용" 방식입니다.
+#  새 홈페이지 폴더를 만들면 아래 허용 목록에 직접 추가하세요.
+# ═══════════════════════════════════════════════════════
+
+# ① 전부 차단
+*
+
+# ② 홈페이지 구성 파일만 허용
+!.gitignore
+!CNAME
+!robots.txt
+!sitemap.xml
+!feed.json
+!index.html
+!google*.html
+!naver*.html
+
+!assets/
+!images/
+!faq/
+!gradeinput/
+!guide/
+!management/
+!mento/
+!nsu/
+!pricing/
+!qa/
+!reviews/
+!study-room/
+!suneungharu/
+!videos/
+!winterschool/
+!wordtest/
+!wrongnote/
+!*/
+# (위 !*/ 는 허용된 폴더 안쪽을 탐색하기 위한 것입니다)
+
+# ③ 허용 폴더 안에서도 이것들은 차단
+*.csv
+*.tsv
+*.xlsx
+*.xls
+*.bak
+*.bak-*
+.DS_Store
+*명단*
+*반편성*
+*환불*
+*이체*
+*_문자*
+*확인문자*
+*입금*
+*배정*
+*고사실*
+*수험표*
+*_PROCTOR*
+*_ADMIN*
+guest_*
+
+# ④ 사진은 기본 차단 — 홈페이지 사진 폴더만 허용
+#    (학생 사진이 실수로 섞여 들어가는 것을 막기 위함)
+*.jpg
+*.jpeg
+*.png
+*.webp
+!images/**
+!qa/static/images/**
+!suneungharu/img/**
+!suneungharu/2027-sataam/img/**
+!assets/**
+!*.svg
+!*.ico

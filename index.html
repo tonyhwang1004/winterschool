@@ -41,15 +41,16 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
     <style>
         :root {
             --primary: #0a2463;
             --primary-light: #1e4b8e;
             --primary-dark: #051438;
-            --accent: #3e92cc;
-            --accent-light: #5ba4d9;
-            --accent-dark: #2d7ab8;
+            --accent: #E8A33D;            /* 금빛 — 채움용 */
+            --accent-light: #F2BC6B;
+            --accent-text: #8A5A0B;       /* 흰 배경 위 글자용 (대비 6.2:1) */
+            --accent-dark: #C9832A;
             --cream: #ffffff;
             --warm-white: #fafafa;
             --bg-soft: #f5f5f5;
@@ -64,10 +65,10 @@
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             
             /* 어학원 전용 컬러 */
-            --academy-primary: #2d6a4f;
-            --academy-light: #40916c;
-            --academy-dark: #1b4332;
-            --academy-accent: #95d5b2;
+            --academy-primary: #0a2463;   /* 초록 체계 없앰 — 남색으로 통일 */
+            --academy-light: #1e4b8e;
+            --academy-dark: #051438;
+            --academy-accent: #E8A33D;
         }
 
         * {
@@ -81,7 +82,7 @@
         }
 
         body {
-            font-family: 'Noto Sans KR', sans-serif;
+            font-family: 'Pretendard', 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
             background: var(--cream);
             color: var(--text-dark);
             line-height: 1.8;
@@ -300,7 +301,7 @@
         }
 
         .hero-title {
-            font-family: 'Noto Sans KR', sans-serif;
+            font-family: 'Pretendard', 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
             font-size: clamp(36px, 6vw, 64px);
             font-weight: 900;
             color: #0a2463;
@@ -399,7 +400,7 @@
             background: var(--academy-light);
             border-color: var(--academy-light);
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(45, 106, 79, 0.4);
+            box-shadow: 0 8px 30px rgba(10, 36, 99, 0.4);
         }
 
         .btn-outline-dark {
@@ -423,7 +424,7 @@
             background: var(--academy-primary);
             color: var(--white);
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(45, 106, 79, 0.3);
+            box-shadow: 0 8px 30px rgba(10, 36, 99, 0.3);
         }
 
         /* ==================== 브랜드 섹션 ==================== */
@@ -437,7 +438,7 @@
         }
 
         .brand-section-academy {
-            background: linear-gradient(135deg, #f0f9f4 0%, #e8f5e9 100%);
+            background: linear-gradient(135deg, #f5f7fb 0%, #eef2f9 100%);
         }
 
         .brand-buttons {
@@ -514,7 +515,7 @@
             text-align: center;
             margin-top: 40px;
             padding: 14px 28px;
-            background: rgba(45, 106, 79, 0.1);
+            background: rgba(10, 36, 99, 0.1);
             border-radius: 50px;
             display: inline-block;
             margin-left: 50%;
@@ -688,7 +689,7 @@
         }
 
         .pricing-section-academy {
-            background: linear-gradient(135deg, #e8f5e9 0%, #f0f9f4 100%);
+            background: linear-gradient(135deg, #eef2f9 0%, #f5f7fb 100%);
             padding: 80px 40px;
         }
 
@@ -753,7 +754,7 @@
         }
 
         .application-section-academy {
-            background: linear-gradient(135deg, #f0f9f4 0%, #e8f5e9 100%);
+            background: linear-gradient(135deg, #f5f7fb 0%, #eef2f9 100%);
         }
 
         .application-form-container {
@@ -849,7 +850,7 @@
         .application-section-academy .brand-form .form-select:focus,
         .application-section-academy .brand-form .form-textarea:focus {
             border-color: var(--academy-primary);
-            box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.1);
+            box-shadow: 0 0 0 3px rgba(10, 36, 99, 0.1);
         }
 
         .form-success {
@@ -1189,7 +1190,7 @@
             right: 30px;
             font-size: 100px;
             color: var(--academy-accent);
-            font-family: Georgia, serif;
+            font-family: 'Pretendard', 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
             line-height: 1;
             opacity: 0.3;
         }
@@ -1437,13 +1438,13 @@
 
         /* 수리딩영어논술학원 갤러리 탭 버튼 */
         .gallery-tab-btn.academy-gallery-btn {
-            background: rgba(45, 106, 79, 0.3);
+            background: rgba(10, 36, 99, 0.3);
             border-color: var(--academy-accent);
             color: var(--academy-accent);
         }
 
         .gallery-tab-btn.academy-gallery-btn:hover {
-            background: rgba(45, 106, 79, 0.5);
+            background: rgba(10, 36, 99, 0.5);
             border-color: var(--white);
             color: var(--white);
         }
@@ -1802,7 +1803,7 @@
             right: 36px;
             font-size: 80px;
             color: var(--bg-soft);
-            font-family: Georgia, serif;
+            font-family: 'Pretendard', 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
             line-height: 1;
         }
 
@@ -2039,7 +2040,7 @@
         }
 
         .pricing-tab-btn.academy-pricing-btn:hover {
-            background: rgba(45, 106, 79, 0.1);
+            background: rgba(10, 36, 99, 0.1);
         }
 
         .pricing-tab-btn.academy-pricing-btn.active {
@@ -2061,7 +2062,7 @@
             display: flex;
             align-items: flex-start;
             gap: 20px;
-            background: linear-gradient(135deg, rgba(45, 106, 79, 0.1) 0%, rgba(149, 213, 178, 0.1) 100%);
+            background: linear-gradient(135deg, rgba(10, 36, 99, 0.1) 0%, rgba(232, 163, 61, 0.1) 100%);
             border: 1px solid var(--academy-primary);
             border-radius: 16px;
             padding: 28px 32px;
@@ -2906,6 +2907,30 @@
 .apply-form-wrap{ display:none; }
 .apply-form-wrap.active{ display:block; }
 @media (max-width:768px){ .apply-type-selector{ flex-direction:column; } }
+    
+        /* ───────── 사업 고르기 탭 (2026-10-27) ─────────
+           숨은 칸도 HTML 에 그대로 있습니다. 검색엔진은 전부 읽습니다. */
+        .biz-tabs{position:sticky;top:var(--머리말높이,68px);z-index:900;
+            background:rgba(255,255,255,.97);backdrop-filter:blur(14px);
+            border-bottom:1px solid var(--border)}
+        .biz-tabs-in{max-width:1120px;margin:0 auto;display:flex;gap:8px;
+            padding:12px 24px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+        .biz-tabs-in::-webkit-scrollbar{display:none}
+        .biz-tab{flex:0 0 auto;border:1px solid var(--border);background:#fff;
+            color:var(--text-muted);font-family:inherit;font-size:15px;font-weight:700;
+            line-height:1;padding:13px 20px;border-radius:999px;cursor:pointer;
+            white-space:nowrap;transition:background .18s ease,color .18s ease,border-color .18s ease}
+        .biz-tab:hover{border-color:var(--primary);color:var(--primary)}
+        .biz-tab.is-on{background:var(--primary);border-color:var(--primary);color:#fff;
+            box-shadow:0 4px 14px rgba(10,36,99,.22)}
+        .biz-tab.is-on::before{content:"";display:inline-block;width:7px;height:7px;
+            border-radius:50%;background:var(--accent);margin-right:8px;vertical-align:middle}
+        .biz-panel{display:none}
+        .biz-panel.is-on{display:block}
+        @media(max-width:720px){
+            .biz-tabs-in{padding:9px 14px;gap:6px}
+            .biz-tab{padding:11px 15px;font-size:14px}
+        }
     </style>
     <script type="application/ld+json">
 {
@@ -3043,11 +3068,23 @@
     </section>
 
   <!-- ==================== 8층 김엄마관리형독서실 브랜드 섹션 ==================== -->
-    <section class="section brand-section" id="brand-8f">
+    
+<!-- ───── 사업 고르기 탭 (2026-10-27) ─────
+     글은 셋 다 페이지에 그대로 남아 있습니다. 네이버·구글은 전부 읽습니다.
+     사람 눈에만 한 번에 하나씩 보입니다. -->
+<nav class="biz-tabs" aria-label="사업 선택">
+  <div class="biz-tabs-in" role="tablist">
+    <button type="button" class="biz-tab is-on" data-biz="8f"      role="tab" aria-selected="true"  aria-controls="biz-8f">8층 관리형독서실</button>
+    <button type="button" class="biz-tab"       data-biz="7f"      role="tab" aria-selected="false" aria-controls="biz-7f">7층 독학재수학원</button>
+    <button type="button" class="biz-tab"       data-biz="academy" role="tab" aria-selected="false" aria-controls="biz-academy">수리딩영어논술</button>
+  </div>
+</nav>
+<div id="biz-8f" class="biz-panel is-on" data-biz="8f" role="tabpanel">
+<section class="section brand-section" id="brand-8f">
 
         <!-- 7년 실적 홍보 이미지 -->
         <div style="max-width:500px;margin:0 auto 52px;border-radius:24px;overflow:hidden;box-shadow:0 12px 40px rgba(10,36,99,0.15);animation:fadeInUp 1s ease-out;">
-            <img src="images/7years-miracle.png" alt="분당 김엄마가 만들어낸 7년간의 기적 - 의치한약수 62명, SKY 합격생 172명" style="width:100%;display:block;">
+            <img src="images/7years-miracle.png" alt="분당 김엄마가 만들어낸 7년간의 기적 - 의치한약수 62명, SKY 합격생 172명" style="width:100%;display:block;" fetchpriority="high" decoding="async">
         </div>
 
         <div class="section-header">
@@ -3110,112 +3147,112 @@
         </div>
         <div class="gallery-grid-large">
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/8f-study-1.png.png" alt="8층 독서실 내부">
+                <img src="images/8f-study-1.png.png" alt="8층 독서실 내부" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">독서실 내부 1</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/8f-study-2.png.png" alt="8층 독서실 내부">
+                <img src="images/8f-study-2.png.png" alt="8층 독서실 내부" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">독서실 내부 2</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/8f-study-3.png.png" alt="8층 독서실 내부">
+                <img src="images/8f-study-3.png.png" alt="8층 독서실 내부" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">독서실 내부 3</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/8f-study-4.png.png" alt="8층 독서실 내부">
+                <img src="images/8f-study-4.png.png" alt="8층 독서실 내부" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">독서실 내부 4</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/8f-study-5.png.png" alt="8층 독서실 내부">
+                <img src="images/8f-study-5.png.png" alt="8층 독서실 내부" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">독서실 내부 5</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/8f-study-6.png.png" alt="8층 독서실 내부">
+                <img src="images/8f-study-6.png.png" alt="8층 독서실 내부" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">독서실 내부 6</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/8f-study-7.png.png" alt="8층 독서실 내부">
+                <img src="images/8f-study-7.png.png" alt="8층 독서실 내부" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">독서실 내부 7</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/8f-faceid-1.png.png" alt="8층 안면인식">
+                <img src="images/8f-faceid-1.png.png" alt="8층 안면인식" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">안면인식 입구 1</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/8f-faceid-2.png.png" alt="8층 안면인식">
+                <img src="images/8f-faceid-2.png.png" alt="8층 안면인식" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">안면인식 입구 2</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/8f-refresh-1.png.png" alt="8층 리프레쉬룸">
+                <img src="images/8f-refresh-1.png.png" alt="8층 리프레쉬룸" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">리프레쉬룸 1</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/8f-refresh-2.png.png" alt="8층 리프레쉬룸">
+                <img src="images/8f-refresh-2.png.png" alt="8층 리프레쉬룸" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">리프레쉬룸 2</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/8f-refresh-3.png.png" alt="8층 리프레쉬룸">
+                <img src="images/8f-refresh-3.png.png" alt="8층 리프레쉬룸" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">리프레쉬룸 3</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/8f-restroom.png.png" alt="8층 화장실">
+                <img src="images/8f-restroom.png.png" alt="8층 화장실" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">화장실쪽</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/8f-hallway.png.png" alt="8층 복도">
+                <img src="images/8f-hallway.png.png" alt="8층 복도" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">복도</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/program-1.png.png" alt="관리 프로그램">
+                <img src="images/program-1.png.png" alt="관리 프로그램" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">관리 프로그램 1</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/program-2.png.png" alt="관리 프로그램">
+                <img src="images/program-2.png.png" alt="관리 프로그램" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">관리 프로그램 2</span>
                     <span class="gallery-zoom-icon">🔍</span>
@@ -3897,7 +3934,9 @@
     </div>
 </section>
     <!-- ==================== 7층 김엄마송도독학재수학원 브랜드 섹션 ==================== -->
-    <section class="section brand-section brand-section-alt" id="brand-7f">
+    </div>
+<div id="biz-7f" class="biz-panel" data-biz="7f" role="tabpanel">
+<section class="section brand-section brand-section-alt" id="brand-7f">
         <div class="section-header">
             <span class="section-label">7F Academy</span>
             <h2 class="section-title">김엄마송도독학재수학원</h2>
@@ -3946,84 +3985,84 @@
         </div>
         <div class="gallery-grid-large">
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/7f-study-1.png.jpeg" alt="7층 내부">
+                <img src="images/7f-study-1.png.jpeg" alt="7층 내부" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">내부 1</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/7f-study-2.png.jpeg" alt="7층 내부">
+                <img src="images/7f-study-2.png.jpeg" alt="7층 내부" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">내부 2</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/7f-study-5.png.jpeg" alt="7층 내부">
+                <img src="images/7f-study-5.png.jpeg" alt="7층 내부" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">내부 5</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/7f-study-6.png.jpeg" alt="7층 내부">
+                <img src="images/7f-study-6.png.jpeg" alt="7층 내부" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">내부 6</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/7f-study-7.png.jpeg" alt="7층 내부">
+                <img src="images/7f-study-7.png.jpeg" alt="7층 내부" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">내부 7</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/7f-study-8.png" alt="7층 내부">
+                <img src="images/7f-study-8.png" alt="7층 내부" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">내부 8</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/7f-front-1.png.jpeg" alt="7층 프론트">
+                <img src="images/7f-front-1.png.jpeg" alt="7층 프론트" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">프론트 1</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/7f-front-2.png.jpeg" alt="7층 프론트">
+                <img src="images/7f-front-2.png.jpeg" alt="7층 프론트" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">프론트 2</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/7f-faceid.png.jpeg" alt="안면인식">
+                <img src="images/7f-faceid.png.jpeg" alt="안면인식" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">안면인식</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/7f-entrance.png.jpeg" alt="7층 입구">
+                <img src="images/7f-entrance.png.jpeg" alt="7층 입구" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">입구</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/7f-back-desk.png.jpeg" alt="7층 후면">
+                <img src="images/7f-back-desk.png.jpeg" alt="7층 후면" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">뒤쪽 데스크</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/7f-refresh.png.jpeg" alt="7층 휴게실">
+                <img src="images/7f-refresh.png.jpeg" alt="7층 휴게실" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">리프레쉬룸</span>
                     <span class="gallery-zoom-icon">🔍</span>
@@ -4491,7 +4530,9 @@
     </section>
 
     <!-- ==================== 어학원 브랜드 섹션 ==================== -->
-    <section class="section brand-section brand-section-academy" id="brand-academy">
+    </div>
+<div id="biz-academy" class="biz-panel" data-biz="academy" role="tabpanel">
+<section class="section brand-section brand-section-academy" id="brand-academy">
         <div class="section-header">
             <span class="section-label">7F SR Academy</span>
             <h2 class="section-title">수리딩영어논술학원</h2>
@@ -4543,112 +4584,112 @@
         </div>
         <div class="gallery-grid-large">
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/images/academy/academy-1.jpg" alt="수리딩영어논술학원">
+                <img src="images/images/academy/academy-1.jpg" alt="수리딩영어논술학원" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">스터디홀</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/images/academy/academy-2.jpg" alt="수리딩영어논술학원">
+                <img src="images/images/academy/academy-2.jpg" alt="수리딩영어논술학원" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">에세이교정수업</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/images/academy/academy-5.jpg" alt="수리딩영어논술학원">
+                <img src="images/images/academy/academy-5.jpg" alt="수리딩영어논술학원" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">센트럴파크가 보이는창문</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/images/academy/academy-6.jpg" alt="수리딩영어논술학원">
+                <img src="images/images/academy/academy-6.jpg" alt="수리딩영어논술학원" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">어학원 내부</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/images/academy/academy-7.jpg" alt="수리딩영어논술학원">
+                <img src="images/images/academy/academy-7.jpg" alt="수리딩영어논술학원" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">1대1수업장면</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/images/academy/academy-12.jpg" alt="수리딩영어논술학원">
+                <img src="images/images/academy/academy-12.jpg" alt="수리딩영어논술학원" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">어학원</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/images/academy/academy-15.jpg" alt="수리딩영어논술학원">
+                <img src="images/images/academy/academy-15.jpg" alt="수리딩영어논술학원" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">전자칠판</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/images/academy/academy-19.jpg" alt="수리딩영어논술학원">
+                <img src="images/images/academy/academy-19.jpg" alt="수리딩영어논술학원" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">학원로고</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/images/academy/academy-20.jpg" alt="수리딩영어논술학원">
+                <img src="images/images/academy/academy-20.jpg" alt="수리딩영어논술학원" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">책장</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/images/academy/academy-22.jpg" alt="수리딩영어논술학원">
+                <img src="images/images/academy/academy-22.jpg" alt="수리딩영어논술학원" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">출석체크패드</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/images/academy/academy-23.jpg" alt="수리딩영어논술학원">
+                <img src="images/images/academy/academy-23.jpg" alt="수리딩영어논술학원" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">핸드폰보관함</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/images/academy/academy-24.jpg" alt="수리딩영어논술학원">
+                <img src="images/images/academy/academy-24.jpg" alt="수리딩영어논술학원" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">1대1원어민수업</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/images/academy/academy-33.jpg" alt="수리딩영어논술학원">
+                <img src="images/images/academy/academy-33.jpg" alt="수리딩영어논술학원" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">원서책장</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/images/academy/academy-34.jpg" alt="수리딩영어논술학원">
+                <img src="images/images/academy/academy-34.jpg" alt="수리딩영어논술학원" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">원서</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/images/academy/academy-39.jpg" alt="수리딩영어논술학원">
+                <img src="images/images/academy/academy-39.jpg" alt="수리딩영어논술학원" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">어학원 시설</span>
                     <span class="gallery-zoom-icon">🔍</span>
                 </div>
             </div>
             <div class="gallery-item-large" onclick="openLightbox(this)">
-                <img src="images/images/academy/academy-40.jpg" alt="수리딩영어논술학원">
+                <img src="images/images/academy/academy-40.jpg" alt="수리딩영어논술학원" loading="lazy" decoding="async">
                 <div class="gallery-item-overlay">
                     <span class="gallery-item-label">어학원 시설</span>
                     <span class="gallery-zoom-icon">🔍</span>
@@ -4711,7 +4752,9 @@
 
    
 <!-- ==================== 네이버 블로그 최신글 ==================== -->
-    <section class="section" id="blogFeed" style="background: var(--bg-soft);">
+    </div>
+<!-- ───── 사업 탭 끝 ───── -->
+<section class="section" id="blogFeed" style="background: var(--bg-soft);">
         <div class="section-header">
             <span class="section-label">Blog</span>
             <h2 class="section-title">김엄마 소식</h2>
@@ -4775,7 +4818,7 @@
         });
       }
       function firstImage(html){
-        var m = /<img[^>]+src=["']([^"']+)["']/i.exec(html || '');
+        var m = /<img[^ loading="lazy" decoding="async">]+src=["']([^"']+)["']/i.exec(html || '');
         return m ? m[1] : null;
       }
       function plain(html){
@@ -4795,7 +4838,7 @@
           data.items.slice(0, COUNT).forEach(function(it){
             var img = firstImage(it.content || it.description);
             html += '<a class="bf-card" href="' + esc(it.link) + '" target="_blank" rel="noopener">'
-                  + (img ? '<img class="bf-thumb" src="' + esc(img) + '" alt="" loading="lazy">' : '')
+                  + (img ? '<img class="bf-thumb" src="' + esc(img) + '" alt="" loading="lazy" decoding="async">' : '')
                   + '<div class="bf-body">'
                   +   '<div class="bf-date">' + fmt(it.pubDate) + '</div>'
                   +   '<div class="bf-title">' + esc(plain(it.title)) + '</div>'
@@ -4849,7 +4892,7 @@
             </div>
             <div class="location-map">
                 <a href="https://map.naver.com/p/entry/place/1781065691" target="_blank">
-                    <img src="images/map.png" alt="오시는 길 지도" style="cursor: pointer;">
+                    <img src="images/map.png" alt="오시는 길 지도" style="cursor: pointer;" loading="lazy" decoding="async">
                 </a>
                 <p style="margin-top: 16px; font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.7; text-align: center;">
                     지도를 클릭하시면 실제 네이버지도로 연결됩니다.<br>
@@ -4891,7 +4934,7 @@
         <div class="lightbox-content">
             <button class="lightbox-close" onclick="closeLightbox()">×</button>
             <button class="lightbox-nav lightbox-prev" onclick="prevImage()">‹</button>
-            <img src="" alt="" id="lightbox-img">
+            <img src="" alt="" id="lightbox-img" loading="lazy" decoding="async">
             <button class="lightbox-nav lightbox-next" onclick="nextImage()">›</button>
             <div class="lightbox-label" id="lightbox-label"></div>
         </div>
@@ -5596,7 +5639,7 @@ Object.keys(FORM_CONFIG).forEach(function(id){
 </script>
 <!-- 수능하루 홍보 팝업 (2026-10-03 추가 · 2026-10-25 10/24 회차 줄 삭제, 11/8 회차만 안내) -->
 <style>
-#shp-wrap{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;background:rgba(5,20,56,.55);padding:16px;font-family:'Noto Sans KR',sans-serif}
+#shp-wrap{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;background:rgba(5,20,56,.55);padding:16px;font-family:'Pretendard', 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif}
 #shp-wrap.on{display:flex}
 #shp{position:relative;width:100%;max-width:420px;max-height:92vh;overflow:auto;background:#fff;border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
 #shp .hd{background:linear-gradient(135deg,#0a2463,#1e4b8e);color:#fff;padding:22px 22px 18px;border-radius:18px 18px 0 0}
@@ -5668,6 +5711,87 @@ Object.keys(FORM_CONFIG).forEach(function(id){
     track('popup_click',{button:'오늘 하루 보지 않기'});var d=new Date();d.setHours(24,0,0,0);try{localStorage.setItem(KEY,String(d.getTime()));}catch(e){}close();
   });
   setTimeout(function(){w.classList.add('on');track('popup_view');document.addEventListener('keydown',esc);var g=w.querySelector('.go');if(g)g.focus({preventScroll:true});},700);
+})();
+</script>
+<script src="/assets/track.js?v=20261027" defer></script>
+
+<script>
+/* ───────── 사업 고르기 탭 (2026-10-27) ─────────
+   · 한 번에 한 사업만 보여 줍니다. 글은 셋 다 페이지에 남아 있습니다.
+   · 페이지 안 링크(#brand-7f 등)를 누르면 그 사업 탭을 먼저 열고 내려갑니다. */
+(function () {
+  'use strict';
+  var 단추들 = [].slice.call(document.querySelectorAll('.biz-tab'));
+  var 칸들   = [].slice.call(document.querySelectorAll('.biz-panel'));
+  if (!단추들.length || !칸들.length) return;
+
+  /* 머리말이 position:fixed 라 높이를 재서 탭바 위치를 맞춥니다 */
+  function 높이맞추기() {
+    var nav = document.querySelector('.nav');
+    var h = nav ? Math.round(nav.getBoundingClientRect().height) : 68;
+    document.documentElement.style.setProperty('--머리말높이', h + 'px');
+  }
+  높이맞추기();
+  window.addEventListener('resize', 높이맞추기, { passive: true });
+  window.addEventListener('scroll', 높이맞추기, { passive: true });
+
+  function 열기(이름) {
+    단추들.forEach(function (b) {
+      var 켬 = b.getAttribute('data-biz') === 이름;
+      b.classList.toggle('is-on', 켬);
+      b.setAttribute('aria-selected', 켬 ? 'true' : 'false');
+    });
+    칸들.forEach(function (p) {
+      p.classList.toggle('is-on', p.getAttribute('data-biz') === 이름);
+    });
+  }
+
+  단추들.forEach(function (b) {
+    b.addEventListener('click', function () {
+      열기(b.getAttribute('data-biz'));
+      var 바 = document.querySelector('.biz-tabs');
+      if (바) window.scrollTo({ top: 바.offsetTop - 4, behavior: 'smooth' });
+    });
+  });
+
+  function 어느칸(el) {
+    for (var p = el; p; p = p.parentElement) {
+      if (p.classList && p.classList.contains('biz-panel')) return p.getAttribute('data-biz');
+    }
+    return null;
+  }
+
+  /* 숨은 칸으로 가는 링크를 눌러도 깨지지 않게 합니다 */
+  document.addEventListener('click', function (e) {
+    var el = e.target, a = null;
+    for (var i = 0; i < 5 && el && el !== document.body; i++) {
+      if ((el.tagName || '').toLowerCase() === 'a') { a = el; break; }
+      el = el.parentElement;
+    }
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (href.charAt(0) !== '#' || href.length < 2) return;
+    var 대상 = document.getElementById(href.slice(1));
+    if (!대상) return;
+    var 이름 = 어느칸(대상);
+    if (!이름) return;
+    e.preventDefault();
+    열기(이름);
+    setTimeout(function () { 대상.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 40);
+  }, false);
+
+  /* 주소창에 #이 붙어 들어온 경우 — 처음 열 때와, 주소만 바뀔 때 모두 */
+  function 주소따라열기(스크롤) {
+    if (location.hash.length < 2) return;
+    var t = document.getElementById(location.hash.slice(1));
+    if (!t) return;
+    var n = 어느칸(t);
+    if (!n) return;
+    열기(n);
+    if (스크롤) setTimeout(function () { t.scrollIntoView({ block: 'start' }); }, 80);
+  }
+  주소따라열기(true);
+  window.addEventListener('hashchange', function () { 주소따라열기(true); });
 })();
 </script>
 </body>

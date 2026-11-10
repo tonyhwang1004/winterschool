@@ -5639,7 +5639,7 @@ Object.keys(FORM_CONFIG).forEach(function(id){
   };
 })();
 </script>
-<!-- 수능하루 홍보 팝업 (2026-10-03 추가 · 2026-10-25 10/24 회차 줄 삭제, 11/8 회차만 안내) -->
+<!-- 수능하루 홍보 팝업 (2026-10-03 추가 · 2026-11-10 시즌 종료 → 성적 조회 안내로 변경) -->
 <style>
 #shp-wrap{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;background:rgba(5,20,56,.55);padding:16px;font-family:'Pretendard', 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif}
 #shp-wrap.on{display:flex}
@@ -5674,15 +5674,17 @@ Object.keys(FORM_CONFIG).forEach(function(id){
   <div id="shp">
     <button class="x" type="button" aria-label="닫기" data-shp-close>×</button>
     <div class="hd">
-      <span class="tag">수능 실전 모의고사 접수 중</span>
-      <h2 id="shp-title">실제 학교 시험장에서<br>수능 하루를 미리 경험하세요</h2>
-      <p>11월 8일(일) 강남 대왕중 회차 접수를 시작했습니다. 수능 시간표·OMR·방송·감독까지 실제 수능과 같은 방식으로 진행합니다.</p>
+      <span class="tag">2026 수능하루 · 성적 조회 오픈</span>
+      <h2 id="shp-title">수능하루 모의고사<br>성적표를 확인하세요</h2>
+      <p>2026년 회차는 모두 끝났습니다. 응시한 회차의 성적표와 수능하루 분석표를 휴대폰 번호와 생년월일로 바로 확인할 수 있습니다.</p>
     </div>
     <div class="bd">
-      <div class="run"><b>11/8(일)</b><span>서울 강남구 대왕중 · 대성 더프리미엄<span class="ok" style="background:#e8293f;color:#fff">NEW 접수 중</span></span></div>
+      <div class="run"><b>11/8(일)</b><span>서울 강남구 대왕중 · 대성 더프리미엄<span class="ok" style="background:#e9ecf2;color:#5b6170">시험 종료</span></span></div>
+      <div class="run"><b>11/2(월)</b><span>김엄마관리형독서실 · 시대인재 11월 모의평가<span class="ok">성적·통계 공개</span></span></div>
       <ul>
         <li>실제 학교 교실에서 아침 입실부터 퇴실까지 수능 당일 그대로</li>
-        <li>시험 당일 문제지·해설지 배부, 출제기관 사이트에서 성적 확인</li>
+        <li>성적표와 함께 틀린 영역·대응 방법을 정리한 수능하루 분석표 제공</li>
+        <li><a href="/stats/sidae-1102/" style="color:#0a2463;font-weight:700">김엄마 시대인재 11월 모의평가 통계 보기 →</a></li>
       </ul>
       <a class="vid" data-shp-track="영상·사진" href="https://www.suneungharu.co.kr/venue?utm_source=kimmom&utm_medium=popup&utm_campaign=1108#review" target="_blank" rel="noopener">
         <span class="vid-ico" aria-hidden="true">▶</span>
@@ -5691,7 +5693,7 @@ Object.keys(FORM_CONFIG).forEach(function(id){
       </a>
     </div>
     <div class="ft">
-      <a class="go" data-shp-track="지금 접수하기" href="https://www.suneungharu.co.kr/info?utm_source=kimmom&utm_medium=popup&utm_campaign=1108" target="_blank" rel="noopener">지금 접수하기 →</a>
+      <a class="go" data-shp-track="성적 조회" href="https://www.suneungharu.co.kr/score?utm_source=kimmom&utm_medium=popup&utm_campaign=score" target="_blank" rel="noopener">성적 조회하기 →</a>
       <a class="more" data-shp-track="자세히 보기" href="/suneungharu/">수능하루 자세히 보기</a>
       <div class="row"><button type="button" data-shp-today>오늘 하루 보지 않기</button><button type="button" data-shp-close>닫기</button></div>
     </div>

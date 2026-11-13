@@ -43,7 +43,7 @@ a{color:inherit}
 }
 .hd-cta:hover{background:var(--navy-lt)}
 @media(max-width:820px){
-  .hd-in{height:auto;padding:12px 0;flex-wrap:wrap}
+  .hd-in{height:auto;padding-top:12px;padding-bottom:12px;flex-wrap:wrap}
   .hd-nav{gap:14px;order:3;width:100%;padding-top:6px;border-top:1px solid var(--line)}
   .hd-nav a{font-size:13px}
 }
@@ -55,7 +55,7 @@ a{color:inherit}
 .crumb span{margin:0 7px}
 
 /* ---------- 페이지 헤드 ---------- */
-.phead{padding:44px 0 52px;border-bottom:1px solid var(--line)}
+.phead{padding-top:44px;padding-bottom:52px;border-bottom:1px solid var(--line)}
 .eyebrow{
   display:inline-block;font-size:12px;font-weight:800;letter-spacing:2.4px;
   text-transform:uppercase;color:var(--accent);margin-bottom:14px;

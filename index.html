@@ -2948,7 +2948,7 @@
       "parentOrganization": { "@type": "Organization", "name": "(주)수리딩교육" },
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "컨벤시아대로130번길 18 해온프라자 더 라운지 8층",
+        "streetAddress": "컨벤시아대로130번길 8 해온프라자 더 라운지 8층",
         "addressLocality": "연수구",
         "addressRegion": "인천광역시",
         "postalCode": "22003",
@@ -2975,7 +2975,7 @@
       "telephone": "+82-10-6861-4321",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "컨벤시아대로130번길 18 해온프라자 더 라운지 7층",
+        "streetAddress": "컨벤시아대로130번길 8 해온프라자 더 라운지 7층",
         "addressLocality": "연수구",
         "addressRegion": "인천광역시",
         "postalCode": "22003",
@@ -4863,7 +4863,7 @@
                     <div class="location-icon">📍</div>
                     <div class="location-text">
                         <h4>주소</h4>
-                        <p>인천광역시 연수구 컨벤시아대로130번길 18<br>해온프라자 더 라운지 7층, 8층<br><span style="font-size:13px; color:rgba(255,255,255,0.7);">(지번: 송도동 22-20)</span></p>
+                        <p>인천광역시 연수구 컨벤시아대로130번길 8<br>해온프라자 더 라운지 7층, 8층<br><span style="font-size:13px; color:rgba(255,255,255,0.7);">(지번: 송도동 22-20)</span></p>
                     </div>
                 </div>
                 <div class="location-item">
@@ -5713,6 +5713,68 @@ Object.keys(FORM_CONFIG).forEach(function(id){
   function esc(e){if(e.key==='Escape')close();}
   w.addEventListener('click',function(e){if(e.target===w||e.target.hasAttribute('data-shp-close'))close();});
   w.querySelector('[data-shp-today]').addEventListener('click',function(){
+    track('popup_click',{button:'오늘 하루 보지 않기'});var d=new Date();d.setHours(24,0,0,0);try{localStorage.setItem(KEY,String(d.getTime()));}catch(e){}close();
+  });
+  setTimeout(function(){w.classList.add('on');track('popup_view');document.addEventListener('keydown',esc);var g=w.querySelector('.go');if(g)g.focus({preventScroll:true});},700);
+})();
+</script>
+<!-- 대치독한수능학원 송도 2호관 홍보 팝업 (2026-11-15 추가 · 12/31까지) -->
+<style>
+#dkp-wrap{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;background:rgba(5,20,56,.55);padding:16px;font-family:'Pretendard','Pretendard Variable',-apple-system,BlinkMacSystemFont,system-ui,sans-serif}
+#dkp-wrap.on{display:flex}
+#dkp{position:relative;width:100%;max-width:420px;max-height:92vh;overflow:auto;background:#fff;border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+#dkp .hd{background:linear-gradient(135deg,#0b1d3a,#1c3f73);color:#fff;padding:22px 22px 18px;border-radius:18px 18px 0 0}
+#dkp .tag{display:inline-block;background:#ffd23f;color:#0b1d3a;font-weight:800;font-size:12px;padding:3px 9px;border-radius:999px}
+#dkp h2{margin:10px 0 6px;font-size:22px;line-height:1.35;font-weight:900;color:#fff}
+#dkp .hd p{margin:0;font-size:14px;line-height:1.55;opacity:.92}
+#dkp .bd{padding:14px 20px 4px}
+#dkp .pt{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #eef0f4;font-size:14px;line-height:1.45;color:#222}
+#dkp .pt i{flex:none;font-style:normal;font-size:18px;line-height:1.2}
+#dkp .pt b{color:#0b1d3a}
+#dkp .pt small{display:block;color:#666;font-size:12.5px;margin-top:2px}
+#dkp .ev{margin:12px 0 2px;background:#fff7d6;border:1px dashed #e0a800;border-radius:12px;padding:10px 12px;font-size:13.2px;line-height:1.6;color:#333}
+#dkp .ev b{color:#0b1d3a}
+#dkp .ft{padding:12px 20px 18px}
+#dkp .go{display:block;text-align:center;background:#e63946;color:#fff;text-decoration:none;font-weight:900;font-size:17px;padding:14px;border-radius:12px}
+#dkp .tel{display:block;text-align:center;margin-top:8px;padding:11px;border-radius:12px;border:1.5px solid #0b1d3a;color:#0b1d3a;font-size:15px;font-weight:800;text-decoration:none}
+#dkp .row{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:13px;color:#666}
+#dkp .row button{background:none;border:0;color:#666;font:inherit;cursor:pointer;padding:4px}
+#dkp .x{position:absolute;top:10px;right:12px;background:rgba(255,255,255,.18);border:0;color:#fff;width:32px;height:32px;border-radius:50%;font-size:20px;line-height:32px;cursor:pointer}
+</style>
+<div id="dkp-wrap" role="dialog" aria-modal="true" aria-labelledby="dkp-title">
+  <div id="dkp">
+    <button class="x" type="button" aria-label="닫기" data-dkp-close>×</button>
+    <div class="hd">
+      <span class="tag">NEW · 12월 중순 송도 개원</span>
+      <h2 id="dkp-title">김엄마에서 공부하면서<br>대치동 명강사 수업까지</h2>
+      <p>대치 한티역 <b>대치독한수능학원(독수리의대관)</b> 강사진이 송도 2호관에서 같은 커리큘럼으로 가르칩니다. 이제 대치까지 오가지 않아도 됩니다.</p>
+    </div>
+    <div class="bd">
+      <div class="pt"><i>🎓</i><span><b>대치 본관과 같은 강사진 26명 · 같은 교재</b><small>국어·수학·영어·탐구·논술 + 입시전략 강소장</small></span></div>
+      <div class="pt"><i>🏆</i><span><b>26수능 언매 만점자 약 250명 배출</b> (류성훈T 수강생)<small>3년 연속 24·25·26 수능 언매 적중 (김호랑T)</small></span></div>
+      <div class="pt"><i>🏢</i><span><b>김엄마와 같은 건물 6층</b> — 수업 듣고 바로 독서실로<small>해온프라자 더 라운지 6층 (컨벤시아대로130번길 8) · 김엄마 출결·자습 관리 연계 · 소수정예 반 (선착순 마감)</small></span></div>
+      <div class="ev">📌 <b>논술 파이널 All Day Clinic</b> 11.20(금)~12.4(금)<br>📌 <b>정시 최종지원전략 설명회</b> 12.5(토) 오후 2시 · 독수리의대관<br><span style="color:#777;font-size:12.3px">송도 학생도 신청할 수 있습니다.</span></div>
+    </div>
+    <div class="ft">
+      <a class="go" data-dkp-track="2호관 안내" href="https://tonyhwang1004.github.io/dokhan-songdo/?utm_source=kimmom&utm_medium=popup&utm_campaign=songdo2#songdo" target="_blank" rel="noopener">송도 2호관 · 강사진 보기 →</a>
+      <a class="tel" data-dkp-track="상담 전화" href="tel:01036338240">📞 상담 010-3633-8240</a>
+      <div class="row"><button type="button" data-dkp-today>오늘 하루 보지 않기</button><button type="button" data-dkp-close>닫기</button></div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY='dkp_hide_until', END=Date.parse('2026-12-31T23:59:59+09:00');
+  if(Date.now()>END)return;
+  try{if(Number(localStorage.getItem(KEY)||0)>Date.now())return;}catch(e){}
+  var w=document.getElementById('dkp-wrap');if(!w)return;
+  // 팝업 집계(구글 애널리틱스): popup_view / popup_click(button) / popup_close — popup:'dokhan_songdo2'
+  function track(name,params){try{if(typeof gtag==='function')gtag('event',name,Object.assign({popup:'dokhan_songdo2'},params||{}));}catch(e){}}
+  function close(){if(w.classList.contains('on'))track('popup_close');w.classList.remove('on');document.removeEventListener('keydown',esc);}
+  w.querySelectorAll('[data-dkp-track]').forEach(function(a){a.addEventListener('click',function(){track('popup_click',{button:a.getAttribute('data-dkp-track')});});});
+  function esc(e){if(e.key==='Escape')close();}
+  w.addEventListener('click',function(e){if(e.target===w||e.target.hasAttribute('data-dkp-close'))close();});
+  w.querySelector('[data-dkp-today]').addEventListener('click',function(){
     track('popup_click',{button:'오늘 하루 보지 않기'});var d=new Date();d.setHours(24,0,0,0);try{localStorage.setItem(KEY,String(d.getTime()));}catch(e){}close();
   });
   setTimeout(function(){w.classList.add('on');track('popup_view');document.addEventListener('keydown',esc);var g=w.querySelector('.go');if(g)g.focus({preventScroll:true});},700);

@@ -5727,7 +5727,9 @@ Object.keys(FORM_CONFIG).forEach(function(id){
 #dkp .tag{display:inline-block;background:#ffd23f;color:#0b1d3a;font-weight:800;font-size:12px;padding:3px 9px;border-radius:999px}
 #dkp h2{margin:10px 0 6px;font-size:22px;line-height:1.35;font-weight:900;color:#fff}
 #dkp .hd p{margin:0;font-size:14px;line-height:1.55;opacity:.92}
-#dkp .bd{padding:14px 20px 4px}
+#dkp .bld{padding:14px 14px 0}
+#dkp .bld svg{display:block;width:100%;height:auto;font-family:inherit}
+#dkp .bd{padding:6px 20px 4px}
 #dkp .pt{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #eef0f4;font-size:14px;line-height:1.45;color:#222}
 #dkp .pt i{flex:none;font-style:normal;font-size:18px;line-height:1.2}
 #dkp .pt b{color:#0b1d3a}
@@ -5746,13 +5748,55 @@ Object.keys(FORM_CONFIG).forEach(function(id){
     <button class="x" type="button" aria-label="닫기" data-dkp-close>×</button>
     <div class="hd">
       <span class="tag">NEW · 12월 중순 송도 개원</span>
-      <h2 id="dkp-title">김엄마에서 공부하면서<br>대치동 명강사 수업까지</h2>
-      <p>대치 한티역 <b>대치독한수능학원(독수리의대관)</b> 강사진이 송도 2호관에서 같은 커리큘럼으로 가르칩니다. 이제 대치까지 오가지 않아도 됩니다.</p>
+      <h2 id="dkp-title">한 건물 안에서<br>자습도, 대치동 수업도</h2>
+      <p>김엄마 독서실에서 공부하다가 <b>한 층만 내려가면</b> 대치 한티역 <b>대치독한수능학원</b> 강사진의 수업을 듣습니다.</p>
+    </div>
+    <div class="bld">
+      <svg viewBox="0 0 380 300" role="img" aria-labelledby="dkp-bld-t">
+        <title id="dkp-bld-t">해온프라자 더 라운지 건물 단면도: 8층·7층 김엄마 관리형 독서실, 6층 대치독한수능학원 송도 2호관. 엘리베이터로 한 층 이동.</title>
+        <defs>
+          <marker id="dkp-ah" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e63946"/></marker>
+        </defs>
+        <!-- 지붕·건물 이름 -->
+        <rect x="18" y="8" width="296" height="26" rx="6" fill="#0b1d3a"/>
+        <text x="166" y="26" text-anchor="middle" font-size="12.5" font-weight="800" fill="#fff">송도 해온프라자 더 라운지 · 컨벤시아대로130번길 8</text>
+        <!-- 엘리베이터 -->
+        <rect x="314" y="34" width="48" height="226" fill="#eef1f6" stroke="#c9d1de"/>
+        <rect x="324" y="40" width="28" height="214" rx="3" fill="#fff" stroke="#c9d1de" stroke-dasharray="3 3"/>
+        <text x="338" y="276" text-anchor="middle" font-size="10" fill="#6b7280">엘리베이터</text>
+        <!-- 8층 -->
+        <rect x="18" y="34" width="296" height="62" fill="#e8eefb" stroke="#b7c6e6"/>
+        <circle cx="40" cy="65" r="15" fill="#1c3f73"/><text x="40" y="69.5" text-anchor="middle" font-size="12" font-weight="900" fill="#fff">8F</text>
+        <text x="64" y="60" font-size="14" font-weight="900" fill="#0b1d3a">김엄마 관리형 독서실</text>
+        <text x="64" y="79" font-size="11.5" fill="#44516b">지정석 자습 · 휴대폰 제출 · 순찰 관리</text>
+        <g fill="#9fb3da"><rect x="262" y="50" width="12" height="9" rx="2"/><rect x="280" y="50" width="12" height="9" rx="2"/><rect x="262" y="68" width="12" height="9" rx="2"/><rect x="280" y="68" width="12" height="9" rx="2"/></g>
+        <!-- 7층 -->
+        <rect x="18" y="96" width="296" height="62" fill="#e8eefb" stroke="#b7c6e6"/>
+        <circle cx="40" cy="127" r="15" fill="#1c3f73"/><text x="40" y="131.5" text-anchor="middle" font-size="12" font-weight="900" fill="#fff">7F</text>
+        <text x="64" y="122" font-size="14" font-weight="900" fill="#0b1d3a">김엄마 관리형 독서실</text>
+        <text x="64" y="141" font-size="11.5" fill="#44516b">출결 관리 · 자습 · 상담</text>
+        <g fill="#9fb3da"><rect x="262" y="112" width="12" height="9" rx="2"/><rect x="280" y="112" width="12" height="9" rx="2"/><rect x="262" y="130" width="12" height="9" rx="2"/><rect x="280" y="130" width="12" height="9" rx="2"/></g>
+        <!-- 6층 (강조) -->
+        <rect x="18" y="158" width="296" height="70" fill="#fff4cc" stroke="#e0a800" stroke-width="2.5"/>
+        <circle cx="40" cy="193" r="15" fill="#e63946"/><text x="40" y="197.5" text-anchor="middle" font-size="12" font-weight="900" fill="#fff">6F</text>
+        <rect x="64" y="166" width="38" height="16" rx="8" fill="#e63946"/><text x="83" y="178" text-anchor="middle" font-size="10" font-weight="900" fill="#fff">NEW</text>
+        <text x="108" y="179" font-size="11" font-weight="800" fill="#b45309">12월 중순 개원</text>
+        <text x="64" y="201" font-size="14" font-weight="900" fill="#0b1d3a">대치독한수능학원 송도 2호관</text>
+        <text x="64" y="219" font-size="11.5" fill="#5b4a1a">대치 본관 강사진 26명 · 같은 교재 · 소수정예</text>
+        <!-- 칠판 -->
+        <rect x="262" y="168" width="34" height="20" rx="2" fill="#1f5135"/><line x1="267" y1="175" x2="288" y2="175" stroke="#d9f2e3" stroke-width="1.5"/><line x1="267" y1="181" x2="283" y2="181" stroke="#d9f2e3" stroke-width="1.5"/>
+        <!-- 아래층 -->
+        <rect x="18" y="228" width="296" height="32" fill="#f4f5f7" stroke="#dde1e7"/>
+        <text x="166" y="248" text-anchor="middle" font-size="11" fill="#9aa1ad">1 ~ 5층</text>
+        <!-- 이동 화살표 -->
+        <path d="M338 70 C 372 110, 372 160, 338 193" fill="none" stroke="#e63946" stroke-width="2.5" stroke-dasharray="5 4" marker-start="url(#dkp-ah)" marker-end="url(#dkp-ah)"/>
+        <rect x="244" y="282" width="128" height="16" rx="8" fill="#e63946"/>
+        <text x="308" y="294" text-anchor="middle" font-size="10.5" font-weight="800" fill="#fff">자습 ↔ 수업 한 층 차이</text>
+        <text x="18" y="294" font-size="10.5" fill="#6b7280">밖으로 나갈 필요 없이 건물 안에서 이동</text>
+      </svg>
     </div>
     <div class="bd">
-      <div class="pt"><i>🎓</i><span><b>대치 본관과 같은 강사진 26명 · 같은 교재</b><small>국어·수학·영어·탐구·논술 + 입시전략 강소장</small></span></div>
-      <div class="pt"><i>🏆</i><span><b>26수능 언매 만점자 약 250명 배출</b> (류성훈T 수강생)<small>3년 연속 24·25·26 수능 언매 적중 (김호랑T)</small></span></div>
-      <div class="pt"><i>🏢</i><span><b>김엄마와 같은 건물 6층</b> — 수업 듣고 바로 독서실로<small>해온프라자 더 라운지 6층 (컨벤시아대로130번길 8) · 김엄마 출결·자습 관리 연계 · 소수정예 반 (선착순 마감)</small></span></div>
+      <div class="pt"><i>🏆</i><span><b>26수능 언매 만점자 약 250명 배출</b> (류성훈T 수강생)<small>3년 연속 24·25·26 수능 언매 적중 (김호랑T) · 국어·수학·영어·탐구·논술 + 입시전략 강소장</small></span></div>
       <div class="ev">📌 <b>논술 파이널 All Day Clinic</b> 11.20(금)~12.4(금)<br>📌 <b>정시 최종지원전략 설명회</b> 12.5(토) 오후 2시 · 독수리의대관<br><span style="color:#777;font-size:12.3px">송도 학생도 신청할 수 있습니다.</span></div>
     </div>
     <div class="ft">

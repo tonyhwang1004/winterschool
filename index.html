@@ -5809,7 +5809,7 @@ Object.keys(FORM_CONFIG).forEach(function(id){
 </div>
 <script>
 (function(){
-  var KEY='dkp_hide_until', END=Date.parse('2026-12-31T23:59:59+09:00');
+  var KEY='dkp_hide_until', END=Date.parse('2026-11-15T00:00:00+09:00'); // 11/16 사장님 요청으로 내림
   if(Date.now()>END)return;
   try{if(Number(localStorage.getItem(KEY)||0)>Date.now())return;}catch(e){}
   var w=document.getElementById('dkp-wrap');if(!w)return;
